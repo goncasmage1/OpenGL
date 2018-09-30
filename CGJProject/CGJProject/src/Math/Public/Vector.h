@@ -42,39 +42,39 @@ public:
 
 class Vec3
 {
-	public:
+public:
 
-		float x, y, z;
+	float x, y, z;
 
-		Vec3();
-		Vec3(float newXYZ);
-		Vec3(float newX, float newY, float newZ);
-		Vec3(const class Vec2 V);
-		Vec3(const class Vec4 V);
+	Vec3();
+	Vec3(float newXYZ);
+	Vec3(float newX, float newY, float newZ);
+	Vec3(const class Vec2 V);
+	Vec3(const class Vec4 V);
 
-		friend const Vec3 operator+(const Vec3& V1, const Vec3& V2);
-		friend const Vec3& operator+=(Vec3& V1, const Vec3& V2);
-		friend const Vec3 operator-(const Vec3& V1, const Vec3& V2);
-		friend const Vec3& operator-=(Vec3& V1, const Vec3& V2);
-		friend const Vec3 operator*(const Vec3& V1, const Vec3& V2);
-		friend const Vec3& operator*=(Vec3& V1, const Vec3& V2);
-		friend const Vec3 operator/(const Vec3& V1, const Vec3& V2);
-		friend const Vec3& operator/=(Vec3& V1, const Vec3& V2);
-		friend const Vec3 operator*(const Vec3& V, const float& F);
-		friend const Vec3 operator*(const float& F, const Vec3& V);
-		friend const Vec3 operator*=(const Vec3& V, const float& F);
-		friend const bool operator==(const Vec3& V1, const Vec3& V2);
-		friend const bool operator!=(const Vec3& V1, const Vec3& V2);
-		friend std::ostream& operator<<(std::ostream& os, const Vec3& V);
-		friend std::istream& operator>>(std::istream& is, Vec3& V);
+	friend const Vec3 operator+(const Vec3& V1, const Vec3& V2);
+	friend const Vec3& operator+=(Vec3& V1, const Vec3& V2);
+	friend const Vec3 operator-(const Vec3& V1, const Vec3& V2);
+	friend const Vec3& operator-=(Vec3& V1, const Vec3& V2);
+	friend const Vec3 operator*(const Vec3& V1, const Vec3& V2);
+	friend const Vec3& operator*=(Vec3& V1, const Vec3& V2);
+	friend const Vec3 operator/(const Vec3& V1, const Vec3& V2);
+	friend const Vec3& operator/=(Vec3& V1, const Vec3& V2);
+	friend const Vec3 operator*(const Vec3& V, const float& F);
+	friend const Vec3 operator*(const float& F, const Vec3& V);
+	friend const Vec3 operator*=(const Vec3& V, const float& F);
+	friend const bool operator==(const Vec3& V1, const Vec3& V2);
+	friend const bool operator!=(const Vec3& V1, const Vec3& V2);
+	friend std::ostream& operator<<(std::ostream& os, const Vec3& V);
+	friend std::istream& operator>>(std::istream& is, Vec3& V);
 
-		float* GetData();
-		std::string ToString() const;
-		float Length() const;
-		void Normalize();
-		Vec3 GetNormalized() const;
-		float Dot(const Vec3& V);
-		Vec3 Cross(const Vec3& V);
+	float* GetData();
+	std::string ToString() const;
+	float Length() const;
+	void Normalize();
+	Vec3 GetNormalized() const;
+	float Dot(const Vec3& V);
+	Vec3 Cross(const Vec3& V);
 };
 
 class Vec4

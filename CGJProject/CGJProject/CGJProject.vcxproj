@@ -124,10 +124,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\HelloWorld.cpp" />
-    <ClCompile Include="src\Math\Private\Vec.cpp" />
+    <ClCompile Include="src\Math\Private\Matrix.cpp" />
+    <ClCompile Include="src\Math\Private\Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Math\Public\Vec.h" />
+    <ClInclude Include="src\Math\Public\Matrix.h" />
+    <ClInclude Include="src\Math\Public\Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
