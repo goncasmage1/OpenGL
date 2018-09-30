@@ -124,10 +124,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\HelloWorld.cpp" />
-    <ClCompile Include="Vec.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Vec.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

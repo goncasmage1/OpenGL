@@ -24,6 +24,7 @@
 
 #include "GL/glew.h"
 #include "GL/freeglut.h"
+#include "Math/Vec.h"
 
 #define CAPTION "Hello Blank World"
 
@@ -245,9 +246,16 @@ void init(int argc, char* argv[])
 
 int main(int argc, char* argv[])
 {
-	init(argc, argv);
+	/*init(argc, argv);
 	glutMainLoop();
-	exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);*/
+
+	Vec3 V1 = Vec3(3.f);
+	Vec3 V2 = Vec3(1.f, 2.f, 3.f);
+
+	std::cout << "Length: " << V1.Length() << std::endl;
+	std::cout << "Dot product: " << V1.Dot(V2) << std::endl;
+	std::cout << "Cross product: " << V1.Cross(V2) << std::endl;
 }
 
 ///////////////////////////////////////////////////////////////////////

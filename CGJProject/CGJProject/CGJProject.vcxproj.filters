@@ -21,13 +21,5 @@
     <ClCompile Include="src\HelloWorld.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vec.cpp">
-      <Filter>Source Files\Math</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Vec.h">
-      <Filter>Source Files\Math</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
