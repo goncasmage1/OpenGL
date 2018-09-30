@@ -24,9 +24,6 @@ class Vec3
 		friend const Vec3 operator*(const Vec3& V, const float& F);
 		friend const Vec3 operator*(const float& F, const Vec3& V);
 		friend const Vec3 operator*=(const Vec3& V, const float& F);
-		friend const Vec3 operator/(const Vec3& V, const float& F);
-		friend const Vec3 operator/(const float& F, const Vec3& V);
-		friend const Vec3 operator/=(const Vec3& V, const float& F);
 		friend std::ostream& operator<<(std::ostream& os, const Vec3& V);
 
 		float* GetData();

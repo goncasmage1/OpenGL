@@ -1,4 +1,4 @@
-#include "Vec.h"
+#include "../Public/Vec.h"
 #include <sstream>
 
 Vec3::Vec3(): 
@@ -94,9 +94,9 @@ const Vec3 operator*(const Vec3& V, const float& F)
 	Vec3 newVec = Vec3();
 	Vec3 floatVec = Vec3(F);
 
-	newVec.x = V.x + floatVec.x;
-	newVec.y = V.y + floatVec.y;
-	newVec.z = V.z + floatVec.z;
+	newVec.x = V.x * floatVec.x;
+	newVec.y = V.y * floatVec.y;
+	newVec.z = V.z * floatVec.z;
 	return newVec;
 }
 const Vec3 operator*(const float& F, const Vec3& V)
@@ -104,9 +104,9 @@ const Vec3 operator*(const float& F, const Vec3& V)
 	Vec3 newVec = Vec3();
 	Vec3 floatVec = Vec3(F);
 
-	newVec.x = V.x + floatVec.x;
-	newVec.y = V.y + floatVec.y;
-	newVec.z = V.z + floatVec.z;
+	newVec.x = V.x * floatVec.x;
+	newVec.y = V.y * floatVec.y;
+	newVec.z = V.z * floatVec.z;
 	return newVec;
 }
 const Vec3& operator*=(Vec3& V, float& F)
@@ -116,35 +116,6 @@ const Vec3& operator*=(Vec3& V, float& F)
 	V.x *= floatVec.x;
 	V.y *= floatVec.y;
 	V.z *= floatVec.z;
-	return V;
-}
-const Vec3 operator/(const Vec3& V, const float& F)
-{
-	Vec3 newVec = Vec3();
-	Vec3 floatVec = Vec3(F);
-
-	newVec.x = V.x / floatVec.x;
-	newVec.y = V.y / floatVec.y;
-	newVec.z = V.z / floatVec.z;
-	return newVec;
-}
-const Vec3 operator/(const float& F, const Vec3& V)
-{
-	Vec3 newVec = Vec3();
-	Vec3 floatVec = Vec3(F);
-
-	newVec.x = V.x / floatVec.x;
-	newVec.y = V.y / floatVec.y;
-	newVec.z = V.z / floatVec.z;
-	return newVec;
-}
-const Vec3& operator/=(Vec3& V, float& F)
-{
-	Vec3 floatVec = Vec3(F);
-
-	V.x /= floatVec.x;
-	V.y /= floatVec.y;
-	V.z /= floatVec.z;
 	return V;
 }
 std::ostream & operator<<(std::ostream & os, const Vec3 & V)
