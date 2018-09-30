@@ -121,6 +121,14 @@ const Vec2& operator*=(Vec2& V, float& F)
 	V.y *= floatVec.y;
 	return V;
 }
+const bool operator==(const Vec2 & V1, const Vec2 & V2)
+{
+	return (V1.x == V2.x && V1.y == V2.y);
+}
+const bool operator!=(const Vec2 & V1, const Vec2 & V2)
+{
+	return (V1.x == V2.x || V1.y == V2.y);
+}
 std::ostream & operator<<(std::ostream & os, const Vec2 & V)
 {
 	os << V.ToString();
@@ -309,6 +317,14 @@ const Vec3& operator*=(Vec3& V, float& F)
 	V.y *= floatVec.y;
 	V.z *= floatVec.z;
 	return V;
+}
+const bool operator==(const Vec3 & V1, const Vec3 & V2)
+{
+	return (V1.x == V2.x && V1.y == V2.y && V1.z == V2.z);
+}
+const bool operator!=(const Vec3 & V1, const Vec3 & V2)
+{
+	return (V1.x == V2.x || V1.y == V2.y || V1.z == V2.z);
 }
 std::ostream & operator<<(std::ostream & os, const Vec3 & V)
 {
@@ -511,6 +527,14 @@ const Vec4& operator*=(Vec4& V, float& F)
 	V.z *= floatVec.z;
 	V.w *= floatVec.w;
 	return V;
+}
+const bool operator==(const Vec4 & V1, const Vec4 & V2)
+{
+	return (V1.x == V2.x && V1.y == V2.y && V1.z == V2.z && V1.w == V2.w);
+}
+const bool operator!=(const Vec4 & V1, const Vec4 & V2)
+{
+	return (V1.x == V2.x || V1.y == V2.y || V1.z == V2.z || V1.w == V2.w);
 }
 std::ostream & operator<<(std::ostream & os, const Vec4 & V)
 {

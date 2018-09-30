@@ -251,9 +251,8 @@ int main(int argc, char* argv[])
 	Vec3 V1 = Vec3(3.f);
 	Vec3 V2 = Vec3(1.f, 2.f, 3.f);
 
-	std::cout << "Normalized: " << V1*V2 << std::endl;
-	std::cout << "Normalized: " << V1 * 2.f << std::endl;
-	std::cout << "Normalized: " << V1 / 3.f << std::endl;
+	std::cout << "Equal: " << (V1 == V1) << std::endl;
+	std::cout << "Different: " << (V1 != V2) << std::endl;
 
 	glutMainLoop();
 	exit(EXIT_SUCCESS);

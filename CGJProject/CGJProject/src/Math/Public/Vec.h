@@ -26,6 +26,8 @@ public:
 	friend const Vec2 operator*(const Vec2& V, const float& F);
 	friend const Vec2 operator*(const float& F, const Vec2& V);
 	friend const Vec2 operator*=(const Vec2& V, const float& F);
+	friend const bool operator==(const Vec2& V1, const Vec2& V2);
+	friend const bool operator!=(const Vec2& V1, const Vec2& V2);
 	friend std::ostream& operator<<(std::ostream& os, const Vec2& V);
 	friend std::istream& operator>>(std::istream& is, Vec2& V);
 
@@ -61,6 +63,8 @@ class Vec3
 		friend const Vec3 operator*(const Vec3& V, const float& F);
 		friend const Vec3 operator*(const float& F, const Vec3& V);
 		friend const Vec3 operator*=(const Vec3& V, const float& F);
+		friend const bool operator==(const Vec3& V1, const Vec3& V2);
+		friend const bool operator!=(const Vec3& V1, const Vec3& V2);
 		friend std::ostream& operator<<(std::ostream& os, const Vec3& V);
 		friend std::istream& operator>>(std::istream& is, Vec3& V);
 
@@ -96,6 +100,8 @@ public:
 	friend const Vec4 operator*(const Vec4& V, const float& F);
 	friend const Vec4 operator*(const float& F, const Vec4& V);
 	friend const Vec4 operator*=(const Vec4& V, const float& F);
+	friend const bool operator==(const Vec4& V1, const Vec4& V2);
+	friend const bool operator!=(const Vec4& V1, const Vec4& V2);
 	friend std::ostream& operator<<(std::ostream& os, const Vec4& V);
 	friend std::istream& operator>>(std::istream& is, Vec4& V);
 
