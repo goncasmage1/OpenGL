@@ -33,7 +33,7 @@ public:
 	friend std::ostream& operator<<(std::ostream& os, const Vec2& V);
 	friend std::istream& operator>>(std::istream& is, Vec2& V);
 
-	std::array<float, 2> GetData();
+	std::array<float, 2> GetData() const;
 	std::string ToString() const;
 	float Length() const;
 	void Normalize();
@@ -71,7 +71,7 @@ public:
 	friend std::ostream& operator<<(std::ostream& os, const Vec3& V);
 	friend std::istream& operator>>(std::istream& is, Vec3& V);
 
-	std::array<float, 3> GetData();
+	std::array<float, 3> GetData() const;
 	std::string ToString() const;
 	float Length() const;
 	void Normalize();

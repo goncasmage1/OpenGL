@@ -344,6 +344,7 @@ Mat3 Mat3::RotationMat(EAxis RotationAxis, float Degrees)
 			break;
 		default:
 			assert(1 == 0);
+			return Mat3();
 			break;
 	}
 	
