@@ -24,7 +24,7 @@
 
 #include "GL/glew.h"
 #include "GL/freeglut.h"
-#include "Math/Public/Vec.h"
+#include "Math/Public/Vector.h"
 
 #define CAPTION "Hello Blank World"
 
@@ -250,6 +250,8 @@ int main(int argc, char* argv[])
 
 	Vec3 V1 = Vec3(3.f);
 	Vec3 V2 = Vec3(1.f, 2.f, 3.f);
+
+	V1 += V2;
 
 	std::cout << "Equal: " << (V1 == V1) << std::endl;
 	std::cout << "Different: " << (V1 != V2) << std::endl;

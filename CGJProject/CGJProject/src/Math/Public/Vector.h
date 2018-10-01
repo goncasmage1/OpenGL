@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string.h>
 #include <math.h>
+#include <array>
 
 class Vec2
 {
@@ -12,6 +13,7 @@ public:
 	Vec2();
 	Vec2(float newXY);
 	Vec2(float newX, float newY);
+	Vec2(const Vec2& newV2);
 	Vec2(const class Vec3 V);
 	Vec2(const class Vec4 V);
 
@@ -31,7 +33,7 @@ public:
 	friend std::ostream& operator<<(std::ostream& os, const Vec2& V);
 	friend std::istream& operator>>(std::istream& is, Vec2& V);
 
-	float* GetData();
+	std::array<float, 2> GetData();
 	std::string ToString() const;
 	float Length() const;
 	void Normalize();
@@ -50,6 +52,7 @@ public:
 	Vec3(float newXYZ);
 	Vec3(float newX, float newY, float newZ);
 	Vec3(const class Vec2 V);
+	Vec3(const Vec3& newV3);
 	Vec3(const class Vec4 V);
 
 	friend const Vec3 operator+(const Vec3& V1, const Vec3& V2);
@@ -68,7 +71,7 @@ public:
 	friend std::ostream& operator<<(std::ostream& os, const Vec3& V);
 	friend std::istream& operator>>(std::istream& is, Vec3& V);
 
-	float* GetData();
+	std::array<float, 3> GetData();
 	std::string ToString() const;
 	float Length() const;
 	void Normalize();
@@ -88,6 +91,7 @@ public:
 	Vec4(float newX, float newY, float newZ, float newW);
 	Vec4(const class Vec2 V);
 	Vec4(const class Vec3 V);
+	Vec4(const Vec4& newV4);
 
 	friend const Vec4 operator+(const Vec4& V1, const Vec4& V2);
 	friend const Vec4& operator+=(Vec4& V1, const Vec4& V2);
@@ -105,7 +109,7 @@ public:
 	friend std::ostream& operator<<(std::ostream& os, const Vec4& V);
 	friend std::istream& operator>>(std::istream& is, Vec4& V);
 
-	float* GetData();
+	std::array<float, 4> GetData() const;
 	std::string ToString() const;
 	float Length() const;
 	void Normalize();

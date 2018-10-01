@@ -1,4 +1,4 @@
-#include "../Public/Vec.h"
+#include "../Public/Vector.h"
 #include <sstream>
 
 
@@ -19,6 +19,12 @@ Vec2::Vec2(float newX, float newY) :
 {
 }
 
+Vec2::Vec2(const Vec2& newV2)
+{
+	x = newV2.x;
+	y = newV2.y;
+}
+
 Vec2::Vec2(const Vec3 V) :
 	x(V.x), y(V.y)
 {
@@ -29,12 +35,10 @@ Vec2::Vec2(const Vec4 V) :
 {
 }
 
-float* Vec2::GetData()
+std::array<float, 2> Vec2::GetData() const
 {
-	float *arr = new float[2];
+	std::array<float, 2> arr = { {x,y} };
 
-	arr[0] = x;
-	arr[1] = y;
 	return arr;
 }
 
@@ -127,7 +131,7 @@ const bool operator==(const Vec2 & V1, const Vec2 & V2)
 }
 const bool operator!=(const Vec2 & V1, const Vec2 & V2)
 {
-	return (V1.x == V2.x || V1.y == V2.y);
+	return (V1.x != V2.x || V1.y != V2.y);
 }
 std::ostream & operator<<(std::ostream & os, const Vec2 & V)
 {
@@ -204,6 +208,13 @@ Vec3::Vec3(float newX, float newY, float newZ) :
 {
 }
 
+Vec3::Vec3(const Vec3 & newV3)
+{
+	x = newV3.x;
+	y = newV3.y;
+	z = newV3.z;
+}
+
 Vec3::Vec3(const Vec2 V) :
 	x(V.x), y(V.y), z(0)
 {
@@ -214,16 +225,12 @@ Vec3::Vec3(const Vec4 V) :
 {
 }
 
-float* Vec3::GetData()
+std::array<float, 3> Vec3::GetData() const
 {
-	float *arr = new float[3];
-		
-	arr[0] = x;
-	arr[1] = y;
-	arr[2] = z;
+	std::array<float, 3> arr = { {x,y,z} };
+
 	return arr;
 }
-
 const Vec3 operator+(const Vec3& V1, const Vec3& V2)
 {
 	Vec3 newVec = Vec3();
@@ -324,7 +331,7 @@ const bool operator==(const Vec3 & V1, const Vec3 & V2)
 }
 const bool operator!=(const Vec3 & V1, const Vec3 & V2)
 {
-	return (V1.x == V2.x || V1.y == V2.y || V1.z == V2.z);
+	return (V1.x != V2.x || V1.y != V2.y || V1.z != V2.z);
 }
 std::ostream & operator<<(std::ostream & os, const Vec3 & V)
 {
@@ -413,14 +420,18 @@ Vec4::Vec4(const Vec3 V) :
 {
 }
 
-float* Vec4::GetData()
+Vec4::Vec4(const Vec4 & newV4)
 {
-	float *arr = new float[4];
+	x = newV4.x;
+	y = newV4.y;
+	z = newV4.z;
+	w = newV4.w;
+}
 
-	arr[0] = x;
-	arr[1] = y;
-	arr[2] = z;
-	arr[3] = w;
+std::array<float, 4> Vec4::GetData() const
+{
+	std::array<float, 4> arr = { {x,y,z,w} };
+
 	return arr;
 }
 
@@ -534,7 +545,7 @@ const bool operator==(const Vec4 & V1, const Vec4 & V2)
 }
 const bool operator!=(const Vec4 & V1, const Vec4 & V2)
 {
-	return (V1.x == V2.x || V1.y == V2.y || V1.z == V2.z || V1.w == V2.w);
+	return (V1.x != V2.x || V1.y != V2.y || V1.z != V2.z || V1.w != V2.w);
 }
 std::ostream & operator<<(std::ostream & os, const Vec4 & V)
 {
