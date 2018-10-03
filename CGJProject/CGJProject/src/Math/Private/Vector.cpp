@@ -35,10 +35,9 @@ Vec2::Vec2(const Vec4 V) :
 {
 }
 
-std::array<float, 2> Vec2::GetData() const
+float* Vec2::GetData() const
 {
-	std::array<float, 2> arr = { {x,y} };
-
+	float* arr = new float[2]{x,y};
 	return arr;
 }
 
@@ -51,11 +50,29 @@ const Vec2 operator+(const Vec2& V1, const Vec2& V2)
 
 	return newVec;
 }
-const Vec2& operator+=(Vec2& V1, const Vec2& V2)
+Vec2 & Vec2::operator+=(const Vec2 & V)
 {
-	V1.x += V2.x;
-	V1.y += V2.y;
-	return V1;
+	x += V.x;
+	y += V.y;
+	return *this;
+}
+Vec2 & Vec2::operator-=(const Vec2 & V)
+{
+	x -= V.x;
+	y -= V.y;
+	return *this;
+}
+Vec2 & Vec2::operator*=(const Vec2 & V)
+{
+	x *= V.x;
+	y *= V.y;
+	return *this;
+}
+Vec2 & Vec2::operator/=(const Vec2 & V)
+{
+	x /= V.x;
+	y /= V.y;
+	return *this;
 }
 const Vec2 operator-(const Vec2& V1, const Vec2& V2)
 {
@@ -65,12 +82,6 @@ const Vec2 operator-(const Vec2& V1, const Vec2& V2)
 	newVec.y = V1.y - V2.y;
 	return newVec;
 }
-const Vec2& operator-=(Vec2& V1, const Vec2& V2)
-{
-	V1.x -= V2.x;
-	V1.y -= V2.y;
-	return V1;
-}
 const Vec2 operator*(const Vec2& V1, const Vec2& V2)
 {
 	Vec2 newVec = Vec2();
@@ -79,12 +90,6 @@ const Vec2 operator*(const Vec2& V1, const Vec2& V2)
 	newVec.y = V1.y * V2.y;
 	return newVec;
 }
-const Vec2& operator*=(Vec2& V1, const Vec2& V2)
-{
-	V1.x *= V2.x;
-	V1.y *= V2.y;
-	return V1;
-}
 const Vec2 operator/(const Vec2& V1, const Vec2& V2)
 {
 	Vec2 newVec = Vec2();
@@ -92,12 +97,6 @@ const Vec2 operator/(const Vec2& V1, const Vec2& V2)
 	newVec.x = V1.x / V2.x;
 	newVec.y = V1.y / V2.y;
 	return newVec;
-}
-const Vec2& operator /=(Vec2& V1, const Vec2& V2)
-{
-	V1.x /= V2.x;
-	V1.y /= V2.y;
-	return V1;
 }
 const Vec2 operator*(const Vec2& V, const float& F)
 {
@@ -117,13 +116,11 @@ const Vec2 operator*(const float& F, const Vec2& V)
 	newVec.y = V.y * floatVec.y;
 	return newVec;
 }
-const Vec2& operator*=(Vec2& V, float& F)
+Vec2 & Vec2::operator*=(const float & F)
 {
-	Vec2 floatVec = Vec2(F);
-
-	V.x *= floatVec.x;
-	V.y *= floatVec.y;
-	return V;
+	x *= F;
+	y *= F;
+	return *this;
 }
 const bool operator==(const Vec2 & V1, const Vec2 & V2)
 {
@@ -143,6 +140,19 @@ std::istream & operator>>(std::istream & is, Vec2 & V)
 {
 	is >> V.x >> V.y;
 	return is;
+}
+
+float Vec2::operator[](int row) const
+{
+	switch (row)
+	{
+		case 0:
+			return x;
+		case 1:
+			return y;
+		default:
+			return 0.0f;
+	}
 }
 
 std::string Vec2::ToString() const
@@ -179,17 +189,6 @@ float Vec2::Dot(const Vec2 & V)
 	return (x*V.x + y*V.y);
 }
 
-Vec2 Vec2::Cross(const Vec2 & V)
-{
-	Vec2 crossed = Vec2();
-
-	//TODO: É possível????
-	/*crossed.x = (y*V.z - z * V.y);
-	crossed.y = (z*V.x - x * V.z);
-	crossed.z = (x*V.y - y * V.x);*/
-
-	return crossed;
-}
 
 /////////
 // Vec3
@@ -225,10 +224,9 @@ Vec3::Vec3(const Vec4 V) :
 {
 }
 
-std::array<float, 3> Vec3::GetData() const
+float* Vec3::GetData() const
 {
-	std::array<float, 3> arr = { {x,y,z} };
-
+	float* arr = new float[3] { x, y, z };
 	return arr;
 }
 const Vec3 operator+(const Vec3& V1, const Vec3& V2)
@@ -241,13 +239,6 @@ const Vec3 operator+(const Vec3& V1, const Vec3& V2)
 
 	return newVec;
 }
-const Vec3& operator+=(Vec3& V1, const Vec3& V2)
-{
-	V1.x += V2.x;
-	V1.y += V2.y;
-	V1.z += V2.z;
-	return V1;
-}
 const Vec3 operator-(const Vec3& V1, const Vec3& V2)
 {
 	Vec3 newVec = Vec3();
@@ -256,13 +247,6 @@ const Vec3 operator-(const Vec3& V1, const Vec3& V2)
 	newVec.y = V1.y - V2.y;
 	newVec.z = V1.z - V2.z;
 	return newVec;
-}
-const Vec3& operator-=(Vec3& V1, const Vec3& V2)
-{
-	V1.x -= V2.x;
-	V1.y -= V2.y;
-	V1.z -= V2.z;
-	return V1;
 }
 const Vec3 operator*(const Vec3& V1, const Vec3& V2)
 {
@@ -273,13 +257,6 @@ const Vec3 operator*(const Vec3& V1, const Vec3& V2)
 	newVec.z = V1.z * V2.z;
 	return newVec;
 }
-const Vec3& operator*=(Vec3& V1, const Vec3& V2)
-{
-	V1.x *= V2.x;
-	V1.y *= V2.y;
-	V1.z *= V2.z;
-	return V1;
-}
 const Vec3 operator/(const Vec3& V1, const Vec3& V2)
 {
 	Vec3 newVec = Vec3();
@@ -289,12 +266,33 @@ const Vec3 operator/(const Vec3& V1, const Vec3& V2)
 	newVec.z = V1.z / V2.z;
 	return newVec;
 }
-const Vec3& operator /=(Vec3& V1, const Vec3& V2)
+Vec3& Vec3::operator+=(const Vec3& V)
 {
-	V1.x /= V2.x;
-	V1.y /= V2.y;
-	V1.z /= V2.z;
-	return V1;
+	x += V.x;
+	y += V.y;
+	z += V.z;
+	return *this;
+}
+Vec3& Vec3::operator-=(const Vec3& V)
+{
+	x -= V.x;
+	y -= V.y;
+	z -= V.z;
+	return *this;
+}
+Vec3& Vec3::operator*=(const Vec3& V)
+{
+	x *= V.x;
+	y *= V.y;
+	z *= V.z;
+	return *this;
+}
+Vec3& Vec3::operator/=(const Vec3& V)
+{
+	x /= V.x;
+	y /= V.y;
+	z /= V.z;
+	return *this;
 }
 const Vec3 operator*(const Vec3& V, const float& F)
 {
@@ -316,14 +314,12 @@ const Vec3 operator*(const float& F, const Vec3& V)
 	newVec.z = V.z * floatVec.z;
 	return newVec;
 }
-const Vec3& operator*=(Vec3& V, float& F)
+Vec3& Vec3::operator*=(const float& F)
 {
-	Vec3 floatVec = Vec3(F);
-
-	V.x *= floatVec.x;
-	V.y *= floatVec.y;
-	V.z *= floatVec.z;
-	return V;
+	x *= F;
+	y *= F;
+	z *= F;
+	return *this;
 }
 const bool operator==(const Vec3 & V1, const Vec3 & V2)
 {
@@ -343,6 +339,21 @@ std::istream & operator>>(std::istream & is, Vec3 & V)
 {
 	is >> V.x >> V.y >> V.z;
 	return is;
+}
+
+float Vec3::operator[](int row) const
+{
+	switch (row)
+	{
+		case 0:
+			return x;
+		case 1:
+			return y;
+		case 2:
+			return z;
+		default:
+			return 0.0f;
+	}
 }
 
 std::string Vec3::ToString() const
@@ -394,7 +405,7 @@ Vec3 Vec3::Cross(const Vec3 & V)
 
 
 /////////
-// Vec3
+// Vec4
 /////////
 
 Vec4::Vec4() :
@@ -428,10 +439,9 @@ Vec4::Vec4(const Vec4 & newV4)
 	w = newV4.w;
 }
 
-std::array<float, 4> Vec4::GetData() const
+float* Vec4::GetData() const
 {
-	std::array<float, 4> arr = { {x,y,z,w} };
-
+	float* arr = new float[4] { x, y, z, w };
 	return arr;
 }
 
@@ -445,14 +455,6 @@ const Vec4 operator+(const Vec4& V1, const Vec4& V2)
 	newVec.w = V1.w + V2.w;
 	return newVec;
 }
-const Vec4& operator+=(Vec4& V1, const Vec4& V2)
-{
-	V1.x += V2.x;
-	V1.y += V2.y;
-	V1.z += V2.z;
-	V1.w += V2.w;
-	return V1;
-}
 const Vec4 operator-(const Vec4& V1, const Vec4& V2)
 {
 	Vec4 newVec = Vec4();
@@ -462,14 +464,6 @@ const Vec4 operator-(const Vec4& V1, const Vec4& V2)
 	newVec.z = V1.z - V2.z;
 	newVec.w = V1.w - V2.w;
 	return newVec;
-}
-const Vec4& operator-=(Vec4& V1, const Vec4& V2)
-{
-	V1.x -= V2.x;
-	V1.y -= V2.y;
-	V1.z -= V2.z;
-	V1.w -= V2.w;
-	return V1;
 }
 const Vec4 operator*(const Vec4& V1, const Vec4& V2)
 {
@@ -481,14 +475,6 @@ const Vec4 operator*(const Vec4& V1, const Vec4& V2)
 	newVec.w = V1.w * V2.w;
 	return newVec;
 }
-const Vec4& operator*=(Vec4& V1, const Vec4& V2)
-{
-	V1.x *= V2.x;
-	V1.y *= V2.y;
-	V1.z *= V2.z;
-	V1.w *= V2.w;
-	return V1;
-}
 const Vec4 operator/(const Vec4& V1, const Vec4& V2)
 {
 	Vec4 newVec = Vec4();
@@ -499,13 +485,37 @@ const Vec4 operator/(const Vec4& V1, const Vec4& V2)
 	newVec.w = V1.w / V2.w;
 	return newVec;
 }
-const Vec4& operator /=(Vec4& V1, const Vec4& V2)
+Vec4& Vec4::operator+=(const Vec4& V)
 {
-	V1.x /= V2.x;
-	V1.y /= V2.y;
-	V1.z /= V2.z;
-	V1.w /= V2.w;
-	return V1;
+	x += V.x;
+	y += V.y;
+	z += V.z;
+	w += V.w;
+	return *this;
+}
+Vec4& Vec4::operator-=(const Vec4& V)
+{
+	x -= V.x;
+	y -= V.y;
+	z -= V.z;
+	w -= V.w;
+	return *this;
+}
+Vec4& Vec4::operator*=(const Vec4& V)
+{
+	x *= V.x;
+	y *= V.y;
+	z *= V.z;
+	w *= V.w;
+	return *this;
+}
+Vec4& Vec4::operator/=(const Vec4& V)
+{
+	x /= V.x;
+	y /= V.y;
+	z /= V.z;
+	z /= V.w;
+	return *this;
 }
 const Vec4 operator*(const Vec4& V, const float& F)
 {
@@ -529,15 +539,13 @@ const Vec4 operator*(const float& F, const Vec4& V)
 	newVec.w = V.w * floatVec.w;
 	return newVec;
 }
-const Vec4& operator*=(Vec4& V, float& F)
+Vec4& Vec4::operator*=(const float& F)
 {
-	Vec4 floatVec = Vec4(F);
-
-	V.x *= floatVec.x;
-	V.y *= floatVec.y;
-	V.z *= floatVec.z;
-	V.w *= floatVec.w;
-	return V;
+	x *= F;
+	y *= F;
+	z *= F;
+	w *= F;
+	return *this;
 }
 const bool operator==(const Vec4 & V1, const Vec4 & V2)
 {
@@ -557,6 +565,23 @@ std::istream & operator>>(std::istream & is, Vec4 & V)
 {
 	is >> V.x >> V.y >> V.z >> V.w;
 	return is;
+}
+
+float Vec4::operator[](int row) const
+{
+	switch (row)
+	{
+		case 0:
+			return x;
+		case 1:
+			return y;
+		case 2:
+			return z;
+		case 3:
+			return w;
+		default:
+			return 0.0f;
+	}
 }
 
 std::string Vec4::ToString() const
@@ -595,16 +620,4 @@ Vec4 Vec4::GetNormalized() const
 float Vec4::Dot(const Vec4 & V)
 {
 	return (x*V.x + y*V.y + z*V.z + w*V.w);
-}
-
-Vec4 Vec4::Cross(const Vec4 & V)
-{
-	Vec4 crossed = Vec4();
-
-	//TODO: Como se faz???
-	/*crossed.x = (y*V.z - z * V.y);
-	crossed.y = (z*V.x - x * V.z);
-	crossed.z = (x*V.y - y * V.x);*/
-
-	return crossed;
 }

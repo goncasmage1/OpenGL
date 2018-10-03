@@ -5,16 +5,13 @@
 
 enum class EAxis { X, Y, Z};
 
-class Mat2
+struct Mat2
 {
 
 };
 
-class Mat3
+struct Mat3
 {
-
-public:
-
 	std::array<std::array<float, 3>, 3> values = { {
 													{ 0.f, 0.f, 0.f },
 													{ 0.f, 0.f, 0.f },
@@ -29,11 +26,11 @@ public:
 	std::array<float, 3> operator[](int row) const;
 
 	friend const Mat3 operator+(const Mat3& M1, const Mat3& M2);
-	friend const Mat3& operator+=(Mat3& M1, const Mat3& M2);
 	friend const Mat3 operator-(const Mat3& M1, const Mat3& M2);
-	friend const Mat3& operator-=(Mat3& M1, const Mat3& M2);
 	friend const Mat3 operator*(const Mat3& M1, const Mat3& M2);
-	friend const Mat3& operator*=(Mat3& M1, const Mat3& M2);
+	Mat3& operator+=(const Mat3& M);
+	Mat3& operator-=(const Mat3& M);
+	Mat3& operator*=(const Mat3& M);
 	friend const Mat3 operator*(const Mat3& M1, const float& F);
 	friend const Mat3 operator*(const float& F, const Mat3& M1);
 	friend const Mat3& operator*=(Mat3& M1, const float& F);
@@ -44,13 +41,12 @@ public:
 	friend std::ostream& operator<<(std::ostream& os, const Mat3& M);
 	friend std::istream& operator>>(std::istream& is, Mat3& M);
 
-	std::array<std::array<float, 3>, 3> GetValues() const;
 	void Transpose();
 	Mat3 GetTransposed() const;
 	float Determinant() const;
 	Mat3 Inverse() const;
 
-	std::array<float, 9> GetData() const;
+	float* GetData() const;
 
 	static Mat3 IdentityMat();
 	static Mat3 TranslationMat(float x, float y);
@@ -59,7 +55,7 @@ public:
 
 };
 
-class Mat4
+struct Mat4
 {
 
 };

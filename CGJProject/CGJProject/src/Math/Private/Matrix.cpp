@@ -16,7 +16,7 @@ Mat3::Mat3(std::array<std::array<float, 3>, 3> newValues)
 
 Mat3::Mat3(const Mat3 & newMat)
 {
-	values = newMat.GetValues();
+	values = newMat.values;
 }
 
 std::array<float, 3>& Mat3::operator[](int row)
@@ -31,7 +31,6 @@ std::array<float, 3> Mat3::operator[](int row) const
 
 const Mat3 operator+(const Mat3 & M1, const Mat3 & M2)
 {
-
 	return Mat3(
 		{
 		{
@@ -42,22 +41,6 @@ const Mat3 operator+(const Mat3 & M1, const Mat3 & M2)
 		}
 	);
 }
-
-const Mat3& operator+=(Mat3 & M1, const Mat3 & M2)
-{
-	M1[0][0] += M2[0][0];
-	M1[0][1] += M2[0][1];
-	M1[0][2] += M2[0][2];
-	M1[1][0] += M2[1][0];
-	M1[1][1] += M2[1][1];
-	M1[1][2] += M2[1][2];
-	M1[2][0] += M2[2][0];
-	M1[2][1] += M2[2][1];
-	M1[2][2] += M2[2][2];
-	
-	return M1;
-}
-
 const Mat3 operator-(const Mat3 & M1, const Mat3 & M2)
 {
 	return Mat3(
@@ -70,29 +53,13 @@ const Mat3 operator-(const Mat3 & M1, const Mat3 & M2)
 		}
 	);
 }
-
-const Mat3 & operator-=(Mat3 & M1, const Mat3 & M2)
-{
-	M1[0][0] -= M2[0][0];
-	M1[0][1] -= M2[0][1];
-	M1[0][2] -= M2[0][2];
-	M1[1][0] -= M2[1][0];
-	M1[1][1] -= M2[1][1];
-	M1[1][2] -= M2[1][2];
-	M1[2][0] -= M2[2][0];
-	M1[2][1] -= M2[2][1];
-	M1[2][2] -= M2[2][2];
-
-	return M1;
-}
-
 const Mat3 operator*(const Mat3 & M1, const Mat3 & M2)
 {
 	return Mat3(
 		{
 		{
 			{
-			M1[0][0]*M2[0][0] + M1[0][1] * M2[1][0] + M1[0][2] * M2[2][0],
+			M1[0][0] * M2[0][0] + M1[0][1] * M2[1][0] + M1[0][2] * M2[2][0],
 			M1[0][0] * M2[0][1] + M1[0][1] * M2[1][1] + M1[0][2] * M2[2][1],
 			M1[0][0] * M2[0][2] + M1[0][1] * M2[1][2] + M1[0][2] * M2[2][2]
 			},
@@ -110,21 +77,31 @@ const Mat3 operator*(const Mat3 & M1, const Mat3 & M2)
 		}
 	);
 }
-
-const Mat3 & operator*=(Mat3 & M1, const Mat3 & M2)
+Mat3& Mat3::operator+=(const Mat3& M)
 {
-	M1[0][0] = M1[0][0] * M2[0][0] + M1[0][1] * M2[1][0] + M1[0][2] * M2[2][0];
-	M1[0][1] = M1[0][0] * M2[0][1] + M1[0][1] * M2[1][1] + M1[0][2] * M2[2][1];
-	M1[0][2] = M1[0][0] * M2[0][2] + M1[0][1] * M2[1][2] + M1[0][2] * M2[2][2];
-	M1[1][0] = M1[1][0] * M2[0][0] + M1[1][1] * M2[1][0] + M1[1][2] * M2[2][0];
-	M1[1][1] = M1[1][0] * M2[0][1] + M1[1][1] * M2[1][1] + M1[1][2] * M2[2][1];
-	M1[1][2] = M1[1][0] * M2[0][2] + M1[1][1] * M2[1][2] + M1[1][2] * M2[2][2];
-	M1[2][0] = M1[2][0] * M2[0][0] + M1[2][1] * M2[1][0] + M1[2][2] * M2[2][0];
-	M1[2][1] = M1[2][0] * M2[0][1] + M1[2][1] * M2[1][1] + M1[2][2] * M2[2][1];
-	M1[2][2] = M1[2][0] * M2[0][2] + M1[2][1] * M2[1][2] + M1[2][2] * M2[2][2];
-	return M1;
+	int i, j;
+	for (i = 0; i < 3; i++) for (j = 0; j < 3; j++) values[i][j] += M[i][j];
+	return *this;
 }
-
+Mat3& Mat3::operator-=(const Mat3& M)
+{
+	int i, j;
+	for (i = 0; i < 3; i++) for (j = 0; j < 3; j++) values[i][j] -= M[i][j];
+	return *this;
+}
+Mat3& Mat3::operator*=(const Mat3& M)
+{
+	values[0][0] = values[0][0] * M[0][0] + values[0][1] * M[1][0] + values[0][2] * M[2][0];
+	values[0][1] = values[0][0] * M[0][1] + values[0][1] * M[1][1] + values[0][2] * M[2][1];
+	values[0][2] = values[0][0] * M[0][2] + values[0][1] * M[1][2] + values[0][2] * M[2][2];
+	values[1][0] = values[1][0] * M[0][0] + values[1][1] * M[1][0] + values[1][2] * M[2][0];
+	values[1][1] = values[1][0] * M[0][1] + values[1][1] * M[1][1] + values[1][2] * M[2][1];
+	values[1][2] = values[1][0] * M[0][2] + values[1][1] * M[1][2] + values[1][2] * M[2][2];
+	values[2][0] = values[2][0] * M[0][0] + values[2][1] * M[1][0] + values[2][2] * M[2][0];
+	values[2][1] = values[2][0] * M[0][1] + values[2][1] * M[1][1] + values[2][2] * M[2][1];
+	values[2][2] = values[2][0] * M[0][2] + values[2][1] * M[1][2] + values[2][2] * M[2][2];
+	return *this;
+}
 const Mat3 operator*(const Mat3 & M1, const float & F)
 {
 	return Mat3(
@@ -137,34 +114,19 @@ const Mat3 operator*(const Mat3 & M1, const float & F)
 		}
 	);
 }
-
 const Mat3 operator*(const float & F, const Mat3 & M1)
 {
-	return Mat3(
-		{
-		{
-			{M1[0][0] * F, M1[0][1] * F, M1[0][2] * F},
-			{M1[1][0] * F, M1[1][1] * F, M1[1][2] * F},
-			{M1[2][0] * F, M1[2][1] * F, M1[2][2] * F}
-		}
-		}
-	);
+	Mat3 newMat = Mat3();
+	int i, j;
+	for (i = 0; i < 3; i++) for (j = 0; j < 3; j++) newMat[i][j] = M1[i][j] * F;
+	return newMat;
 }
-
 const Mat3 & operator*=(Mat3 & M1, const float & F)
 {
-	M1[0][0] *= F;
-	M1[0][1] *= F;
-	M1[0][2] *= F;
-	M1[1][0] *= F;
-	M1[1][1] *= F;
-	M1[1][2] *= F;
-	M1[2][0] *= F;
-	M1[2][1] *= F;
-	M1[2][2] *= F;
+	int i, j;
+	for (i = 0; i < 3; i++) for (j = 0; j < 3; j++) M1[i][j] *= F;
 	return M1;
 }
-
 const Vec3 operator*(const Mat3 & M1, const Vec3 & V)
 {
 	return Vec3(M1[0][0] * V.x + M1[0][1] * V.y + M1[0][2] * V.z,
@@ -209,23 +171,10 @@ std::istream & operator>>(std::istream & is, Mat3 & M)
 	return is;
 }
 
-std::array<std::array<float, 3>, 3> Mat3::GetValues() const
-{
-	return values;
-}
-
 void Mat3::Transpose()
 {
 	Mat3 copy = GetTransposed();
-	values[0][0] = copy[0][0];
-	values[0][1] = copy[0][1];
-	values[0][2] = copy[0][2];
-	values[1][0] = copy[1][0];
-	values[1][1] = copy[1][1];
-	values[1][2] = copy[1][2];
-	values[2][0] = copy[2][0];
-	values[2][1] = copy[2][1];
-	values[2][2] = copy[2][2];
+	values = copy.values;
 }
 
 Mat3 Mat3::GetTransposed() const
@@ -260,9 +209,10 @@ Mat3 Mat3::Inverse() const
 	return Mat3();
 }
 
-std::array<float, 9> Mat3::GetData() const
+float* Mat3::GetData() const
 {
-	return { {values[0][0], values[0][1], values[0][2], values[1][0], values[1][1], values[1][2], values[2][0], values[2][1], values[2][2], } };
+	float arr[9] = { values[0][0], values[1][0], values[2][0], values[0][1], values[1][1], values[2][1], values[0][2], values[1][2], values[2][2] };
+	return arr;
 }
 
 Mat3 Mat3::IdentityMat()
@@ -280,7 +230,6 @@ Mat3 Mat3::IdentityMat()
 
 Mat3 Mat3::TranslationMat(float x, float y)
 {
-	//TODO: Correct???
 	return Mat3(
 		{
 		{
