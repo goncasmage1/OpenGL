@@ -4,6 +4,8 @@
 #include <math.h>
 #include <assert.h>
 
+#define PI 3.14159265358979323846
+
 Mat3::Mat3()
 {
 
@@ -263,8 +265,8 @@ Mat3 Mat3::RotationMat(EAxis RotationAxis, float Degrees)
 				{
 				{
 					{1, 0, 0},
-					{0, std::cos(Degrees), -std::sin(Degrees)},
-					{0, std::sin(Degrees), std::cos(Degrees)}
+					{0, std::cos((Degrees*PI)/180.f), -std::sin((Degrees*PI) / 180.f)},
+					{0, std::sin((Degrees*PI) / 180.f), std::cos((Degrees*PI) / 180.f)}
 				}
 				}
 			);
@@ -273,9 +275,9 @@ Mat3 Mat3::RotationMat(EAxis RotationAxis, float Degrees)
 			return Mat3(
 				{
 				{
-					{std::cos(Degrees), 0, std::sin(Degrees)},
+					{std::cos((Degrees*PI) / 180.f), 0, std::sin((Degrees*PI) / 180.f)},
 					{0, 1, 0},
-					{-std::sin(Degrees), 0, std::cos(Degrees)}
+					{-std::sin((Degrees*PI) / 180.f), 0, std::cos((Degrees*PI) / 180.f)}
 				}
 				}
 			);
@@ -284,8 +286,8 @@ Mat3 Mat3::RotationMat(EAxis RotationAxis, float Degrees)
 			return Mat3(
 				{
 				{
-					{std::cos(Degrees), -std::sin(Degrees), 0},
-					{std::sin(Degrees), std::cos(Degrees), 0},
+					{std::cos((Degrees*PI) / 180.f), -std::sin((Degrees*PI) / 180.f), 0},
+					{std::sin((Degrees*PI) / 180.f), std::cos((Degrees*PI) / 180.f), 0},
 					{0, 0, 1}
 				}
 				}
