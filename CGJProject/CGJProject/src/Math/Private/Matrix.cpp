@@ -358,48 +358,8 @@ Mat3 Mat3::ScaleMat(float scalar)
 	);
 }
 
-Mat3 Mat3::RotationMat(EAxis RotationAxis, float Degrees)
+Mat3 Mat3::RotationMat(EAxis RotationAxis, double Degrees)
 {
-	switch (RotationAxis)
-	{
-		case EAxis::X:
-			return Mat3(
-				{
-				{
-					{1, 0, 0},
-					{0, std::cos((Degrees*PI)/180), -std::sin((Degrees*PI) / 180)},
-					{0, std::sin((Degrees*PI) / 180), std::cos((Degrees*PI) / 180)}
-				}
-				}
-			);
-			break;
-		case EAxis::Y:
-			return Mat3(
-				{
-				{
-					{std::cos((Degrees*PI) / 180), 0, std::sin((Degrees*PI) / 180)},
-					{0, 1, 0},
-					{-std::sin((Degrees*PI) / 180), 0, std::cos((Degrees*PI) / 180)}
-				}
-				}
-			);
-			break;
-		case EAxis::Z:
-			return Mat3(
-				{
-				{
-					{std::cos((Degrees*PI) / 180), -std::sin((Degrees*PI) / 180), 0},
-					{std::sin((Degrees*PI) / 180), std::cos((Degrees*PI) / 180), 0},
-					{0, 0, 1}
-				}
-				}
-			);
-			break;
-		default:
-			assert(1 == 0);
-			return Mat3();
-			break;
-	}
 	
 }
 

@@ -46,7 +46,7 @@ struct Mat2
 	static Mat2 IdentityMat();
 	//static Mat2 TranslationMat(float x, float y);
 	static Mat2 ScaleMat(float scalar);
-	static Mat2 RotationMat(EAxis RotationAxis, float Degrees);
+	static Mat2 RotationMat(EAxis RotationAxis, double Degrees);
 };
 
 struct Mat3
@@ -90,7 +90,7 @@ struct Mat3
 	static Mat3 IdentityMat();
 	static Mat3 TranslationMat(float x, float y);
 	static Mat3 ScaleMat(float scalar);
-	static Mat3 RotationMat(EAxis RotationAxis, float Degrees);
+	static Mat3 RotationMat(EAxis RotationAxis, double Degrees);
 
 };
 
