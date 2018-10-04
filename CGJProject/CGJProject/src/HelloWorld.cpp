@@ -249,82 +249,69 @@ int main(int argc, char* argv[])
 {
 	init(argc, argv);
 
-	Mat3 M1 = Mat3(
-		{
-		{
-			{1, 0, 0},
-			{0, 1, 0},
-			{0, 0, 1}
-		}
-		}
-	);
+	Mat4 M1 = Mat4::IdentityMat();
 
-	Mat3 M2 = Mat3(
+	Mat4 M3 = Mat4(
 		{
 		{
-			{1, 0, 0},
-			{0, 1, 0},
-			{0, 0, 1}
-		}
-		}
-	);
-
-	Mat3 M3 = Mat3(
-		{
-		{
-			{2, 0, 0},
-			{0, 2, 0},
-			{0, 0, 2}
+			{2, 0, 0, 0},
+			{0, 2, 0, 0},
+			{0, 0, 2, 0},
+			{0, 0, 0, 2}
 		}
 		}
 	);
 
 	std::cout << "Equal: " << ((M1 * 2) == M3) << std::endl;
 
-	Mat3 M5 = Mat3(
+	Mat4 M5 = Mat4(
 		{
 		{
-			{1, 2, 3},
-			{4, 5, 6},
-			{7, 8, 9}
+			{1, 2, 3, 4},
+			{5, 6, 7, 8},
+			{9, 10, 11, 12},
+			{13, 14, 15, 16}
 		}
 		}
 	);
-	Mat3 M6 = Mat3(
+	Mat4 M6 = Mat4(
 		{
 		{
-			{9, 8, 7},
-			{6, 5, 4},
-			{3, 2, 1}
+			{16, 15, 14, 13},
+			{12, 11, 10, 9},
+			{8, 7, 6, 5},
+			{4, 3, 2, 1}
 		}
 		}
 	);
-	Mat3 M7 = Mat3(
+	Mat4 M7 = Mat4(
 		{
 		{
-			{30, 24, 18},
-			{84, 69, 54},
-			{138, 114, 90}
+			{80, 70, 60, 50},
+			{240, 214, 188, 162},
+			{400, 358, 316, 274},
+			{560, 502, 444, 386}
 		}
 		}
 	);
-	Mat3 M8 = Mat3(
+	Mat4 M8 = Mat4(
 		{
 		{
-			{6, 1, 1},
-			{4, -2, 5},
-			{2, 8, 7}
+			{1, 2, 2, 1},
+			{1, 2, 4, 2},
+			{2, 7, 5, 2},
+			{-1, 4, -6, 3}
 		}
 		}
 	);
 
-	Mat3 Mul = M5 * M6;
+	Mat4 Mul = M5 * M6;
 	std::cout << "Multiplication: " << std::endl << Mul << std::endl;
 	std::cout << "Equal: " << (Mul == M7) << std::endl;
 	std::cout << "Determinant: " << M8.Determinant() << std::endl;
 	std::cout << "Transpose: " << M5.GetTransposed() << std::endl;
 	std::cout << "Inverse: " << M8.GetInverse() << std::endl;
-	std::cout << "Rotation: " << Mat3::RotationMat(Vec3(1, 0, 0), 45) << std::endl;
+	std::cout << "Rotation: " << Mat4::RotationMat(Vec3(1, 0, 0), 45) << std::endl;
 
 	glutMainLoop();
 	exit(EXIT_SUCCESS);
