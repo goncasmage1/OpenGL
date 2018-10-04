@@ -20,7 +20,7 @@ struct Mat2
 	std::array<float, 2>& operator[](int row);
 	std::array<float, 2> operator[](int row) const;
 
-	friend const Mat2 operator+(const Mat2& M1, const Mat2& M2);
+	/*friend const Mat2 operator+(const Mat2& M1, const Mat2& M2);
 	friend const Mat2 operator-(const Mat2& M1, const Mat2& M2);
 	friend const Mat2 operator*(const Mat2& M1, const Mat2& M2);
 	Mat2& operator+=(const Mat2& M);
@@ -34,19 +34,20 @@ struct Mat2
 	friend const bool operator!=(const Mat2& M1, const Mat2& M2);
 	std::string ToString() const;
 	friend std::ostream& operator<<(std::ostream& os, const Mat2& M);
-	friend std::istream& operator>>(std::istream& is, Mat2& M);
+	friend std::istream& operator>>(std::istream& is, Mat2& M);*/
 
 	void Transpose();
 	Mat2 GetTransposed() const;
 	float Determinant() const;
 	Mat2 GetInverse() const;
+	void Inverse();
 
 	float* GetData() const;
 
 	static Mat2 IdentityMat();
 	//static Mat2 TranslationMat(float x, float y);
-	static Mat2 ScaleMat(float scalar);
-	static Mat2 RotationMat(EAxis RotationAxis, double Degrees);
+	/*static Mat2 ScaleMat(float scalar);
+	static Mat2 RotationMat(struct Vec2 V, const double Degrees);*/
 };
 
 struct Mat3
@@ -90,8 +91,7 @@ struct Mat3
 	static Mat3 IdentityMat();
 	static Mat3 TranslationMat(float x, float y);
 	static Mat3 ScaleMat(float scalar);
-	static Mat3 RotationMat(EAxis RotationAxis, double Degrees);
-
+	static Mat3 RotationMat(struct Vec3 V, const double Degrees);
 };
 
 struct Mat4

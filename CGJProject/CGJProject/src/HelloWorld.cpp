@@ -25,6 +25,7 @@
 #include "GL/glew.h"
 #include "GL/freeglut.h"
 #include "Math/Public/Vector.h"
+#include "Math/Public/Matrix.h"
 
 #define CAPTION "Hello Blank World"
 
@@ -248,13 +249,82 @@ int main(int argc, char* argv[])
 {
 	init(argc, argv);
 
-	Vec3 V1 = Vec3(3.f);
-	Vec3 V2 = Vec3(1.f, 2.f, 3.f);
+	Mat3 M1 = Mat3(
+		{
+		{
+			{1, 0, 0},
+			{0, 1, 0},
+			{0, 0, 1}
+		}
+		}
+	);
 
-	V1 += V2;
+	Mat3 M2 = Mat3(
+		{
+		{
+			{1, 0, 0},
+			{0, 1, 0},
+			{0, 0, 1}
+		}
+		}
+	);
 
-	std::cout << "Equal: " << (V1 == V1) << std::endl;
-	std::cout << "Different: " << (V1 != V2) << std::endl;
+	Mat3 M3 = Mat3(
+		{
+		{
+			{2, 0, 0},
+			{0, 2, 0},
+			{0, 0, 2}
+		}
+		}
+	);
+
+	std::cout << "Equal: " << ((M1 * 2) == M3) << std::endl;
+
+	Mat3 M5 = Mat3(
+		{
+		{
+			{1, 2, 3},
+			{4, 5, 6},
+			{7, 8, 9}
+		}
+		}
+	);
+	Mat3 M6 = Mat3(
+		{
+		{
+			{9, 8, 7},
+			{6, 5, 4},
+			{3, 2, 1}
+		}
+		}
+	);
+	Mat3 M7 = Mat3(
+		{
+		{
+			{30, 24, 18},
+			{84, 69, 54},
+			{138, 114, 90}
+		}
+		}
+	);
+	Mat3 M8 = Mat3(
+		{
+		{
+			{6, 1, 1},
+			{4, -2, 5},
+			{2, 8, 7}
+		}
+		}
+	);
+
+	Mat3 Mul = M5 * M6;
+	std::cout << "Multiplication: " << std::endl << Mul << std::endl;
+	std::cout << "Equal: " << (Mul == M7) << std::endl;
+	std::cout << "Determinant: " << M8.Determinant() << std::endl;
+	std::cout << "Transpose: " << M5.GetTransposed() << std::endl;
+	std::cout << "Inverse: " << M8.GetInverse() << std::endl;
+	std::cout << "Rotation: " << Mat3::RotationMat(Vec3(1, 0, 0), 45) << std::endl;
 
 	glutMainLoop();
 	exit(EXIT_SUCCESS);

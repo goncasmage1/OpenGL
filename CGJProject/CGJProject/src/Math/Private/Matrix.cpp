@@ -63,18 +63,24 @@ float Mat2::Determinant() const
 
 Mat2 Mat2::GetInverse() const
 {
-	float InvertedDeterminant = 1 / Determinant();
+	return Mat2();
+	/*float InvertedDeterminant = 1 / Determinant();
 	return InvertedDeterminant * Mat2({ 
 										{
 										{values[1][1], -values[0][1]},
 										{-values[1][0], values[0][0]}
 										} 
-									  });
+									  });*/
+}
+
+void Mat2::Inverse()
+{
+	values = GetInverse().values;
 }
 
 float * Mat2::GetData() const
 {
-	float arr[4] = { values[0][0], values[1][0], values[0][1], values[1][1] };
+	float* arr = new float[4]{ values[0][0], values[1][0], values[0][1], values[1][1] };
 	return arr;
 }
 
@@ -290,32 +296,39 @@ float Mat3::Determinant() const
 
 Mat3 Mat3::GetInverse() const
 {
-	Mat3 Transposed = GetTransposed();
 	float Det = Determinant();
 
-	std::array<std::array<float, 3>, 3> determinants = { {
-													{ 0.f, 0.f, 0.f },
-													{ 0.f, 0.f, 0.f },
-													{ 0.f, 0.f, 0.f }
-													}
-	};
+	Mat3 determinantMat = Mat3( {	{
+									{ 0.f, 0.f, 0.f },
+									{ 0.f, 0.f, 0.f },
+									{ 0.f, 0.f, 0.f }
+									}
+									});
 
-	determinants[0][0] = Mat2({ {{values[1][1], values[1][2]}, {values[2][1], values[2][2]} } }).Determinant();
-	determinants[0][0] = Mat2({ {{values[1][1], values[1][2]}, {values[2][1], values[2][2]} } }).Determinant();
-	determinants[0][0] = Mat2({ {{values[1][1], values[1][2]}, {values[2][1], values[2][2]} } }).Determinant();
-	determinants[0][0] = Mat2({ {{values[1][1], values[1][2]}, {values[2][1], values[2][2]} } }).Determinant();
-	determinants[0][0] = Mat2({ {{values[1][1], values[1][2]}, {values[2][1], values[2][2]} } }).Determinant();
-	determinants[0][0] = Mat2({ {{values[1][1], values[1][2]}, {values[2][1], values[2][2]} } }).Determinant();
-	determinants[0][0] = Mat2({ {{values[1][1], values[1][2]}, {values[2][1], values[2][2]} } }).Determinant();
-	determinants[0][0] = Mat2({ {{values[1][1], values[1][2]}, {values[2][1], values[2][2]} } }).Determinant();
-	determinants[0][0] = Mat2({ {{values[1][1], values[1][2]}, {values[2][1], values[2][2]} } }).Determinant();
+	determinantMat[0][0] = Mat2({ {{values[1][1], values[1][2]}, {values[2][1], values[2][2]} } }).Determinant();
+	determinantMat[0][1] = Mat2({ {{values[1][0], values[1][2]}, {values[2][0], values[2][2]} } }).Determinant();
+	determinantMat[0][2] = Mat2({ {{values[1][0], values[1][1]}, {values[2][0], values[2][1]} } }).Determinant();
+	determinantMat[1][0] = Mat2({ {{values[0][1], values[0][2]}, {values[2][1], values[2][2]} } }).Determinant();
+	determinantMat[1][1] = Mat2({ {{values[0][0], values[0][2]}, {values[2][0], values[2][2]} } }).Determinant();
+	determinantMat[1][2] = Mat2({ {{values[0][0], values[0][1]}, {values[2][0], values[2][1]} } }).Determinant();
+	determinantMat[2][0] = Mat2({ {{values[0][1], values[0][2]}, {values[1][1], values[1][2]} } }).Determinant();
+	determinantMat[2][1] = Mat2({ {{values[0][0], values[0][2]}, {values[1][0], values[1][2]} } }).Determinant();
+	determinantMat[2][2] = Mat2({ {{values[0][0], values[0][1]}, {values[1][0], values[1][1]} } }).Determinant();
 
-	return Mat3();
+	determinantMat[0][1] = -determinantMat[0][1];
+	determinantMat[1][0] = -determinantMat[1][0];
+	determinantMat[1][2] = -determinantMat[1][2];
+	determinantMat[2][1] = -determinantMat[2][1];
+
+	determinantMat.Transpose();
+	determinantMat *= (1/Det);
+
+	return determinantMat;
 }
 
 float* Mat3::GetData() const
 {
-	float arr[9] = { values[0][0], values[1][0], values[2][0], values[0][1], values[1][1], values[2][1], values[0][2], values[1][2], values[2][2] };
+	float* arr = new float[9]{ values[0][0], values[1][0], values[2][0], values[0][1], values[1][1], values[2][1], values[0][2], values[1][2], values[2][2] };
 	return arr;
 }
 
@@ -358,9 +371,16 @@ Mat3 Mat3::ScaleMat(float scalar)
 	);
 }
 
-Mat3 Mat3::RotationMat(EAxis RotationAxis, double Degrees)
+Mat3 Mat3::RotationMat(Vec3 V, const double Degrees)
 {
-	
+	Mat3 AMat = Mat3(
+				{ {
+					{0, -V.z, V.y},
+					{V.z, 0, -V.x},
+					{-V.y, V.x, 0}
+				} }
+				);
+	return (IdentityMat() + (float)std::sin((Degrees*PI)/180) * AMat + (1 - (float)std::cos((Degrees*PI) / 180)) * (AMat*AMat));
 }
 
 
