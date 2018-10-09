@@ -36,6 +36,7 @@ struct Vec2
 	float* GetData() const;
 	std::string ToString() const;
 	float Length() const;
+	float Quadrance();
 	void Normalize();
 	Vec2 GetNormalized() const;
 	float Dot(const Vec2& V);
@@ -74,6 +75,7 @@ struct Vec3
 	float* GetData() const;
 	std::string ToString() const;
 	float Length() const;
+	float Quadrance();
 	void Normalize();
 	Vec3 GetNormalized() const;
 	float Dot(const Vec3& V);
@@ -113,6 +115,7 @@ struct Vec4
 	float* GetData() const;
 	std::string ToString() const;
 	float Length() const;
+	float Quadrance();
 	void Normalize();
 	Vec4 GetNormalized() const;
 	float Dot(const Vec4& V);

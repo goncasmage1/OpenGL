@@ -164,7 +164,12 @@ std::string Vec2::ToString() const
 
 float Vec2::Length() const
 {
-	return std::sqrt(x*x + y * y);
+	return std::sqrt(x*x + y*y);
+}
+
+float Vec2::Quadrance()
+{
+	return (x*x + y*y);
 }
 
 void Vec2::Normalize()
@@ -365,7 +370,12 @@ std::string Vec3::ToString() const
 
 float Vec3::Length() const
 {
-	return std::sqrt(x*x + y * y + z * z);
+	return std::sqrt(x*x + y*y + z*z);
+}
+
+float Vec3::Quadrance()
+{
+	return (x*x + y*y + z*z);
 }
 
 void Vec3::Normalize()
@@ -594,6 +604,11 @@ std::string Vec4::ToString() const
 float Vec4::Length() const
 {
 	return std::sqrt(x*x + y*y + z*z + w*w);
+}
+
+float Vec4::Quadrance()
+{
+	return (x*x + y*y + z*z + w*w);
 }
 
 void Vec4::Normalize()
