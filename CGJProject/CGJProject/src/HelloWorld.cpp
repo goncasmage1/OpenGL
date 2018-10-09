@@ -310,7 +310,7 @@ int main(int argc, char* argv[])
 	std::cout << "Equal: " << (Mul == M7) << std::endl;
 	std::cout << "Determinant: " << M8.Determinant() << std::endl;
 	std::cout << "Transpose: " << M5.GetTransposed() << std::endl;
-	std::cout << "Inverse: " << M8.GetInverse() << std::endl;
+	//std::cout << "Inverse: " << M8.GetInverse() << std::endl;
 	std::cout << "Rotation: " << Mat4::RotationMat(Vec3(1, 0, 0), 45) << std::endl;
 
 	glutMainLoop();

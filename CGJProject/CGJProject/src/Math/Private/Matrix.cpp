@@ -787,38 +787,6 @@ float Mat4::Determinant() const
 			);
 }
 
-Mat4 Mat4::GetInverse() const
-{
-	float Det = Determinant();
-
-	Mat4 determinantMat = Mat4({ {
-									{ 0.f, 0.f, 0.f },
-									{ 0.f, 0.f, 0.f },
-									{ 0.f, 0.f, 0.f }
-									}
-							   });
-
-	determinantMat[0][0] = Mat2({ {{values[1][1], values[1][2]}, {values[2][1], values[2][2]} } }).Determinant();
-	determinantMat[0][1] = Mat2({ {{values[1][0], values[1][2]}, {values[2][0], values[2][2]} } }).Determinant();
-	determinantMat[0][2] = Mat2({ {{values[1][0], values[1][1]}, {values[2][0], values[2][1]} } }).Determinant();
-	determinantMat[1][0] = Mat2({ {{values[0][1], values[0][2]}, {values[2][1], values[2][2]} } }).Determinant();
-	determinantMat[1][1] = Mat2({ {{values[0][0], values[0][2]}, {values[2][0], values[2][2]} } }).Determinant();
-	determinantMat[1][2] = Mat2({ {{values[0][0], values[0][1]}, {values[2][0], values[2][1]} } }).Determinant();
-	determinantMat[2][0] = Mat2({ {{values[0][1], values[0][2]}, {values[1][1], values[1][2]} } }).Determinant();
-	determinantMat[2][1] = Mat2({ {{values[0][0], values[0][2]}, {values[1][0], values[1][2]} } }).Determinant();
-	determinantMat[2][2] = Mat2({ {{values[0][0], values[0][1]}, {values[1][0], values[1][1]} } }).Determinant();
-
-	determinantMat.Transpose();
-	determinantMat *= (1 / Det);
-
-	return determinantMat;
-}
-
-void Mat4::Inverse()
-{
-	values = GetInverse().values;
-}
-
 float* Mat4::GetData() const
 {
 	float* arr = new float[9]{ values[0][0], values[1][0], values[2][0], values[0][1], values[1][1], values[2][1], values[0][2], values[1][2], values[2][2] };
@@ -861,7 +829,7 @@ Mat4 Mat4::ScaleMat(float scalar)
 			{scalar, 0, 0, 0},
 			{0, scalar, 0, 0},
 			{0, 0, scalar, 0},
-			{0, 0, 0, scalar}
+			{0, 0, 0, 1}
 		}
 		}
 	);
@@ -869,12 +837,7 @@ Mat4 Mat4::ScaleMat(float scalar)
 
 Mat4 Mat4::RotationMat(Vec4 V, const double Degrees)
 {
-	Mat4 AMat = Mat4(
-		{ {
-			{0, -V.z, V.y},
-			{V.z, 0, -V.x},
-			{-V.y, V.x, 0}
-		} }
-	);
-	return (IdentityMat() + (float)std::sin((Degrees*PI) / 180) * AMat + (1 - (float)std::cos((Degrees*PI) / 180)) * (AMat*AMat));
+	Mat4 RotMat = Mat4(Mat3::RotationMat(V, Degrees));
+	RotMat[3][3] = 1;
+	return RotMat;
 }

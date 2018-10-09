@@ -46,8 +46,6 @@ struct Mat2
 	float* GetData() const;
 
 	static Mat2 IdentityMat();
-	//TODO: ??
-	//static Mat2 TranslationMat(float x, float y);
 	//TODO: Dual Matrix??
 	static Mat2 ScaleMat(float scalar);
 	static Mat2 RotationMat(const double Degrees);
@@ -136,15 +134,11 @@ struct Mat4
 	void Transpose();
 	Mat4 GetTransposed() const;
 	float Determinant() const;
-	//TODO: ???
-	Mat4 GetInverse() const;
-	void Inverse();
 
 	float* GetData() const;
 
 	static Mat4 IdentityMat();
 	static Mat4 TranslationMat(const struct Vec3& V);
 	static Mat4 ScaleMat(float scalar);
-	//TODO: Mat4 Rotation??
 	static Mat4 RotationMat(struct Vec4 V, const double Degrees);
 };
