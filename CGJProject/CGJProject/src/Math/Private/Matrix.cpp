@@ -193,7 +193,9 @@ float Mat2::Determinant() const
 Mat2 Mat2::GetInverse() const
 {
 	return Mat2();
-	float InvertedDeterminant = 1 / Determinant();
+	float Det = Determinant();
+	if (Det == 0.f) throw std::overflow_error("Division by 0!");
+	float InvertedDeterminant = 1 / Det;
 	return InvertedDeterminant * Mat2({ 
 										{
 										{values[1][1], -values[0][1]},
@@ -456,7 +458,7 @@ float Mat3::Determinant() const
 Mat3 Mat3::GetInverse() const
 {
 	float Det = Determinant();
-
+	if (Det == 0.f) throw std::overflow_error("Division by 0!");
 	Mat3 determinantMat = Mat3( {	{
 									{ 0.f, 0.f, 0.f },
 									{ 0.f, 0.f, 0.f },
