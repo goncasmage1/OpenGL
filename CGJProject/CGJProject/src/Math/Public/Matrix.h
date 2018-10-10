@@ -46,7 +46,6 @@ struct Mat2
 	float* GetData() const;
 
 	static Mat2 IdentityMat();
-	//TODO: Dual Matrix??
 	static Mat2 ScaleMat(float scalar);
 	static Mat2 RotationMat(const double Degrees);
 };
