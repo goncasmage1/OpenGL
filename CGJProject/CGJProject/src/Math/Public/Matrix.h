@@ -93,9 +93,10 @@ struct Mat3
 	float* GetData() const;
 
 	static Mat3 IdentityMat();
+	static Mat3 GetDual(const struct Vec3& V);
 	static Mat3 TranslationMat(const struct Vec2& V);
 	static Mat3 ScaleMat(float scalar);
-	static Mat3 RotationMat(struct Vec3 V, const double Degrees);
+	static Mat3 RotationMat(const struct Vec3& V, const double Degrees);
 };
 
 struct Mat4

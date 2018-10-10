@@ -511,6 +511,17 @@ Mat3 Mat3::IdentityMat()
 	);
 }
 
+Mat3 Mat3::GetDual(const Vec3 & V)
+{
+	return Mat3(
+		{ {
+			{0, -V.z, V.y},
+			{V.z, 0, -V.x},
+			{-V.y, V.x, 0}
+		} }
+	);
+}
+
 Mat3 Mat3::TranslationMat(const struct Vec2& V)
 {
 	return Mat3(
@@ -537,15 +548,9 @@ Mat3 Mat3::ScaleMat(float scalar)
 	);
 }
 
-Mat3 Mat3::RotationMat(Vec3 V, const double Degrees)
+Mat3 Mat3::RotationMat(const Vec3& V, const double Degrees)
 {
-	Mat3 AMat = Mat3(
-				{ {
-					{0, -V.z, V.y},
-					{V.z, 0, -V.x},
-					{-V.y, V.x, 0}
-				} }
-				);
+	Mat3 AMat = GetDual(V);
 	return (IdentityMat() + (float)std::sin((Degrees*PI)/180) * AMat + (1 - (float)std::cos((Degrees*PI) / 180)) * (AMat*AMat));
 }
 
