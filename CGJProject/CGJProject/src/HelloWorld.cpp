@@ -1,20 +1,24 @@
 ﻿///////////////////////////////////////////////////////////////////////
 //
-// Assignment 1 consists in the following:
+// Drawing two instances of a triangle in Modern OpenGL.
+// A "hello world" of Modern OpenGL.
 //
-// - Update your graphics drivers to their latest versions.
-// - Download the libraries: Glew and FreeGlut for your system.
-// - Create a project to compile, link and run the code provided in this 
-//   section in your favourite programming environment 
-//   (course will use VS2017 Community Edition).
-// - Verify what OpenGL contexts your computer can support, a minimum of 
-//   OpenGL 3.3 support is required for this course.
+// Assignment : Create Shader Abstraction 
+//					(e.g. check compilation/linkage for errors, read from file) 
+//			  : Manage Multiple Drawable Entities (using your vertex and matrix classes)
+//              Draw a set of 7 TANs (i.e. TANGRAM shapes) of different colors: 
+//              (1) 3 different TAN geometric shapes at the origin:
+//					- right triangle
+//					- square
+//					- parallelogram
+//              (2) 7 TANs of different colors put together to form a shape of your choice:
+//					- 2 big right triangles
+//					- 1 medium right triangle
+//					- 2 small right triangles
+//					- 1 square
+//					- 1 parallelogram;
 //
-// Further suggestions to verify your understanding of the concepts explored:
-// - Change the program so display is called at 30 FPS.
-// - Create an abstract class for an OpenGL application.
-//
-// (c)2013-18 by Carlos Martinho
+// (c) 2013-18 by Carlos Martinho
 //
 ///////////////////////////////////////////////////////////////////////
 
@@ -24,31 +28,21 @@
 
 #include "GL/glew.h"
 #include "GL/freeglut.h"
-#include "Math/Public/Vector.h"
-#include "Math/Public/Matrix.h"
 
-#define CAPTION "Hello Blank World"
+#define CAPTION "Hello Modern 2D World"
 
 int WinX = 640, WinY = 480;
 int WindowHandle = 0;
 unsigned int FrameCount = 0;
-unsigned int TimerMillis = 1000;
+
+#define VERTICES 0
+#define COLORS 1
+
+GLuint VaoId, VboId[2];
+GLuint VertexShaderId, FragmentShaderId, ProgramId;
+GLint UniformId;
 
 /////////////////////////////////////////////////////////////////////// ERRORS
-
-static std::string errorSource(GLenum source)
-{
-	switch (source)
-	{
-		case GL_DEBUG_SOURCE_API:				return "API";
-		case GL_DEBUG_SOURCE_WINDOW_SYSTEM:		return "window system";
-		case GL_DEBUG_SOURCE_SHADER_COMPILER:	return "shader compiler";
-		case GL_DEBUG_SOURCE_THIRD_PARTY:		return "third party";
-		case GL_DEBUG_SOURCE_APPLICATION:		return "application";
-		case GL_DEBUG_SOURCE_OTHER:				return "other";
-		default:								exit(EXIT_FAILURE);
-	}
-}
 
 static std::string errorType(GLenum type)
 {
@@ -61,6 +55,20 @@ static std::string errorType(GLenum type)
 		case GL_DEBUG_TYPE_PERFORMANCE:			return "performance issue";
 		case GL_DEBUG_TYPE_MARKER:				return "stream annotation";
 		case GL_DEBUG_TYPE_OTHER_ARB:			return "other";
+		default:								exit(EXIT_FAILURE);
+	}
+}
+
+static std::string errorSource(GLenum source)
+{
+	switch (source)
+	{
+		case GL_DEBUG_SOURCE_API:				return "API";
+		case GL_DEBUG_SOURCE_WINDOW_SYSTEM:		return "window system";
+		case GL_DEBUG_SOURCE_SHADER_COMPILER:	return "shader compiler";
+		case GL_DEBUG_SOURCE_THIRD_PARTY:		return "third party";
+		case GL_DEBUG_SOURCE_APPLICATION:		return "application";
+		case GL_DEBUG_SOURCE_OTHER:				return "other";
 		default:								exit(EXIT_FAILURE);
 	}
 }
@@ -118,23 +126,188 @@ static void checkOpenGLError(std::string error)
 	}
 }
 
+/////////////////////////////////////////////////////////////////////// SHADERs
+
+const GLchar* VertexShader =
+{
+	"#version 330 core\n"
+
+	"in vec4 in_Position;\n"
+	"in vec4 in_Color;\n"
+	"out vec4 ex_Color;\n"
+
+	"uniform mat4 Matrix;\n"
+
+	"void main(void)\n"
+	"{\n"
+	"	gl_Position = Matrix * in_Position;\n"
+	"	ex_Color = in_Color;\n"
+	"}\n"
+};
+
+const GLchar* FragmentShader =
+{
+	"#version 330 core\n"
+
+	"in vec4 ex_Color;\n"
+	"out vec4 out_Color;\n"
+
+	"void main(void)\n"
+	"{\n"
+	"	out_Color = ex_Color;\n"
+	"}\n"
+};
+
+void createShaderProgram()
+{
+	VertexShaderId = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(VertexShaderId, 1, &VertexShader, 0);
+	glCompileShader(VertexShaderId);
+
+	FragmentShaderId = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(FragmentShaderId, 1, &FragmentShader, 0);
+	glCompileShader(FragmentShaderId);
+
+	ProgramId = glCreateProgram();
+	glAttachShader(ProgramId, VertexShaderId);
+	glAttachShader(ProgramId, FragmentShaderId);
+
+	glBindAttribLocation(ProgramId, VERTICES, "in_Position");
+	glBindAttribLocation(ProgramId, COLORS, "in_Color");
+
+	glLinkProgram(ProgramId);
+	UniformId = glGetUniformLocation(ProgramId, "Matrix");
+
+	glDetachShader(ProgramId, VertexShaderId);
+	glDeleteShader(VertexShaderId);
+	glDetachShader(ProgramId, FragmentShaderId);
+	glDeleteShader(FragmentShaderId);
+
+	checkOpenGLError("ERROR: Could not create shaders.");
+}
+
+void destroyShaderProgram()
+{
+	glUseProgram(0);
+	glDeleteProgram(ProgramId);
+
+	checkOpenGLError("ERROR: Could not destroy shaders.");
+}
+
+/////////////////////////////////////////////////////////////////////// VAOs & VBOs
+
+typedef struct
+{
+	GLfloat XYZW[4];
+	GLfloat RGBA[4];
+} Vertex;
+
+const Vertex Vertices[] =
+{
+	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
+	{{ 0.75f, 0.25f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }},
+	{{ 0.50f, 0.75f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }}
+};
+
+const GLubyte Indices[] =
+{
+	0,1,2
+};
+
+void createBufferObjects()
+{
+	glGenVertexArrays(1, &VaoId);
+	glBindVertexArray(VaoId);
+	{
+		glGenBuffers(2, VboId);
+
+		glBindBuffer(GL_ARRAY_BUFFER, VboId[0]);
+		{
+			glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
+			glEnableVertexAttribArray(VERTICES);
+			glVertexAttribPointer(VERTICES, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+			glEnableVertexAttribArray(COLORS);
+			glVertexAttribPointer(COLORS, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)sizeof(Vertices[0].XYZW));
+		}
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VboId[1]);
+		{
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
+		}
+	}
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	checkOpenGLError("ERROR: Could not create VAOs and VBOs.");
+}
+
+void destroyBufferObjects()
+{
+	glBindVertexArray(VaoId);
+	glDisableVertexAttribArray(VERTICES);
+	glDisableVertexAttribArray(COLORS);
+	glDeleteBuffers(2, VboId);
+	glDeleteVertexArrays(1, &VaoId);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+
+	checkOpenGLError("ERROR: Could not destroy VAOs and VBOs.");
+}
+
+/////////////////////////////////////////////////////////////////////// SCENE
+
+typedef GLfloat Matrix[16];
+
+const Matrix I = {
+	1.0f,  0.0f,  0.0f,  0.0f,
+	0.0f,  1.0f,  0.0f,  0.0f,
+	0.0f,  0.0f,  1.0f,  0.0f,
+	0.0f,  0.0f,  0.0f,  1.0f
+}; // Row Major (GLSL is Column Major)
+
+const Matrix M = {
+	1.0f,  0.0f,  0.0f, -1.0f,
+	0.0f,  1.0f,  0.0f, -1.0f,
+	0.0f,  0.0f,  1.0f,  0.0f,
+	0.0f,  0.0f,  0.0f,  1.0f
+}; // Row Major (GLSL is Column Major)
+
+void drawScene()
+{
+	glBindVertexArray(VaoId);
+	glUseProgram(ProgramId);
+
+	glUniformMatrix4fv(UniformId, 1, GL_TRUE, I);
+	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE, (GLvoid*)0);
+
+	glUniformMatrix4fv(UniformId, 1, GL_TRUE, M);
+	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE, (GLvoid*)0);
+
+	glUseProgram(0);
+	glBindVertexArray(0);
+
+	checkOpenGLError("ERROR: Could not draw scene.");
+}
+
 /////////////////////////////////////////////////////////////////////// CALLBACKS
 
 void cleanup()
 {
+	destroyShaderProgram();
+	destroyBufferObjects();
 }
 
 void display()
 {
 	++FrameCount;
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	// Draw something
+	drawScene();
 	glutSwapBuffers();
 }
 
 void idle()
 {
-	// Update your scene
 	glutPostRedisplay();
 }
 
@@ -145,21 +318,15 @@ void reshape(int w, int h)
 	glViewport(0, 0, WinX, WinY);
 }
 
-void updateFPS()
+void timer(int value)
 {
 	std::ostringstream oss;
-	unsigned int FPS = FrameCount * 1000 / TimerMillis;
-	oss << CAPTION << ": " << FPS << " FPS @ (" << WinX << "x" << WinY << ")";
+	oss << CAPTION << ": " << FrameCount << " FPS @ (" << WinX << "x" << WinY << ")";
 	std::string s = oss.str();
 	glutSetWindow(WindowHandle);
 	glutSetWindowTitle(s.c_str());
 	FrameCount = 0;
-}
-
-void timer(int value)
-{
-	updateFPS();
-	glutTimerFunc(TimerMillis, timer, 0);
+	glutTimerFunc(1000, timer, 0);
 }
 
 /////////////////////////////////////////////////////////////////////// SETUP
@@ -197,14 +364,11 @@ void setupOpenGL()
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glFrontFace(GL_CCW);
-	glViewport(0, 0, WinX, WinY);
 }
 
 void setupGLEW()
 {
 	glewExperimental = GL_TRUE;
-	// Allow extension entry points to be loaded even if the extension isn't 
-	// present in the driver's extensions string.
 	GLenum result = glewInit();
 	if (result != GLEW_OK)
 	{
@@ -212,7 +376,6 @@ void setupGLEW()
 		exit(EXIT_FAILURE);
 	}
 	GLenum err_code = glGetError();
-	// You might get GL_INVALID_ENUM when loading GLEW.
 }
 
 void setupGLUT(int argc, char* argv[])
@@ -221,7 +384,6 @@ void setupGLUT(int argc, char* argv[])
 
 	glutInitContextVersion(3, 3);
 	glutInitContextProfile(GLUT_CORE_PROFILE);
-	//glutInitContextProfile(GLUT_COMPATIBILITY_PROFILE);
 	glutInitContextFlags(GLUT_FORWARD_COMPATIBLE);
 	//glutInitContextFlags(GLUT_DEBUG);
 
@@ -243,79 +405,15 @@ void init(int argc, char* argv[])
 	setupGLEW();
 	setupOpenGL();
 	setupCallbacks();
+	createShaderProgram();
+	createBufferObjects();
 }
 
 int main(int argc, char* argv[])
 {
 	init(argc, argv);
-
-	Mat4 M1 = Mat4::IdentityMat();
-
-	Mat4 M3 = Mat4(
-		{
-		{
-			{2, 0, 0, 0},
-			{0, 2, 0, 0},
-			{0, 0, 2, 0},
-			{0, 0, 0, 2}
-		}
-		}
-	);
-
-	std::cout << "Equal: " << ((M1 * 2) == M3) << std::endl;
-
-	Mat4 M5 = Mat4(
-		{
-		{
-			{1, 2, 3, 4},
-			{5, 6, 7, 8},
-			{9, 10, 11, 12},
-			{13, 14, 15, 16}
-		}
-		}
-	);
-	Mat4 M6 = Mat4(
-		{
-		{
-			{16, 15, 14, 13},
-			{12, 11, 10, 9},
-			{8, 7, 6, 5},
-			{4, 3, 2, 1}
-		}
-		}
-	);
-	Mat4 M7 = Mat4(
-		{
-		{
-			{80, 70, 60, 50},
-			{240, 214, 188, 162},
-			{400, 358, 316, 274},
-			{560, 502, 444, 386}
-		}
-		}
-	);
-	Mat4 M8 = Mat4(
-		{
-		{
-			{1, 2, 2, 1},
-			{1, 2, 4, 2},
-			{2, 7, 5, 2},
-			{-1, 4, -6, 3}
-		}
-		}
-	);
-
-	Mat4 Mul = M5 * M6;
-	std::cout << "Multiplication: " << std::endl << Mul << std::endl;
-	std::cout << "Equal: " << (Mul == M7) << std::endl;
-	std::cout << "Determinant: " << M8.Determinant() << std::endl;
-	std::cout << "Transpose: " << M5.GetTransposed() << std::endl;
-	//std::cout << "Inverse: " << M8.GetInverse() << std::endl;
-	std::cout << "Rotation: " << Mat4::RotationMat(Vec3(1, 0, 0), 45) << std::endl;
-
 	glutMainLoop();
 	exit(EXIT_SUCCESS);
-
 }
 
 ///////////////////////////////////////////////////////////////////////
