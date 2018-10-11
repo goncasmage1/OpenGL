@@ -3,7 +3,7 @@
 // Drawing two instances of a triangle in Modern OpenGL.
 // A "hello world" of Modern OpenGL.
 //
-// Assignment : Create Shader Abstraction 
+// Assignment : Create Shader Abstraction
 //					(e.g. check compilation/linkage for errors, read from file) 
 //			  : Manage Multiple Drawable Entities (using your vertex and matrix classes)
 //              Draw a set of 7 TANs (i.e. TANGRAM shapes) of different colors: 
@@ -26,6 +26,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <vector>
 
 #include "GL/glew.h"
 #include "GL/freeglut.h"
@@ -189,9 +190,62 @@ typedef struct
 
 const Vertex Vertices[] =
 {
-	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
-	{{ 0.75f, 0.25f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }},
-	{{ 0.50f, 0.75f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }}
+	{{ 0.00f, 0.25f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
+	{{ 0.50f, 0.25f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
+	{{ 0.25f, 0.75f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }}
+};
+
+const Vertex MediumTri[] =
+{
+	{{ 0.00f, 0.25f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
+	{{ 0.50f, 0.25f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
+	{{ 0.25f, 0.75f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }}
+};
+
+const Vertex BigTri[] =
+{
+	{{ 0.00f, 0.25f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
+	{{ 1.00f, 0.25f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
+	{{ 0.50f, 1.25f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }}
+};
+
+const Vertex SmallTri[] =
+{
+	{{ 0.00f, 0.25f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
+	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
+	{{ 0.25f, 0.50f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }}
+};
+
+const Vertex* GetVertices(uint8_t index)
+{
+	switch (index)
+	{
+		case 0:
+		case 1:
+			return MediumTri;
+			break;
+		case 2:
+			return BigTri;
+			break;
+		case 3:
+			return SmallTri;
+			break;
+		case 4:
+			return nullptr;
+			break;
+		case 5:
+			return nullptr;
+			break;
+		case 6:
+			return nullptr;
+			break;
+		case 7:
+			return nullptr;
+			break;
+		default:
+			return nullptr;
+			break;
+	}
 };
 
 const GLubyte Indices[] =
@@ -208,6 +262,7 @@ void createBufferObjects()
 
 		glBindBuffer(GL_ARRAY_BUFFER, VboId[0]);
 		{
+			//const Vertex* Vertices = GetVertices(0);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
 			glEnableVertexAttribArray(VERTICES);
 			glVertexAttribPointer(VERTICES, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
