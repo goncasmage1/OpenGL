@@ -23,6 +23,7 @@
 ///////////////////////////////////////////////////////////////////////
 
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include <string>
 
@@ -128,38 +129,22 @@ static void checkOpenGLError(std::string error)
 
 /////////////////////////////////////////////////////////////////////// SHADERs
 
-const GLchar* VertexShader =
+std::string ReadShader(bool bVertex)
 {
-	"#version 330 core\n"
-
-	"in vec4 in_Position;\n"
-	"in vec4 in_Color;\n"
-	"out vec4 ex_Color;\n"
-
-	"uniform mat4 Matrix;\n"
-
-	"void main(void)\n"
-	"{\n"
-	"	gl_Position = Matrix * in_Position;\n"
-	"	ex_Color = in_Color;\n"
-	"}\n"
-};
-
-const GLchar* FragmentShader =
-{
-	"#version 330 core\n"
-
-	"in vec4 ex_Color;\n"
-	"out vec4 out_Color;\n"
-
-	"void main(void)\n"
-	"{\n"
-	"	out_Color = ex_Color;\n"
-	"}\n"
-};
+	std::ifstream myReadFile(bVertex ? "src/VertexShader.vert" : "src/FragmentShader.frag");
+	std::string content((std::istreambuf_iterator<char>(myReadFile)),
+		(std::istreambuf_iterator<char>()));
+	std::cout << content << std::endl;
+	return content;
+}
 
 void createShaderProgram()
 {
+	std::string VertStr = ReadShader(true);
+	std::string FragStr = ReadShader(false);
+	const GLchar* VertexShader = VertStr.c_str();
+	const GLchar* FragmentShader = FragStr.c_str();
+
 	VertexShaderId = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(VertexShaderId, 1, &VertexShader, 0);
 	glCompileShader(VertexShaderId);
