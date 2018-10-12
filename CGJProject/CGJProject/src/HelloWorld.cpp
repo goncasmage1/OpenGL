@@ -42,6 +42,7 @@ unsigned int FrameCount = 0;
 
 #define VERTICES 0
 #define COLORS 1
+#define SHAPES 7
 
 GLuint VaoId, VboId[2];
 GLuint VertexShaderId, FragmentShaderId, ProgramId;
@@ -138,7 +139,6 @@ std::string ReadShader(bool bVertex)
 	std::ifstream myReadFile(bVertex ? "src/VertexShader.vert" : "src/FragmentShader.frag");
 	std::string content((std::istreambuf_iterator<char>(myReadFile)),
 		(std::istreambuf_iterator<char>()));
-	std::cout << content << std::endl;
 	return content;
 }
 
@@ -193,67 +193,130 @@ typedef struct
 
 const Vertex Vertices[] =
 {
-	{{ 0.00f, 0.25f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
-	{{ 0.50f, 0.25f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
-	{{ 0.25f, 0.75f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }}
+	//Triangle
+	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
+	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
+	{{ 0.25f, 0.5f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
+	//Triangle
+	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }},
+	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }},
+	{{ 0.25f, 0.5f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }},
+	//Triangle
+	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }},
+	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }},
+	{{ 0.25f, 0.5f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }},
+	//Triangle
+	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
+	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
+	{{ 0.25f, 0.5f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
+	//Triangle
+	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
+	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
+	{{ 0.25f, 0.5f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
+	//Square
+	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.50f, 0.5f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.00f, 0.5f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
+	//Paralelogram
+	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.75f, 0.5f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.25f, 0.5f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
 };
 
-const Vertex MediumTri[] =
-{
-	{{ 0.00f, 0.25f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
-	{{ 0.50f, 0.25f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
-	{{ 0.25f, 0.75f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }}
+const int Sizes[]{
+	3,
+	3,
+	3,
+	3,
+	3,
+	4,
+	4
 };
 
-const Vertex BigTri[] =
-{
-	{{ 0.00f, 0.25f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
-	{{ 1.00f, 0.25f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
-	{{ 0.50f, 1.25f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }}
-};
+typedef GLfloat Matrix[16];
 
-const Vertex SmallTri[] =
-{
-	{{ 0.00f, 0.25f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
-	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
-	{{ 0.25f, 0.50f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }}
-};
-
-const Vertex* GetVertices(uint8_t index)
-{
-	switch (index)
+const Matrix Matrices[] = {
 	{
-		case 0:
-		case 1:
-			return MediumTri;
-			break;
-		case 2:
-			return BigTri;
-			break;
-		case 3:
-			return SmallTri;
-			break;
-		case 4:
-			return nullptr;
-			break;
-		case 5:
-			return nullptr;
-			break;
-		case 6:
-			return nullptr;
-			break;
-		case 7:
-			return nullptr;
-			break;
-		default:
-			return nullptr;
-			break;
+	2.0f,  0.0f,  0.0f,  0.0f,
+	0.0f,  2.0f,  0.0f,  0.0f,
+	0.0f,  0.0f,  2.0f,  0.0f,
+	0.0f,  0.0f,  0.0f,  1.0f
+	},
+	{
+	2.0f,  0.0f,  0.0f,  0.0f,
+	0.0f,  2.0f,  0.0f,  0.0f,
+	0.0f,  0.0f,  2.0f,  0.0f,
+	0.0f,  0.0f,  0.0f,  1.0f
+	},
+	{
+	1.0f,  0.0f,  0.0f,  0.0f,
+	0.0f,  1.0f,  0.0f,  0.0f,
+	0.0f,  0.0f,  1.0f,  0.0f,
+	0.0f,  0.0f,  0.0f,  1.0f
+	},
+	{
+	0.5f,  0.0f,  0.0f,  0.0f,
+	0.0f,  0.5f,  0.0f,  0.0f,
+	0.0f,  0.0f,  0.5f,  0.0f,
+	0.0f,  0.0f,  0.0f,  1.0f
+	},
+	{
+	0.5f,  0.0f,  0.0f,  0.0f,
+	0.0f,  0.5f,  0.0f,  0.0f,
+	0.0f,  0.0f,  0.5f,  0.0f,
+	0.0f,  0.0f,  0.0f,  1.0f
+	},
+	{
+	1.0f,  0.0f,  0.0f,  0.0f,
+	0.0f,  1.0f,  0.0f,  0.0f,
+	0.0f,  0.0f,  1.0f,  0.0f,
+	0.0f,  0.0f,  0.0f,  1.0f
+	},
+	{
+	1.0f,  0.0f,  0.0f,  0.0f,
+	0.0f,  1.0f,  0.0f,  0.0f,
+	0.0f,  0.0f,  1.0f,  0.0f,
+	0.0f,  0.0f,  0.0f,  1.0f
 	}
-};
+}; // Row Major (GLSL is Column Major)
+
+//const Vertex* GetVertices(uint8_t index)
+//{
+//	switch (index)
+//	{
+//		case 0:
+//		case 1:
+//			return MediumTri;
+//			break;
+//		case 2:
+//			return BigTri;
+//			break;
+//		case 3:
+//			return SmallTri;
+//			break;
+//		case 4:
+//			return nullptr;
+//			break;
+//		case 5:
+//			return nullptr;
+//			break;
+//		case 6:
+//			return nullptr;
+//			break;
+//		case 7:
+//			return nullptr;
+//			break;
+//		default:
+//			return nullptr;
+//			break;
+//	}
+//};
 
 const GLubyte Indices[] =
 {
-	0,1,2
+	0,1,2,3,4,5,6
 };
 
 void createBufferObjects()
@@ -265,7 +328,6 @@ void createBufferObjects()
 
 		glBindBuffer(GL_ARRAY_BUFFER, VboId[0]);
 		{
-			//const Vertex* Vertices = GetVertices(0);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
 			glEnableVertexAttribArray(VERTICES);
 			glVertexAttribPointer(VERTICES, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
@@ -300,32 +362,21 @@ void destroyBufferObjects()
 
 /////////////////////////////////////////////////////////////////////// SCENE
 
-typedef GLfloat Matrix[16];
-
-const Matrix I = {
-	1.0f,  0.0f,  0.0f,  0.0f,
-	0.0f,  1.0f,  0.0f,  0.0f,
-	0.0f,  0.0f,  1.0f,  0.0f,
-	0.0f,  0.0f,  0.0f,  1.0f
-}; // Row Major (GLSL is Column Major)
-
-const Matrix M = {
-	1.0f,  0.0f,  0.0f, -1.0f,
-	0.0f,  1.0f,  0.0f, -1.0f,
-	0.0f,  0.0f,  1.0f,  0.0f,
-	0.0f,  0.0f,  0.0f,  1.0f
-}; // Row Major (GLSL is Column Major)
-
 void drawScene()
 {
 	glBindVertexArray(VaoId);
 	glUseProgram(ProgramId);
 
-	glUniformMatrix4fv(UniformId, 1, GL_TRUE, I);
-	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE, (GLvoid*)0);
+	uint64_t counter = 0;
 
-	glUniformMatrix4fv(UniformId, 1, GL_TRUE, M);
-	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE, (GLvoid*)0);
+	for (int i = 0; i < SHAPES; i++)
+	{
+		int size = Sizes[i];
+		glUniformMatrix4fv(UniformId, 1, GL_TRUE, Matrices[i]);
+
+		glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_BYTE, (GLvoid*)counter);
+		counter += size;
+	}
 
 	glUseProgram(0);
 	glBindVertexArray(0);
