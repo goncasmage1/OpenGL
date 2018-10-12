@@ -1,10 +1,10 @@
 #include "../Public/Matrix.h"
 #include "../Public/Vector.h"
 #include <sstream>
-#include <math.h>
 #include <assert.h>
 
-#define PI 3.14159265358979323846
+#define PI 3.14159265358979323846f
+#define TOLERANCE 0.00000001f
 
 /////////
 // Mat2
@@ -138,9 +138,15 @@ const Vec2 operator*(const Mat2 & M1, const Vec2 & V)
 
 const bool operator==(const Mat2 & M1, const Mat2 & M2)
 {
-	return (M1[0] == M2[0] &&
-			M1[1] == M2[1]
-			);
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 2; j++)
+		{
+			if ((M1[i][j] - M2[i][j]) > TOLERANCE) return false;
+		}
+	}
+
+	return true;
 }
 
 const bool operator!=(const Mat2 & M1, const Mat2 & M2)
@@ -172,15 +178,15 @@ std::istream & operator>>(std::istream & is, Mat2 & M)
 
 void Mat2::Transpose()
 {
-	values = GetTransposed().values;
+	values = Transposed(*this).values;
 }
 
-Mat2 Mat2::GetTransposed() const
+const Mat2 Transposed(const Mat2& M)
 {
 	return Mat2({
 					{
-					{values[0][0], values[1][0]},
-					{values[0][1], values[1][1]}
+					{M[0][0], M[1][0]},
+					{M[0][1], M[1][1]}
 					}
 				});
 }
@@ -190,23 +196,23 @@ float Mat2::Determinant() const
 	return (values[0][0] * values[1][1] - values[0][1] * values[1][0]);
 }
 
-Mat2 Mat2::GetInverse() const
+const Mat2 Inversed(const Mat2& M)
 {
 	return Mat2();
-	float Det = Determinant();
+	float Det = M.Determinant();
 	if (Det == 0.f) throw std::overflow_error("Division by 0!");
 	float InvertedDeterminant = 1 / Det;
 	return InvertedDeterminant * Mat2({ 
 										{
-										{values[1][1], -values[0][1]},
-										{-values[1][0], values[0][0]}
+										{M[1][1], -M[0][1]},
+										{-M[1][0], M[0][0]}
 										} 
 									  });
 }
 
 void Mat2::Inverse()
 {
-	values = GetInverse().values;
+	values = Inversed(*this).values;
 }
 
 float * Mat2::GetData() const
@@ -235,12 +241,12 @@ Mat2 Mat2::ScaleMat(float scalar)
 				});
 }
 
-Mat2 Mat2::RotationMat(const double Degrees)
+Mat2 Mat2::RotationMat(const float Degrees)
 {
 	return Mat2({
 					{
-					{(float)std::cos((Degrees*PI) / 180), -(float)std::sin((Degrees*PI) / 180)},
-					{(float)std::sin((Degrees*PI) / 180), (float)std::cos((Degrees*PI) / 180)}
+					{std::cos((Degrees*PI) / 180), -std::sin((Degrees*PI) / 180)},
+					{std::sin((Degrees*PI) / 180), std::cos((Degrees*PI) / 180)}
 					}
 				});
 }
@@ -391,10 +397,15 @@ const Vec3 operator*(const Mat3 & M1, const Vec3 & V)
 
 const bool operator==(const Mat3 & M1, const Mat3 & M2)
 {
-	return (M1[0] == M2[0] &&
-			M1[1] == M2[1] &&
-			M1[2] == M2[2]
-			);
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			if ((M1[i][j] - M2[i][j]) > TOLERANCE) return false;
+		}
+	}
+
+	return true;
 }
 
 const bool operator!=(const Mat3 & M1, const Mat3 & M2)
@@ -428,17 +439,17 @@ std::istream & operator>>(std::istream & is, Mat3 & M)
 
 void Mat3::Transpose()
 {
-	values = GetTransposed().values;
+	values = Transposed(*this).values;
 }
 
-Mat3 Mat3::GetTransposed() const
+const Mat3 Transposed(const Mat3& M)
 {
 	return Mat3(
 		{
 		{
-			{values[0][0], values[1][0], values[2][0]},
-			{values[0][1], values[1][1], values[2][1]},
-			{values[0][2], values[1][2], values[2][2]}
+			{M[0][0], M[1][0], M[2][0]},
+			{M[0][1], M[1][1], M[2][1]},
+			{M[0][2], M[1][2], M[2][2]}
 		}
 		}
 	);
@@ -455,9 +466,14 @@ float Mat3::Determinant() const
 			);
 }
 
-Mat3 Mat3::GetInverse() const
+void Mat3::Inverse()
 {
-	float Det = Determinant();
+	values = Inversed(*this).values;
+}
+
+const Mat3 Inversed(const Mat3& M)
+{
+	float Det = M.Determinant();
 	if (Det == 0.f) throw std::overflow_error("Division by 0!");
 	Mat3 determinantMat = Mat3( {	{
 									{ 0.f, 0.f, 0.f },
@@ -466,15 +482,15 @@ Mat3 Mat3::GetInverse() const
 									}
 									});
 
-	determinantMat[0][0] = Mat2({ {{values[1][1], values[1][2]}, {values[2][1], values[2][2]} } }).Determinant();
-	determinantMat[0][1] = Mat2({ {{values[1][0], values[1][2]}, {values[2][0], values[2][2]} } }).Determinant();
-	determinantMat[0][2] = Mat2({ {{values[1][0], values[1][1]}, {values[2][0], values[2][1]} } }).Determinant();
-	determinantMat[1][0] = Mat2({ {{values[0][1], values[0][2]}, {values[2][1], values[2][2]} } }).Determinant();
-	determinantMat[1][1] = Mat2({ {{values[0][0], values[0][2]}, {values[2][0], values[2][2]} } }).Determinant();
-	determinantMat[1][2] = Mat2({ {{values[0][0], values[0][1]}, {values[2][0], values[2][1]} } }).Determinant();
-	determinantMat[2][0] = Mat2({ {{values[0][1], values[0][2]}, {values[1][1], values[1][2]} } }).Determinant();
-	determinantMat[2][1] = Mat2({ {{values[0][0], values[0][2]}, {values[1][0], values[1][2]} } }).Determinant();
-	determinantMat[2][2] = Mat2({ {{values[0][0], values[0][1]}, {values[1][0], values[1][1]} } }).Determinant();
+	determinantMat[0][0] = Mat2({ {{M[1][1], M[1][2]}, {M[2][1], M[2][2]} } }).Determinant();
+	determinantMat[0][1] = Mat2({ {{M[1][0], M[1][2]}, {M[2][0], M[2][2]} } }).Determinant();
+	determinantMat[0][2] = Mat2({ {{M[1][0], M[1][1]}, {M[2][0], M[2][1]} } }).Determinant();
+	determinantMat[1][0] = Mat2({ {{M[0][1], M[0][2]}, {M[2][1], M[2][2]} } }).Determinant();
+	determinantMat[1][1] = Mat2({ {{M[0][0], M[0][2]}, {M[2][0], M[2][2]} } }).Determinant();
+	determinantMat[1][2] = Mat2({ {{M[0][0], M[0][1]}, {M[2][0], M[2][1]} } }).Determinant();
+	determinantMat[2][0] = Mat2({ {{M[0][1], M[0][2]}, {M[1][1], M[1][2]} } }).Determinant();
+	determinantMat[2][1] = Mat2({ {{M[0][0], M[0][2]}, {M[1][0], M[1][2]} } }).Determinant();
+	determinantMat[2][2] = Mat2({ {{M[0][0], M[0][1]}, {M[1][0], M[1][1]} } }).Determinant();
 
 	determinantMat[0][1] = -determinantMat[0][1];
 	determinantMat[1][0] = -determinantMat[1][0];
@@ -485,11 +501,6 @@ Mat3 Mat3::GetInverse() const
 	determinantMat *= (1/Det);
 
 	return determinantMat;
-}
-
-void Mat3::Inverse()
-{
-	values = GetInverse().values;
 }
 
 float* Mat3::GetData() const
@@ -548,10 +559,10 @@ Mat3 Mat3::ScaleMat(float scalar)
 	);
 }
 
-Mat3 Mat3::RotationMat(const Vec3& V, const double Degrees)
+Mat3 Mat3::RotationMat(const Vec3& V, const float Degrees)
 {
 	Mat3 AMat = GetDual(V);
-	return (IdentityMat() + (float)std::sin((Degrees*PI)/180) * AMat + (1 - (float)std::cos((Degrees*PI) / 180)) * (AMat*AMat));
+	return (IdentityMat() + std::sin((Degrees*PI)/180) * AMat + (1 - std::cos((Degrees*PI) / 180)) * (AMat*AMat));
 }
 
 
@@ -726,11 +737,15 @@ const Vec4 operator*(const Mat4 & M1, const Vec4 & V)
 
 const bool operator==(const Mat4 & M1, const Mat4 & M2)
 {
-	return (M1[0] == M2[0] &&
-			M1[1] == M2[1] &&
-			M1[2] == M2[2] &&
-			M1[3] == M2[3]
-			);
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			if ((M1[i][j] - M2[i][j]) > TOLERANCE) return false;
+		}
+	}
+
+	return true;
 }
 
 const bool operator!=(const Mat4 & M1, const Mat4 & M2)
@@ -766,18 +781,18 @@ std::istream & operator>>(std::istream & is, Mat4 & M)
 
 void Mat4::Transpose()
 {
-	values = GetTransposed().values;
+	values = Transposed(*this).values;
 }
 
-Mat4 Mat4::GetTransposed() const
+const Mat4 Transposed(const Mat4& M)
 {
 	return Mat4(
 		{
 		{
-			{values[0][0], values[1][0], values[2][0], values[3][0]},
-			{values[0][1], values[1][1], values[2][1], values[3][1]},
-			{values[0][2], values[1][2], values[2][2], values[3][2]},
-			{values[0][3], values[1][3], values[2][3], values[3][3]}
+			{M[0][0], M[1][0], M[2][0], M[3][0]},
+			{M[0][1], M[1][1], M[2][1], M[3][1]},
+			{M[0][2], M[1][2], M[2][2], M[3][2]},
+			{M[0][3], M[1][3], M[2][3], M[3][3]}
 		}
 		}
 	);
@@ -842,7 +857,7 @@ Mat4 Mat4::ScaleMat(float scalar)
 	);
 }
 
-Mat4 Mat4::RotationMat(Vec4 V, const double Degrees)
+Mat4 Mat4::RotationMat(Vec4 V, const float Degrees)
 {
 	Mat4 RotMat = Mat4(Mat3::RotationMat(V, Degrees));
 	RotMat[3][3] = 1;

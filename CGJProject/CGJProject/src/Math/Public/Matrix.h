@@ -38,16 +38,16 @@ struct Mat2
 	friend std::istream& operator>>(std::istream& is, Mat2& M);
 
 	void Transpose();
-	Mat2 GetTransposed() const;
+	friend const Mat2 Transposed(const Mat2& M);
 	float Determinant() const;
-	Mat2 GetInverse() const;
+	friend const Mat2 Inversed(const Mat2& M);
 	void Inverse();
 
 	float* GetData() const;
 
 	static Mat2 IdentityMat();
 	static Mat2 ScaleMat(float scalar);
-	static Mat2 RotationMat(const double Degrees);
+	static Mat2 RotationMat(const float Degrees);
 };
 
 struct Mat3
@@ -84,9 +84,9 @@ struct Mat3
 	friend std::istream& operator>>(std::istream& is, Mat3& M);
 
 	void Transpose();
-	Mat3 GetTransposed() const;
+	friend const Mat3 Transposed(const Mat3& M);
 	float Determinant() const;
-	Mat3 GetInverse() const;
+	friend const Mat3 Inversed(const Mat3& M);
 	void Inverse();
 
 	float* GetData() const;
@@ -95,7 +95,7 @@ struct Mat3
 	static Mat3 GetDual(const struct Vec3& V);
 	static Mat3 TranslationMat(const struct Vec2& V);
 	static Mat3 ScaleMat(float scalar);
-	static Mat3 RotationMat(const struct Vec3& V, const double Degrees);
+	static Mat3 RotationMat(const struct Vec3& V, const float Degrees);
 };
 
 struct Mat4
@@ -132,7 +132,7 @@ struct Mat4
 	friend std::istream& operator>>(std::istream& is, Mat4& M);
 
 	void Transpose();
-	Mat4 GetTransposed() const;
+	friend const Mat4 Transposed(const Mat4& M);
 	float Determinant() const;
 
 	float* GetData() const;
@@ -140,5 +140,5 @@ struct Mat4
 	static Mat4 IdentityMat();
 	static Mat4 TranslationMat(const struct Vec3& V);
 	static Mat4 ScaleMat(float scalar);
-	static Mat4 RotationMat(struct Vec4 V, const double Degrees);
+	static Mat4 RotationMat(struct Vec4 V, const float Degrees);
 };

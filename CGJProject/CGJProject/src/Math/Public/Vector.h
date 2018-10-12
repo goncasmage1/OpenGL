@@ -38,8 +38,8 @@ struct Vec2
 	float Length() const;
 	float Quadrance();
 	void Normalize();
-	Vec2 GetNormalized() const;
-	float Dot(const Vec2& V);
+	friend const Vec2 Normalized(const Vec2& V);
+	friend const float Dot(const Vec2& V1, const Vec2& V2);
 };
 
 struct Vec3
@@ -77,9 +77,12 @@ struct Vec3
 	float Length() const;
 	float Quadrance();
 	void Normalize();
-	Vec3 GetNormalized() const;
-	float Dot(const Vec3& V);
-	Vec3 Cross(const Vec3& V);
+	friend const Vec3 Normalized(const Vec3& V);
+	friend const float Dot(const Vec3& V1, const Vec3& V2);
+	friend const Vec3 Cross(const Vec3& V1, const Vec3& V2);
+	friend const Vec3 RotV(const Vec3& V, const Vec3& a, const float degrees);
+
+	 
 };
 
 struct Vec4
@@ -117,6 +120,7 @@ struct Vec4
 	float Length() const;
 	float Quadrance();
 	void Normalize();
-	Vec4 GetNormalized() const;
-	float Dot(const Vec4& V);
+	friend const Vec4 Normalized(const Vec4& V);
+	friend const float Dot(const Vec4& V1, const Vec4& V2);
+
 };

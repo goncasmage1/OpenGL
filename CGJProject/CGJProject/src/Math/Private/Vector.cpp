@@ -1,6 +1,8 @@
 #include "../Public/Vector.h"
 #include <sstream>
 
+#define PI 3.14159265358979323846f
+#define TOLERANCE 0.00000001f
 
 /////////
 // Vec2
@@ -124,7 +126,8 @@ Vec2 & Vec2::operator*=(const float & F)
 }
 const bool operator==(const Vec2 & V1, const Vec2 & V2)
 {
-	return (V1.x == V2.x && V1.y == V2.y);
+	for (int i = 0; i < 2; i++) if ((V1[i] - V2[i]) > TOLERANCE) return false;
+	return true;
 }
 const bool operator!=(const Vec2 & V1, const Vec2 & V2)
 {
@@ -141,6 +144,8 @@ std::istream & operator>>(std::istream & is, Vec2 & V)
 	is >> V.x >> V.y;
 	return is;
 }
+
+
 
 float Vec2::operator[](int row) const
 {
@@ -179,21 +184,20 @@ void Vec2::Normalize()
 	y /= len;
 }
 
-Vec2 Vec2::GetNormalized() const
+const Vec2 Normalized(const Vec2& V)
 {
 	Vec2 normalized = Vec2();
-	float len = Length();
+	float len = V.Length();
 
-	normalized.x = x / len;
-	normalized.y = y / len;
+	normalized.x = V.x / len;
+	normalized.y = V.y / len;
 	return normalized;
 }
 
-float Vec2::Dot(const Vec2 & V)
+const float Dot(const Vec2& V1, const Vec2& V2)
 {
-	return (x*V.x + y*V.y);
+	return (V1.x*V2.x + V1.y*V2.y);
 }
-
 
 /////////
 // Vec3
@@ -328,7 +332,8 @@ Vec3& Vec3::operator*=(const float& F)
 }
 const bool operator==(const Vec3 & V1, const Vec3 & V2)
 {
-	return (V1.x == V2.x && V1.y == V2.y && V1.z == V2.z);
+	for (int i = 0; i < 3; i++) if ((V1[i] - V2[i]) > TOLERANCE) return false;
+	return true;
 }
 const bool operator!=(const Vec3 & V1, const Vec3 & V2)
 {
@@ -386,31 +391,31 @@ void Vec3::Normalize()
 	z /= len;
 }
 
-Vec3 Vec3::GetNormalized() const
+const Vec3 Normalized(const Vec3& V)
 {
 	Vec3 normalized = Vec3();
-	float len = Length();
+	float len = V.Length();
 
-	normalized.x = x / len;
-	normalized.y = y / len;
-	normalized.z = z / len;
+	normalized.x = V.x / len;
+	normalized.y = V.y / len;
+	normalized.z = V.z / len;
 	return normalized;
 }
 
-float Vec3::Dot(const Vec3 & V)
+const float Dot(const Vec3& V1, const Vec3& V2)
 {
-	return (x*V.x + y*V.y + z*V.z);
+	return (V1.x*V2.x + V1.y*V2.y + V1.z*V2.z);
 }
 
-Vec3 Vec3::Cross(const Vec3 & V)
+const Vec3 Cross(const Vec3& V1, const Vec3& V2)
 {
-	Vec3 crossed = Vec3();
+	return Vec3(V1.y*V2.z - V1.z*V2.y, V1.z*V2.x - V1.x*V2.z, V1.x*V2.y - V1.y*V2.x);
+}
 
-	crossed.x = (y*V.z - z*V.y);
-	crossed.y = (z*V.x - x*V.z);
-	crossed.z = (x*V.y - y*V.x);
-
-	return crossed;
+const Vec3 RotV(const Vec3& V, const Vec3 & a, const float degrees)
+{
+	Vec3 NewVec = (std::cos(degrees*PI) * V) + (std::sin(degrees*PI)*(Cross(a, V))) + (a * (Dot(a, V)) * (1 - std::cos(degrees*PI)));
+	return NewVec;
 }
 
 
@@ -559,7 +564,8 @@ Vec4& Vec4::operator*=(const float& F)
 }
 const bool operator==(const Vec4 & V1, const Vec4 & V2)
 {
-	return (V1.x == V2.x && V1.y == V2.y && V1.z == V2.z && V1.w == V2.w);
+	for (int i = 0; i < 4; i++) if ((V1[i] - V2[i]) > TOLERANCE) return false;
+	return true;
 }
 const bool operator!=(const Vec4 & V1, const Vec4 & V2)
 {
@@ -620,19 +626,19 @@ void Vec4::Normalize()
 	w /= len;
 }
 
-Vec4 Vec4::GetNormalized() const
+const Vec4 Normalized(const Vec4& V)
 {
 	Vec4 normalized = Vec4();
-	float len = Length();
+	float len = V.Length();
 
-	normalized.x = x/len;
-	normalized.y = y/len;
-	normalized.z = z/len;
-	normalized.w = w/len;
+	normalized.x = V.x/len;
+	normalized.y = V.y/len;
+	normalized.z = V.z/len;
+	normalized.w = V.w/len;
 	return normalized;
 }
 
-float Vec4::Dot(const Vec4 & V)
+const float Dot(const Vec4& V1, const Vec4& V2)
 {
-	return (x*V.x + y*V.y + z*V.z + w*V.w);
+	return (V1.x*V2.x + V1.y*V2.y + V1.z*V2.z + V1.w*V2.w);
 }

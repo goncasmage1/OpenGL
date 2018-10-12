@@ -26,10 +26,13 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-#include <vector>
+#include <ctime>
 
 #include "GL/glew.h"
 #include "GL/freeglut.h"
+
+#include "Math/Public/Vector.h"
+#include "Math/Public/Matrix.h"
 
 #define CAPTION "Hello Modern 2D World"
 
