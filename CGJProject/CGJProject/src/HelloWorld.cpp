@@ -26,6 +26,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <vector>
 #include <ctime>
 
 #include "GL/glew.h"
@@ -36,13 +37,12 @@
 
 #define CAPTION "Hello Modern 2D World"
 
-int WinX = 960, WinY = 540;
+int WinX = 1280, WinY = 760;
 int WindowHandle = 0;
 unsigned int FrameCount = 0;
 
 #define VERTICES 0
 #define COLORS 1
-#define SHAPES 7
 
 GLuint VaoId, VboId[2];
 GLuint VertexShaderId, FragmentShaderId, ProgramId;
@@ -213,41 +213,117 @@ const Vertex Vertices[] =
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
 	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
 	{{ 0.25f, 0.5f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
-	//Square
+	//Square 1
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.00f, 0.5f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
+	//Square 2
 	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
 	{{ 0.50f, 0.5f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
 	{{ 0.00f, 0.5f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
-	//Paralelogram
+	//Paralelogram 1
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.25f, 0.5f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
+	//Paralelogram 2
 	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
 	{{ 0.75f, 0.5f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
 	{{ 0.25f, 0.5f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
 };
 
-const int Sizes[]{
-	3,
-	3,
-	3,
-	3,
-	3,
-	4,
-	4
+const std::vector<Mat4> Mats[] = {
+	{ 
+		{ Mat4(
+		{{
+		{1.5f,  0.0f,  0.0f,  0.0f},
+		{0.0f,  1.5f,  0.0f,  0.0f},
+		{0.0f,  0.0f,  1.5f,  0.0f},
+		{0.0f,  0.0f,  0.0f,  1.0f}
+		}})},
+		{ Mat4(
+		{{
+		{1.0f,  0.0f,  0.0f,  0.5f},
+		{0.0f,  1.0f,  0.0f,  0.0f},
+		{0.0f,  0.0f,  1.0f,  0.0f},
+		{0.0f,  0.0f,  0.0f,  1.0f}
+		}})}
+	},
+	{
+		{ Mat4(
+		{{
+		{1.5f,  0.0f,  0.0f,  0.0f},
+		{0.0f,  1.5f,  0.0f,  0.0f},
+		{0.0f,  0.0f,  1.5f,  0.0f},
+		{0.0f,  0.0f,  0.0f,  1.0f}
+		}})}
+	},
+	{
+
+	},
+	{
+		{ Mat4(
+		{{
+		{0.5f,  0.0f,  0.0f,  0.0f},
+		{0.0f,  0.5f,  0.0f,  0.0f},
+		{0.0f,  0.0f,  0.5f,  0.0f},
+		{0.0f,  0.0f,  0.0f,  1.0f}
+		}})}
+	},
+	{
+		{ Mat4(
+		{{
+		{0.5f,  0.0f,  0.0f,  0.0f},
+		{0.0f,  0.5f,  0.0f,  0.0f},
+		{0.0f,  0.0f,  0.5f,  0.0f},
+		{0.0f,  0.0f,  0.0f,  1.0f}
+		}})},
+		{ Mat4(
+		{{
+		{1.0f,  0.0f,  0.0f,  0.5f},
+		{0.0f,  1.0f,  0.0f,  0.0f},
+		{0.0f,  0.0f,  1.0f,  0.0f},
+		{0.0f,  0.0f,  0.0f,  1.0f}
+		}})}
+	},
+	{
+
+	},
+	{
+
+	},
+	{
+		{ Mat4(
+		{{
+		{1.0f,  0.0f,  0.0f,  -1.0f},
+		{0.0f,  1.0f,  0.0f,  0.0f},
+		{0.0f,  0.0f,  1.0f,  0.0f},
+		{0.0f,  0.0f,  0.0f,  1.0f}
+		}})}
+	},
+	{
+		{ Mat4(
+		{{
+		{1.0f,  0.0f,  0.0f,  -1.0f},
+		{0.0f,  1.0f,  0.0f,  0.0f},
+		{0.0f,  0.0f,  1.0f,  0.0f},
+		{0.0f,  0.0f,  0.0f,  1.0f}
+		}})}
+	}
 };
 
 typedef GLfloat Matrix[16];
 
 const Matrix Matrices[] = {
 	{
-	2.0f,  0.0f,  0.0f,  0.5f,
-	0.0f,  2.0f,  0.0f,  0.0f,
-	0.0f,  0.0f,  2.0f,  0.0f,
+	1.5f,  0.0f,  0.0f,  0.5f,
+	0.0f,  1.5f,  0.0f,  0.0f,
+	0.0f,  0.0f,  1.5f,  0.0f,
 	0.0f,  0.0f,  0.0f,  1.0f
 	},
 	{
-	2.0f,  0.0f,  0.0f,  0.0f,
-	0.0f,  2.0f,  0.0f,  0.0f,
-	0.0f,  0.0f,  2.0f,  0.0f,
+	1.5f,  0.0f,  0.0f,  0.0f,
+	0.0f,  1.5f,  0.0f,  0.0f,
+	0.0f,  0.0f,  1.5f,  0.0f,
 	0.0f,  0.0f,  0.0f,  1.0f
 	},
 	{
@@ -264,7 +340,7 @@ const Matrix Matrices[] = {
 	},
 	{
 	0.5f,  0.0f,  0.0f,  0.0f,
-	0.0f,  0.5f,  0.0f,  0.0f,
+	0.0f,  0.5f,  0.0f,  0.5f,
 	0.0f,  0.0f,  0.5f,  0.0f,
 	0.0f,  0.0f,  0.0f,  1.0f
 	},
@@ -276,6 +352,18 @@ const Matrix Matrices[] = {
 	},
 	{
 	1.0f,  0.0f,  0.0f,  0.0f,
+	0.0f,  1.0f,  0.0f,  0.0f,
+	0.0f,  0.0f,  1.0f,  0.0f,
+	0.0f,  0.0f,  0.0f,  1.0f
+	},
+	{
+	1.0f,  0.0f,  0.0f,  -1.0f,
+	0.0f,  1.0f,  0.0f,  0.0f,
+	0.0f,  0.0f,  1.0f,  0.0f,
+	0.0f,  0.0f,  0.0f,  1.0f
+	},
+	{
+	1.0f,  0.0f,  0.0f,  -1.0f,
 	0.0f,  1.0f,  0.0f,  0.0f,
 	0.0f,  0.0f,  1.0f,  0.0f,
 	0.0f,  0.0f,  0.0f,  1.0f
@@ -344,13 +432,12 @@ void drawScene()
 
 	uint64_t counter = 0;
 
-	for (int i = 0; i < SHAPES; i++)
+	for (int i = 0; i < ((sizeof(Vertices) / sizeof(*Vertices) / 3)); i++)
 	{
-		int size = Sizes[i];
-		glUniformMatrix4fv(UniformId, 1, GL_TRUE, Matrices[i]);
+		for (int j = 0; j < Mats[i].size(); j++) glUniformMatrix4fv(UniformId, 1, GL_FALSE, Mats[i][j].GetData());
 
-		glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_BYTE, (GLvoid*)counter);
-		counter += size;
+		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE, (GLvoid*)counter);
+		counter += 3;
 	}
 
 	glUseProgram(0);
