@@ -36,7 +36,7 @@
 
 #define CAPTION "Hello Modern 2D World"
 
-int WinX = 640, WinY = 480;
+int WinX = 960, WinY = 540;
 int WindowHandle = 0;
 unsigned int FrameCount = 0;
 
@@ -239,7 +239,7 @@ typedef GLfloat Matrix[16];
 
 const Matrix Matrices[] = {
 	{
-	2.0f,  0.0f,  0.0f,  0.0f,
+	2.0f,  0.0f,  0.0f,  0.5f,
 	0.0f,  2.0f,  0.0f,  0.0f,
 	0.0f,  0.0f,  2.0f,  0.0f,
 	0.0f,  0.0f,  0.0f,  1.0f
@@ -282,42 +282,17 @@ const Matrix Matrices[] = {
 	}
 }; // Row Major (GLSL is Column Major)
 
-//const Vertex* GetVertices(uint8_t index)
-//{
-//	switch (index)
-//	{
-//		case 0:
-//		case 1:
-//			return MediumTri;
-//			break;
-//		case 2:
-//			return BigTri;
-//			break;
-//		case 3:
-//			return SmallTri;
-//			break;
-//		case 4:
-//			return nullptr;
-//			break;
-//		case 5:
-//			return nullptr;
-//			break;
-//		case 6:
-//			return nullptr;
-//			break;
-//		case 7:
-//			return nullptr;
-//			break;
-//		default:
-//			return nullptr;
-//			break;
-//	}
-//};
-
-const GLubyte Indices[] =
+const GLubyte* BuildIndices()
 {
-	0,1,2,3,4,5,6
-};
+	int size = (sizeof(Vertices) / sizeof(*Vertices));
+	GLubyte* arr = new GLubyte[size];
+
+	for (int i = 0; i < size; i++) arr[i] = i;
+
+	return arr;
+}
+
+const GLubyte* Indices = BuildIndices();
 
 void createBufferObjects()
 {
@@ -336,7 +311,7 @@ void createBufferObjects()
 		}
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VboId[1]);
 		{
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLubyte) * (sizeof(Vertices) / sizeof(*Vertices)), Indices, GL_STATIC_DRAW);
 		}
 	}
 	glBindVertexArray(0);
@@ -390,6 +365,7 @@ void cleanup()
 {
 	destroyShaderProgram();
 	destroyBufferObjects();
+	delete Indices;
 }
 
 void display()
