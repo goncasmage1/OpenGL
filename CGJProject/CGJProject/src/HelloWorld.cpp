@@ -235,16 +235,16 @@ const std::vector<Mat4> Mats[] = {
 	{ 
 		{ Mat4(
 		{{
-		{1.5f,  0.0f,  0.0f,  0.0f},
-		{0.0f,  1.5f,  0.0f,  0.0f},
-		{0.0f,  0.0f,  1.5f,  0.0f},
+		{1.0f,  0.0f,  0.0f,  0.5f},
+		{0.0f,  1.0f,  0.0f,  0.0f},
+		{0.0f,  0.0f,  1.0f,  0.0f},
 		{0.0f,  0.0f,  0.0f,  1.0f}
 		}})},
 		{ Mat4(
 		{{
-		{1.0f,  0.0f,  0.0f,  0.5f},
-		{0.0f,  1.0f,  0.0f,  0.0f},
-		{0.0f,  0.0f,  1.0f,  0.0f},
+		{1.5f,  0.0f,  0.0f,  0.0f},
+		{0.0f,  1.5f,  0.0f,  0.0f},
+		{0.0f,  0.0f,  1.5f,  0.0f},
 		{0.0f,  0.0f,  0.0f,  1.0f}
 		}})}
 	},
@@ -272,16 +272,16 @@ const std::vector<Mat4> Mats[] = {
 	{
 		{ Mat4(
 		{{
-		{0.5f,  0.0f,  0.0f,  0.0f},
-		{0.0f,  0.5f,  0.0f,  0.0f},
-		{0.0f,  0.0f,  0.5f,  0.0f},
+		{1.0f,  0.0f,  0.0f,  0.5f},
+		{0.0f,  1.0f,  0.0f,  0.0f},
+		{0.0f,  0.0f,  1.0f,  0.0f},
 		{0.0f,  0.0f,  0.0f,  1.0f}
 		}})},
 		{ Mat4(
 		{{
-		{1.0f,  0.0f,  0.0f,  0.5f},
-		{0.0f,  1.0f,  0.0f,  0.0f},
-		{0.0f,  0.0f,  1.0f,  0.0f},
+		{0.5f,  0.0f,  0.0f,  0.0f},
+		{0.0f,  0.5f,  0.0f,  0.0f},
+		{0.0f,  0.0f,  0.5f,  0.0f},
 		{0.0f,  0.0f,  0.0f,  1.0f}
 		}})}
 	},
@@ -310,65 +310,6 @@ const std::vector<Mat4> Mats[] = {
 		}})}
 	}
 };
-
-typedef GLfloat Matrix[16];
-
-const Matrix Matrices[] = {
-	{
-	1.5f,  0.0f,  0.0f,  0.5f,
-	0.0f,  1.5f,  0.0f,  0.0f,
-	0.0f,  0.0f,  1.5f,  0.0f,
-	0.0f,  0.0f,  0.0f,  1.0f
-	},
-	{
-	1.5f,  0.0f,  0.0f,  0.0f,
-	0.0f,  1.5f,  0.0f,  0.0f,
-	0.0f,  0.0f,  1.5f,  0.0f,
-	0.0f,  0.0f,  0.0f,  1.0f
-	},
-	{
-	1.0f,  0.0f,  0.0f,  0.0f,
-	0.0f,  1.0f,  0.0f,  0.0f,
-	0.0f,  0.0f,  1.0f,  0.0f,
-	0.0f,  0.0f,  0.0f,  1.0f
-	},
-	{
-	0.5f,  0.0f,  0.0f,  0.0f,
-	0.0f,  0.5f,  0.0f,  0.0f,
-	0.0f,  0.0f,  0.5f,  0.0f,
-	0.0f,  0.0f,  0.0f,  1.0f
-	},
-	{
-	0.5f,  0.0f,  0.0f,  0.0f,
-	0.0f,  0.5f,  0.0f,  0.5f,
-	0.0f,  0.0f,  0.5f,  0.0f,
-	0.0f,  0.0f,  0.0f,  1.0f
-	},
-	{
-	1.0f,  0.0f,  0.0f,  0.0f,
-	0.0f,  1.0f,  0.0f,  0.0f,
-	0.0f,  0.0f,  1.0f,  0.0f,
-	0.0f,  0.0f,  0.0f,  1.0f
-	},
-	{
-	1.0f,  0.0f,  0.0f,  0.0f,
-	0.0f,  1.0f,  0.0f,  0.0f,
-	0.0f,  0.0f,  1.0f,  0.0f,
-	0.0f,  0.0f,  0.0f,  1.0f
-	},
-	{
-	1.0f,  0.0f,  0.0f,  -1.0f,
-	0.0f,  1.0f,  0.0f,  0.0f,
-	0.0f,  0.0f,  1.0f,  0.0f,
-	0.0f,  0.0f,  0.0f,  1.0f
-	},
-	{
-	1.0f,  0.0f,  0.0f,  -1.0f,
-	0.0f,  1.0f,  0.0f,  0.0f,
-	0.0f,  0.0f,  1.0f,  0.0f,
-	0.0f,  0.0f,  0.0f,  1.0f
-	}
-}; // Row Major (GLSL is Column Major)
 
 const GLubyte* BuildIndices()
 {
@@ -430,12 +371,35 @@ void drawScene()
 	glBindVertexArray(VaoId);
 	glUseProgram(ProgramId);
 
+	Mat4 M1(
+			{ {
+			{1.5f,  0.0f,  0.0f,  0.0f},
+			{0.0f,  1.5f,  0.0f,  0.0f},
+			{0.0f,  0.0f,  1.5f,  0.0f},
+			{0.0f,  0.0f,  0.0f,  1.0f}
+			} });
+	Mat4 M2(
+		{{
+		{1.0f,  0.0f,  0.0f,  0.5f},
+		{0.0f,  1.0f,  0.0f,  0.0f},
+		{0.0f,  0.0f,  1.0f,  0.0f},
+		{0.0f,  0.0f,  0.0f,  1.0f}
+		} });
+
+	Mat4 Res = M2 * M1;
+
+
 	uint64_t counter = 0;
 
 	for (int i = 0; i < ((sizeof(Vertices) / sizeof(*Vertices) / 3)); i++)
 	{
-		for (int j = 0; j < Mats[i].size(); j++) glUniformMatrix4fv(UniformId, 1, GL_FALSE, Mats[i][j].GetData());
+		Mat4 Result = Mat4::IdentityMat();
+		for (size_t j = 0; j < Mats[i].size(); j++)
+		{
+			Result = Mats[i][j] * Result;
+		}
 
+		glUniformMatrix4fv(UniformId, 1, GL_FALSE, Result.GetData());
 		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE, (GLvoid*)counter);
 		counter += 3;
 	}
