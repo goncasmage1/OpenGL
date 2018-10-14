@@ -1,4 +1,4 @@
-﻿///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 //
 // Drawing two instances of a triangle in Modern OpenGL.
 // A "hello world" of Modern OpenGL.
@@ -233,8 +233,9 @@ const Vertex Vertices[] =
 
 const std::vector<Mat4> Mats[] = {
 	//Triangle 1
-	{ 
-		Mat4::TranslationMat(Vec3(0.5, 0, 0)),
+	{
+		Mat4::RotationMat(Vec3(0, 0, 1), 45),
+		Mat4::TranslationMat(Vec3(0, -0.5, 0)),
 		Mat4::ScaleMat(1.5)
 	},
 	//Triangle 2
@@ -331,24 +332,6 @@ void drawScene()
 {
 	glBindVertexArray(VaoId);
 	glUseProgram(ProgramId);
-
-	Mat4 M1(
-			{ {
-			{1.5f,  0.0f,  0.0f,  0.0f},
-			{0.0f,  1.5f,  0.0f,  0.0f},
-			{0.0f,  0.0f,  1.5f,  0.0f},
-			{0.0f,  0.0f,  0.0f,  1.0f}
-			} });
-	Mat4 M2(
-		{{
-		{1.0f,  0.0f,  0.0f,  0.5f},
-		{0.0f,  1.0f,  0.0f,  0.0f},
-		{0.0f,  0.0f,  1.0f,  0.0f},
-		{0.0f,  0.0f,  0.0f,  1.0f}
-		} });
-
-	Mat4 Res = M2 * M1;
-
 
 	uint64_t counter = 0;
 
