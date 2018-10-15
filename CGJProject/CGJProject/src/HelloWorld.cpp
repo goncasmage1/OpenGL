@@ -37,7 +37,7 @@
 
 #define CAPTION "Hello Modern 2D World"
 
-int WinX = 1280, WinY = 760;
+int WinX = 800, WinY = 800;
 int WindowHandle = 0;
 unsigned int FrameCount = 0;
 
@@ -196,23 +196,23 @@ const Vertex Vertices[] =
 	//Triangle 1
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
 	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
-	{{ 0.25f, 0.5f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
+	{{ 0.25f, 0.35f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
 	//Triangle 2
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }},
 	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }},
-	{{ 0.25f, 0.5f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }},
+	{{ 0.25f, 0.35f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }},
 	//Triangle 3
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }},
 	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }},
-	{{ 0.25f, 0.5f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }},
+	{{ 0.25f, 0.35f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }},
 	//Triangle 4
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
 	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
-	{{ 0.25f, 0.5f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
+	{{ 0.25f, 0.35f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
 	//Triangle 5
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
 	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
-	{{ 0.25f, 0.5f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
+	{{ 0.25f, 0.35f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
 	//Square 1.1
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
 	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
@@ -234,7 +234,7 @@ const Vertex Vertices[] =
 const std::vector<Mat4> Mats[] = {
 	//Triangle 1
 	{
-		Mat4::RotationMat(Vec3(0, 0, 1), 45),
+		//Mat4::RotationMat(Vec3(0, 0, 1), 90),
 		Mat4::TranslationMat(Vec3(0, -0.5, 0)),
 		Mat4::ScaleMat(1.5)
 	},
@@ -257,11 +257,11 @@ const std::vector<Mat4> Mats[] = {
 	},
 	//Square 1.1
 	{
-		Mat4::TranslationMat(Vec3(-0.5, 0, 0)),
+		Mat4::TranslationMat(Vec3(0, 0, 0)),
 	},
 	//Square 1.2
 	{
-		Mat4::TranslationMat(Vec3(-0.5, 0, 0)),
+		Mat4::TranslationMat(Vec3(0, 0, 0)),
 	},
 	//Paralelogram 1.1
 	{
