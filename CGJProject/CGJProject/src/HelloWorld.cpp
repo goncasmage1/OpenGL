@@ -196,80 +196,88 @@ const Vertex Vertices[] =
 	//Triangle 1
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
 	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
-	{{ 0.25f, 0.35f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
+	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
 	//Triangle 2
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }},
 	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }},
-	{{ 0.25f, 0.35f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }},
+	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }},
 	//Triangle 3
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }},
 	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }},
-	{{ 0.25f, 0.35f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }},
+	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }},
 	//Triangle 4
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
 	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
-	{{ 0.25f, 0.35f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
+	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
 	//Triangle 5
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
 	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
-	{{ 0.25f, 0.35f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
+	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
 	//Square 1.1
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.00f, 0.5f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.25f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.00f, 0.25f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
 	//Square 1.2
-	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.50f, 0.5f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.00f, 0.5f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.25f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.00f, 0.25f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
 	//Paralelogram 1.1
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.25f, 0.5f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.35f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.525f, 0.175f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
 	//Paralelogram 1.2
-	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.75f, 0.5f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.25f, 0.5f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.525f, 0.175f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.175f, 0.175f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
 };
 
 const std::vector<Mat4> Mats[] = {
 	//Triangle 1
 	{
-		//Mat4::RotationMat(Vec3(0, 0, 1), 90),
-		Mat4::TranslationMat(Vec3(0, -0.5, 0)),
+		Mat4::RotationMat(Vec3(0, 0, 1), 180),
+		Mat4::TranslationMat(Vec3(0.25, 0.5, 0)),
 		Mat4::ScaleMat(1.5)
 	},
 	//Triangle 2
 	{
+		Mat4::RotationMat(Vec3(0, 0, 1), 90),
+		Mat4::TranslationMat(Vec3(0.25, 0, 0)),
 		Mat4::ScaleMat(1.5)
 	},
 	//Triangle 3
 	{
-
+		Mat4::RotationMat(Vec3(0, 0, 1), 135),
+		Mat4::ScaleMat(1.06)
 	},
 	//Triangle 4
 	{
-		Mat4::ScaleMat(0.5)
+		Mat4::RotationMat(Vec3(0, 0, 1), -90),
+		Mat4::ScaleMat(0.75),
+		Mat4::TranslationMat(Vec3(-0.25*0.75, 0.562, 0)),
 	},
 	//Triangle 5
 	{
-		Mat4::TranslationMat(Vec3(0.5, 0, 0)),
-		Mat4::ScaleMat(0.5)
+		Mat4::ScaleMat(0.75)
 	},
 	//Square 1.1
 	{
-		Mat4::TranslationMat(Vec3(0, 0, 0)),
+		Mat4::RotationMat(Vec3(0, 0, 1), 45),
+		Mat4::ScaleMat(1.06)
 	},
 	//Square 1.2
 	{
-		Mat4::TranslationMat(Vec3(0, 0, 0)),
+		Mat4::RotationMat(Vec3(0, 0, 1), 45),
+		Mat4::ScaleMat(1.06)
 	},
 	//Paralelogram 1.1
 	{
-		Mat4::TranslationMat(Vec3(-1, 0, 0)),
+		Mat4::RotationMat(Vec3(0, 0, 1), 90),
+		Mat4::TranslationMat(Vec3(-0.2, 0.2, 0)),
 	},
 	//Paralelogram 1.2
 	{
-		Mat4::TranslationMat(Vec3(-1, 0, 0)),
+		Mat4::RotationMat(Vec3(0, 0, 1), 90),
+		Mat4::TranslationMat(Vec3(-0.2, 0.2, 0)),
 	}
 };
 
