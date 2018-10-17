@@ -863,3 +863,17 @@ Mat4 Mat4::RotationMat(Vec4 V, const float Degrees)
 	RotMat[3][3] = 1;
 	return RotMat;
 }
+
+Mat4 Mat4::Orthographic(float n, float f, float t, float b, float l, float r)
+{
+	return Mat4(
+		{
+		{
+			{2/(r-l), 0, 0, (l+r)/(l-r)},
+			{0, 2/(t-b), 0, (b+t)/(b-t)},
+			{0, 0, -2/(f-n), (n+r)/(n-f)},
+			{0, 0, 0, 1}
+		}
+		}
+	);
+}
