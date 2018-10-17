@@ -893,3 +893,17 @@ Mat4 Mat4::Projection(float fov, float aspect, float n, float f)
 		}
 	);
 }
+
+Mat4 Mat4::View(const Vec3 S, const Vec3 U, const Vec3 V, const Vec3 e)
+{
+	return Mat4(
+		{
+		{
+			{S.x, S.y, S.z, -(Dot(S, e))},
+			{U.x, U.y, U.z, -(Dot(U, e))},
+			{-V.x, -V.y, -V.z, Dot(V, e)},
+			{0, 0, 0, 1}
+		}
+		}
+	);
+}
