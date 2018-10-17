@@ -142,4 +142,5 @@ struct Mat4
 	static Mat4 ScaleMat(const struct Vec3 V);
 	static Mat4 RotationMat(struct Vec4 V, const float Degrees);
 	static Mat4 Orthographic(float n, float f, float t, float b, float l, float r);
+	static Mat4 Projection(float fov, float aspect, float n, float f);
 };

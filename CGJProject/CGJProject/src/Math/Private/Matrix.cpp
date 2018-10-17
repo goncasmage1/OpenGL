@@ -877,3 +877,19 @@ Mat4 Mat4::Orthographic(float n, float f, float t, float b, float l, float r)
 		}
 	);
 }
+
+Mat4 Mat4::Projection(float fov, float aspect, float n, float f)
+{
+	float degrees = fov / 2;
+	float d = 1 / std::tan((degrees*PI)/180);
+	return Mat4(
+		{
+		{
+			{d/aspect, 0, 0, 0},
+			{0, d, 0, 0},
+			{0, 0, (f+n)/(n-f), (2*f*n)/(n-f)},
+			{0, 0, -1, 0}
+		}
+		}
+	);
+}
