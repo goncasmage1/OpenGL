@@ -234,24 +234,24 @@ const Vertex Vertices[] =
 const std::vector<Mat4> Mats[] = {
 	//Triangle 1
 	{
-		Mat4::RotationMat(Vec3(0, 0, 1), 180),
+		Mat4::RotationMat(Vec3::Z(), 180),
 		Mat4::TranslationMat(Vec3(0.25, 0.5, 0)),
 		Mat4::ScaleMat(1.5),
 	},
 	//Triangle 2
 	{
-		Mat4::RotationMat(Vec3(0, 0, 1), 90),
+		Mat4::RotationMat(Vec3::Z(), 90),
 		Mat4::TranslationMat(Vec3(0.25, 0, 0)),
 		Mat4::ScaleMat(1.5),
 	},
 	//Triangle 3
 	{
-		Mat4::RotationMat(Vec3(0, 0, 1), 135),
+		Mat4::RotationMat(Vec3::Z(), 135),
 		Mat4::ScaleMat(1.06)
 	},
 	//Triangle 4
 	{
-		Mat4::RotationMat(Vec3(0, 0, 1), -90),
+		Mat4::RotationMat(Vec3::Z(), -90),
 		Mat4::ScaleMat(0.75),
 		Mat4::TranslationMat(Vec3(-0.25*0.75, 0.562, 0)),
 	},
@@ -261,23 +261,23 @@ const std::vector<Mat4> Mats[] = {
 	},
 	//Square 1.1
 	{
-		Mat4::RotationMat(Vec3(0, 0, 1), 45),
+		Mat4::RotationMat(Vec3::Z(), 45),
 		Mat4::ScaleMat(1.06),
 	},
 	//Square 1.2
 	{
-		Mat4::RotationMat(Vec3(0, 0, 1), 45),
+		Mat4::RotationMat(Vec3::Z(), 45),
 		Mat4::ScaleMat(1.06),
 	},
 	//Paralelogram 1.1
 	{
-		Mat4::RotationMat(Vec3(0, 0, 1), -90),
+		Mat4::RotationMat(Vec3::Z(), -90),
 		Mat4::ScaleMat(1.07),
 		Mat4::TranslationMat(Vec3(-0.375, 0.75, 0)),
 	},
 	//Paralelogram 1.2
 	{
-		Mat4::RotationMat(Vec3(0, 0, 1), -90),
+		Mat4::RotationMat(Vec3::Z(), -90),
 		Mat4::ScaleMat(1.07),
 		Mat4::TranslationMat(Vec3(-0.375, 0.75, 0)),
 	}

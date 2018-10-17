@@ -546,14 +546,14 @@ Mat3 Mat3::TranslationMat(const struct Vec2& V)
 	);
 }
 
-Mat3 Mat3::ScaleMat(float scalar)
+Mat3 Mat3::ScaleMat(const Vec3 V)
 {
 	return Mat3(
 		{
 		{
-			{scalar, 0, 0},
-			{0, scalar, 0},
-			{0, 0, scalar}
+			{V.x, 0, 0},
+			{0, V.y, 0},
+			{0, 0, V.z}
 		}
 		}
 	);
@@ -843,14 +843,14 @@ Mat4 Mat4::TranslationMat(const struct Vec3& V)
 	);
 }
 
-Mat4 Mat4::ScaleMat(float scalar)
+Mat4 Mat4::ScaleMat(const Vec3 V)
 {
 	return Mat4(
 		{
 		{
-			{scalar, 0, 0, 0},
-			{0, scalar, 0, 0},
-			{0, 0, scalar, 0},
+			{V.x, 0, 0, 0},
+			{0, V.y, 0, 0},
+			{0, 0, V.z, 0},
 			{0, 0, 0, 1}
 		}
 		}

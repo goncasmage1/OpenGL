@@ -37,6 +37,16 @@ Vec2::Vec2(const Vec4 V) :
 {
 }
 
+Vec2 Vec2::X()
+{
+	return Vec2(1, 0);
+}
+
+Vec2 Vec2::Y()
+{
+	return Vec2(1, 0);
+}
+
 float* Vec2::GetData() const
 {
 	float* arr = new float[2]{x,y};
@@ -231,6 +241,21 @@ Vec3::Vec3(const Vec2 V) :
 Vec3::Vec3(const Vec4 V) :
 	x(V.x), y(V.y), z(V.z)
 {
+}
+
+Vec3 Vec3::X()
+{
+	return Vec3(1, 0, 0);
+}
+
+Vec3 Vec3::Y()
+{
+	return Vec3(0, 1, 0);
+}
+
+Vec3 Vec3::Z()
+{
+	return Vec3(0, 0, 1);
 }
 
 float* Vec3::GetData() const
@@ -452,6 +477,26 @@ Vec4::Vec4(const Vec4 & newV4)
 	y = newV4.y;
 	z = newV4.z;
 	w = newV4.w;
+}
+
+Vec4 Vec4::X()
+{
+	return Vec4(1, 0, 0, 0);
+}
+
+Vec4 Vec4::Y()
+{
+	return Vec4(0, 1, 0, 0);
+}
+
+Vec4 Vec4::Z()
+{
+	return Vec4(0, 0, 1, 0);
+}
+
+Vec4 Vec4::W()
+{
+	return Vec4(0, 0, 0, 1);
 }
 
 float* Vec4::GetData() const
