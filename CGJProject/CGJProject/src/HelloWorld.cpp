@@ -1,22 +1,25 @@
 ///////////////////////////////////////////////////////////////////////
 //
-// Drawing two instances of a triangle in Modern OpenGL.
-// A "hello world" of Modern OpenGL.
+// Assignment consists in the following:
 //
-// Assignment : Create Shader Abstraction
-//					(e.g. check compilation/linkage for errors, read from file) 
-//			  : Manage Multiple Drawable Entities (using your vertex and matrix classes)
-//              Draw a set of 7 TANs (i.e. TANGRAM shapes) of different colors: 
-//              (1) 3 different TAN geometric shapes at the origin:
-//					- right triangle
-//					- square
-//					- parallelogram
-//              (2) 7 TANs of different colors put together to form a shape of your choice:
-//					- 2 big right triangles
-//					- 1 medium right triangle
-//					- 2 small right triangles
-//					- 1 square
-//					- 1 parallelogram;
+// - Create the following changes to your scene:
+//   - Make your TANs double-faced, so they can be seen from both sides.
+//   - The new face of each TAN should share the same hue as the
+//     original top face color but have a different level of saturation 
+//     and brightness.
+//
+// - Add the following functionality:
+//   - Create a View Matrix from (eye, center, up) parameters.
+//   - Create an Orthographic Projection Matrix from (left-right, 
+//     bottom-top, near-far) parameters.
+//   - Create a Perspective Projection Matrix from (fovy, aspect,
+//     nearZ, farZ) parameters.
+//
+// - Add the following dynamics to the application:
+//   - Create a free 3D camera controlled by the mouse allowing to 
+//     visualize the scene through all its angles.
+//   - Change perspective from orthographic to perspective and back as
+//     a response to pressing the key 'p'.
 //
 // (c) 2013-18 by Carlos Martinho
 //
@@ -46,7 +49,8 @@ unsigned int FrameCount = 0;
 
 GLuint VaoId, VboId[2];
 GLuint VertexShaderId, FragmentShaderId, ProgramId;
-GLint UniformId;
+GLint UboId, UniformId;
+const GLuint UBO_BP = 0;
 
 /////////////////////////////////////////////////////////////////////// ERRORS
 
@@ -163,9 +167,10 @@ void createShaderProgram()
 
 	glBindAttribLocation(ProgramId, VERTICES, "in_Position");
 	glBindAttribLocation(ProgramId, COLORS, "in_Color");
-
 	glLinkProgram(ProgramId);
-	UniformId = glGetUniformLocation(ProgramId, "Matrix");
+	UniformId = glGetUniformLocation(ProgramId, "ModelMatrix");
+	UboId = glGetUniformBlockIndex(ProgramId, "SharedMatrices");
+	glUniformBlockBinding(ProgramId, UboId, UBO_BP);
 
 	glDetachShader(ProgramId, VertexShaderId);
 	glDeleteShader(VertexShaderId);
@@ -193,42 +198,47 @@ typedef struct
 
 const Vertex Vertices[] =
 {
-	//Triangle 1
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
-	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
-	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
-	//Triangle 2
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }},
-	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }},
-	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }},
-	//Triangle 3
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }},
-	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }},
-	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }},
-	//Triangle 4
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
-	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
-	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
-	//Triangle 5
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
-	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
-	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
-	//Square 1.1
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.25f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.00f, 0.25f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
-	//Square 1.2
-	{{ 0.25f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.00f, 0.25f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
-	//Paralelogram 1.1
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.35f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.525f, 0.175f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
-	//Paralelogram 1.2
-	{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.525f, 0.175f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.175f, 0.175f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
+	{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 0 - FRONT
+	{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 1
+	{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 2
+	{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 2	
+	{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 3
+	{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 0
+
+	{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 1 - RIGHT
+	{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 5
+	{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 6
+	{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 6	
+	{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 2
+	{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 1
+
+	{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 2 - TOP
+	{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 6
+	{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 7
+	{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 7	
+	{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 3
+	{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 2
+
+	{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 5 - BACK
+	{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 4
+	{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 7
+	{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 7	
+	{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 6
+	{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 5
+
+	{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 4 - LEFT
+	{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 0
+	{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 3
+	{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 3	
+	{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 7
+	{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 4
+
+	{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 0 - BOTTOM
+	{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 4
+	{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 5
+	{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 5	
+	{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 1
+	{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}  // 0
 };
 
 const std::vector<Mat4> Mats[] = {
@@ -310,16 +320,18 @@ void createBufferObjects()
 			glEnableVertexAttribArray(COLORS);
 			glVertexAttribPointer(COLORS, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)sizeof(Vertices[0].XYZW));
 		}
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VboId[1]);
-		{
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLubyte) * (sizeof(Vertices) / sizeof(*Vertices)), Indices, GL_STATIC_DRAW);
-		}
 	}
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-	checkOpenGLError("ERROR: Could not create VAOs and VBOs.");
+	glBindBuffer(GL_UNIFORM_BUFFER, VboId[1]);
+	{
+		glBufferData(GL_UNIFORM_BUFFER, sizeof(Mat4) * 2, 0, GL_STREAM_DRAW);
+		glBindBufferBase(GL_UNIFORM_BUFFER, UBO_BP, VboId[1]);
+	}
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+	checkOpenGLError("ERROR: Could not create VAOs, VBOs and UBOs.");
 }
 
 void destroyBufferObjects()
@@ -330,33 +342,61 @@ void destroyBufferObjects()
 	glDeleteBuffers(2, VboId);
 	glDeleteVertexArrays(1, &VaoId);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 	glBindVertexArray(0);
 
 	checkOpenGLError("ERROR: Could not destroy VAOs and VBOs.");
 }
 
+Mat4 ModelMat({ {
+	{1, 0, 0, -0.5},
+	{0, 1, 0, -0.5},
+	{0, 0, 1, -0.5},
+	{0, 0, 0, 1}
+	} });
+
+Mat4 ViewMat1({ {
+	{1, 0, 0, 0},
+	{0, 1, 0, 0},
+	{0, 0, 1, 0},
+	{0, 0, 0, 1}
+	} });
+
+Mat4 ViewMat2({ {
+	{1, 0, 0, 0},
+	{0, 1, 0, 0},
+	{0, 0, 1, 0},
+	{0, 0, 0, 1}
+	} });
+
+Mat4 ProjMat1({ {
+	{1, 0, 0, 0},
+	{0, 1, 0, 0},
+	{0, 0, 1, 0},
+	{0, 0, 0, 1}
+	} });
+
+Mat4 ProjMat2({ {
+	{1, 0, 0, 0},
+	{0, 1, 0, 0},
+	{0, 0, 1, 0},
+	{0, 0, 0, 1}
+	} });
+
 /////////////////////////////////////////////////////////////////////// SCENE
 
 void drawScene()
 {
+	glBindBuffer(GL_UNIFORM_BUFFER, VboId[1]);
+	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), ViewMat1.GetData());
+	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(Mat4), sizeof(Mat4), ProjMat2.GetData());
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
 	glBindVertexArray(VaoId);
 	glUseProgram(ProgramId);
 
-	uint64_t counter = 0;
-
-	for (int i = 0; i < ((sizeof(Vertices) / sizeof(*Vertices) / 3)); i++)
-	{
-		Mat4 Result = Mat4::IdentityMat();
-		for (size_t j = 0; j < Mats[i].size(); j++)
-		{
-			Result = Mats[i][j] * Result;
-		}
-
-		glUniformMatrix4fv(UniformId, 1, GL_FALSE, Result.GetData());
-		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE, (GLvoid*)counter);
-		counter += 3;
-	}
+	glUniformMatrix4fv(UniformId, 1, GL_FALSE, ModelMat.GetData());
+	glDrawArrays(GL_TRIANGLES, 0, 36);
 
 	glUseProgram(0);
 	glBindVertexArray(0);
