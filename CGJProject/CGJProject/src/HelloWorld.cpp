@@ -241,70 +241,6 @@ const Vertex Vertices[] =
 	{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}  // 0
 };
 
-const std::vector<Mat4> Mats[] = {
-	//Triangle 1
-	{
-		Mat4::RotationMat(Vec3::Z(), 180),
-		Mat4::TranslationMat(Vec3(0.25, 0.5, 0)),
-		Mat4::ScaleMat(1.5),
-	},
-	//Triangle 2
-	{
-		Mat4::RotationMat(Vec3::Z(), 90),
-		Mat4::TranslationMat(Vec3(0.25, 0, 0)),
-		Mat4::ScaleMat(1.5),
-	},
-	//Triangle 3
-	{
-		Mat4::RotationMat(Vec3::Z(), 135),
-		Mat4::ScaleMat(1.06)
-	},
-	//Triangle 4
-	{
-		Mat4::RotationMat(Vec3::Z(), -90),
-		Mat4::ScaleMat(0.75),
-		Mat4::TranslationMat(Vec3(-0.25*0.75, 0.562, 0)),
-	},
-	//Triangle 5
-	{
-		Mat4::ScaleMat(0.75),
-	},
-	//Square 1.1
-	{
-		Mat4::RotationMat(Vec3::Z(), 45),
-		Mat4::ScaleMat(1.06),
-	},
-	//Square 1.2
-	{
-		Mat4::RotationMat(Vec3::Z(), 45),
-		Mat4::ScaleMat(1.06),
-	},
-	//Paralelogram 1.1
-	{
-		Mat4::RotationMat(Vec3::Z(), -90),
-		Mat4::ScaleMat(1.07),
-		Mat4::TranslationMat(Vec3(-0.375, 0.75, 0)),
-	},
-	//Paralelogram 1.2
-	{
-		Mat4::RotationMat(Vec3::Z(), -90),
-		Mat4::ScaleMat(1.07),
-		Mat4::TranslationMat(Vec3(-0.375, 0.75, 0)),
-	}
-};
-
-const GLubyte* BuildIndices()
-{
-	int size = (sizeof(Vertices) / sizeof(*Vertices));
-	GLubyte* arr = new GLubyte[size];
-
-	for (int i = 0; i < size; i++) arr[i] = i;
-
-	return arr;
-}
-
-const GLubyte* Indices = BuildIndices();
-
 void createBufferObjects()
 {
 	glGenVertexArrays(1, &VaoId);
@@ -348,30 +284,14 @@ void destroyBufferObjects()
 	checkOpenGLError("ERROR: Could not destroy VAOs and VBOs.");
 }
 
-Mat4 ModelMat({ {
-	{1, 0, 0, -0.5},
-	{0, 1, 0, -0.5},
-	{0, 0, 1, -0.5},
-	{0, 0, 0, 1}
-	} });
+Mat4 ModelMat1 = Mat4::Model(Vec3(0.5, 0.5, 0.5));
+Mat4 ModelMat2 = Mat4::Model(Vec3(2.5, 2.5, 2.5));
 
-Mat4 ViewMat1({ {
-	{1, 0, 0, 0},
-	{0, 1, 0, 0},
-	{0, 0, 1, 0},
-	{0, 0, 0, 1}
-	} });
+Mat4 ViewMat1 = Mat4::View(Vec3(5 ,5 ,5), Vec3(0, 0, 0), Vec3(0, 1, 0));
+Mat4 ViewMat2 = Mat4::View(Vec3(-5, -5, -5), Vec3(0, 0, 0), Vec3(0, 1, 0));
 
-Mat4 ViewMat2({ {
-	{1, 0, 0, 0},
-	{0, 1, 0, 0},
-	{0, 0, 1, 0},
-	{0, 0, 0, 1}
-	} });
-
-Mat4 ProjMat1 = Mat4::Orthographic(1, 10, 1, -1, 1, -1);
-
-Mat4 ProjMat2 = Mat4::Projection(70, 4.f/3.f, 1, 10);
+Mat4 ProjMat1 = Mat4::Orthographic(1, 10, -2, 2, -2, 2);
+Mat4 ProjMat2 = Mat4::Projection(30, 640/480, 1, 10);
 
 /////////////////////////////////////////////////////////////////////// SCENE
 
@@ -379,13 +299,13 @@ void drawScene()
 {
 	glBindBuffer(GL_UNIFORM_BUFFER, VboId[1]);
 	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), ViewMat1.GetData());
-	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(Mat4), sizeof(Mat4), ProjMat2.GetData());
+	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(Mat4), sizeof(Mat4), ProjMat1.GetData());
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
 	glBindVertexArray(VaoId);
 	glUseProgram(ProgramId);
 
-	glUniformMatrix4fv(UniformId, 1, GL_FALSE, ModelMat.GetData());
+	glUniformMatrix4fv(UniformId, 1, GL_FALSE, ModelMat1.GetData());
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 
 	glUseProgram(0);
@@ -400,7 +320,6 @@ void cleanup()
 {
 	destroyShaderProgram();
 	destroyBufferObjects();
-	delete Indices;
 }
 
 void display()

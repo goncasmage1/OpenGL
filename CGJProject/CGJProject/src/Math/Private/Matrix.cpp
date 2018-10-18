@@ -864,7 +864,38 @@ Mat4 Mat4::RotationMat(Vec4 V, const float Degrees)
 	return RotMat;
 }
 
-Mat4 Mat4::Orthographic(float n, float f, float t, float b, float l, float r)
+Mat4 Mat4::Model(const Vec3 e)
+{
+	return Mat4(
+		{
+		{
+			{1, 0, 0, e.x},
+			{0, 1, 0, e.y},
+			{0, 0, 1, e.z},
+			{0, 0, 0, 1}
+		}
+		}
+	);
+}
+
+Mat4 Mat4::View(const Vec3 center, const Vec3 eye, const Vec3 up)
+{
+	Vec3 V = Normalized(center - eye);
+	Vec3 S = Normalized(Cross(V, up));
+	Vec3 U = Cross(S, V);
+	return Mat4(
+		{
+		{
+			{S.x, S.y, S.z, 0},
+			{U.x, U.y, U.z, 0},
+			{-V.x, -V.y, -V.z, 0},
+			{0, 0, 0, 1}
+		}
+		}
+	);
+}
+
+Mat4 Mat4::Orthographic(float n, float f, float b, float t, float r, float l)
 {
 	return Mat4(
 		{
@@ -889,20 +920,6 @@ Mat4 Mat4::Projection(float fov, float aspect, float n, float f)
 			{0, d, 0, 0},
 			{0, 0, (f+n)/(n-f), (2*f*n)/(n-f)},
 			{0, 0, -1, 0}
-		}
-		}
-	);
-}
-
-Mat4 Mat4::View(const Vec3 S, const Vec3 U, const Vec3 V, const Vec3 e)
-{
-	return Mat4(
-		{
-		{
-			{S.x, S.y, S.z, -(Dot(S, e))},
-			{U.x, U.y, U.z, -(Dot(U, e))},
-			{-V.x, -V.y, -V.z, Dot(V, e)},
-			{0, 0, 0, 1}
 		}
 		}
 	);
