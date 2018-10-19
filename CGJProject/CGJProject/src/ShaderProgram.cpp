@@ -1,9 +1,13 @@
 #include "ShaderProgram.h"
 
+#include "Shader.h"
 #include "VertexShader.h"
 #include "FragmentShader.h"
 
-ShaderProgram::ShaderProgram()
+#define VERTICES 0
+#define COLORS 1
+
+ShaderProgram::ShaderProgram(std::vector<ShaderAttribute> Attributes)
 {
 	VertexShader VShader = VertexShader{};
 	FragmentShader FShader = FragmentShader();
@@ -11,6 +15,8 @@ ShaderProgram::ShaderProgram()
 	ProgramId = glCreateProgram();
 	VShader.Attach(ProgramId);
 	FShader.Attach(ProgramId);
+
+	for (ShaderAttribute attr : Attributes) glBindAttribLocation(ProgramId, attr.index, attr.name);
 
 	glLinkProgram(ProgramId);
 

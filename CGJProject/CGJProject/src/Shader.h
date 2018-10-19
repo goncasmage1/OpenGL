@@ -12,7 +12,7 @@ protected:
 
 public:
 
-	virtual void Attach(GLuint ProgramId);
-	virtual void DetachAndDelete(GLuint ProgramId);
+	void Attach(GLuint ProgramId);
+	void DetachAndDelete(GLuint ProgramId);
 	GLuint GetID() const { return id; }
 };

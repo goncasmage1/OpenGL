@@ -8,6 +8,4 @@ class VertexShader : public Shader
 {
 public:
 	VertexShader();
-
-	virtual void Attach(GLuint ProgramId) override;
 };

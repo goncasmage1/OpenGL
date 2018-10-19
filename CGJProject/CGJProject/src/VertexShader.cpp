@@ -16,11 +16,3 @@ VertexShader::VertexShader()
 	glCompileShader(id);
 }
 
-void VertexShader::Attach(GLuint ProgramId)
-{
-	Shader::Attach(ProgramId);
-
-	//TODO: FIX
-	/*glBindAttribLocation(ProgramId, VERTICES, "in_Position");
-	glBindAttribLocation(ProgramId, COLORS, "in_Color");*/
-}

@@ -37,17 +37,47 @@
 
 #define CAPTION "Hello Modern 2D World"
 
+#define VERTICES 0
+#define COLORS 1
+
+#define CENTERED_RIGHT_TRIANGLE(base, height, color_r, color_g, color_b) \
+	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
+	{ { base, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
+	{ { base/2, height, 0.0f, 1.0f }, {color_r, color_g, color_b, 1.0f } },
+
+#define LEFT_LEAN_RIGHT_TRIANGLE(base, height, color_r, color_g, color_b) \
+	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
+	{ { base, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
+	{ { 0.f, height, 0.0f, 1.0f }, {color_r, color_g, color_b, 1.0f } },
+
+#define RIGHT_LEAN_RIGHT_TRIANGLE(base, height, color_r, color_g, color_b) \
+	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
+	{ { base, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
+	{ { base, height, 0.0f, 1.0f }, {color_r, color_g, color_b, 1.0f } },
+
+#define SQUARE(side, color_r, color_g, color_b) \
+	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f }},\
+	{ { side, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
+	{ { 0.00f, side, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
+	{ { side, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
+	{ { side, side, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
+	{ { 0.00f, side, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },
+
+#define PARALELOGRAM(base, height, offset, color_r, color_g, color_b) \
+	{ { 0.0f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
+	{ { base, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
+	{ { base + offset, height, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
+	{ { 0.0f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
+	{ { base + offset, height, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
+	{ { offset, height, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } },
+
 int WinX = 800, WinY = 800;
 int WindowHandle = 0;
 unsigned int FrameCount = 0;
 
-#define VERTICES 0
-#define COLORS 1
-
 GLuint VaoId, VboId[2];
 
-ShaderProgram ShaderProg;
-//std::shared_ptr<ShaderProgram> ShaderProg;
+std::shared_ptr<ShaderProgram> ShaderProg = nullptr;
 
 /////////////////////////////////////////////////////////////////////// ERRORS
 
@@ -137,13 +167,15 @@ static void checkOpenGLError(std::string error)
 
 void createShaderProgram()
 {
-	ShaderProg = ShaderProgram();
+	std::vector<ShaderAttribute> Attributes = { {VERTICES, "in_Position"},
+												{COLORS, "in_Color"} };
+	ShaderProg = std::make_shared<ShaderProgram>(Attributes);
 	checkOpenGLError("ERROR: Could not create shaders.");
 }
 
 void destroyShaderProgram()
 {
-	ShaderProg.Destroy();
+	ShaderProg->Destroy();
 	checkOpenGLError("ERROR: Could not destroy shaders.");
 }
 
@@ -158,41 +190,19 @@ typedef struct
 const Vertex Vertices[] =
 {
 	//Triangle 1
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
-	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
-	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }},
+	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 1.0f, 0.0f, 0.0f)
 	//Triangle 2
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }},
-	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }},
-	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f }},
+	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 0.0f, 1.0f, 0.0f)
 	//Triangle 3
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }},
-	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }},
-	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f, 1.0f }},
+	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 0.0f, 0.0f, 1.0f)
 	//Triangle 4
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
-	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
-	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f }},
+	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 1.0f, 1.0f, 0.0f)
 	//Triangle 5
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
-	{{ 0.50f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
-	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f }},
-	//Square 1.1
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.25f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.00f, 0.25f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
-	//Square 1.2
-	{{ 0.25f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.25f, 0.25f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.00f, 0.25f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }},
-	//Paralelogram 1.1
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.35f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.525f, 0.175f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
-	//Paralelogram 1.2
-	{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.525f, 0.175f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
-	{{ 0.175f, 0.175f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }},
+	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 1.0f, 0.0f, 1.0f)
+	//Square
+	SQUARE(0.25f, 0.f, 1.f, 1.f)
+	//Paralelogram
+	PARALELOGRAM(0.35f, 0.175f, 0.175f, 1.f, 1.f, 1.f)
 };
 
 const std::vector<Mat4> Mats[] = {
@@ -305,7 +315,9 @@ void destroyBufferObjects()
 void drawScene()
 {
 	glBindVertexArray(VaoId);
-	glUseProgram(ShaderProg.GetProgramId());
+	glUseProgram(ShaderProg->GetProgramId());
+
+	GLuint UniformId = ShaderProg->GetUniformId("Matrix");
 
 	uint64_t counter = 0;
 
@@ -317,7 +329,7 @@ void drawScene()
 			Result = Mats[i][j] * Result;
 		}
 
-		glUniformMatrix4fv(ShaderProg.GetUniformId("Matrix"), 1, GL_FALSE, Result.GetData());
+		glUniformMatrix4fv(UniformId, 1, GL_FALSE, Result.GetData());
 		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE, (GLvoid*)counter);
 		counter += 3;
 	}
