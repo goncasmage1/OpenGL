@@ -23,7 +23,6 @@
 ///////////////////////////////////////////////////////////////////////
 
 #include <iostream>
-#include <fstream>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -34,6 +33,7 @@
 
 #include "Math/Public/Vector.h"
 #include "Math/Public/Matrix.h"
+#include "ShaderProgram.h"
 
 #define CAPTION "Hello Modern 2D World"
 
@@ -45,8 +45,9 @@ unsigned int FrameCount = 0;
 #define COLORS 1
 
 GLuint VaoId, VboId[2];
-GLuint VertexShaderId, FragmentShaderId, ProgramId;
-GLint UniformId;
+
+ShaderProgram ShaderProg;
+//std::shared_ptr<ShaderProgram> ShaderProg;
 
 /////////////////////////////////////////////////////////////////////// ERRORS
 
@@ -134,52 +135,15 @@ static void checkOpenGLError(std::string error)
 
 /////////////////////////////////////////////////////////////////////// SHADERs
 
-std::string ReadShader(bool bVertex)
-{
-	std::ifstream myReadFile(bVertex ? "src/VertexShader.vert" : "src/FragmentShader.frag");
-	std::string content((std::istreambuf_iterator<char>(myReadFile)),
-		(std::istreambuf_iterator<char>()));
-	return content;
-}
-
 void createShaderProgram()
 {
-	std::string VertStr = ReadShader(true);
-	std::string FragStr = ReadShader(false);
-	const GLchar* VertexShader = VertStr.c_str();
-	const GLchar* FragmentShader = FragStr.c_str();
-
-	VertexShaderId = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(VertexShaderId, 1, &VertexShader, 0);
-	glCompileShader(VertexShaderId);
-
-	FragmentShaderId = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(FragmentShaderId, 1, &FragmentShader, 0);
-	glCompileShader(FragmentShaderId);
-
-	ProgramId = glCreateProgram();
-	glAttachShader(ProgramId, VertexShaderId);
-	glAttachShader(ProgramId, FragmentShaderId);
-
-	glBindAttribLocation(ProgramId, VERTICES, "in_Position");
-	glBindAttribLocation(ProgramId, COLORS, "in_Color");
-
-	glLinkProgram(ProgramId);
-	UniformId = glGetUniformLocation(ProgramId, "Matrix");
-
-	glDetachShader(ProgramId, VertexShaderId);
-	glDeleteShader(VertexShaderId);
-	glDetachShader(ProgramId, FragmentShaderId);
-	glDeleteShader(FragmentShaderId);
-
+	ShaderProg = ShaderProgram();
 	checkOpenGLError("ERROR: Could not create shaders.");
 }
 
 void destroyShaderProgram()
 {
-	glUseProgram(0);
-	glDeleteProgram(ProgramId);
-
+	ShaderProg.Destroy();
 	checkOpenGLError("ERROR: Could not destroy shaders.");
 }
 
@@ -341,7 +305,7 @@ void destroyBufferObjects()
 void drawScene()
 {
 	glBindVertexArray(VaoId);
-	glUseProgram(ProgramId);
+	glUseProgram(ShaderProg.GetProgramId());
 
 	uint64_t counter = 0;
 
@@ -353,7 +317,7 @@ void drawScene()
 			Result = Mats[i][j] * Result;
 		}
 
-		glUniformMatrix4fv(UniformId, 1, GL_FALSE, Result.GetData());
+		glUniformMatrix4fv(ShaderProg.GetUniformId("Matrix"), 1, GL_FALSE, Result.GetData());
 		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE, (GLvoid*)counter);
 		counter += 3;
 	}
