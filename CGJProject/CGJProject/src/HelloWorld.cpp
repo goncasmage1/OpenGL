@@ -26,6 +26,7 @@
 ///////////////////////////////////////////////////////////////////////
 
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -173,6 +174,7 @@ void createShaderProgram()
 	std::vector<ShaderAttribute> Attributes = { {VERTICES, "in_Position"},
 												{COLORS, "in_Color"} };
 	ShaderProg = std::make_shared<ShaderProgram>(Attributes);
+
 	checkOpenGLError("ERROR: Could not create shaders.");
 }
 
@@ -192,6 +194,13 @@ typedef struct
 
 const Vertex Vertices[] =
 {
+	{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 0 - FRONT
+	{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 1
+	{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 2
+	{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 2	
+	{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 3
+	{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 0
+
 	{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 1 - RIGHT
 	{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 5
 	{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 6
@@ -285,14 +294,14 @@ Mat4 ProjMat2 = Mat4::Projection(30, 640/480, 1, 10);
 void drawScene()
 {
 	glBindBuffer(GL_UNIFORM_BUFFER, VboId[1]);
-	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), ViewMat1.GetData());
+	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), ViewMat2.GetData());
 	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(Mat4), sizeof(Mat4), ProjMat1.GetData());
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
 	glBindVertexArray(VaoId);
 	glUseProgram(ShaderProg->GetProgramId());
 
-	glUniformMatrix4fv(ShaderProg->GetUniformId("Matrix"), 1, GL_FALSE, ModelMat1.GetData());
+	glUniformMatrix4fv(ShaderProg->GetUniformId("ModelMatrix"), 1, GL_FALSE, ModelMat1.GetData());
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 
 	glUseProgram(0);

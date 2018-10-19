@@ -9,7 +9,7 @@
 
 ShaderProgram::ShaderProgram(std::vector<ShaderAttribute> Attributes)
 {
-	VertexShader VShader = VertexShader{};
+	VertexShader VShader = VertexShader();
 	FragmentShader FShader = FragmentShader();
 
 	ProgramId = glCreateProgram();
