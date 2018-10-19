@@ -1,17 +1,18 @@
-#include "FragmentShader.h"
-
+#include "VertexShader.h"
+#include <string>
 #include <fstream>
 
-FragmentShader::FragmentShader()
+VertexShader::VertexShader()
 {
-	std::ifstream myReadFile("src/FragmentShader.frag");
+	std::ifstream myReadFile("src/Shader/VertexShader.vert");
 	std::string content((std::istreambuf_iterator<char>(myReadFile)),
 		(std::istreambuf_iterator<char>()));
 
 	const GLchar* shader = content.c_str();
 
-	id = glCreateShader(GL_FRAGMENT_SHADER);
+	id = glCreateShader(GL_VERTEX_SHADER);
 
 	glShaderSource(id, 1, &shader, 0);
 	glCompileShader(id);
 }
+

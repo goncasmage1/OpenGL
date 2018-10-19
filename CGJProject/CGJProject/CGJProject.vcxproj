@@ -123,21 +123,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\FragmentShader.cpp" />
     <ClCompile Include="src\HelloWorld.cpp" />
     <ClCompile Include="src\Math\Private\Matrix.cpp" />
     <ClCompile Include="src\Math\Private\Vector.cpp" />
-    <ClCompile Include="src\Shader.cpp" />
-    <ClCompile Include="src\ShaderProgram.cpp" />
-    <ClCompile Include="src\VertexShader.cpp" />
+    <ClCompile Include="src\Shader\FragmentShader.cpp" />
+    <ClCompile Include="src\Shader\Shader.cpp" />
+    <ClCompile Include="src\Shader\ShaderProgram.cpp" />
+    <ClCompile Include="src\Shader\VertexShader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\FragmentShader.h" />
     <ClInclude Include="src\Math\Public\Matrix.h" />
     <ClInclude Include="src\Math\Public\Vector.h" />
-    <ClInclude Include="src\Shader.h" />
-    <ClInclude Include="src\ShaderProgram.h" />
-    <ClInclude Include="src\VertexShader.h" />
+    <ClInclude Include="src\Shader\FragmentShader.h" />
+    <ClInclude Include="src\Shader\Shader.h" />
+    <ClInclude Include="src\Shader\ShaderProgram.h" />
+    <ClInclude Include="src\Shader\VertexShader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

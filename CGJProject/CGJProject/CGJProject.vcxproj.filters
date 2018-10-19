@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Math\Private">
       <UniqueIdentifier>{f42e53d7-553e-4588-87f1-6fa63c13c2e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Shader">
+      <UniqueIdentifier>{a8080e10-d66a-4a09-b225-280c59c4775e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\HelloWorld.cpp">
@@ -33,17 +36,17 @@
     <ClCompile Include="src\Math\Private\Vector.cpp">
       <Filter>Source Files\Math\Private</Filter>
     </ClCompile>
-    <ClCompile Include="src\VertexShader.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Shader\FragmentShader.cpp">
+      <Filter>Source Files\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="src\FragmentShader.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Shader\Shader.cpp">
+      <Filter>Source Files\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="src\Shader.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Shader\ShaderProgram.cpp">
+      <Filter>Source Files\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="src\ShaderProgram.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Shader\VertexShader.cpp">
+      <Filter>Source Files\Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,17 +56,17 @@
     <ClInclude Include="src\Math\Public\Vector.h">
       <Filter>Source Files\Math\Public</Filter>
     </ClInclude>
-    <ClInclude Include="src\VertexShader.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="src\Shader\FragmentShader.h">
+      <Filter>Source Files\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="src\FragmentShader.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="src\Shader\Shader.h">
+      <Filter>Source Files\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="src\Shader.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="src\Shader\ShaderProgram.h">
+      <Filter>Source Files\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="src\ShaderProgram.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="src\Shader\VertexShader.h">
+      <Filter>Source Files\Shader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

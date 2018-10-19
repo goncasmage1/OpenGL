@@ -37,7 +37,7 @@
 
 #include "Math/Public/Vector.h"
 #include "Math/Public/Matrix.h"
-#include "ShaderProgram.h"
+#include "Shader/ShaderProgram.h"
 
 #define CAPTION "Hello Modern 2D World"
 
