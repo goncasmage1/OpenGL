@@ -19,6 +19,7 @@ ShaderProgram::ShaderProgram(std::vector<ShaderAttribute> Attributes)
 	for (ShaderAttribute attr : Attributes) glBindAttribLocation(ProgramId, attr.index, attr.name);
 
 	glLinkProgram(ProgramId);
+	glUniformBlockBinding(ProgramId, GetUboId("SharedMatrices"), UBO_BP);
 
 	VShader.DetachAndDelete(ProgramId);
 	FShader.DetachAndDelete(ProgramId);

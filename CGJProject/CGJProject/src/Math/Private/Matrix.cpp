@@ -863,3 +863,64 @@ Mat4 Mat4::RotationMat(Vec4 V, const float Degrees)
 	RotMat[3][3] = 1;
 	return RotMat;
 }
+
+Mat4 Mat4::Model(const Vec3 e)
+{
+	return Mat4(
+		{
+		{
+			{1, 0, 0, e.x},
+			{0, 1, 0, e.y},
+			{0, 0, 1, e.z},
+			{0, 0, 0, 1}
+		}
+		}
+	);
+}
+
+Mat4 Mat4::View(const Vec3 center, const Vec3 eye, const Vec3 up)
+{
+	Vec3 V = Normalized(center - eye);
+	Vec3 S = Normalized(Cross(V, up));
+	Vec3 U = Cross(S, V);
+	return Mat4(
+		{
+		{
+			{S.x, S.y, S.z, 0},
+			{U.x, U.y, U.z, 0},
+			{-V.x, -V.y, -V.z, 0},
+			{0, 0, 0, 1}
+		}
+		}
+	);
+}
+
+Mat4 Mat4::Orthographic(float n, float f, float b, float t, float r, float l)
+{
+	return Mat4(
+		{
+		{
+			{2/(r-l), 0, 0, (l+r)/(l-r)},
+			{0, 2/(t-b), 0, (b+t)/(b-t)},
+			{0, 0, -2/(f-n), (n+r)/(n-f)},
+			{0, 0, 0, 1}
+		}
+		}
+	);
+}
+
+Mat4 Mat4::Projection(float fov, float aspect, float n, float f)
+{
+	float degrees = fov / 2;
+	float d = 1 / std::tan((degrees*PI)/180);
+	return Mat4(
+		{
+		{
+			{d/aspect, 0, 0, 0},
+			{0, d, 0, 0},
+			{0, 0, (f+n)/(n-f), (2*f*n)/(n-f)},
+			{0, 0, -1, 0}
+		}
+		}
+	);
+}

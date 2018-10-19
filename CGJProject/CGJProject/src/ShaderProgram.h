@@ -14,13 +14,16 @@ struct ShaderAttribute
 class ShaderProgram
 {
 	GLuint ProgramId;
+	const GLuint UBO_BP = 0;
 
 public:
 
 	ShaderProgram(std::vector<ShaderAttribute> Attributes);
 
 	GLuint GetProgramId() const { return ProgramId; }
-	GLuint GetUniformId(std::string param) const { return glGetUniformLocation(ProgramId, "Matrix"); }
+	GLuint GetUniformId(const GLchar* param) const { return glGetUniformLocation(ProgramId, param); }
+	GLuint GetUboId(const GLchar* param) const { return glGetUniformBlockIndex(ProgramId, param); }
+	const GLuint GetUBO_BP() const { return UBO_BP; }
 
 	void Destroy();
 };
