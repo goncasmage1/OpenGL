@@ -222,20 +222,55 @@ typedef struct
 
 const Vertex Vertices[] =
 {
-	//Triangle 1
 	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 1.0f, 0.0f, 0.0f)
-	//Triangle 2
 	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 0.0f, 1.0f, 0.0f)
-	//Triangle 3
 	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 0.0f, 0.0f, 1.0f)
-	//Triangle 4
 	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 1.0f, 1.0f, 0.0f)
-	//Triangle 5
 	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 1.0f, 0.0f, 1.0f)
-	//Square
 	SQUARE(0.25f, 0.f, 1.f, 1.f)
-	//Paralelogram
 	PARALELOGRAM(0.35f, 0.175f, 0.175f, 1.f, 1.f, 1.f)
+
+	//{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 0 - FRONT
+	//{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 1
+	//{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 2
+	//{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 2	
+	//{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 3
+	//{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 0
+
+	//{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 1 - RIGHT
+	//{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 5
+	//{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 6
+	//{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 6	
+	//{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 2
+	//{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 1
+
+	//{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 2 - TOP
+	//{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 6
+	//{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 7
+	//{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 7	
+	//{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 3
+	//{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 2
+
+	//{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 5 - BACK
+	//{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 4
+	//{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 7
+	//{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 7	
+	//{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 6
+	//{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 5
+
+	//{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 4 - LEFT
+	//{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 0
+	//{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 3
+	//{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 3	
+	//{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 7
+	//{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 4
+
+	//{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 0 - BOTTOM
+	//{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 4
+	//{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 5
+	//{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 5	
+	//{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 1
+	//{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}  // 0
 };
 
 const std::vector<Mat4> Mats[] = {
@@ -347,7 +382,7 @@ Mat4 ProjMat2 = Mat4::Projection(30, 640/480, 1, 10);
 void drawScene()
 {
 	glBindBuffer(GL_UNIFORM_BUFFER, VboId[1]);
-	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), ViewMat2.GetData());
+	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), ViewMat1.GetData());
 	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(Mat4), sizeof(Mat4), ProjMat1.GetData());
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
@@ -368,7 +403,7 @@ void drawScene()
 	}*/
 
 	glUniformMatrix4fv(ShaderProg->GetUniformId("ModelMatrix"), 1, GL_FALSE, ModelMat1.GetData());
-	glDrawArrays(GL_TRIANGLES, 0, 36);
+	glDrawArrays(GL_TRIANGLES, 0, sizeof(Vertices) / sizeof(*Vertices));
 
 	glUseProgram(0);
 	glBindVertexArray(0);
@@ -376,9 +411,12 @@ void drawScene()
 	checkOpenGLError("ERROR: Could not draw scene.");
 }
 
+void processInput()
+{
+
+}
+
 /////////////////////////////////////////////////////////////////////// CALLBACKS
-
-
 
 void cleanup()
 {
@@ -406,19 +444,24 @@ void reshape(int w, int h)
 	glViewport(0, 0, WinX, WinY);
 }
 
-void keyboardInputDown(unsigned char Key, int x, int y)
+void keyboardButtontDown(unsigned char Key, int x, int y)
 {
-	input->keyboardInputDown(Key, x, y);
+	input->keyboardButtontDown(Key, x, y);
 }
 
-void keyboardInputUp(unsigned char Key, int x, int y)
+void keyboardButtonUp(unsigned char Key, int x, int y)
 {
-	input->keyboardInputUp(Key, x, y);
+	input->keyboardButtonUp(Key, x, y);
 }
 
-void mouseInput(int button, int state, int x, int y)
+void mouseButton(int button, int state, int x, int y)
 {
-	input->mouseInput(button, state, x, y);
+	input->mouseButton(button, state, x, y);
+}
+
+void mouseMove(int x, int y)
+{
+	input->mouseMove(x, y);
 }
 
 void timer(int value)
@@ -441,9 +484,11 @@ void setupCallbacks()
 	glutIdleFunc(idle);
 	glutReshapeFunc(reshape);
 	glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
-	glutKeyboardFunc(keyboardInputDown);
-	glutKeyboardUpFunc(keyboardInputUp);
-	glutMouseFunc(mouseInput);
+	glutKeyboardFunc(keyboardButtontDown);
+	glutKeyboardUpFunc(keyboardButtonUp);
+	glutMouseFunc(mouseButton);
+	glutMotionFunc(mouseMove);
+	glutPassiveMotionFunc(mouseMove);
 	glutTimerFunc(0, timer, 0);
 	setupErrors();
 }

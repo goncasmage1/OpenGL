@@ -14,7 +14,8 @@ protected:
 
 public:
 
-	void keyboardInputDown(unsigned char Key, int x, int y);
-	void keyboardInputUp(unsigned char Key, int x, int y);
-	void mouseInput(int button, int state, int x, int y);
+	void keyboardButtontDown(unsigned char Key, int x, int y);
+	void keyboardButtonUp(unsigned char Key, int x, int y);
+	void mouseButton(int button, int state, int x, int y);
+	void mouseMove(int x, int y);
 };

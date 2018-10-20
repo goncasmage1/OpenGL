@@ -3,12 +3,27 @@
 #include "GL/glew.h"
 #include "GL/freeglut.h"
 
-void Input::keyboardInputDown(unsigned char Key, int x, int y)
+void Input::keyboardButtontDown(unsigned char Key, int x, int y)
 {
 	switch (Key)
 	{
 		case 'w': 
-			std::cout << "W!" << std::endl;
+			Forward += 1.f;
+			break;
+		case 's':
+			Forward -= 1.f;
+			break;
+		case 'd':
+			Right += 1.f;
+			break;
+		case 'a':
+			Right -= 1.f;
+			break;
+		case 'e':
+			Up += 1.f;
+			break;
+		case 'q':
+			Up -= 1.f;
 			break;
 		case 27:
 			exit(1);
@@ -16,12 +31,27 @@ void Input::keyboardInputDown(unsigned char Key, int x, int y)
 	};
 }
 
-void Input::keyboardInputUp(unsigned char Key, int x, int y)
+void Input::keyboardButtonUp(unsigned char Key, int x, int y)
 {
 	switch (Key)
 	{
 		case 'w':
-			std::cout << "W!" << std::endl;
+			Forward -= 1.f;
+			break;
+		case 's':
+			Forward += 1.f;
+			break;
+		case 'd':
+			Right -= 1.f;
+			break;
+		case 'a':
+			Right += 1.f;
+			break;
+		case 'e':
+			Up -= 1.f;
+			break;
+		case 'q':
+			Up += 1.f;
 			break;
 		case 27:
 			exit(1);
@@ -29,9 +59,7 @@ void Input::keyboardInputUp(unsigned char Key, int x, int y)
 	};
 }
 
-//Add "glutMouseFunc(MyMouseFunc)" in the opengl init func.
-
-void Input::mouseInput(int button, int state, int x, int y)
+void Input::mouseButton(int button, int state, int x, int y)
 {
 	switch (button)
 	{
@@ -42,4 +70,8 @@ void Input::mouseInput(int button, int state, int x, int y)
 			RightMouseButtonDown = state == GLUT_DOWN;
 			break;
 	};
+}
+
+void Input::mouseMove(int x, int y)
+{
 }
