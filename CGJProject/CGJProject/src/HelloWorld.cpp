@@ -38,6 +38,7 @@
 #include "Math/Public/Vector.h"
 #include "Math/Public/Matrix.h"
 #include "Shader/ShaderProgram.h"
+#include "Input.h"
 
 #define CAPTION "Hello Modern 2D World"
 
@@ -48,16 +49,28 @@
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
 	{ { base, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
 	{ { base/2, height, 0.0f, 1.0f }, {color_r, color_g, color_b, 1.0f } },
+#define CENTERED_RIGHT_TRIANGLE_BACK(base, height, color_r, color_g, color_b) \
+	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
+	{ { base/2, height, 0.0f, 1.0f }, {color_r, color_g, color_b, 1.0f } },\
+	{ { base, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },
 
 #define LEFT_LEAN_RIGHT_TRIANGLE(base, height, color_r, color_g, color_b) \
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
 	{ { base, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
 	{ { 0.f, height, 0.0f, 1.0f }, {color_r, color_g, color_b, 1.0f } },
+#define LEFT_LEAN_RIGHT_TRIANGLE_BACK(base, height, color_r, color_g, color_b) \
+	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
+	{ { 0.f, height, 0.0f, 1.0f }, {color_r, color_g, color_b, 1.0f } },\
+	{ { base, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },
 
 #define RIGHT_LEAN_RIGHT_TRIANGLE(base, height, color_r, color_g, color_b) \
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
 	{ { base, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
 	{ { base, height, 0.0f, 1.0f }, {color_r, color_g, color_b, 1.0f } },
+#define RIGHT_LEAN_RIGHT_TRIANGLE_BACK(base, height, color_r, color_g, color_b) \
+	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
+	{ { base, height, 0.0f, 1.0f }, {color_r, color_g, color_b, 1.0f } },\
+	{ { base, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },
 
 #define SQUARE(side, color_r, color_g, color_b) \
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f }},\
@@ -66,6 +79,13 @@
 	{ { side, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
 	{ { side, side, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
 	{ { 0.00f, side, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },
+#define SQUARE_BACK(side, color_r, color_g, color_b) \
+	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f }},\
+	{ { 0.00f, side, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
+	{ { side, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
+	{ { side, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
+	{ { 0.00f, side, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
+	{ { side, side, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },
 
 #define PARALELOGRAM(base, height, offset, color_r, color_g, color_b) \
 	{ { 0.0f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
@@ -74,6 +94,13 @@
 	{ { 0.0f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
 	{ { base + offset, height, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
 	{ { offset, height, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } },
+#define PARALELOGRAM_BACK(base, height, offset, color_r, color_g, color_b) \
+	{ { 0.0f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
+	{ { base + offset, height, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
+	{ { base, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
+	{ { 0.0f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
+	{ { offset, height, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
+	{ { base + offset, height, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } },
 
 int WinX = 800, WinY = 800;
 int WindowHandle = 0;
@@ -82,6 +109,7 @@ unsigned int FrameCount = 0;
 GLuint VaoId, VboId[2];
 
 std::shared_ptr<ShaderProgram> ShaderProg = nullptr;
+std::shared_ptr<Input> input = std::make_shared<Input>();
 
 /////////////////////////////////////////////////////////////////////// ERRORS
 
@@ -194,47 +222,72 @@ typedef struct
 
 const Vertex Vertices[] =
 {
-	{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 0 - FRONT
-	{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 1
-	{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 2
-	{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 2	
-	{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 3
-	{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 0
+	//Triangle 1
+	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 1.0f, 0.0f, 0.0f)
+	//Triangle 2
+	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 0.0f, 1.0f, 0.0f)
+	//Triangle 3
+	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 0.0f, 0.0f, 1.0f)
+	//Triangle 4
+	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 1.0f, 1.0f, 0.0f)
+	//Triangle 5
+	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 1.0f, 0.0f, 1.0f)
+	//Square
+	SQUARE(0.25f, 0.f, 1.f, 1.f)
+	//Paralelogram
+	PARALELOGRAM(0.35f, 0.175f, 0.175f, 1.f, 1.f, 1.f)
+};
 
-	{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 1 - RIGHT
-	{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 5
-	{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 6
-	{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 6	
-	{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 2
-	{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 1
-
-	{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 2 - TOP
-	{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 6
-	{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 7
-	{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 7	
-	{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 3
-	{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 2
-
-	{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 5 - BACK
-	{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 4
-	{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 7
-	{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 7	
-	{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 6
-	{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 5
-
-	{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 4 - LEFT
-	{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 0
-	{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 3
-	{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 3	
-	{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 7
-	{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 4
-
-	{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 0 - BOTTOM
-	{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 4
-	{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 5
-	{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 5	
-	{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 1
-	{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}  // 0
+const std::vector<Mat4> Mats[] = {
+	//Triangle 1
+	{
+		Mat4::RotationMat(Vec3::Z(), 180),
+		Mat4::TranslationMat(Vec3(0.25, 0.5, 0)),
+		Mat4::ScaleMat(1.5),
+	},
+	//Triangle 2
+	{
+		Mat4::RotationMat(Vec3::Z(), 90),
+		Mat4::TranslationMat(Vec3(0.25, 0, 0)),
+		Mat4::ScaleMat(1.5),
+	},
+	//Triangle 3
+	{
+		Mat4::RotationMat(Vec3::Z(), 135),
+		Mat4::ScaleMat(1.06)
+	},
+	//Triangle 4
+	{
+		Mat4::RotationMat(Vec3::Z(), -90),
+		Mat4::ScaleMat(0.75),
+		Mat4::TranslationMat(Vec3(-0.25*0.75, 0.562, 0)),
+	},
+	//Triangle 5
+	{
+		Mat4::ScaleMat(0.75),
+	},
+	//Square 1.1
+	{
+		Mat4::RotationMat(Vec3::Z(), 45),
+		Mat4::ScaleMat(1.06),
+	},
+	//Square 1.2
+	{
+		Mat4::RotationMat(Vec3::Z(), 45),
+		Mat4::ScaleMat(1.06),
+	},
+	//Paralelogram 1.1
+	{
+		Mat4::RotationMat(Vec3::Z(), -90),
+		Mat4::ScaleMat(1.07),
+		Mat4::TranslationMat(Vec3(-0.375, 0.75, 0)),
+	},
+	//Paralelogram 1.2
+	{
+		Mat4::RotationMat(Vec3::Z(), -90),
+		Mat4::ScaleMat(1.07),
+		Mat4::TranslationMat(Vec3(-0.375, 0.75, 0)),
+	}
 };
 
 void createBufferObjects()
@@ -301,6 +354,19 @@ void drawScene()
 	glBindVertexArray(VaoId);
 	glUseProgram(ShaderProg->GetProgramId());
 
+	/*for (int i = 0; i < ((sizeof(Vertices) / sizeof(*Vertices) / 3)); i++)
+	{
+		Mat4 Result = Mat4::IdentityMat();
+		for (size_t j = 0; j < Mats[i].size(); j++)
+		{
+			Result = Mats[i][j] * Result;
+		}
+
+		glUniformMatrix4fv(UniformId, 1, GL_FALSE, Result.GetData());
+		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE, (GLvoid*)counter);
+		counter += 3;
+	}*/
+
 	glUniformMatrix4fv(ShaderProg->GetUniformId("ModelMatrix"), 1, GL_FALSE, ModelMat1.GetData());
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 
@@ -311,6 +377,8 @@ void drawScene()
 }
 
 /////////////////////////////////////////////////////////////////////// CALLBACKS
+
+
 
 void cleanup()
 {
@@ -338,6 +406,21 @@ void reshape(int w, int h)
 	glViewport(0, 0, WinX, WinY);
 }
 
+void keyboardInputDown(unsigned char Key, int x, int y)
+{
+	input->keyboardInputDown(Key, x, y);
+}
+
+void keyboardInputUp(unsigned char Key, int x, int y)
+{
+	input->keyboardInputUp(Key, x, y);
+}
+
+void mouseInput(int button, int state, int x, int y)
+{
+	input->mouseInput(button, state, x, y);
+}
+
 void timer(int value)
 {
 	std::ostringstream oss;
@@ -357,6 +440,10 @@ void setupCallbacks()
 	glutDisplayFunc(display);
 	glutIdleFunc(idle);
 	glutReshapeFunc(reshape);
+	glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
+	glutKeyboardFunc(keyboardInputDown);
+	glutKeyboardUpFunc(keyboardInputUp);
+	glutMouseFunc(mouseInput);
 	glutTimerFunc(0, timer, 0);
 	setupErrors();
 }
@@ -412,6 +499,7 @@ void setupGLUT(int argc, char* argv[])
 	glutInitWindowSize(WinX, WinY);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	WindowHandle = glutCreateWindow(CAPTION);
+
 	if (WindowHandle < 1)
 	{
 		std::cerr << "ERROR: Could not create a new rendering window." << std::endl;

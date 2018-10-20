@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\HelloWorld.cpp" />
+    <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\Math\Private\Matrix.cpp" />
     <ClCompile Include="src\Math\Private\Vector.cpp" />
     <ClCompile Include="src\Shader\FragmentShader.cpp" />
@@ -132,6 +133,7 @@
     <ClCompile Include="src\Shader\VertexShader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\Math\Public\Matrix.h" />
     <ClInclude Include="src\Math\Public\Vector.h" />
     <ClInclude Include="src\Shader\FragmentShader.h" />

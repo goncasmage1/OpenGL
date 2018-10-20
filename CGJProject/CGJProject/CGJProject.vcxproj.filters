@@ -48,6 +48,9 @@
     <ClCompile Include="src\Shader\VertexShader.cpp">
       <Filter>Source Files\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="src\Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Math\Public\Matrix.h">
@@ -67,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="src\Shader\VertexShader.h">
       <Filter>Source Files\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Input.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
