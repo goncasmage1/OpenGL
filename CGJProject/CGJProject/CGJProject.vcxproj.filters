@@ -75,4 +75,12 @@
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\Shader\FragmentShader.frag">
+      <Filter>Source Files\Shader</Filter>
+    </None>
+    <None Include="src\Shader\VertexShader.vert">
+      <Filter>Source Files\Shader</Filter>
+    </None>
+  </ItemGroup>
 </Project>

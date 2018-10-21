@@ -94,6 +94,10 @@ const Vec2 operator-(const Vec2& V1, const Vec2& V2)
 	newVec.y = V1.y - V2.y;
 	return newVec;
 }
+const Vec2 operator-(const Vec2 & V1)
+{
+	return Vec2(-V1.x, -V1.y);
+}
 const Vec2 operator*(const Vec2& V1, const Vec2& V2)
 {
 	Vec2 newVec = Vec2();
@@ -281,6 +285,10 @@ const Vec3 operator-(const Vec3& V1, const Vec3& V2)
 	newVec.y = V1.y - V2.y;
 	newVec.z = V1.z - V2.z;
 	return newVec;
+}
+const Vec3 operator-(const Vec3 & V1)
+{
+	return Vec3(-V1.x, -V1.y, -V1.z);
 }
 const Vec3 operator*(const Vec3& V1, const Vec3& V2)
 {
@@ -524,6 +532,10 @@ const Vec4 operator-(const Vec4& V1, const Vec4& V2)
 	newVec.z = V1.z - V2.z;
 	newVec.w = V1.w - V2.w;
 	return newVec;
+}
+const Vec4 operator-(const Vec4 & V1)
+{
+	return Vec4(-V1.x, -V1.y, -V1.z, -V1.w);
 }
 const Vec4 operator*(const Vec4& V1, const Vec4& V2)
 {

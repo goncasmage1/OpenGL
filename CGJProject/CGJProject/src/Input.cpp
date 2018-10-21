@@ -74,4 +74,20 @@ void Input::mouseButton(int button, int state, int x, int y)
 
 void Input::mouseMove(int x, int y)
 {
+	MouseMoved = true;
+	MouseDelta.x = x - PreviousMousePosition.x;
+	MouseDelta.y = y - PreviousMousePosition.y;
+
+	PreviousMousePosition.x = x;
+	PreviousMousePosition.y = y;
+}
+
+Vec2 Input::GetMouseDelta()
+{
+	if (MouseMoved && RightMouseButtonDown)
+	{
+		MouseMoved = false;
+		return MouseDelta * MouseSensitivity;
+	}
+	return Vec2();
 }

@@ -19,6 +19,7 @@ struct Vec2
 
 	friend const Vec2 operator+(const Vec2& V1, const Vec2& V2);
 	friend const Vec2 operator-(const Vec2& V1, const Vec2& V2);
+	friend const Vec2 operator-(const Vec2& V1);
 	friend const Vec2 operator*(const Vec2& V1, const Vec2& V2);
 	friend const Vec2 operator/(const Vec2& V1, const Vec2& V2);
 	Vec2& operator+=(const Vec2& V);
@@ -62,6 +63,7 @@ struct Vec3
 
 	friend const Vec3 operator+(const Vec3& V1, const Vec3& V2);
 	friend const Vec3 operator-(const Vec3& V1, const Vec3& V2);
+	friend const Vec3 operator-(const Vec3& V1);
 	friend const Vec3 operator*(const Vec3& V1, const Vec3& V2);
 	friend const Vec3 operator/(const Vec3& V1, const Vec3& V2);
 	Vec3& operator+=(const Vec3& V);
@@ -110,6 +112,7 @@ struct Vec4
 
 	friend const Vec4 operator+(const Vec4& V1, const Vec4& V2);
 	friend const Vec4 operator-(const Vec4& V1, const Vec4& V2);
+	friend const Vec4 operator-(const Vec4& V1);
 	friend const Vec4 operator*(const Vec4& V1, const Vec4& V2);
 	friend const Vec4 operator/(const Vec4& V1, const Vec4& V2);
 	Vec4& operator+=(const Vec4& V);
