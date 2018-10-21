@@ -89,7 +89,7 @@ struct Vec3
 	friend const Vec3 Normalized(const Vec3& V);
 	friend const float Dot(const Vec3& V1, const Vec3& V2);
 	friend const Vec3 Cross(const Vec3& V1, const Vec3& V2);
-	friend const Vec3 RotV(const Vec3& V, const Vec3& a, const float degrees);
+	friend const Vec3 RotateVector(const Vec3& V, const Vec3& a, const float degrees);
 
 	 
 };

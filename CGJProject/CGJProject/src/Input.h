@@ -11,6 +11,7 @@ protected:
 	float Up = 0.f;
 
 	struct Vec2 MouseSensitivity = Vec2(50000.f);
+	struct Vec3 MoveSensitivity = Vec3(0.01f);
 
 	struct Vec2 MouseDelta;
 	struct Vec2 PreviousMousePosition;
@@ -27,4 +28,7 @@ public:
 	void mouseMove(int x, int y);
 
 	struct Vec2 GetMouseDelta();
+	float GetForwardAxis() const { return Forward * MoveSensitivity.x; }
+	float GetRightAxis() const { return Right * MoveSensitivity.y; }
+	float GetUpAxis() const { return Up * MoveSensitivity.z; }
 };

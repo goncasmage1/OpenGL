@@ -445,7 +445,7 @@ const Vec3 Cross(const Vec3& V1, const Vec3& V2)
 	return Vec3(V1.y*V2.z - V1.z*V2.y, V1.z*V2.x - V1.x*V2.z, V1.x*V2.y - V1.y*V2.x);
 }
 
-const Vec3 RotV(const Vec3& V, const Vec3 & a, const float degrees)
+const Vec3 RotateVector(const Vec3& V, const Vec3 & a, const float degrees)
 {
 	Vec3 NewVec = (std::cos(degrees*PI) * V) + (std::sin(degrees*PI)*(Cross(a, V))) + (a * (Dot(a, V)) * (1 - std::cos(degrees*PI)));
 	return NewVec;

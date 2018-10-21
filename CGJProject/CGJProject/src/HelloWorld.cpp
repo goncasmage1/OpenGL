@@ -405,19 +405,29 @@ void drawScene()
 	checkOpenGLError("ERROR: Could not draw scene.");
 }
 
-void processInput()
+void processCameraInput()
 {
 	Vec2 MouseDelta = input->GetMouseDelta();
 
 	//std::cout << "Delta: " << MouseDelta.x << "\t" << MouseDelta.y << std::endl;
-	Direction = RotV(Direction, Vec3::Z(), MouseDelta.y);
+	Direction = RotateVector(Direction, Vec3::X(), MouseDelta.y);
+	Direction = RotateVector(Direction, Vec3::Y(), MouseDelta.x);
 	std::cout << Direction << std::endl;
-
-	//Direction.y -= 0.1f;
-	//Offset -= (Direction / 100.f);
 
 	ViewMat = Mat4::ViewMat(Direction, UpVector);
 	ModelMat = Mat4::ScaleMat(Vec3(Offset.Length())) * Mat4::TranslationMat(Offset);
+}
+
+void processMoveInput()
+{
+	Offset += Direction * input->GetForwardAxis();
+	//Offset += RotateVector(Direction) * input->GetForwardAxis();
+}
+
+void processInput()
+{
+	processCameraInput();
+	processMoveInput();
 }
 
 /////////////////////////////////////////////////////////////////////// CALLBACKS
