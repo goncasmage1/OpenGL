@@ -25,6 +25,9 @@ void Input::keyboardButtontDown(unsigned char Key, int x, int y)
 		case 'q':
 			Up -= 1.f;
 			break;
+		case 'p':
+			bUsePerspective = !bUsePerspective;
+			break;
 		case 27:
 			exit(1);
 			break;
@@ -64,17 +67,17 @@ void Input::mouseButton(int button, int state, int x, int y)
 	switch (button)
 	{
 		case GLUT_LEFT_BUTTON:
-			LeftMouseButtonDown = state == GLUT_DOWN;
+			bLeftMouseButtonDown = state == GLUT_DOWN;
 			break;
 		case GLUT_RIGHT_BUTTON:
-			RightMouseButtonDown = state == GLUT_DOWN;
+			bRightMouseButtonDown = state == GLUT_DOWN;
 			break;
 	};
 }
 
 void Input::mouseMove(int x, int y)
 {
-	MouseMoved = true;
+	bMouseMoved = true;
 	MouseDelta.x = x - PreviousMousePosition.x;
 	MouseDelta.y = y - PreviousMousePosition.y;
 
@@ -84,9 +87,9 @@ void Input::mouseMove(int x, int y)
 
 Vec2 Input::GetMouseDelta()
 {
-	if (MouseMoved && RightMouseButtonDown)
+	if (bMouseMoved && bRightMouseButtonDown)
 	{
-		MouseMoved = false;
+		bMouseMoved = false;
 		return MouseDelta * MouseSensitivity;
 	}
 	return Vec2();

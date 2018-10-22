@@ -9,16 +9,16 @@
 //     and brightness.
 //
 // - Add the following functionality:
-//   - Create a View Matrix from (eye, center, up) parameters.
-//   - Create an Orthographic Projection Matrix from (left-right, 
+//   x Create a View Matrix from (eye, center, up) parameters.
+//   x Create an Orthographic Projection Matrix from (left-right, 
 //     bottom-top, near-far) parameters.
-//   - Create a Perspective Projection Matrix from (fovy, aspect,
+//   x Create a Perspective Projection Matrix from (fovy, aspect,
 //     nearZ, farZ) parameters.
 //
 // - Add the following dynamics to the application:
 //   - Create a free 3D camera controlled by the mouse allowing to 
 //     visualize the scene through all its angles.
-//   - Change perspective from orthographic to perspective and back as
+//   x Change perspective from orthographic to perspective and back as
 //     a response to pressing the key 'p'.
 //
 // (c) 2013-18 by Carlos Martinho
@@ -369,8 +369,8 @@ Vec3 Direction = Vec3(1,1,1);
 Vec3 UpVector = Vec3(0,1,0);
 Mat4 ViewMat = Mat4::ViewMat(Direction, UpVector);
 
-Mat4 ProjMat1 = Mat4::OrthographicMat(0.1, 100, -2, 2, -2, 2);
-Mat4 ProjMat2 = Mat4::ProjectionMat(30, 640/480, 0.1, 100);
+Mat4 Orthographic = Mat4::OrthographicMat(1, 100, -2, 2, -2, 2);
+Mat4 Projection = Mat4::ProjectionMat(90, 640/480, 1, 100);
 
 /////////////////////////////////////////////////////////////////////// SCENE
 
@@ -378,7 +378,7 @@ void drawScene()
 {
 	glBindBuffer(GL_UNIFORM_BUFFER, VboId[1]);
 	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), ViewMat.GetData());
-	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(Mat4), sizeof(Mat4), ProjMat1.GetData());
+	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(Mat4), sizeof(Mat4), (input->GetUsePerspective() ? Projection : Orthographic).GetData());
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
 	glBindVertexArray(VaoId);
@@ -409,9 +409,8 @@ void processCameraInput()
 {
 	Vec2 MouseDelta = input->GetMouseDelta();
 
-	//std::cout << "Delta: " << MouseDelta.x << "\t" << MouseDelta.y << std::endl;
-	Direction = RotateVector(Direction, Vec3::X(), MouseDelta.y);
-	Direction = RotateVector(Direction, Vec3::Y(), MouseDelta.x);
+	Direction = RotateVector(Direction, Vec3::X(), -MouseDelta.y);
+	Direction = RotateVector(Direction, Vec3::Y(), -MouseDelta.x);
 	std::cout << Direction << std::endl;
 
 	ViewMat = Mat4::ViewMat(Direction, UpVector);

@@ -16,9 +16,10 @@ protected:
 	struct Vec2 MouseDelta;
 	struct Vec2 PreviousMousePosition;
 
-	uint8_t LeftMouseButtonDown : 1;
-	uint8_t RightMouseButtonDown : 1;
-	uint8_t MouseMoved : 1;
+	uint8_t bLeftMouseButtonDown : 1;
+	uint8_t bRightMouseButtonDown : 1;
+	uint8_t bMouseMoved : 1;
+	uint8_t bUsePerspective : 1;
 
 public:
 
@@ -31,4 +32,5 @@ public:
 	float GetForwardAxis() const { return Forward * MoveSensitivity.x; }
 	float GetRightAxis() const { return Right * MoveSensitivity.y; }
 	float GetUpAxis() const { return Up * MoveSensitivity.z; }
+	bool GetUsePerspective() const { return bUsePerspective; }
 };
