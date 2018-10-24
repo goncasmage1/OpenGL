@@ -370,7 +370,7 @@ Vec3 RightVector = Vec3(1,0,0);
 Vec3 UpVector = Vec3(0,1,0);
 Mat4 ViewMat = Mat4::ViewMat(Direction, UpVector);
 
-Mat4 Orthographic = Mat4::OrthographicMat(1, 100, -2, 2, -2, 2);
+Mat4 Orthographic = Mat4::OrthographicMat(1, 100, -1, 1, -1, 1);
 Mat4 Projection = Mat4::ProjectionMat(90, 640/480, 1, 100);
 
 /////////////////////////////////////////////////////////////////////// SCENE
@@ -420,6 +420,8 @@ void processCameraInput()
 void processMoveInput()
 {
 	Offset += Direction * input->GetForwardAxis();
+	Offset += RightVector * input->GetRightAxis();
+	Offset += UpVector * input->GetUpAxis();
 	//Offset += RotateVector(Direction) * input->GetForwardAxis();
 
 	ModelMat = Mat4::TranslationMat(Offset);
