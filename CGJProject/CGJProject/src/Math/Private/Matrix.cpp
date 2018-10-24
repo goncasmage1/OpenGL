@@ -909,7 +909,7 @@ Mat4 Mat4::ProjectionMat(float fov, float aspect, float n, float f)
 		{
 			{d/aspect, 0, 0, 0},
 			{0, d, 0, 0},
-			{0, 0, (f+n)/(n-f), (2*f*n)/(n-f)},
+			{0, 0, (n+f)/(n-f), (2*f*n)/(n-f)},
 			{0, 0, -1, 0}
 		}
 		}

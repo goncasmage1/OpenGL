@@ -3,8 +3,8 @@
 // Assignment consists in the following:
 //
 // - Create the following changes to your scene:
-//   - Make your TANs double-faced, so they can be seen from both sides.
-//   - The new face of each TAN should share the same hue as the
+//   x Make your TANs double-faced, so they can be seen from both sides.
+//   x The new face of each TAN should share the same hue as the
 //     original top face color but have a different level of saturation 
 //     and brightness.
 //
@@ -16,7 +16,7 @@
 //     nearZ, farZ) parameters.
 //
 // - Add the following dynamics to the application:
-//   - Create a free 3D camera controlled by the mouse allowing to 
+//   x Create a free 3D camera controlled by the mouse allowing to 
 //     visualize the scene through all its angles.
 //   x Change perspective from orthographic to perspective and back as
 //     a response to pressing the key 'p'.
@@ -88,19 +88,19 @@
 	{ { side, side, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },
 
 #define PARALELOGRAM(base, height, offset, color_r, color_g, color_b) \
-	{ { 0.0f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
-	{ { base, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
-	{ { base + offset, height, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
-	{ { 0.0f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
-	{ { base + offset, height, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
-	{ { offset, height, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } },
+	{ { 0.0f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } }, \
+	{ { base, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } }, \
+	{ { base + offset, height, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } }, \
+	{ { 0.0f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } }, \
+	{ { base + offset, height, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } }, \
+	{ { offset, height, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },
 #define PARALELOGRAM_BACK(base, height, offset, color_r, color_g, color_b) \
-	{ { 0.0f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
-	{ { base + offset, height, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
-	{ { base, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
-	{ { 0.0f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
-	{ { offset, height, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } }, \
-	{ { base + offset, height, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f } },
+	{ { 0.0f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } }, \
+	{ { base + offset, height, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } }, \
+	{ { base, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } }, \
+	{ { 0.0f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } }, \
+	{ { offset, height, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } }, \
+	{ { base + offset, height, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },
 
 int WinX = 800, WinY = 800;
 int WindowHandle = 0;
@@ -235,7 +235,7 @@ const Vertex Vertices[] =
 	CENTERED_RIGHT_TRIANGLE_BACK(0.5f, 0.25f, 0.5f, 0.5f, 0.0f)
 	CENTERED_RIGHT_TRIANGLE_BACK(0.5f, 0.25f, 0.5f, 0.0f, 0.5f)
 	SQUARE_BACK(0.25f, 0.f, 0.5f, 0.5f)
-	PARALELOGRAM_BACK(0.35f, 0.175f, 0.175f, 0.1f, 0.1f, 0.1f)
+	PARALELOGRAM_BACK(0.35f, 0.175f, 0.175f, 0.5f, 0.5f, 0.5f)
 	//{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 0 - FRONT
 	//{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 1
 	//{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 2
