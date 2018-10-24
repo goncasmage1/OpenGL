@@ -366,6 +366,7 @@ Vec3 Offset = Vec3(0.5f, 0.5f, 0.5f);
 Mat4 ModelMat = Mat4::IdentityMat();
 
 Vec3 Direction = Vec3(1,1,1);
+Vec3 RightVector = Vec3(1,0,0);
 Vec3 UpVector = Vec3(0,1,0);
 Mat4 ViewMat = Mat4::ViewMat(Direction, UpVector);
 
@@ -409,18 +410,19 @@ void processCameraInput()
 {
 	Vec2 MouseDelta = input->GetMouseDelta();
 
-	Direction = RotateVector(Direction, Vec3::X(), -MouseDelta.y);
-	Direction = RotateVector(Direction, Vec3::Y(), -MouseDelta.x);
-	std::cout << Direction << std::endl;
+	UpVector = RotateVector(UpVector, RightVector, MouseDelta.y);
+	RightVector = RotateVector(RightVector, UpVector, -MouseDelta.x);
+	Direction = Cross(RightVector, UpVector);
 
 	ViewMat = Mat4::ViewMat(Direction, UpVector);
-	ModelMat = Mat4::ScaleMat(Vec3(Offset.Length())) * Mat4::TranslationMat(Offset);
 }
 
 void processMoveInput()
 {
 	Offset += Direction * input->GetForwardAxis();
 	//Offset += RotateVector(Direction) * input->GetForwardAxis();
+
+	ModelMat = Mat4::TranslationMat(Offset);
 }
 
 void processInput()

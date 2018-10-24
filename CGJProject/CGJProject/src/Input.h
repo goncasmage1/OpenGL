@@ -11,7 +11,7 @@ protected:
 	float Up = 0.f;
 
 	struct Vec2 MouseSensitivity = Vec2(50000.f);
-	struct Vec3 MoveSensitivity = Vec3(0.01f);
+	struct Vec3 MoveSensitivity = Vec3(0.04f);
 
 	struct Vec2 MouseDelta;
 	struct Vec2 PreviousMousePosition;
