@@ -419,9 +419,9 @@ void processCameraInput()
 
 void processMoveInput()
 {
-	Offset += Direction * input->GetForwardAxis();
+	Offset -= Direction * input->GetForwardAxis();
 	Offset += RightVector * input->GetRightAxis();
-	Offset += UpVector * input->GetUpAxis();
+	Offset -= UpVector * input->GetUpAxis();
 	//Offset += RotateVector(Direction) * input->GetForwardAxis();
 
 	ModelMat = Mat4::TranslationMat(Offset);

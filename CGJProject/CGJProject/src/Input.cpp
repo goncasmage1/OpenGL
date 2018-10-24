@@ -28,6 +28,9 @@ void Input::keyboardButtontDown(unsigned char Key, int x, int y)
 		case 'p':
 			bUsePerspective = !bUsePerspective;
 			break;
+		case 14:
+			bLeftShiftDown = true;
+			break;
 		case 27:
 			exit(1);
 			break;
@@ -55,6 +58,9 @@ void Input::keyboardButtonUp(unsigned char Key, int x, int y)
 			break;
 		case 'q':
 			Up += 1.f;
+			break;
+		case 14:
+			bLeftShiftDown = false;
 			break;
 		case 27:
 			exit(1);
