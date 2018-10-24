@@ -20,7 +20,6 @@ protected:
 
 	uint8_t bLeftMouseButtonDown : 1;
 	uint8_t bRightMouseButtonDown : 1;
-	uint8_t bLeftShiftDown : 1;
 	uint8_t bMouseMoved : 1;
 	uint8_t bUsePerspective : 1;
 
@@ -32,8 +31,8 @@ public:
 	void mouseMove(int x, int y);
 
 	struct Vec2 GetMouseDelta();
-	float GetForwardAxis() const { return Forward * MoveSensitivity.x * (bLeftShiftDown ? SpeedMultiplier : 1.f); }
-	float GetRightAxis() const { return Right * MoveSensitivity.y * (bLeftShiftDown ? SpeedMultiplier : 1.f); }
-	float GetUpAxis() const { return Up * MoveSensitivity.z * (bLeftShiftDown ? SpeedMultiplier : 1.f); }
-	bool GetUsePerspective() const { return bUsePerspective * (bLeftShiftDown ? SpeedMultiplier : 1.f); }
+	float GetForwardAxis() const { return Forward * MoveSensitivity.x; }
+	float GetRightAxis() const { return Right * MoveSensitivity.y; }
+	float GetUpAxis() const { return Up * MoveSensitivity.z; }
+	bool GetUsePerspective() const { return bUsePerspective; }
 };

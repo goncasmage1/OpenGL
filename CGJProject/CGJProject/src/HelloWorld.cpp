@@ -222,49 +222,61 @@ typedef struct
 
 const Vertex Vertices[] =
 {
-	//SQUARE()
+	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 1.0f, 0.0f, 0.0f)
+	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 0.0f, 1.0f, 0.0f)
+	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 0.0f, 0.0f, 1.0f)
+	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 1.0f, 1.0f, 0.0f)
+	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 1.0f, 0.0f, 1.0f)
+	SQUARE(0.25f, 0.f, 1.f, 1.f)
+	PARALELOGRAM(0.35f, 0.175f, 0.175f, 1.f, 1.f, 1.f)
+	CENTERED_RIGHT_TRIANGLE_BACK(0.5f, 0.25f, 0.5f, 0.0f, 0.0f)
+	CENTERED_RIGHT_TRIANGLE_BACK(0.5f, 0.25f, 0.0f, 0.5f, 0.0f)
+	CENTERED_RIGHT_TRIANGLE_BACK(0.5f, 0.25f, 0.0f, 0.0f, 0.5f)
+	CENTERED_RIGHT_TRIANGLE_BACK(0.5f, 0.25f, 0.5f, 0.5f, 0.0f)
+	CENTERED_RIGHT_TRIANGLE_BACK(0.5f, 0.25f, 0.5f, 0.0f, 0.5f)
+	SQUARE_BACK(0.25f, 0.f, 0.5f, 0.5f)
+	PARALELOGRAM_BACK(0.35f, 0.175f, 0.175f, 0.1f, 0.1f, 0.1f)
+	//{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 0 - FRONT
+	//{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 1
+	//{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 2
+	//{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 2	
+	//{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 3
+	//{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 0
 
-	{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 0 - FRONT
-	{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 1
-	{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 2
-	{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 2	
-	{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 3
-	{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 0
+	//{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 1 - RIGHT
+	//{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 5
+	//{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 6
+	//{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 6	
+	//{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 2
+	//{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 1
 
-	{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 1 - RIGHT
-	{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 5
-	{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 6
-	{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 6	
-	{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 2
-	{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 1
+	//{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 2 - TOP
+	//{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 6
+	//{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 7
+	//{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 7	
+	//{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 3
+	//{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 2
 
-	{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 2 - TOP
-	{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 6
-	{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 7
-	{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 7	
-	{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 3
-	{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 2
+	//{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 5 - BACK
+	//{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 4
+	//{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 7
+	//{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 7	
+	//{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 6
+	//{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 5
 
-	{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 5 - BACK
-	{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 4
-	{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 7
-	{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 7	
-	{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 6
-	{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 5
+	//{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 4 - LEFT
+	//{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 0
+	//{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 3
+	//{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 3	
+	//{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 7
+	//{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 4
 
-	{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 4 - LEFT
-	{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 0
-	{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 3
-	{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 3	
-	{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 7
-	{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 4
-
-	{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 0 - BOTTOM
-	{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 4
-	{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 5
-	{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 5	
-	{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 1
-	{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}  // 0
+	//{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 0 - BOTTOM
+	//{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 4
+	//{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 5
+	//{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 5	
+	//{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 1
+	//{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}  // 0
 };
 
 const std::vector<Mat4> Mats[] = {
@@ -314,9 +326,58 @@ const std::vector<Mat4> Mats[] = {
 	//Paralelogram 1.2
 	{
 		Mat4::RotationMat(Vec3::Z(), -90),
+		Mat4::ScaleMat(1.08),
+		Mat4::TranslationMat(Vec3(-0.375, 0.75, 0)),
+	},
+	//Triangle 1 back
+	{
+		Mat4::RotationMat(Vec3::Z(), 180),
+		Mat4::TranslationMat(Vec3(0.25, 0.5, 0)),
+		Mat4::ScaleMat(1.5),
+	},
+	//Triangle 2 back
+	{
+		Mat4::RotationMat(Vec3::Z(), 90),
+		Mat4::TranslationMat(Vec3(0.25, 0, 0)),
+		Mat4::ScaleMat(1.5),
+	},
+	//Triangle 3 back
+	{
+		Mat4::RotationMat(Vec3::Z(), 135),
+		Mat4::ScaleMat(1.06)
+	},
+	//Triangle 4 back
+	{
+		Mat4::RotationMat(Vec3::Z(), -90),
+		Mat4::ScaleMat(0.75),
+		Mat4::TranslationMat(Vec3(-0.25*0.75, 0.562, 0)),
+	},
+	//Triangle 5 back
+	{
+		Mat4::ScaleMat(0.75),
+	},
+	//Square 1.1 back
+	{
+		Mat4::RotationMat(Vec3::Z(), 45),
+		Mat4::ScaleMat(1.06),
+	},
+	//Square 1.2 back
+	{
+		Mat4::RotationMat(Vec3::Z(), 45),
+		Mat4::ScaleMat(1.06),
+	},
+	//Paralelogram 1.1 back
+	{
+		Mat4::RotationMat(Vec3::Z(), -90),
 		Mat4::ScaleMat(1.07),
 		Mat4::TranslationMat(Vec3(-0.375, 0.75, 0)),
-	}
+	},
+	//Paralelogram 1.2 back
+	{
+		Mat4::RotationMat(Vec3::Z(), -90),
+		Mat4::ScaleMat(1.08),
+		Mat4::TranslationMat(Vec3(-0.375, 0.75, 0)),
+	},
 };
 
 void createBufferObjects()
@@ -370,8 +431,8 @@ Vec3 RightVector = Vec3(1,0,0);
 Vec3 UpVector = Vec3(0,1,0);
 Mat4 ViewMat = Mat4::ViewMat(Direction, UpVector);
 
-Mat4 Orthographic = Mat4::OrthographicMat(1, 100, -1, 1, -1, 1);
-Mat4 Projection = Mat4::ProjectionMat(90, 640/480, 1, 100);
+Mat4 Orthographic = Mat4::OrthographicMat(0.01f, 100, -1, 1, -1, 1);
+Mat4 Projection = Mat4::ProjectionMat(90, 640/480, 0.01f, 100);
 
 /////////////////////////////////////////////////////////////////////// SCENE
 
@@ -388,11 +449,19 @@ void drawScene()
 	GLint UniformId = ShaderProg->GetUniformId("Transformation");
 
 	uint32_t counter = 0;
-	for (int i = 0; i < (sizeof(Vertices) / sizeof(*Vertices)) / 3; i++)
+	//TODO: size = 3??
+	size_t size = Mats->size();
+	for (int i = 0; i < ((sizeof(Vertices) / sizeof(*Vertices)) / 3); i++)
 	{
 		Mat4 Result = Mat4::IdentityMat();
 
-		//if (Mats->size() > i) for (size_t j = 0; j < Mats[i].size(); j++) Result = Mats[i][j] * Result;
+		//if (size > i)
+		{
+			for (size_t j = 0; j < Mats[i].size(); j++)
+			{
+				Result = Mats[i][j] * Result;
+			}
+		}
 
 		glUniformMatrix4fv(UniformId, 1, GL_FALSE, Result.GetData());
 		glUniformMatrix4fv(ShaderProg->GetUniformId("ModelMatrix"), 1, GL_FALSE, ModelMat.GetData());
@@ -422,7 +491,6 @@ void processMoveInput()
 	Offset -= Direction * input->GetForwardAxis();
 	Offset += RightVector * input->GetRightAxis();
 	Offset -= UpVector * input->GetUpAxis();
-	//Offset += RotateVector(Direction) * input->GetForwardAxis();
 
 	ModelMat = Mat4::TranslationMat(Offset);
 }
