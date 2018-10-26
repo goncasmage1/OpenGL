@@ -42,6 +42,7 @@ struct Mat2
 	float Determinant() const;
 	friend const Mat2 Inversed(const Mat2& M);
 	void Inverse();
+	void Clean();
 
 	float* GetData() const;
 
@@ -88,6 +89,7 @@ struct Mat3
 	float Determinant() const;
 	friend const Mat3 Inversed(const Mat3& M);
 	void Inverse();
+	void Clean();
 
 	float* GetData() const;
 
@@ -134,6 +136,7 @@ struct Mat4
 	void Transpose();
 	friend const Mat4 Transposed(const Mat4& M);
 	float Determinant() const;
+	void Clean();
 
 	float* GetData() const;
 

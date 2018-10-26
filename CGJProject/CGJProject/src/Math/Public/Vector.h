@@ -42,6 +42,7 @@ struct Vec2
 	float Length() const;
 	float Quadrance();
 	void Normalize();
+	void Clean();
 	friend const Vec2 Normalized(const Vec2& V);
 	friend const float Dot(const Vec2& V1, const Vec2& V2);
 };
@@ -86,6 +87,7 @@ struct Vec3
 	float Length() const;
 	float Quadrance();
 	void Normalize();
+	void Clean();
 	friend const Vec3 Normalized(const Vec3& V);
 	friend const float Dot(const Vec3& V1, const Vec3& V2);
 	friend const Vec3 Cross(const Vec3& V1, const Vec3& V2);
@@ -135,6 +137,7 @@ struct Vec4
 	float Length() const;
 	float Quadrance();
 	void Normalize();
+	void Clean();
 	friend const Vec4 Normalized(const Vec4& V);
 	friend const float Dot(const Vec4& V1, const Vec4& V2);
 

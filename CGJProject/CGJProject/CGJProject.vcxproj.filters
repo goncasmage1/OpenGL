@@ -27,9 +27,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\HelloWorld.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Math\Private\Matrix.cpp">
       <Filter>Source Files\Math\Private</Filter>
     </ClCompile>
@@ -53,6 +50,12 @@
     </ClCompile>
     <ClCompile Include="src\Camera.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Math\Private\Quaternion.cpp">
+      <Filter>Source Files\Math\Private</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +85,12 @@
     </ClInclude>
     <ClInclude Include="src\Camera.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Math\Public\Quaternion.h">
+      <Filter>Source Files\Math\Public</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

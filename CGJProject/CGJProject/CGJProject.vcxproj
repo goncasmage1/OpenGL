@@ -124,9 +124,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Camera.cpp" />
-    <ClCompile Include="src\HelloWorld.cpp" />
     <ClCompile Include="src\Input.cpp" />
+    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Math\Private\Matrix.cpp" />
+    <ClCompile Include="src\Math\Private\Quaternion.cpp" />
     <ClCompile Include="src\Math\Private\Vector.cpp" />
     <ClCompile Include="src\Shader\FragmentShader.cpp" />
     <ClCompile Include="src\Shader\Shader.cpp" />
@@ -135,9 +136,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Quaternion.h" />
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\Math\Public\Matrix.h" />
+    <ClInclude Include="src\Math\Public\Quaternion.h" />
     <ClInclude Include="src\Math\Public\Vector.h" />
     <ClInclude Include="src\Shader\FragmentShader.h" />
     <ClInclude Include="src\Shader\Shader.h" />

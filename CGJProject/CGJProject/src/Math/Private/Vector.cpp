@@ -140,12 +140,13 @@ Vec2 & Vec2::operator*=(const float & F)
 }
 const bool operator==(const Vec2 & V1, const Vec2 & V2)
 {
-	for (int i = 0; i < 2; i++) if ((V1[i] - V2[i]) > TOLERANCE) return false;
+	for (int i = 0; i < 2; i++) if (std::abs(V1[i] - V2[i]) > TOLERANCE) return false;
 	return true;
 }
 const bool operator!=(const Vec2 & V1, const Vec2 & V2)
 {
-	return (V1.x != V2.x || V1.y != V2.y);
+	for (int i = 0; i < 2; i++) if (std::abs(V1[i] - V2[i]) > TOLERANCE) return true;
+	return false;
 }
 std::ostream & operator<<(std::ostream & os, const Vec2 & V)
 {
@@ -196,6 +197,12 @@ void Vec2::Normalize()
 	float len = Length();
 	x /= len;
 	y /= len;
+}
+
+void Vec2::Clean()
+{
+	x = x <= TOLERANCE ? 0.f : x;
+	y = y <= TOLERANCE ? 0.f : y;
 }
 
 const Vec2 Normalized(const Vec2& V)
@@ -365,12 +372,13 @@ Vec3& Vec3::operator*=(const float& F)
 }
 const bool operator==(const Vec3 & V1, const Vec3 & V2)
 {
-	for (int i = 0; i < 3; i++) if ((V1[i] - V2[i]) > TOLERANCE) return false;
+	for (int i = 0; i < 3; i++) if (std::abs(V1[i] - V2[i]) > TOLERANCE) return false;
 	return true;
 }
 const bool operator!=(const Vec3 & V1, const Vec3 & V2)
 {
-	return (V1.x != V2.x || V1.y != V2.y || V1.z != V2.z);
+	for (int i = 0; i < 3; i++) if (std::abs(V1[i] - V2[i]) > TOLERANCE) return true;
+	return false;
 }
 std::ostream & operator<<(std::ostream & os, const Vec3 & V)
 {
@@ -422,6 +430,13 @@ void Vec3::Normalize()
 	x /= len;
 	y /= len;
 	z /= len;
+}
+
+void Vec3::Clean()
+{
+	x = x <= TOLERANCE ? 0.f : x;
+	y = y <= TOLERANCE ? 0.f : y;
+	z = z <= TOLERANCE ? 0.f : z;
 }
 
 const Vec3 Normalized(const Vec3& V)
@@ -621,12 +636,13 @@ Vec4& Vec4::operator*=(const float& F)
 }
 const bool operator==(const Vec4 & V1, const Vec4 & V2)
 {
-	for (int i = 0; i < 4; i++) if ((V1[i] - V2[i]) > TOLERANCE) return false;
+	for (int i = 0; i < 4; i++) if (std::abs(V1[i] - V2[i]) > TOLERANCE) return false;
 	return true;
 }
 const bool operator!=(const Vec4 & V1, const Vec4 & V2)
 {
-	return (V1.x != V2.x || V1.y != V2.y || V1.z != V2.z || V1.w != V2.w);
+	for (int i = 0; i < 4; i++) if (std::abs(V1[i] - V2[i]) > TOLERANCE) return true;
+	return false;
 }
 std::ostream & operator<<(std::ostream & os, const Vec4 & V)
 {
@@ -681,6 +697,14 @@ void Vec4::Normalize()
 	y /= len;
 	z /= len;
 	w /= len;
+}
+
+void Vec4::Clean()
+{
+	x = x <= TOLERANCE ? 0.f : x;
+	y = y <= TOLERANCE ? 0.f : y;
+	z = z <= TOLERANCE ? 0.f : z;
+	w = w <= TOLERANCE ? 0.f : w;
 }
 
 const Vec4 Normalized(const Vec4& V)

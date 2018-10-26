@@ -35,8 +35,7 @@
 #include "GL/glew.h"
 #include "GL/freeglut.h"
 
-#include "Math/Public/Vector.h"
-#include "Math/Public/Matrix.h"
+#include "Math/Public/Quaternion.h"
 #include "Shader/ShaderProgram.h"
 #include "Input.h"
 #include "Camera.h"

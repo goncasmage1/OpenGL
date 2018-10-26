@@ -142,18 +142,22 @@ const bool operator==(const Mat2 & M1, const Mat2 & M2)
 	{
 		for (int j = 0; j < 2; j++)
 		{
-			if ((M1[i][j] - M2[i][j]) > TOLERANCE) return false;
+			if (std::abs(M1[i][j] - M2[i][j]) > TOLERANCE) return false;
 		}
 	}
-
 	return true;
 }
 
 const bool operator!=(const Mat2 & M1, const Mat2 & M2)
 {
-	return (M1[0] != M2[0] ||
-			M1[1] != M2[1]
-			);
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 2; j++)
+		{
+			if (std::abs(M1[i][j] - M2[i][j]) > TOLERANCE) return true;
+		}
+	}
+	return false;
 }
 
 std::string Mat2::ToString() const
@@ -213,6 +217,17 @@ const Mat2 Inversed(const Mat2& M)
 void Mat2::Inverse()
 {
 	values = Inversed(*this).values;
+}
+
+void Mat2::Clean()
+{
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 2; j++)
+		{
+			if (std::abs(values[i][j]) <= TOLERANCE) values[i][j] = 0.f;
+		}
+	}
 }
 
 float * Mat2::GetData() const
@@ -401,19 +416,22 @@ const bool operator==(const Mat3 & M1, const Mat3 & M2)
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			if ((M1[i][j] - M2[i][j]) > TOLERANCE) return false;
+			if (std::abs(M1[i][j] - M2[i][j]) > TOLERANCE) return false;
 		}
 	}
-
 	return true;
 }
 
 const bool operator!=(const Mat3 & M1, const Mat3 & M2)
 {
-	return (M1[0] != M2[0] ||
-			M1[1] != M2[1] ||
-			M1[2] != M2[2]
-			);
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			if (std::abs(M1[i][j] - M2[i][j]) > TOLERANCE) return true;
+		}
+	}
+	return false;
 }
 
 std::string Mat3::ToString() const
@@ -469,6 +487,17 @@ float Mat3::Determinant() const
 void Mat3::Inverse()
 {
 	values = Inversed(*this).values;
+}
+
+void Mat3::Clean()
+{
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			if (std::abs(values[i][j]) <= TOLERANCE) values[i][j] = 0.f;
+		}
+	}
 }
 
 const Mat3 Inversed(const Mat3& M)
@@ -741,20 +770,22 @@ const bool operator==(const Mat4 & M1, const Mat4 & M2)
 	{
 		for (int j = 0; j < 4; j++)
 		{
-			if ((M1[i][j] - M2[i][j]) > TOLERANCE) return false;
+			if (std::abs(M1[i][j] - M2[i][j]) > TOLERANCE) return false;
 		}
 	}
-
 	return true;
 }
 
 const bool operator!=(const Mat4 & M1, const Mat4 & M2)
 {
-	return (M1[0] != M2[0] ||
-			M1[1] != M2[1] ||
-			M1[2] != M2[2] ||
-			M1[3] != M2[3]
-			);
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			if (std::abs(M1[i][j] - M2[i][j]) > TOLERANCE) return true;
+		}
+	}
+	return false;
 }
 
 std::string Mat4::ToString() const
@@ -807,6 +838,17 @@ float Mat4::Determinant() const
 			values[0][1] * values[1][0] * values[2][2] -
 			values[0][0] * values[1][2] * values[2][1]
 			);
+}
+
+void Mat4::Clean()
+{
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			if (std::abs(values[i][j]) <= TOLERANCE) values[i][j] = 0.f;
+		}
+	}
 }
 
 float* Mat4::GetData() const
