@@ -1,6 +1,9 @@
 #include "../Public/Vector.h"
+#include "../Public/Quaternion.h"
 #include <sstream>
 
+#define DEGREES_TO_RADIANS 0.01745329251994329547
+#define RADIANS_TO_DEGREES 57.29577951308232185913
 #define PI 3.14159265358979323846f
 #define TOLERANCE 0.00000001f
 
@@ -722,4 +725,16 @@ const Vec4 Normalized(const Vec4& V)
 const float Dot(const Vec4& V1, const Vec4& V2)
 {
 	return (V1.x*V2.x + V1.y*V2.y + V1.z*V2.z + V1.w*V2.w);
+}
+
+const Quat FromAngleAxis(const Vec4 & axis, float degrees)
+{
+	Vec4 normalizedAxis = Normalized(axis);
+	float a = degrees * (float)DEGREES_TO_RADIANS;
+	float s = std::sin(a / 2.0f);
+
+	Quat q = Quat(std::cos(a / 2.0f), normalizedAxis.x * s, normalizedAxis.y * s, normalizedAxis.z * s);
+	q.Clean();
+
+	return Normalized(q);
 }

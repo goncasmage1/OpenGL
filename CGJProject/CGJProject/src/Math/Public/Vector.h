@@ -92,7 +92,6 @@ struct Vec3
 	friend const float Dot(const Vec3& V1, const Vec3& V2);
 	friend const Vec3 Cross(const Vec3& V1, const Vec3& V2);
 	friend const Vec3 RotateVector(const Vec3& V, const Vec3& a, const float degrees);
-
 	 
 };
 
@@ -140,5 +139,6 @@ struct Vec4
 	void Clean();
 	friend const Vec4 Normalized(const Vec4& V);
 	friend const float Dot(const Vec4& V1, const Vec4& V2);
+	friend const struct Quat FromAngleAxis(const Vec4& axis, float degrees);
 
 };

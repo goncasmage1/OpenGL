@@ -7,17 +7,17 @@
 #define RADIANS_TO_DEGREES 57.29577951308232185913
 #define TOLERANCE 0.00000001f
 
-Quaternion::Quaternion()
+Quat::Quat()
 {
 	t = x = y = z = 0.f;
 }
 
-Quaternion::Quaternion(float val)
+Quat::Quat(float val)
 {
 	t = x = y = z = val;
 }
 
-Quaternion::Quaternion(float newX, float newY, float newZ)
+Quat::Quat(float newX, float newY, float newZ)
 {
 	x = newX;
 	y = newY;
@@ -25,7 +25,7 @@ Quaternion::Quaternion(float newX, float newY, float newZ)
 	t = 0.f;
 }
 
-Quaternion::Quaternion(float newT, float newX, float newY, float newZ)
+Quat::Quat(float newT, float newX, float newY, float newZ)
 {
 	t = newT;
 	x = newX;
@@ -33,14 +33,14 @@ Quaternion::Quaternion(float newT, float newX, float newY, float newZ)
 	z = newZ;
 }
 
-Quaternion::Quaternion(Vec3 V)
+Quat::Quat(Vec3 V)
 {
 	x = V.x;
 	y = V.y;
 	z = V.z;
 }
 
-Quaternion::Quaternion(Vec4 V)
+Quat::Quat(Vec4 V)
 {
 	x = V.x;
 	y = V.y;
@@ -48,7 +48,7 @@ Quaternion::Quaternion(Vec4 V)
 	t = V.w;
 }
 
-Quaternion::Quaternion(const Quaternion & Q)
+Quat::Quat(const Quat & Q)
 {
 	x = Q.x;
 	y = Q.y;
@@ -56,30 +56,30 @@ Quaternion::Quaternion(const Quaternion & Q)
 	t = Q.t;
 }
 
-const Quaternion operator+(const Quaternion & Q1, const Quaternion & Q2)
+const Quat operator+(const Quat & Q1, const Quat & Q2)
 {
-	return Quaternion(Q1.t + Q2.t, Q1.x + Q2.x, Q1.y + Q2.y, Q1.z + Q2.z);
+	return Quat(Q1.t + Q2.t, Q1.x + Q2.x, Q1.y + Q2.y, Q1.z + Q2.z);
 }
 
-const Quaternion operator-(const Quaternion & Q1, const Quaternion & Q2)
+const Quat operator-(const Quat & Q1, const Quat & Q2)
 {
-	return Quaternion(Q1.t - Q2.t, Q1.x - Q2.x, Q1.y - Q2.y, Q1.z - Q2.z);
+	return Quat(Q1.t - Q2.t, Q1.x - Q2.x, Q1.y - Q2.y, Q1.z - Q2.z);
 }
 
-const Quaternion operator-(const Quaternion & Q1)
+const Quat operator-(const Quat & Q1)
 {
-	return Quaternion(-Q1.t, -Q1.x, -Q1.y, -Q1.z);
+	return Quat(-Q1.t, -Q1.x, -Q1.y, -Q1.z);
 }
 
-const Quaternion operator*(const Quaternion & Q1, const Quaternion & Q2)
+const Quat operator*(const Quat & Q1, const Quat & Q2)
 {
-	return Quaternion(Q1.t * Q2.t - Q1.x * Q2.x - Q1.y * Q2.y - Q1.z * Q2.z,
+	return Quat(Q1.t * Q2.t - Q1.x * Q2.x - Q1.y * Q2.y - Q1.z * Q2.z,
 					  Q1.t * Q2.x - Q1.x * Q2.x - Q1.y * Q2.z - Q1.z * Q2.y,
 					  Q1.t * Q2.y - Q1.y * Q2.x - Q1.z * Q2.x - Q1.x * Q2.z,
 					  Q1.t * Q2.z - Q1.z * Q2.x - Q1.x * Q2.y - Q1.y * Q2.x );
 }
 
-Quaternion & Quaternion::operator+=(const Quaternion & Q)
+Quat & Quat::operator+=(const Quat & Q)
 {
 	t += Q.t;
 	x += Q.x;
@@ -88,7 +88,7 @@ Quaternion & Quaternion::operator+=(const Quaternion & Q)
 	return *this;
 }
 
-Quaternion & Quaternion::operator-=(const Quaternion & Q)
+Quat & Quat::operator-=(const Quat & Q)
 {
 	t -= Q.t;
 	x -= Q.x;
@@ -97,7 +97,7 @@ Quaternion & Quaternion::operator-=(const Quaternion & Q)
 	return *this;
 }
 
-Quaternion & Quaternion::operator*=(const Quaternion & Q)
+Quat & Quat::operator*=(const Quat & Q)
 {
 	t = t * Q.t - x * Q.x - y * Q.y - z * Q.z;
 	x = t * Q.x - x * Q.x - y * Q.z - z * Q.y;
@@ -106,17 +106,17 @@ Quaternion & Quaternion::operator*=(const Quaternion & Q)
 	return *this;
 }
 
-const Quaternion operator*(const Quaternion & Q, const float & F)
+const Quat operator*(const Quat & Q, const float & F)
 {
-	return Quaternion(Q.t * F, Q.x * F, Q.y * F, Q.z * F);
+	return Quat(Q.t * F, Q.x * F, Q.y * F, Q.z * F);
 }
 
-const Quaternion operator*(const float & F, const Quaternion & Q)
+const Quat operator*(const float & F, const Quat & Q)
 {
-	return Quaternion(Q.t * F, Q.x * F, Q.y * F, Q.z * F);
+	return Quat(Q.t * F, Q.x * F, Q.y * F, Q.z * F);
 }
 
-Quaternion & Quaternion::operator*=(const float & F)
+Quat & Quat::operator*=(const float & F)
 {
 	t *= F;
 	x *= F;
@@ -125,7 +125,7 @@ Quaternion & Quaternion::operator*=(const float & F)
 	return *this;
 }
 
-float Quaternion::operator[](int row) const
+float Quat::operator[](int row) const
 {
 	switch (row)
 	{
@@ -142,80 +142,80 @@ float Quaternion::operator[](int row) const
 	}
 }
 
-std::string Quaternion::ToString() const
+std::string Quat::ToString() const
 {
 	std::ostringstream oss;
 	oss << "(" << t << "," << x << "," << y << "," << z << ")" << std::endl;
 	return oss.str();
 }
 
-const bool operator==(const Quaternion & Q1, const Quaternion & Q2)
+const bool operator==(const Quat & Q1, const Quat & Q2)
 {
 	for (int i = 0; i < 4; i++) if (std::abs(Q1[i] - Q2[i]) > TOLERANCE) return false;
 	return true;
 }
 
-const bool operator!=(const Quaternion & Q1, const Quaternion & Q2)
+const bool operator!=(const Quat & Q1, const Quat & Q2)
 {
 	for (int i = 0; i < 4; i++) if (std::abs(Q1[i] - Q2[i]) > TOLERANCE) return true;
 	return false;
 }
 
-std::ostream & operator<<(std::ostream & os, const Quaternion & Q)
+std::ostream & operator<<(std::ostream & os, const Quat & Q)
 {
 	os << Q.ToString();
 	return os;
 }
 
-std::istream & operator>>(std::istream & is, Quaternion & Q)
+std::istream & operator>>(std::istream & is, Quat & Q)
 {
 	is >> Q.t >> Q.x >> Q.y >> Q.z;
 	return is;
 }
 
-const Quaternion Normalized(const Quaternion & Q)
+const Quat Normalized(const Quat & Q)
 {
 	return (Q * (1 / Q.Length()));
 }
 
-const Quaternion Conjugated(const Quaternion & Q)
+const Quat Conjugated(const Quat & Q)
 {
-	return Quaternion(Q.t, -Q.x, -Q.y, -Q.z);
+	return Quat(Q.t, -Q.x, -Q.y, -Q.z);
 }
 
-const Quaternion Inversed(const Quaternion & Q)
+const Quat Inversed(const Quat & Q)
 {
 	return (Conjugated(Q) * (1 / Q.Quadrance()));
 }
 
-void Quaternion::Normalize()
+void Quat::Normalize()
 {
-	Quaternion norm = Normalized(*this);
+	Quat norm = Normalized(*this);
 	t = norm.t;
 	x = norm.x;
 	y = norm.y;
 	z = norm.z;
 }
 
-void Quaternion::Conjugate()
+void Quat::Conjugate()
 {
-	Quaternion conj = Conjugated(*this);
+	Quat conj = Conjugated(*this);
 	t = conj.t;
 	x = conj.x;
 	y = conj.y;
 	z = conj.z;
 }
 
-void Quaternion::Inverse()
+void Quat::Inverse()
 {
-	Quaternion inv = Inversed(*this);
+	Quat inv = Inversed(*this);
 	t = inv.t;
 	x = inv.x;
 	y = inv.y;
 	z = inv.z;
 }
 
-void Quaternion::Clean()
+void Quat::Clean()
 {
 	t = t <= TOLERANCE ? 0.f : t;
 	x = x <= TOLERANCE ? 0.f : x;
@@ -223,31 +223,19 @@ void Quaternion::Clean()
 	z = z <= TOLERANCE ? 0.f : z;
 }
 
-float Quaternion::Length() const
+float Quat::Length() const
 {
 	return std::sqrt(Quadrance());
 }
 
-float Quaternion::Quadrance() const
+float Quat::Quadrance() const
 {
 	return t*t + x*x + y*y + z*z;
 }
 
-const Quaternion FromAngleAxis(const Vec4 & axis, float degrees)
+const Vec4 ToAngleAxis(const Quat & Q, float degrees)
 {
-	Vec4 normalizedAxis = Normalized(axis);
-	float a = degrees * (float)DEGREES_TO_RADIANS;
-	float s = std::sin(a / 2.0f);
-
-	Quaternion q = Quaternion(std::cos(a / 2.0f), normalizedAxis.x * s, normalizedAxis.y * s, normalizedAxis.z * s);
-	q.Clean();
-
-	return Normalized(q);
-}
-
-const Vec4 ToAngleAxis(const Quaternion & Q, float degrees)
-{
-	Quaternion quat = Normalized(Q);
+	Quat quat = Normalized(Q);
 	Vec4 axis = Vec4();
 	degrees = 2.0f * std::acos(quat.t) * (float)RADIANS_TO_DEGREES;
 	float s = std::sqrt(1.0f - quat.t * quat.t);
@@ -269,9 +257,9 @@ const Vec4 ToAngleAxis(const Quaternion & Q, float degrees)
 	return axis;
 }
 
-Mat4 Quaternion::GetMatrix()
+Mat4 Quat::GetMatrix()
 {
-	Quaternion qn = Normalized(*this);
+	Quat qn = Normalized(*this);
 
 	float xx = qn.x * qn.x;
 	float xy = qn.x * qn.y;
@@ -310,20 +298,20 @@ Mat4 Quaternion::GetMatrix()
 	return matrix;
 }
 
-const Quaternion Lerp(const Quaternion & Q1, const Quaternion & Q2, float alpha)
+const Quat Lerp(const Quat & Q1, const Quat & Q2, float alpha)
 {
 	float angle = Q1.t * Q2.t + Q1.x * Q2.x + Q1.y * Q2.y + Q1.z * Q2.z;
 	float a1 = 1.f - alpha;
 	float a2 = angle > 0 ? alpha : -alpha;
 
-	return Normalized(Quaternion(Q1*a1) + Quaternion(Q2*a2));
+	return Normalized(Quat(Q1*a1) + Quat(Q2*a2));
 }
 
-const Quaternion Slerp(const Quaternion & Q1, const Quaternion & Q2, float alpha)
+const Quat Slerp(const Quat & Q1, const Quat & Q2, float alpha)
 {
 	float angle = std::acos(Q1.t * Q2.t + Q1.x * Q2.x + Q1.y * Q2.y + Q1.z * Q2.z);
 	float a1 = std::sin((1-alpha)*angle) / std::sin(angle);
 	float a2 = std::sin(alpha*angle) / std::sin(angle);
 
-	return Normalized(Quaternion(Q1*a1) + Quaternion(Q2*a2));
+	return Normalized(Quat(Q1*a1) + Quat(Q2*a2));
 }

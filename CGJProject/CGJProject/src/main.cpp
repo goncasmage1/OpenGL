@@ -31,10 +31,13 @@
 #include <string>
 #include <vector>
 #include <ctime>
+#include <cassert>
 
 #include "GL/glew.h"
 #include "GL/freeglut.h"
 
+#include "Math/Public/Vector.h"
+#include "Math/Public/Matrix.h"
 #include "Math/Public/Quaternion.h"
 #include "Shader/ShaderProgram.h"
 #include "Input.h"
@@ -623,10 +626,25 @@ void init(int argc, char* argv[])
 int main(int argc, char* argv[])
 {
 	init(argc, argv);
-	glutMainLoop();
-	std::cout << std::endl << "Press <return>.";
-	std::cin.ignore(1);
+	//glutMainLoop();
+
+	Quat q = FromAngleAxis(Vec4(0.0f, 1.0f, 0.0f, 1.0f), 90.0f);
+	std::cout << "q " << q << std::endl;
+
+	Quat vi = { 0.0f, 7.0f, 0.0f, 0.0f };
+	std::cout << "vi " << vi << std::endl;
+
+	Quat qe = { 0.0f, 0.0f, 0.0f, -7.0f };
+	std::cout << "qe " << qe << std::endl;
+
+	Quat qinv = Inversed(q);
+	qinv.Clean();
+	std::cout << "qinv " << qinv << std::endl;
+
+	Quat qf = (q * vi) * qinv;
+	std::cout << "qf " << qf << std::endl;
+
+	assert(qf == qe);
+
 	exit(EXIT_SUCCESS);
 }
-
-///////////////////////////////////////////////////////////////////////

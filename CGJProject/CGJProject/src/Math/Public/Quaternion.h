@@ -2,33 +2,33 @@
 #include <iostream>
 #include <string>
 
-struct Quaternion
+struct Quat
 {
 	float t, x, y, z;
 
-	Quaternion();
-	Quaternion(float val);
-	Quaternion(float newX, float newY, float newZ);
-	Quaternion(float newT, float newX, float newY, float newZ);
-	Quaternion(struct Vec3 V);
-	Quaternion(struct Vec4 V);
-	Quaternion(const Quaternion& Q);
+	Quat();
+	Quat(float val);
+	Quat(float newX, float newY, float newZ);
+	Quat(float newT, float newX, float newY, float newZ);
+	Quat(struct Vec3 V);
+	Quat(struct Vec4 V);
+	Quat(const Quat& Q);
 
-	friend const Quaternion operator+(const Quaternion& Q1, const Quaternion& Q2);
-	friend const Quaternion operator-(const Quaternion& Q1, const Quaternion& Q2);
-	friend const Quaternion operator-(const Quaternion& Q1);
-	friend const Quaternion operator*(const Quaternion& Q1, const Quaternion& Q2);
-	Quaternion& operator+=(const Quaternion& Q);
-	Quaternion& operator-=(const Quaternion& Q);
-	Quaternion& operator*=(const Quaternion& Q);
-	friend const Quaternion operator*(const Quaternion& Q, const float& F);
-	friend const Quaternion operator*(const float& F, const Quaternion& Q);
-	Quaternion& operator*=(const float& F);
-	friend const bool operator==(const Quaternion& Q1, const Quaternion& Q2);
-	friend const bool operator!=(const Quaternion& Q1, const Quaternion& Q2);
+	friend const Quat operator+(const Quat& Q1, const Quat& Q2);
+	friend const Quat operator-(const Quat& Q1, const Quat& Q2);
+	friend const Quat operator-(const Quat& Q1);
+	friend const Quat operator*(const Quat& Q1, const Quat& Q2);
+	Quat& operator+=(const Quat& Q);
+	Quat& operator-=(const Quat& Q);
+	Quat& operator*=(const Quat& Q);
+	friend const Quat operator*(const Quat& Q, const float& F);
+	friend const Quat operator*(const float& F, const Quat& Q);
+	Quat& operator*=(const float& F);
+	friend const bool operator==(const Quat& Q1, const Quat& Q2);
+	friend const bool operator!=(const Quat& Q1, const Quat& Q2);
 
-	friend std::ostream& operator<<(std::ostream& os, const Quaternion& Q);
-	friend std::istream& operator>>(std::istream& is, Quaternion& Q);
+	friend std::ostream& operator<<(std::ostream& os, const Quat& Q);
+	friend std::istream& operator>>(std::istream& is, Quat& Q);
 
 	float operator[](int row) const;
 
@@ -40,15 +40,14 @@ struct Quaternion
 	void Clean();
 	float Length() const;
 	float Quadrance() const;
+		
+	friend const Quat Normalized(const Quat& Q);
+	friend const Quat Conjugated(const Quat& Q);
+	friend const Quat Inversed(const Quat& Q);
+	friend const struct Vec4 ToAngleAxis(const Quat& Q, float degrees);
 
-	friend const Quaternion Normalized(const Quaternion& Q);
-	friend const Quaternion Conjugated(const Quaternion& Q);
-	friend const Quaternion Inversed(const Quaternion& Q);
-	friend const Quaternion FromAngleAxis(const struct Vec4& axis, float degrees);
-	friend const struct Vec4 ToAngleAxis(const Quaternion& Q, float degrees);
-
-	friend const Quaternion Lerp(const Quaternion& Q1, const Quaternion& Q2, float alpha);
-	friend const Quaternion Slerp(const Quaternion& Q1, const Quaternion& Q2, float alpha);
+	friend const Quat Lerp(const Quat& Q1, const Quat& Q2, float alpha);
+	friend const Quat Slerp(const Quat& Q1, const Quat& Q2, float alpha);
 
 };
 
