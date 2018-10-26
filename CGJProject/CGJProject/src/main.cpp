@@ -192,6 +192,8 @@ static void checkOpenGLError(std::string error)
 	if (isOpenGLError())
 	{
 		std::cerr << error << std::endl;
+		std::cout << std::endl << "Press <return>.";
+		std::cin.ignore(1);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -622,6 +624,8 @@ int main(int argc, char* argv[])
 {
 	init(argc, argv);
 	glutMainLoop();
+	std::cout << std::endl << "Press <return>.";
+	std::cin.ignore(1);
 	exit(EXIT_SUCCESS);
 }
 
