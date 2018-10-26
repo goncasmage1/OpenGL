@@ -6,6 +6,7 @@ class Input
 {
 protected:
 
+	struct Vec3 movement = Vec3(0.f);
 	float Forward = 0.f;
 	float Right = 0.f;
 	float Up = 0.f;
@@ -31,8 +32,6 @@ public:
 	void mouseMove(int x, int y);
 
 	struct Vec2 GetMouseDelta();
-	float GetForwardAxis() const { return Forward * MoveSensitivity.x; }
-	float GetRightAxis() const { return Right * MoveSensitivity.y; }
-	float GetUpAxis() const { return Up * MoveSensitivity.z; }
+	struct Vec3 GetMovement() { return movement * MoveSensitivity; }
 	bool GetUsePerspective() const { return bUsePerspective; }
 };

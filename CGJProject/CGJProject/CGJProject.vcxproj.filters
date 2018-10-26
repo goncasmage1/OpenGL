@@ -51,6 +51,9 @@
     <ClCompile Include="src\Input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Math\Public\Matrix.h">
@@ -72,6 +75,12 @@
       <Filter>Source Files\Shader</Filter>
     </ClInclude>
     <ClInclude Include="src\Input.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Camera.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

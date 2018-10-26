@@ -893,7 +893,7 @@ Mat4 Mat4::OrthographicMat(float n, float f, float b, float t, float r, float l)
 		{
 			{2/(r-l), 0, 0, (l+r)/(l-r)},
 			{0, 2/(t-b), 0, (b+t)/(b-t)},
-			{0, 0, -2/(f-n), (n+r)/(n-f)},
+			{0, 0, 2/(f-n), (n+r)/(n-f)},
 			{0, 0, 0, 1}
 		}
 		}

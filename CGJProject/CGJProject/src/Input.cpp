@@ -1,4 +1,5 @@
 #include "Input.h"
+#include "Math/Public/Vector.h"
 
 #include "GL/glew.h"
 #include "GL/freeglut.h"
@@ -8,22 +9,22 @@ void Input::keyboardButtontDown(unsigned char Key, int x, int y)
 	switch (Key)
 	{
 		case 'w': 
-			Forward += 1.f;
+			movement.z += 1.f;
 			break;
 		case 's':
-			Forward -= 1.f;
+			movement.z -= 1.f;
 			break;
 		case 'd':
-			Right += 1.f;
+			movement.x += 1.f;
 			break;
 		case 'a':
-			Right -= 1.f;
+			movement.x -= 1.f;
 			break;
 		case 'e':
-			Up += 1.f;
+			movement.y += 1.f;
 			break;
 		case 'q':
-			Up -= 1.f;
+			movement.y -= 1.f;
 			break;
 		case 'p':
 			bUsePerspective = !bUsePerspective;
@@ -39,22 +40,22 @@ void Input::keyboardButtonUp(unsigned char Key, int x, int y)
 	switch (Key)
 	{
 		case 'w':
-			Forward -= 1.f;
+			movement.z -= 1.f;
 			break;
 		case 's':
-			Forward += 1.f;
+			movement.z += 1.f;
 			break;
 		case 'd':
-			Right -= 1.f;
+			movement.x -= 1.f;
 			break;
 		case 'a':
-			Right += 1.f;
+			movement.x += 1.f;
 			break;
 		case 'e':
-			Up -= 1.f;
+			movement.y -= 1.f;
 			break;
 		case 'q':
-			Up += 1.f;
+			movement.y += 1.f;
 			break;
 		case 27:
 			exit(1);

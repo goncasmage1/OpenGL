@@ -39,6 +39,7 @@
 #include "Math/Public/Matrix.h"
 #include "Shader/ShaderProgram.h"
 #include "Input.h"
+#include "Camera.h"
 
 #define CAPTION "Hello Modern 2D World"
 
@@ -110,6 +111,7 @@ GLuint VaoId, VboId[2];
 
 std::shared_ptr<ShaderProgram> ShaderProg = nullptr;
 std::shared_ptr<Input> input = std::make_shared<Input>();
+std::shared_ptr<Camera> camera = std::make_shared<Camera>();
 
 /////////////////////////////////////////////////////////////////////// ERRORS
 
@@ -423,24 +425,13 @@ void destroyBufferObjects()
 	checkOpenGLError("ERROR: Could not destroy VAOs and VBOs.");
 }
 
-Vec3 Offset = Vec3(0.5f, 0.5f, 0.5f);
-Mat4 ModelMat = Mat4::IdentityMat();
-
-Vec3 Direction = Vec3(1,1,1);
-Vec3 RightVector = Vec3(1,0,0);
-Vec3 UpVector = Vec3(0,1,0);
-Mat4 ViewMat = Mat4::ViewMat(Direction, UpVector);
-
-Mat4 Orthographic = Mat4::OrthographicMat(0.01f, 100, -1, 1, -1, 1);
-Mat4 Projection = Mat4::ProjectionMat(90, 640/480, 0.01f, 100);
-
 /////////////////////////////////////////////////////////////////////// SCENE
 
 void drawScene()
 {
 	glBindBuffer(GL_UNIFORM_BUFFER, VboId[1]);
-	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), ViewMat.GetData());
-	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(Mat4), sizeof(Mat4), (input->GetUsePerspective() ? Projection : Orthographic).GetData());
+	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), camera->GetViewMatrix().GetData());
+	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(Mat4), sizeof(Mat4), camera->GetProjectionMatrix(input->GetUsePerspective()).GetData());
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
 	glBindVertexArray(VaoId);
@@ -464,7 +455,7 @@ void drawScene()
 		}
 
 		glUniformMatrix4fv(UniformId, 1, GL_FALSE, Result.GetData());
-		glUniformMatrix4fv(ShaderProg->GetUniformId("ModelMatrix"), 1, GL_FALSE, ModelMat.GetData());
+		glUniformMatrix4fv(ShaderProg->GetUniformId("ModelMatrix"), 1, GL_FALSE, camera->GetModelMatrix().GetData());
 		glDrawArrays(GL_TRIANGLES, counter, 3);
 		counter += 3;
 	}
@@ -475,30 +466,10 @@ void drawScene()
 	checkOpenGLError("ERROR: Could not draw scene.");
 }
 
-void processCameraInput()
-{
-	Vec2 MouseDelta = input->GetMouseDelta();
-
-	UpVector = RotateVector(UpVector, RightVector, MouseDelta.y);
-	RightVector = RotateVector(RightVector, UpVector, -MouseDelta.x);
-	Direction = Cross(RightVector, UpVector);
-
-	ViewMat = Mat4::ViewMat(Direction, UpVector);
-}
-
-void processMoveInput()
-{
-	Offset -= Direction * input->GetForwardAxis();
-	Offset += RightVector * input->GetRightAxis();
-	Offset -= UpVector * input->GetUpAxis();
-
-	ModelMat = Mat4::TranslationMat(Offset);
-}
-
 void processInput()
 {
-	processCameraInput();
-	processMoveInput();
+	camera->RotateCamera(input->GetMouseDelta());
+	camera->MoveCamera(input->GetMovement());
 }
 
 /////////////////////////////////////////////////////////////////////// CALLBACKS
