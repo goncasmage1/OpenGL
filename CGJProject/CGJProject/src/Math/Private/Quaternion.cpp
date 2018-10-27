@@ -5,7 +5,7 @@
 
 #define DEGREES_TO_RADIANS 0.01745329251994329547
 #define RADIANS_TO_DEGREES 57.29577951308232185913
-#define TOLERANCE 0.00000001f
+#define TOLERANCE 0.000001f
 
 Quat::Quat()
 {
@@ -74,9 +74,9 @@ const Quat operator-(const Quat & Q1)
 const Quat operator*(const Quat & Q1, const Quat & Q2)
 {
 	return Quat(Q1.t * Q2.t - Q1.x * Q2.x - Q1.y * Q2.y - Q1.z * Q2.z,
-					  Q1.t * Q2.x - Q1.x * Q2.x - Q1.y * Q2.z - Q1.z * Q2.y,
-					  Q1.t * Q2.y - Q1.y * Q2.x - Q1.z * Q2.x - Q1.x * Q2.z,
-					  Q1.t * Q2.z - Q1.z * Q2.x - Q1.x * Q2.y - Q1.y * Q2.x );
+				Q1.t * Q2.x + Q1.x * Q2.t + Q1.y * Q2.z - Q1.z * Q2.y,
+				Q1.t * Q2.y + Q1.y * Q2.t + Q1.z * Q2.x - Q1.x * Q2.z,
+				Q1.t * Q2.z + Q1.z * Q2.t + Q1.x * Q2.y - Q1.y * Q2.x);
 }
 
 Quat & Quat::operator+=(const Quat & Q)
@@ -100,9 +100,9 @@ Quat & Quat::operator-=(const Quat & Q)
 Quat & Quat::operator*=(const Quat & Q)
 {
 	t = t * Q.t - x * Q.x - y * Q.y - z * Q.z;
-	x = t * Q.x - x * Q.x - y * Q.z - z * Q.y;
-	y = t * Q.y - y * Q.x - z * Q.x - x * Q.z;
-	z = t * Q.z - z * Q.x - x * Q.y - y * Q.x;
+	x = t * Q.x + x * Q.t + y * Q.z - z * Q.y;
+	y = t * Q.y + y * Q.t + z * Q.x - x * Q.z;
+	z = t * Q.z + z * Q.t + x * Q.y - y * Q.x;
 	return *this;
 }
 
@@ -185,7 +185,7 @@ const Quat Conjugated(const Quat & Q)
 
 const Quat Inversed(const Quat & Q)
 {
-	return (Conjugated(Q) * (1 / Q.Quadrance()));
+	return (Conjugated(Q) * (1.f / Q.Quadrance()));
 }
 
 void Quat::Normalize()
@@ -217,10 +217,10 @@ void Quat::Inverse()
 
 void Quat::Clean()
 {
-	t = t <= TOLERANCE ? 0.f : t;
-	x = x <= TOLERANCE ? 0.f : x;
-	y = y <= TOLERANCE ? 0.f : y;
-	z = z <= TOLERANCE ? 0.f : z;
+	t = std::abs(t) <= TOLERANCE ? 0.f : t;
+	x = std::abs(x) <= TOLERANCE ? 0.f : x;
+	y = std::abs(y) <= TOLERANCE ? 0.f : y;
+	z = std::abs(z) <= TOLERANCE ? 0.f : z;
 }
 
 float Quat::Length() const

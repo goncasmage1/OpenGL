@@ -713,12 +713,12 @@ void Vec4::Clean()
 const Vec4 Normalized(const Vec4& V)
 {
 	Vec4 normalized = Vec4();
-	float len = V.Length();
+	float len = Vec3(V).Length();
 
 	normalized.x = V.x/len;
 	normalized.y = V.y/len;
 	normalized.z = V.z/len;
-	normalized.w = V.w/len;
+	normalized.w = 1.f;
 	return normalized;
 }
 
