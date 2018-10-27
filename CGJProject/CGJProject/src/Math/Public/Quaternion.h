@@ -44,7 +44,7 @@ struct Quat
 	friend const Quat Normalized(const Quat& Q);
 	friend const Quat Conjugated(const Quat& Q);
 	friend const Quat Inversed(const Quat& Q);
-	friend const struct Vec4 ToAngleAxis(const Quat& Q, float degrees);
+	friend const void ToAngleAxis(const Quat& Q, float& degrees, struct Vec4& axis);
 
 	friend const Quat Lerp(const Quat& Q1, const Quat& Q2, float alpha);
 	friend const Quat Slerp(const Quat& Q1, const Quat& Q2, float alpha);

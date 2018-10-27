@@ -19,10 +19,10 @@ Quat::Quat(float val)
 
 Quat::Quat(float newX, float newY, float newZ)
 {
+	t = 0.f;
 	x = newX;
 	y = newY;
 	z = newZ;
-	t = 0.f;
 }
 
 Quat::Quat(float newT, float newX, float newY, float newZ)
@@ -35,6 +35,7 @@ Quat::Quat(float newT, float newX, float newY, float newZ)
 
 Quat::Quat(Vec3 V)
 {
+	t = 0.f;
 	x = V.x;
 	y = V.y;
 	z = V.z;
@@ -42,18 +43,18 @@ Quat::Quat(Vec3 V)
 
 Quat::Quat(Vec4 V)
 {
+	t = V.w;
 	x = V.x;
 	y = V.y;
 	z = V.z;
-	t = V.w;
 }
 
 Quat::Quat(const Quat & Q)
 {
+	t = Q.t;
 	x = Q.x;
 	y = Q.y;
 	z = Q.z;
-	t = Q.t;
 }
 
 const Quat operator+(const Quat & Q1, const Quat & Q2)
@@ -233,10 +234,9 @@ float Quat::Quadrance() const
 	return t*t + x*x + y*y + z*z;
 }
 
-const Vec4 ToAngleAxis(const Quat & Q, float degrees)
+const void ToAngleAxis(const Quat& Q, float& degrees, struct Vec4& axis)
 {
 	Quat quat = Normalized(Q);
-	Vec4 axis = Vec4();
 	degrees = 2.0f * std::acos(quat.t) * (float)RADIANS_TO_DEGREES;
 	float s = std::sqrt(1.0f - quat.t * quat.t);
 	 
@@ -254,7 +254,6 @@ const Vec4 ToAngleAxis(const Quat & Q, float degrees)
 		axis.z = quat.z / s;
 		axis.w = 1.f;
 	}
-	return axis;
 }
 
 Mat4 Quat::GetMatrix()

@@ -57,6 +57,7 @@ struct Vec3
 	Vec3(const struct Vec2 V);
 	Vec3(const Vec3& newV3);
 	Vec3(const struct Vec4 V);
+	Vec3(const struct Quat& Q);
 
 	static Vec3 X();
 	static Vec3 Y();
@@ -105,6 +106,7 @@ struct Vec4
 	Vec4(const struct Vec2 V);
 	Vec4(const struct Vec3 V);
 	Vec4(const Vec4& newV4);
+	Vec4(const struct Quat& Q);
 
 	static Vec4 X();
 	static Vec4 Y();

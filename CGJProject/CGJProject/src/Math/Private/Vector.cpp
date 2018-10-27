@@ -257,6 +257,13 @@ Vec3::Vec3(const Vec4 V) :
 {
 }
 
+Vec3::Vec3(const Quat & Q)
+{
+	x = Q.x;
+	y = Q.y;
+	z = Q.z;
+}
+
 Vec3 Vec3::X()
 {
 	return Vec3(1, 0, 0);
@@ -503,6 +510,14 @@ Vec4::Vec4(const Vec4 & newV4)
 	y = newV4.y;
 	z = newV4.z;
 	w = newV4.w;
+}
+
+Vec4::Vec4(const Quat & Q)
+{
+	x = Q.x;
+	y = Q.y;
+	z = Q.z;
+	w = Q.t;
 }
 
 Vec4 Vec4::X()
