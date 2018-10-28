@@ -4,7 +4,7 @@
 #include <assert.h>
 
 #define PI 3.14159265358979323846f
-#define TOLERANCE 0.00000001f
+#define TOLERANCE 0.000001f
 
 /////////
 // Mat2

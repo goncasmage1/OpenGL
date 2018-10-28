@@ -652,8 +652,9 @@ void q2test()
 	Vec4 vi = { 7.0f, 0.0f, 0.0f, 0.0f };
 	std::cout << "vi " << vi << std::endl;
 
-	Vec4 ve = { 0.0f, 0.0f, -7.0f, 1.0f };
-	std::cout << "vi " << vi << std::endl;
+	//Vec4 ve = { 0.0f, 0.0f, -7.0f, 1.0f };
+	Vec4 ve = { 0.0f, 0.0f, -7.0f, 0.0f };
+	std::cout << "ve " << ve << std::endl;
 
 	Mat4 m = q.GetMatrix();
 	std::cout << "m " << m << std::endl;
@@ -698,7 +699,7 @@ void q3test()
 	assert(qe == qfrp);
 
 	Quat qprinv = Inversed(qpr);
-	Quat qfpr = (qpr == qi) * qprinv;
+	Quat qfpr = (qpr * qi) * qprinv;
 	std::cout << "qfpr " << qfpr << std::endl;
 	assert(qe == qfpr);
 }
@@ -717,7 +718,9 @@ void q4test()
 	std::cout << thetaf << " ";
 	std::cout << "thetaf " << thetaf << std::endl;
 
-	assert((std::abs(thetai - thetaf) < 0.000001f) && (axis_i == axis_f));
+	bool b1 = (std::abs(thetai - thetaf) < 0.00001f);
+	bool b2 = axis_i == axis_f;
+	assert(b1 && b2);
 }
 
 void q5test()

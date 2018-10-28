@@ -234,12 +234,12 @@ float Quat::Quadrance() const
 	return t*t + x*x + y*y + z*z;
 }
 
-const void ToAngleAxis(const Quat& Q, float& degrees, struct Vec4& axis)
+const void ToAngleAxis(const Quat & Q, float & degrees, Vec4 & axis)
 {
 	Quat quat = Normalized(Q);
 	degrees = 2.0f * std::acos(quat.t) * (float)RADIANS_TO_DEGREES;
 	float s = std::sqrt(1.0f - quat.t * quat.t);
-	 
+
 	if (s < TOLERANCE)
 	{
 		axis.x = 1.f;
