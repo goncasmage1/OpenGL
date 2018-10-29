@@ -449,6 +449,14 @@ void Vec3::Clean()
 	z = z <= TOLERANCE ? 0.f : z;
 }
 
+void Vec3::Rotate(const Vec3& a, const float degrees)
+{
+	Vec3 rotated = RotateVector(*this, a, degrees);
+	x = rotated.x;
+	y = rotated.y;
+	z = rotated.z;
+}
+
 const Vec3 Normalized(const Vec3& V)
 {
 	Vec3 normalized = Vec3();

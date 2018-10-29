@@ -1,25 +1,17 @@
 ///////////////////////////////////////////////////////////////////////
 //
-// Assignment consists in the following:
+// Using quaternions to rotate in 3D.
 //
-// - Create the following changes to your scene:
-//   x Make your TANs double-faced, so they can be seen from both sides.
-//   x The new face of each TAN should share the same hue as the
-//     original top face color but have a different level of saturation 
-//     and brightness.
-//
-// - Add the following functionality:
-//   x Create a View Matrix from (eye, center, up) parameters.
-//   x Create an Orthographic Projection Matrix from (left-right, 
-//     bottom-top, near-far) parameters.
-//   x Create a Perspective Projection Matrix from (fovy, aspect,
-//     nearZ, farZ) parameters.
-//
-// - Add the following dynamics to the application:
-//   x Create a free 3D camera controlled by the mouse allowing to 
-//     visualize the scene through all its angles.
-//   x Change perspective from orthographic to perspective and back as
-//     a response to pressing the key 'p'.
+// Assignment: x 1. Create a class for Quaternions.
+//             2. Create a scene with a camera rotating around an 
+//                object at the origin and pointing towards it. 
+//                Do NOT use "gluLookAt" to create the ViewMatrix, 
+//                use rotation matrices!
+//             3. Gimbal lock mode ON: use Translation + Rotation 
+//                matrices (e.g. Euler angles, Rodrigues’ formula).
+//             4. Gimbal lock mode OFF: use Quaternions to produce a 
+//                transformation matrix and avoid gimbal lock.
+//             5. Switch between modes by pressing the 'g' key.
 //
 // (c) 2013-18 by Carlos Martinho
 //
@@ -228,61 +220,47 @@ typedef struct
 
 const Vertex Vertices[] =
 {
-	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 1.0f, 0.0f, 0.0f)
-	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 0.0f, 1.0f, 0.0f)
-	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 0.0f, 0.0f, 1.0f)
-	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 1.0f, 1.0f, 0.0f)
-	CENTERED_RIGHT_TRIANGLE(0.5f, 0.25f, 1.0f, 0.0f, 1.0f)
-	SQUARE(0.25f, 0.f, 1.f, 1.f)
-	PARALELOGRAM(0.35f, 0.175f, 0.175f, 1.f, 1.f, 1.f)
-	CENTERED_RIGHT_TRIANGLE_BACK(0.5f, 0.25f, 0.5f, 0.0f, 0.0f)
-	CENTERED_RIGHT_TRIANGLE_BACK(0.5f, 0.25f, 0.0f, 0.5f, 0.0f)
-	CENTERED_RIGHT_TRIANGLE_BACK(0.5f, 0.25f, 0.0f, 0.0f, 0.5f)
-	CENTERED_RIGHT_TRIANGLE_BACK(0.5f, 0.25f, 0.5f, 0.5f, 0.0f)
-	CENTERED_RIGHT_TRIANGLE_BACK(0.5f, 0.25f, 0.5f, 0.0f, 0.5f)
-	SQUARE_BACK(0.25f, 0.f, 0.5f, 0.5f)
-	PARALELOGRAM_BACK(0.35f, 0.175f, 0.175f, 0.5f, 0.5f, 0.5f)
-	//{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 0 - FRONT
-	//{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 1
-	//{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 2
-	//{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 2	
-	//{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 3
-	//{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 0
+	{{ -0.5f, -0.5f, 0.5f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 0 - FRONT
+	{{ 0.5f, -0.5f, 0.5f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 1
+	{{ 0.5f, 0.5f, 0.5f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 2
+	{{ 0.5f, 0.5f, 0.5f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 2	
+	{{ -0.5f, 0.5f, 0.5f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 3
+	{{ -0.5f, -0.5f, 0.5f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 0
 
-	//{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 1 - RIGHT
-	//{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 5
-	//{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 6
-	//{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 6	
-	//{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 2
-	//{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 1
+	{{ 0.5f, -0.5f, 0.5f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 1 - RIGHT
+	{{ 0.5f, -0.5f, -0.5f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 5
+	{{ 0.5f, 0.5f, -0.5f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 6
+	{{ 0.5f, 0.5f, -0.5f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 6	
+	{{ 0.5f, 0.5f, 0.5f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 2
+	{{ 0.5f, -0.5f, 0.5f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 1
 
-	//{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 2 - TOP
-	//{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 6
-	//{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 7
-	//{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 7	
-	//{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 3
-	//{{ 1.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 2
+	{{ 0.5f, 0.5f, 0.5f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 2 - TOP
+	{{ 0.5f, 0.5f, -0.5f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 6
+	{{ -0.5f, 0.5f, -0.5f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 7
+	{{ -0.5f, 0.5f, -0.5f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 7	
+	{{ -0.5f, 0.5f, 0.5f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 3
+	{{ 0.5f, 0.5f, 0.5f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 2
 
-	//{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 5 - BACK
-	//{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 4
-	//{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 7
-	//{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 7	
-	//{{ 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 6
-	//{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 5
+	{{ 0.5f, -0.5f, -0.5f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 5 - BACK
+	{{ -0.5f, -0.5f, -0.5f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 4
+	{{ -0.5f, 0.5f, -0.5f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 7
+	{{ -0.5f, 0.5f, -0.5f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 7	
+	{{ 0.5f, 0.5f, -0.5f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 6
+	{{ 0.5f, -0.5f, -0.5f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 5
 
-	//{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 4 - LEFT
-	//{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 0
-	//{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 3
-	//{{ 0.0f, 1.0f, 1.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 3	
-	//{{ 0.0f, 1.0f, 0.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 7
-	//{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 4
+	{{ -0.5f, -0.5f, -0.5f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 4 - LEFT
+	{{ -0.5f, -0.5f, 0.5f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 0
+	{{ -0.5f, 0.5f, 0.5f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 3
+	{{ -0.5f, 0.5f, 0.5f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 3	
+	{{ -0.5f, 0.5f, -0.5f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 7
+	{{ -0.5f, -0.5f, -0.5f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 4
 
-	//{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 0 - BOTTOM
-	//{{ 0.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 4
-	//{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 5
-	//{{ 1.0f, 0.0f, 0.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 5	
-	//{{ 1.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 1
-	//{{ 0.0f, 0.0f, 1.0f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}  // 0
+	{{ -0.5f, -0.5f, 0.5f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 0 - BOTTOM
+	{{ -0.5f, -0.5f, -0.5f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 4
+	{{ 0.5f, -0.5f, -0.5f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 5
+	{{ 0.5f, -0.5f, -0.5f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 5	
+	{{ 0.5f, -0.5f, 0.5f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 1
+	{{ -0.5f, -0.5f, 0.5f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}  // 0
 };
 
 const std::vector<Mat4> Mats[] = {
@@ -450,13 +428,13 @@ void drawScene()
 	{
 		Mat4 Result = Mat4::IdentityMat();
 
-		//if (size > i)
-		{
-			for (size_t j = 0; j < Mats[i].size(); j++)
-			{
-				Result = Mats[i][j] * Result;
-			}
-		}
+		////if (size > i)
+		//{
+		//	for (size_t j = 0; j < Mats[i].size(); j++)
+		//	{
+		//		Result = Mats[i][j] * Result;
+		//	}
+		//}
 
 		glUniformMatrix4fv(UniformId, 1, GL_FALSE, Result.GetData());
 		glUniformMatrix4fv(ShaderProg->GetUniformId("ModelMatrix"), 1, GL_FALSE, camera->GetModelMatrix().GetData());
@@ -472,8 +450,10 @@ void drawScene()
 
 void processInput()
 {
+	if (input->IsMiddleMouseButtonDown() != camera->IsOrbiting()) camera->ToggleOrbiting();
 	camera->RotateCamera(input->GetMouseDelta());
 	camera->MoveCamera(input->GetMovement());
+	camera->Zoom(input->GetWheelDelta());
 }
 
 /////////////////////////////////////////////////////////////////////// CALLBACKS
@@ -507,22 +487,27 @@ void reshape(int w, int h)
 
 void keyboardButtontDown(unsigned char Key, int x, int y)
 {
-	input->keyboardButtontDown(Key, x, y);
+	input->keyboardButtontDown(Key);
 }
 
 void keyboardButtonUp(unsigned char Key, int x, int y)
 {
-	input->keyboardButtonUp(Key, x, y);
+	input->keyboardButtonUp(Key);
 }
 
 void mouseButton(int button, int state, int x, int y)
 {
-	input->mouseButton(button, state, x, y);
+	input->mouseButton(button, state);
 }
 
 void mouseMove(int x, int y)
 {
 	input->mouseMove(x, y);
+}
+
+void mouseWheel(int wheel, int direction, int x, int y)
+{
+	input->mouseWheel(direction);
 }
 
 void timer(int value)
@@ -549,6 +534,7 @@ void setupCallbacks()
 	glutKeyboardUpFunc(keyboardButtonUp);
 	glutMouseFunc(mouseButton);
 	glutMotionFunc(mouseMove);
+	glutMouseWheelFunc(mouseWheel);
 	glutPassiveMotionFunc(mouseMove);
 	glutTimerFunc(0, timer, 0);
 	setupErrors();
@@ -750,13 +736,13 @@ void q5test()
 int main(int argc, char* argv[])
 {
 	init(argc, argv);
-	//glutMainLoop();
+	glutMainLoop();
 
-	q1test();
-	q2test();
-	q3test();
-	q4test();
-	q5test();
+	//q1test();
+	//q2test();
+	//q3test();
+	//q4test();
+	//q5test();
 
 	std::cin.ignore(1);
 	exit(EXIT_SUCCESS);

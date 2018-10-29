@@ -89,6 +89,7 @@ struct Vec3
 	float Quadrance();
 	void Normalize();
 	void Clean();
+	void Rotate(const Vec3& a, const float degrees);
 	friend const Vec3 Normalized(const Vec3& V);
 	friend const float Dot(const Vec3& V1, const Vec3& V2);
 	friend const Vec3 Cross(const Vec3& V1, const Vec3& V2);

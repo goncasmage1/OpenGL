@@ -41,6 +41,12 @@ Quat::Quat(Vec3 V)
 	z = V.z;
 }
 
+Quat::Quat(float degrees, Vec3 axis)
+{
+	Quat(axis * std::sin((degrees * (float)DEGREES_TO_RADIANS) / 2.f));
+	t = std::cos((degrees * (float)DEGREES_TO_RADIANS) / 2.f);
+}
+
 Quat::Quat(Vec4 V)
 {
 	t = V.w;

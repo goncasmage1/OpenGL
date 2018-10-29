@@ -4,7 +4,7 @@
 #include "GL/glew.h"
 #include "GL/freeglut.h"
 
-void Input::keyboardButtontDown(unsigned char Key, int x, int y)
+void Input::keyboardButtontDown(unsigned char Key)
 {
 	switch (Key)
 	{
@@ -29,13 +29,16 @@ void Input::keyboardButtontDown(unsigned char Key, int x, int y)
 		case 'p':
 			bUsePerspective = !bUsePerspective;
 			break;
+		case 'g':
+			bUseQuaternion = !bUseQuaternion;
+			break;
 		case 27:
 			exit(1);
 			break;
 	};
 }
 
-void Input::keyboardButtonUp(unsigned char Key, int x, int y)
+void Input::keyboardButtonUp(unsigned char Key)
 {
 	switch (Key)
 	{
@@ -63,7 +66,7 @@ void Input::keyboardButtonUp(unsigned char Key, int x, int y)
 	};
 }
 
-void Input::mouseButton(int button, int state, int x, int y)
+void Input::mouseButton(int button, int state)
 {
 	switch (button)
 	{
@@ -72,6 +75,9 @@ void Input::mouseButton(int button, int state, int x, int y)
 			break;
 		case GLUT_RIGHT_BUTTON:
 			bRightMouseButtonDown = state == GLUT_DOWN;
+			break;
+		case GLUT_MIDDLE_BUTTON:
+			bMiddleMouseButtonDown = state == GLUT_DOWN;
 			break;
 	};
 }
@@ -86,12 +92,28 @@ void Input::mouseMove(int x, int y)
 	PreviousMousePosition.y = y;
 }
 
+void Input::mouseWheel(int direction)
+{
+	bWheelMoved = true;
+	wheelDirection = direction;
+}
+
 Vec2 Input::GetMouseDelta()
 {
-	if (bMouseMoved && bRightMouseButtonDown)
+	if (bMouseMoved && (bRightMouseButtonDown || bMiddleMouseButtonDown))
 	{
 		bMouseMoved = false;
 		return MouseDelta * MouseSensitivity;
 	}
 	return Vec2();
+}
+
+float Input::GetWheelDelta()
+{
+	if (bWheelMoved)
+	{
+		bWheelMoved = false;
+		return wheelDirection * WheelSensitivity;
+	}
+	return 0.f;
 }

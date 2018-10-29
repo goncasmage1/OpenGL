@@ -11,6 +11,7 @@ struct Quat
 	Quat(float newX, float newY, float newZ);
 	Quat(float newT, float newX, float newY, float newZ);
 	Quat(struct Vec3 V);
+	Quat(float degrees, struct Vec3 axis);
 	Quat(struct Vec4 V);
 	Quat(const Quat& Q);
 
