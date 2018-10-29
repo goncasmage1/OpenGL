@@ -2,10 +2,12 @@
 
 Camera::Camera()
 {
-	Offset = Vec3(0.5f, 0.5f, 0.5f);
+	Offset = Vec3();
 	ModelMat = Mat4::IdentityMat();
 
 	Direction = Vec3(1, 1, 1);
+	Center = Vec3();
+	Eye = Vec3(-1, -1, -1);
 	RightVector = Vec3(1, 0, 0);
 	UpVector = Vec3(0, 1, 0);
 	ViewMat = Mat4::ViewMat(Direction, UpVector);
@@ -21,17 +23,22 @@ void Camera::RotateCamera(Vec2 rotation)
 	UpVector.Rotate(RightVector, rotation.y);
 	RightVector.Rotate(UpVector, -rotation.x);
 	Direction = Cross(RightVector, UpVector);
+	Eye = -Direction;
 
 	Rotator *= Quat(-rotation.x, UpVector);
 	Rotator *= Quat(rotation.y, RightVector);
 
-	ViewMat = Mat4::ViewMat(Direction, UpVector);
-	
-	if (bOrbiting)
+	std::cout << Eye << std::endl;
+
+	//if (bOrbiting) ViewMat = Mat4::ViewMat(Center - Eye, UpVector);
+	//else ViewMat = Mat4::ViewMat(Direction, UpVector);
+	ViewMat = Mat4::ViewMat(Center - Eye, UpVector);
+
+	/*if (bOrbiting)
 	{
-		Offset = Vec3(-Direction.x, Direction.y, -Direction.z) * Distance;
+		Offset = Vec3(Direction.x, -Direction.y, Direction.z) * Distance;
 		ModelMat = Mat4::TranslationMat(Offset);
-	}
+	}*/
 }
 
 void Camera::MoveCamera(Vec3 movement)

@@ -11,6 +11,8 @@ protected:
 	Vec3 Offset;
 
 	Vec3 Direction;
+	Vec3 Center;
+	Vec3 Eye;
 	Vec3 RightVector;
 	Vec3 UpVector;
 	Quat Rotator;
