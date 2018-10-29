@@ -28,17 +28,14 @@ void Camera::RotateCamera(Vec2 rotation)
 	Rotator *= Quat(-rotation.x, UpVector);
 	Rotator *= Quat(rotation.y, RightVector);
 
-	std::cout << Eye << std::endl;
+	ViewMat = Mat4::ViewMat(Direction, UpVector);
+	//ViewMat = Rotator.GetMatrix();
 
-	//if (bOrbiting) ViewMat = Mat4::ViewMat(Center - Eye, UpVector);
-	//else ViewMat = Mat4::ViewMat(Direction, UpVector);
-	ViewMat = Mat4::ViewMat(Center - Eye, UpVector);
-
-	/*if (bOrbiting)
+	if (bOrbiting)
 	{
-		Offset = Vec3(Direction.x, -Direction.y, Direction.z) * Distance;
-		ModelMat = Mat4::TranslationMat(Offset);
-	}*/
+		/*Offset = Vec3(Direction.x, -Direction.y, Direction.z) * (Distance + Normalized(Direction));
+		ModelMat = Mat4::TranslationMat(Offset);*/
+	}
 }
 
 void Camera::MoveCamera(Vec3 movement)
@@ -56,8 +53,10 @@ void Camera::Zoom(float amount)
 {
 	if (amount == 0.f) return;
 
-	if (amount > 0) Distance /= amount;
-	else Distance *= -amount;
+	std::cout << Distance << std::endl;
+
+	if (amount < 0) Distance /= -amount;
+	else Distance *= amount;
 
 	if (!bOrbiting) Offset -= Direction * amount;
 }
