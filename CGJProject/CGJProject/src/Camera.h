@@ -11,14 +11,14 @@ protected:
 	Vec3 Offset;
 
 	Vec3 Direction;
-	Vec3 Center;
-	Vec3 Eye;
 	Vec3 RightVector;
 	Vec3 UpVector;
+	Vec2 Rotation;
 	Quat Rotator;
 	float Distance = 3.f;
 
 	bool bOrbiting = false;
+	bool bUseQuaternion = false;
 
 	Mat4 ModelMat;
 	Mat4 ViewMat;
@@ -34,6 +34,8 @@ public:
 	Mat4 GetModelMatrix() { return ModelMat; }
 	bool IsOrbiting() { return bOrbiting; }
 	void ToggleOrbiting() { bOrbiting = !bOrbiting; }
+	bool UsingQuaternion() { return bUseQuaternion; }
+	void ToggleQuaternion() { bUseQuaternion = !bUseQuaternion; }
 
 	void RotateCamera(Vec2 rotation);
 	void MoveCamera(Vec3 movement);

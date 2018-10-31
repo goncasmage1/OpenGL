@@ -27,10 +27,10 @@ void Input::keyboardButtontDown(unsigned char Key)
 			movement.y -= 1.f;
 			break;
 		case 'p':
-			bUsePerspective = !bUsePerspective;
+			bPDown = !bPDown;
 			break;
 		case 'g':
-			bUseQuaternion = !bUseQuaternion;
+			bGDown = !bGDown;
 			break;
 		case 27:
 			exit(1);

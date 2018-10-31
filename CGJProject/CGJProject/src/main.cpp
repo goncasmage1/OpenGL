@@ -413,7 +413,7 @@ void drawScene()
 {
 	glBindBuffer(GL_UNIFORM_BUFFER, VboId[1]);
 	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), camera->GetViewMatrix().GetData());
-	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(Mat4), sizeof(Mat4), camera->GetProjectionMatrix(input->GetUsePerspective()).GetData());
+	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(Mat4), sizeof(Mat4), camera->GetProjectionMatrix(input->IsPDown()).GetData());
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
 	glBindVertexArray(VaoId);
@@ -451,8 +451,10 @@ void drawScene()
 void processInput()
 {
 	if (input->IsMiddleMouseButtonDown() != camera->IsOrbiting()) camera->ToggleOrbiting();
+	if (input->IsGDown() != camera->UsingQuaternion()) camera->ToggleQuaternion();
+
 	camera->RotateCamera(input->GetMouseDelta());
-	camera->MoveCamera(input->GetMovement());
+	//camera->MoveCamera(input->GetMovement());
 	camera->Zoom(input->GetWheelDelta());
 }
 

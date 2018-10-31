@@ -35,7 +35,7 @@ Quat::Quat(float newT, float newX, float newY, float newZ)
 
 Quat::Quat(Vec3 V)
 {
-	t = 0.f;
+	t = 1.f;
 	x = V.x;
 	y = V.y;
 	z = V.z;

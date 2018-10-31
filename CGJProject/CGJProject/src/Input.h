@@ -9,9 +9,9 @@ protected:
 	struct Vec3 movement = Vec3(0.f);
 	int wheelDirection = 0;
 
-	struct Vec2 MouseSensitivity = Vec2(50000.f);
+	struct Vec2 MouseSensitivity = Vec2(1.f);
 	struct Vec3 MoveSensitivity = Vec3(0.04f);
-	float WheelSensitivity = 0.5f;
+	float WheelSensitivity = 0.2f;
 
 	struct Vec2 MouseDelta;
 	struct Vec2 PreviousMousePosition;
@@ -21,8 +21,8 @@ protected:
 	uint8_t bMiddleMouseButtonDown : 1;
 	uint8_t bMouseMoved : 1;
 	uint8_t bWheelMoved : 1;
-	uint8_t bUsePerspective : 1;
-	uint8_t bUseQuaternion : 1;
+	uint8_t bPDown : 1;
+	uint8_t bGDown : 1;
 
 public:
 
@@ -36,6 +36,6 @@ public:
 	struct Vec3 GetMovement() { return movement * MoveSensitivity; }
 	float GetWheelDelta();
 	bool IsMiddleMouseButtonDown() const { return bMiddleMouseButtonDown; }
-	bool GetUsePerspective() const { return bUsePerspective; }
-	bool GetUseQuaternion() const { return bUseQuaternion; }
+	bool IsPDown() const { return bPDown; }
+	bool IsGDown() const { return bGDown; }
 };
