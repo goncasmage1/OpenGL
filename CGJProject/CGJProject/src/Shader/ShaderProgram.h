@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -13,8 +14,12 @@ struct ShaderAttribute
 
 class ShaderProgram
 {
+private:
+
 	GLuint ProgramId;
 	const GLuint UBO_BP = 0;
+
+	void CheckLinkage();
 
 public:
 

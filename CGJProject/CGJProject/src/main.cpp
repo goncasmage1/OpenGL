@@ -1,17 +1,24 @@
 ///////////////////////////////////////////////////////////////////////
 //
-// Using quaternions to rotate in 3D.
+//  Loading OBJ mesh from external file
 //
-// Assignment: x 1. Create a class for Quaternions.
-//             2. Create a scene with a camera rotating around an 
-//                object at the origin and pointing towards it. 
-//                Do NOT use "gluLookAt" to create the ViewMatrix, 
-//                use rotation matrices!
-//             3. Gimbal lock mode ON: use Translation + Rotation 
-//                matrices (e.g. Euler angles, Rodrigues’ formula).
-//             4. Gimbal lock mode OFF: use Quaternions to produce a 
-//                transformation matrix and avoid gimbal lock.
-//             5. Switch between modes by pressing the 'g' key.
+//	Final individual assignment:
+//	1.	Create classes: Scene, Camera and Mesh (that loads a mesh from
+//		a Wavefront OBJ file to an indexed format) and build a small
+//		scenegraph of your tangram scene (you may create more 
+//		classes if needed).
+//	2.	Create a ground object and couple the tangram figure to the
+//		ground. Press keys to move the ground about: the tangram
+//		figure must follow the ground.
+//	3.	Animate between closed puzzle (initial square) and tangram
+//		figure by pressing a key.
+//	4.	Spherical camera interaction through mouse. It should be
+//		possible to interact while animation is playing.
+//
+//	Team assignment:
+//	Pick your team (2 elements from one same lab) for the team
+//	assignment you will be working until the end of the semester,
+//	and register it online.
 //
 // (c) 2013-18 by Carlos Martinho
 //
@@ -38,7 +45,8 @@
 #define CAPTION "Hello Modern 2D World"
 
 #define VERTICES 0
-#define COLORS 1
+#define TEXCOORDS 1
+#define NORMALS 2
 
 #define CENTERED_RIGHT_TRIANGLE(base, height, color_r, color_g, color_b) \
 	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
@@ -106,6 +114,11 @@ GLuint VaoId, VboId[2];
 std::shared_ptr<ShaderProgram> ShaderProg = nullptr;
 std::shared_ptr<Input> input = std::make_shared<Input>();
 std::shared_ptr<Camera> camera = std::make_shared<Camera>();
+
+bool TexcoordsLoaded, NormalsLoaded;
+std::vector <Vec3> Vertices, vertexData, Normals, normalData;
+std::vector <Vec2> Texcoords, texcoordData;
+std::vector <unsigned int> vertexIdx, texcoordIdx, normalIdx;
 
 /////////////////////////////////////////////////////////////////////// ERRORS
 
@@ -198,7 +211,8 @@ static void checkOpenGLError(std::string error)
 void createShaderProgram()
 {
 	std::vector<ShaderAttribute> Attributes = { {VERTICES, "in_Position"},
-												{COLORS, "in_Color"} };
+												{TEXCOORDS, "inTexcoord"},
+												{NORMALS, "inNormal"} };
 	ShaderProg = std::make_shared<ShaderProgram>(Attributes);
 
 	checkOpenGLError("ERROR: Could not create shaders.");
@@ -210,58 +224,106 @@ void destroyShaderProgram()
 	checkOpenGLError("ERROR: Could not destroy shaders.");
 }
 
+/////////////////////////////////////////////////////////////////////// MESHES
+
+void parseVertex(std::stringstream& sin)
+{
+	Vec3 v;
+	sin >> v;
+	vertexData.push_back(v);
+}
+
+void parseTexcoord(std::stringstream& sin)
+{
+	Vec2 t;
+	sin >> t;
+	texcoordData.push_back(t);
+}
+
+void parseNormal(std::stringstream& sin)
+{
+	Vec3 n;
+	sin >> n;
+	normalData.push_back(n);
+}
+
+void parseFace(std::stringstream& sin)
+{
+	std::string token;
+	for (int i = 0; i < 3; i++)
+	{
+		std::getline(sin, token, '/');
+		if (token.size() > 0) vertexIdx.push_back(std::stoi(token));
+		std::getline(sin, token, '/');
+		if (token.size() > 0) texcoordIdx.push_back(std::stoi(token));
+		std::getline(sin, token, ' ');
+		if (token.size() > 0) normalIdx.push_back(std::stoi(token));
+	}
+}
+
+void parseLine(std::stringstream& sin)
+{
+	std::string s;
+	sin >> s;
+	if (s.compare("v") == 0) parseVertex(sin);
+	else if (s.compare("vt") == 0) parseTexcoord(sin);
+	else if (s.compare("vn") == 0) parseNormal(sin);
+	else if (s.compare("f") == 0) parseFace(sin);
+}
+
+void loadMeshData(const std::string& filename)
+{
+	std::ifstream ifile(filename);
+	std::string line;
+	while (std::getline(ifile, line))
+	{
+		std::stringstream ss = std::stringstream(line);
+		parseLine(ss);
+	}
+	TexcoordsLoaded = (texcoordIdx.size() > 0);
+	NormalsLoaded = (normalIdx.size() > 0);
+}
+
+void processMeshData()
+{
+	for (unsigned int i = 0; i < vertexIdx.size(); i++)
+	{
+		unsigned int vi = vertexIdx[i];
+		Vec3 v = vertexData[vi - 1];
+		Vertices.push_back(v);
+		if (TexcoordsLoaded)
+		{
+			unsigned int ti = texcoordIdx[i];
+			Vec2 t = texcoordData[ti - 1];
+			Texcoords.push_back(t);
+		}
+		if (NormalsLoaded)
+		{
+			unsigned int ni = normalIdx[i];
+			Vec3 n = normalData[ni - 1];
+			Normals.push_back(n);
+		}
+	}
+}
+
+void freeMeshData()
+{
+	vertexData.clear();
+	texcoordData.clear();
+	normalData.clear();
+	vertexIdx.clear();
+	texcoordIdx.clear();
+	normalIdx.clear();
+}
+
+const void createMesh(const std::string& filename)
+{
+	loadMeshData(filename);
+	processMeshData();
+	freeMeshData();
+}
+
 /////////////////////////////////////////////////////////////////////// VAOs & VBOs
-
-typedef struct
-{
-	GLfloat XYZW[4];
-	GLfloat RGBA[4];
-} Vertex;
-
-const Vertex Vertices[] =
-{
-	{{ -0.5f, -0.5f, 0.5f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 0 - FRONT
-	{{ 0.5f, -0.5f, 0.5f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 1
-	{{ 0.5f, 0.5f, 0.5f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 2
-	{{ 0.5f, 0.5f, 0.5f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 2	
-	{{ -0.5f, 0.5f, 0.5f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 3
-	{{ -0.5f, -0.5f, 0.5f, 1.0f }, { 0.9f, 0.0f, 0.0f, 1.0f }}, // 0
-
-	{{ 0.5f, -0.5f, 0.5f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 1 - RIGHT
-	{{ 0.5f, -0.5f, -0.5f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 5
-	{{ 0.5f, 0.5f, -0.5f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 6
-	{{ 0.5f, 0.5f, -0.5f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 6	
-	{{ 0.5f, 0.5f, 0.5f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 2
-	{{ 0.5f, -0.5f, 0.5f, 1.0f }, { 0.0f, 0.9f, 0.0f, 1.0f }}, // 1
-
-	{{ 0.5f, 0.5f, 0.5f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 2 - TOP
-	{{ 0.5f, 0.5f, -0.5f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 6
-	{{ -0.5f, 0.5f, -0.5f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 7
-	{{ -0.5f, 0.5f, -0.5f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 7	
-	{{ -0.5f, 0.5f, 0.5f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 3
-	{{ 0.5f, 0.5f, 0.5f, 1.0f }, { 0.0f, 0.0f, 0.9f, 1.0f }}, // 2
-
-	{{ 0.5f, -0.5f, -0.5f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 5 - BACK
-	{{ -0.5f, -0.5f, -0.5f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 4
-	{{ -0.5f, 0.5f, -0.5f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 7
-	{{ -0.5f, 0.5f, -0.5f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 7	
-	{{ 0.5f, 0.5f, -0.5f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 6
-	{{ 0.5f, -0.5f, -0.5f, 1.0f }, { 0.0f, 0.9f, 0.9f, 1.0f }}, // 5
-
-	{{ -0.5f, -0.5f, -0.5f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 4 - LEFT
-	{{ -0.5f, -0.5f, 0.5f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 0
-	{{ -0.5f, 0.5f, 0.5f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 3
-	{{ -0.5f, 0.5f, 0.5f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 3	
-	{{ -0.5f, 0.5f, -0.5f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 7
-	{{ -0.5f, -0.5f, -0.5f, 1.0f }, { 0.9f, 0.0f, 0.9f, 1.0f }}, // 4
-
-	{{ -0.5f, -0.5f, 0.5f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 0 - BOTTOM
-	{{ -0.5f, -0.5f, -0.5f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 4
-	{{ 0.5f, -0.5f, -0.5f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 5
-	{{ 0.5f, -0.5f, -0.5f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 5	
-	{{ 0.5f, -0.5f, 0.5f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}, // 1
-	{{ -0.5f, -0.5f, 0.5f, 1.0f }, { 0.9f, 0.9f, 0.0f, 1.0f }}  // 0
-};
 
 const std::vector<Mat4> Mats[] = {
 	//Triangle 1
@@ -366,6 +428,8 @@ const std::vector<Mat4> Mats[] = {
 
 void createBufferObjects()
 {
+	GLuint VboVertices, VboTexcoords, VboNormals;
+
 	glGenVertexArrays(1, &VaoId);
 	glBindVertexArray(VaoId);
 	{
@@ -373,35 +437,47 @@ void createBufferObjects()
 
 		glBindBuffer(GL_ARRAY_BUFFER, VboId[0]);
 		{
-			glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
+			glGenBuffers(1, &VboVertices);
+			glBindBuffer(GL_ARRAY_BUFFER, VboVertices);
+			glBufferData(GL_ARRAY_BUFFER, Vertices.size() * sizeof(Vec3), &Vertices[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(VERTICES);
-			glVertexAttribPointer(VERTICES, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-			glEnableVertexAttribArray(COLORS);
-			glVertexAttribPointer(COLORS, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)sizeof(Vertices[0].XYZW));
+			glVertexAttribPointer(VERTICES, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
+
+			if (TexcoordsLoaded)
+			{
+				glGenBuffers(1, &VboTexcoords);
+				glBindBuffer(GL_ARRAY_BUFFER, VboTexcoords);
+				glBufferData(GL_ARRAY_BUFFER, Texcoords.size() * sizeof(Vec2), &Texcoords[0], GL_STATIC_DRAW);
+				glEnableVertexAttribArray(TEXCOORDS);
+				glVertexAttribPointer(TEXCOORDS, 2, GL_FLOAT, GL_FALSE, sizeof(Vec2), 0);
+			}
+			if (NormalsLoaded)
+			{
+				glGenBuffers(1, &VboNormals);
+				glBindBuffer(GL_ARRAY_BUFFER, VboNormals);
+				glBufferData(GL_ARRAY_BUFFER, Normals.size() * sizeof(Vec3), &Normals[0], GL_STATIC_DRAW);
+				glEnableVertexAttribArray(NORMALS);
+				glVertexAttribPointer(NORMALS, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
+			}
 		}
 	}
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glDeleteBuffers(1, &VboVertices);
+	glDeleteBuffers(1, &VboTexcoords);
+	glDeleteBuffers(1, &VboNormals);
 
-	glBindBuffer(GL_UNIFORM_BUFFER, VboId[1]);
-	{
-		glBufferData(GL_UNIFORM_BUFFER, sizeof(Mat4) * 2, 0, GL_STREAM_DRAW);
-		glBindBufferBase(GL_UNIFORM_BUFFER, ShaderProg->GetUBO_BP(), VboId[1]);
-	}
-	glBindBuffer(GL_UNIFORM_BUFFER, 0);
-
-	checkOpenGLError("ERROR: Could not create VAOs, VBOs and UBOs.");
+	checkOpenGLError("ERROR: Could not create VAOs and VBOs.");
 }
 
 void destroyBufferObjects()
 {
 	glBindVertexArray(VaoId);
 	glDisableVertexAttribArray(VERTICES);
-	glDisableVertexAttribArray(COLORS);
-	glDeleteBuffers(2, VboId);
+	glDisableVertexAttribArray(TEXCOORDS);
+	glDisableVertexAttribArray(NORMALS);
 	glDeleteVertexArrays(1, &VaoId);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 	glBindVertexArray(0);
 
 	checkOpenGLError("ERROR: Could not destroy VAOs and VBOs.");
@@ -421,22 +497,11 @@ void drawScene()
 
 	GLint UniformId = ShaderProg->GetUniformId("Transformation");
 
+	//TODO Draw all vertices at once
 	uint32_t counter = 0;
-	//TODO: size = 3??
-	size_t size = Mats->size();
-	for (int i = 0; i < ((sizeof(Vertices) / sizeof(*Vertices)) / 3); i++)
+	for (int i = 0; i < (Vertices.size() / 3); i++)
 	{
-		Mat4 Result = Mat4::IdentityMat();
-
-		////if (size > i)
-		//{
-		//	for (size_t j = 0; j < Mats[i].size(); j++)
-		//	{
-		//		Result = Mats[i][j] * Result;
-		//	}
-		//}
-
-		glUniformMatrix4fv(UniformId, 1, GL_FALSE, Result.GetData());
+		glUniformMatrix4fv(UniformId, 1, GL_FALSE, Mat4::IdentityMat().GetData());
 		glUniformMatrix4fv(ShaderProg->GetUniformId("ModelMatrix"), 1, GL_FALSE, camera->GetModelMatrix().GetData());
 		glDrawArrays(GL_TRIANGLES, counter, 3);
 		counter += 3;
@@ -607,6 +672,16 @@ void init(int argc, char* argv[])
 	setupGLEW();
 	setupOpenGL();
 	setupCallbacks();
+	//createMesh(std::string("../../assets/models/blender_2.79/cube_vn.obj"));
+	//createMesh(std::string("../../assets/models/blender_2.79/cube_vtn.obj"));
+	//createMesh(std::string("../../assets/models/blender_2.79/torus_vn.obj"));
+	//createMesh(std::string("../../assets/models/blender_2.79/torus_smooth_vn.obj"));
+	createMesh(std::string("../../assets/models/blender_2.79/suzanne_vtn.obj"));
+	//createMesh(std::string("../../assets/models/blender_2.79/utah_teapot_vtn.obj"));
+	//createMesh(std::string("../../assets/models/blender_2.79/standford_bunny_vn.obj"));
+
+	/*createShaderProgram(std::string("../../projects/ModernOpenGL/src/Introduction/shaders/cube_vs.glsl"),
+						std::string("../../projects/ModernOpenGL/src/Introduction/shaders/cube_fs.glsl"));*/
 	createShaderProgram();
 	createBufferObjects();
 }

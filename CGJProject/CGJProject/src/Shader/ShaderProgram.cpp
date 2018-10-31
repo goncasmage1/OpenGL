@@ -19,10 +19,26 @@ ShaderProgram::ShaderProgram(std::vector<ShaderAttribute> Attributes)
 	for (ShaderAttribute attr : Attributes) glBindAttribLocation(ProgramId, attr.index, attr.name);
 
 	glLinkProgram(ProgramId);
+	CheckLinkage();
 	glUniformBlockBinding(ProgramId, GetUboId("SharedMatrices"), UBO_BP);
 
 	VShader.DetachAndDelete(ProgramId);
 	FShader.DetachAndDelete(ProgramId);
+}
+
+void ShaderProgram::CheckLinkage()
+{
+	GLint linked;
+	glGetProgramiv(ProgramId, GL_LINK_STATUS, &linked);
+	if (linked == GL_FALSE)
+	{
+		GLint length;
+		glGetProgramiv(ProgramId, GL_INFO_LOG_LENGTH, &length);
+		GLchar* const log = new char[length];
+		glGetProgramInfoLog(ProgramId, length, &length, log);
+		std::cerr << "[LINK] " << std::endl << log << std::endl;
+		delete log;
+	}
 }
 
 void ShaderProgram::Destroy()
