@@ -22,22 +22,10 @@ void Camera::RotateCamera(Vec2 rotation)
 	Rotation.x -= rotation.x;
 	Rotation.y += rotation.y;
 
-	//UpVector.Rotate(RightVector, rotation.y);
-	//RightVector.Rotate(UpVector, -rotation.x);
-	//Direction = Cross(RightVector, UpVector);
-
-	std::cout << bUseQuaternion << std::endl;
 	Rotator = FromAngleAxis(Vec4::Y(), rotation.x) * FromAngleAxis(Vec4::X(), -rotation.y) * Rotator;
 	Mat4 RotMat = bUseQuaternion ? Rotator.GetMatrix() : Mat4::RotationMat(RightVector, Rotation.y) * Mat4::RotationMat(UpVector, -Rotation.x);
 
 	ViewMat = Mat4::TranslationMat(Vec3(0, 0, -Distance)) * RotMat;
-	//ViewMat = Mat4::ViewMat(Direction, UpVector);
-
-	if (bOrbiting)
-	{
-		//Offset = Vec3(Direction.x, -Direction.y, Direction.z) * (Distance + Normalized(Direction));
-		//ModelMat = Mat4::TranslationMat(Offset);
-	}
 }
 
 void Camera::MoveCamera(Vec3 movement)
