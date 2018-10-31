@@ -19,7 +19,6 @@ Camera::Camera()
 
 void Camera::RotateCamera(Vec2 rotation)
 {
-	//Usar matrizes
 	Rotation.x -= rotation.x;
 	Rotation.y += rotation.y;
 
@@ -27,14 +26,12 @@ void Camera::RotateCamera(Vec2 rotation)
 	//RightVector.Rotate(UpVector, -rotation.x);
 	//Direction = Cross(RightVector, UpVector);
 
-	std::cout << rotation << std::endl;
-	Rotator = Quat(rotation.x, UpVector) * Quat(-rotation.y, RightVector) * Rotator;
-	std::cout << Rotator << std::endl;
-	//Mat4 RotMat = Mat4::RotationMat(RightVector, Rotation.y) * Mat4::RotationMat(UpVector, -Rotation.x);
-	Mat4 RotMat = Rotator.GetMatrix();
+	std::cout << bUseQuaternion << std::endl;
+	Rotator = FromAngleAxis(Vec4::Y(), rotation.x) * FromAngleAxis(Vec4::X(), -rotation.y) * Rotator;
+	Mat4 RotMat = bUseQuaternion ? Rotator.GetMatrix() : Mat4::RotationMat(RightVector, Rotation.y) * Mat4::RotationMat(UpVector, -Rotation.x);
 
-	/*if (bUseQuaternion)*/ ViewMat = Mat4::TranslationMat(Vec3(0, 0, -Distance)) * RotMat;
-	//else ViewMat = Mat4::ViewMat(Direction, UpVector);
+	ViewMat = Mat4::TranslationMat(Vec3(0, 0, -Distance)) * RotMat;
+	//ViewMat = Mat4::ViewMat(Direction, UpVector);
 
 	if (bOrbiting)
 	{

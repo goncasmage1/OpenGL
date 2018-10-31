@@ -106,13 +106,13 @@ struct Vec4
 	Vec4(float newX, float newY, float newZ, float newW);
 	Vec4(const struct Vec2 V);
 	Vec4(const struct Vec3 V);
+	Vec4(const struct Vec3 V, float f);
 	Vec4(const Vec4& newV4);
 	Vec4(const struct Quat& Q);
 
 	static Vec4 X();
 	static Vec4 Y();
 	static Vec4 Z();
-	static Vec4 W();
 
 	friend const Vec4 operator+(const Vec4& V1, const Vec4& V2);
 	friend const Vec4 operator-(const Vec4& V1, const Vec4& V2);

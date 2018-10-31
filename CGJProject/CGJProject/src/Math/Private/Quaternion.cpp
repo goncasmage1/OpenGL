@@ -12,55 +12,39 @@ Quat::Quat()
 	t = x = y = z = 0.f;
 }
 
-Quat::Quat(float val)
+Quat::Quat(float val) :
+	t(val), x(val), y(val), z(val)
 {
-	t = x = y = z = val;
 }
 
-Quat::Quat(float newX, float newY, float newZ)
+Quat::Quat(float newX, float newY, float newZ) :
+	t(0), x(newX), y(newY), z(newZ)
 {
-	t = 0.f;
-	x = newX;
-	y = newY;
-	z = newZ;
 }
 
-Quat::Quat(float newT, float newX, float newY, float newZ)
+Quat::Quat(float newT, float newX, float newY, float newZ) :
+	t(newT), x(newX), y(newY), z(newZ)
 {
-	t = newT;
-	x = newX;
-	y = newY;
-	z = newZ;
 }
 
-Quat::Quat(Vec3 V)
+Quat::Quat(Vec3 V) :
+	t(1.f), x(V.x), y(V.y), z(V.z)
 {
-	t = 1.f;
-	x = V.x;
-	y = V.y;
-	z = V.z;
 }
 
-Quat::Quat(float degrees, Vec3 axis)
+Quat::Quat(float t, struct Vec3 V) :
+	t(t), x(V.x), y(V.y), z(V.z)
 {
-	Quat(axis * std::sin((degrees * (float)DEGREES_TO_RADIANS) / 2.f));
-	t = std::cos((degrees * (float)DEGREES_TO_RADIANS) / 2.f);
 }
 
-Quat::Quat(Vec4 V)
+Quat::Quat(Vec4 V) :
+	t(V.w), x(V.x), y(V.y), z(V.z)
 {
-	t = V.w;
-	x = V.x;
-	y = V.y;
-	z = V.z;
 }
 
-Quat::Quat(const Quat & Q)
+Quat::Quat(const Quat & Q) :
+	t(Q.t), x(Q.x), y(Q.y), z(Q.z)
 {
-	t = Q.t;
-	x = Q.x;
-	y = Q.y;
-	z = Q.z;
 }
 
 const Quat operator+(const Quat & Q1, const Quat & Q2)

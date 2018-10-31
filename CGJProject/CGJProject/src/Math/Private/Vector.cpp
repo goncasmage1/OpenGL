@@ -512,40 +512,34 @@ Vec4::Vec4(const Vec3 V) :
 {
 }
 
-Vec4::Vec4(const Vec4 & newV4)
+Vec4::Vec4(const Vec3 V, float f) :
+	x(V.x), y(V.y), z(V.z), w(f)
 {
-	x = newV4.x;
-	y = newV4.y;
-	z = newV4.z;
-	w = newV4.w;
 }
 
-Vec4::Vec4(const Quat & Q)
+Vec4::Vec4(const Vec4 & newV4) :
+	x(newV4.x), y(newV4.y), z(newV4.z), w(newV4.w)
 {
-	x = Q.x;
-	y = Q.y;
-	z = Q.z;
-	w = Q.t;
+}
+
+Vec4::Vec4(const Quat & Q) :
+	x(Q.x), y(Q.y), z(Q.z), w(Q.t)
+{
 }
 
 Vec4 Vec4::X()
 {
-	return Vec4(1, 0, 0, 0);
+	return Vec4(1, 0, 0, 1);
 }
 
 Vec4 Vec4::Y()
 {
-	return Vec4(0, 1, 0, 0);
+	return Vec4(0, 1, 0, 1);
 }
 
 Vec4 Vec4::Z()
 {
-	return Vec4(0, 0, 1, 0);
-}
-
-Vec4 Vec4::W()
-{
-	return Vec4(0, 0, 0, 1);
+	return Vec4(0, 0, 1, 1);
 }
 
 float* Vec4::GetData() const
