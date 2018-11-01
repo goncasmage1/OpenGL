@@ -27,16 +27,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Shader\FragmentShader.cpp">
-      <Filter>Source Files\Shader</Filter>
-    </ClCompile>
     <ClCompile Include="src\Shader\Shader.cpp">
       <Filter>Source Files\Shader</Filter>
     </ClCompile>
     <ClCompile Include="src\Shader\ShaderProgram.cpp">
-      <Filter>Source Files\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Shader\VertexShader.cpp">
       <Filter>Source Files\Shader</Filter>
     </ClCompile>
     <ClCompile Include="src\Input.cpp">
@@ -80,16 +74,10 @@
     <ClInclude Include="src\Scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Shader\VertexShader.h">
-      <Filter>Header Files\Shader</Filter>
-    </ClInclude>
     <ClInclude Include="src\Shader\ShaderProgram.h">
       <Filter>Header Files\Shader</Filter>
     </ClInclude>
     <ClInclude Include="src\Shader\Shader.h">
-      <Filter>Header Files\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Shader\FragmentShader.h">
       <Filter>Header Files\Shader</Filter>
     </ClInclude>
     <ClInclude Include="src\Mesh.h">

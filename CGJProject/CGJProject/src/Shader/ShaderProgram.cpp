@@ -1,20 +1,20 @@
 #include "ShaderProgram.h"
 
 #include "Shader.h"
-#include "VertexShader.h"
-#include "FragmentShader.h"
 
 #define VERTICES 0
 #define COLORS 1
 
-ShaderProgram::ShaderProgram(std::vector<ShaderAttribute> Attributes)
+ShaderProgram::ShaderProgram(const std::vector<ShaderAttribute>& Attributes, const std::vector<std::string>& ShaderPaths)
 {
-	VertexShader VShader = VertexShader();
-	FragmentShader FShader = FragmentShader();
+	size_t NumOfShaders = ShaderPaths.size();
+	std::vector<Shader> shaders;
+	int i = 0;
+
+	for (i = 0; i < NumOfShaders; i++) shaders.push_back(Shader(ShaderPaths[i]));
 
 	ProgramId = glCreateProgram();
-	VShader.Attach(ProgramId);
-	FShader.Attach(ProgramId);
+	for (i = 0; i < NumOfShaders; i++) shaders[i].Attach(ProgramId);
 
 	for (ShaderAttribute attr : Attributes) glBindAttribLocation(ProgramId, attr.index, attr.name);
 
@@ -22,8 +22,7 @@ ShaderProgram::ShaderProgram(std::vector<ShaderAttribute> Attributes)
 	CheckLinkage();
 	glUniformBlockBinding(ProgramId, GetUboId("SharedMatrices"), UBO_BP);
 
-	VShader.DetachAndDelete(ProgramId);
-	FShader.DetachAndDelete(ProgramId);
+	for (i = 0; i < NumOfShaders; i++) shaders[i].DetachAndDelete(ProgramId);
 }
 
 void ShaderProgram::CheckLinkage()

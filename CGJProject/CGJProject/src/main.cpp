@@ -210,8 +210,13 @@ void createShaderProgram()
 {
 	std::vector<ShaderAttribute> Attributes = { {VERTICES, "in_Position"},
 												{TEXCOORDS, "inTexcoord"},
-												{NORMALS, "inNormal"} };
-	ShaderProg = std::make_shared<ShaderProgram>(Attributes);
+												{NORMALS, "inNormal"}
+												};
+	std::vector<std::string> ShaderPaths = { "src/Shader/VertexShader.vert",
+											 "src/Shader/FragmentShader.frag"
+											};
+
+	ShaderProg = std::make_shared<ShaderProgram>(Attributes, ShaderPaths);
 
 	checkOpenGLError("ERROR: Could not create shaders.");
 }
