@@ -1,5 +1,5 @@
 #include "Input.h"
-#include "Math/Public/Vector.h"
+#include "Math/Vector.h"
 
 #include "GL/glew.h"
 #include "GL/freeglut.h"

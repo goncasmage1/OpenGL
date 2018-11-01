@@ -16,23 +16,17 @@
     <Filter Include="Source Files\Math">
       <UniqueIdentifier>{7ea80672-9ffe-416f-aab7-355ae07e6abf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Math\Public">
-      <UniqueIdentifier>{367f1c9b-5b31-40cb-8c1a-0588eddf725e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Math\Private">
-      <UniqueIdentifier>{f42e53d7-553e-4588-87f1-6fa63c13c2e7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Shader">
       <UniqueIdentifier>{a8080e10-d66a-4a09-b225-280c59c4775e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Shader">
+      <UniqueIdentifier>{6d1660ce-33e4-4c22-bbe0-10778dd45aed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Math">
+      <UniqueIdentifier>{643019fd-0dd6-408d-9b73-f338c04518d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Math\Private\Matrix.cpp">
-      <Filter>Source Files\Math\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\Private\Vector.cpp">
-      <Filter>Source Files\Math\Private</Filter>
-    </ClCompile>
     <ClCompile Include="src\Shader\FragmentShader.cpp">
       <Filter>Source Files\Shader</Filter>
     </ClCompile>
@@ -54,43 +48,64 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Math\Private\Quaternion.cpp">
-      <Filter>Source Files\Math\Private</Filter>
+    <ClCompile Include="src\Scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Math\Matrix.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Math\Quaternion.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Math\Vector.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MeshLoader.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Math\Public\Matrix.h">
-      <Filter>Source Files\Math\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\Public\Vector.h">
-      <Filter>Source Files\Math\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Shader\FragmentShader.h">
-      <Filter>Source Files\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Shader\Shader.h">
-      <Filter>Source Files\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Shader\ShaderProgram.h">
-      <Filter>Source Files\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Shader\VertexShader.h">
-      <Filter>Source Files\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Input.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Camera.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Quaternion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Math\Public\Quaternion.h">
-      <Filter>Source Files\Math\Public</Filter>
+    <ClInclude Include="src\Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader\VertexShader.h">
+      <Filter>Header Files\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader\ShaderProgram.h">
+      <Filter>Header Files\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader\Shader.h">
+      <Filter>Header Files\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader\FragmentShader.h">
+      <Filter>Header Files\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Math\Matrix.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Math\Quaternion.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Math\Vector.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MeshLoader.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

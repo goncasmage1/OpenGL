@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Math/Public/Vector.h"
-#include "Math/Public/Matrix.h"
-#include "Math/Public/Quaternion.h"
+#include "Math/Vector.h"
+#include "Math/Matrix.h"
+#include "Math/Quaternion.h"
 
 class Camera
 {

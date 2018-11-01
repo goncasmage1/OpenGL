@@ -126,9 +126,12 @@
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Math\Private\Matrix.cpp" />
-    <ClCompile Include="src\Math\Private\Quaternion.cpp" />
-    <ClCompile Include="src\Math\Private\Vector.cpp" />
+    <ClCompile Include="src\Math\Matrix.cpp" />
+    <ClCompile Include="src\Math\Quaternion.cpp" />
+    <ClCompile Include="src\Math\Vector.cpp" />
+    <ClCompile Include="src\Mesh.cpp" />
+    <ClCompile Include="src\MeshLoader.cpp" />
+    <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\Shader\FragmentShader.cpp" />
     <ClCompile Include="src\Shader\Shader.cpp" />
     <ClCompile Include="src\Shader\ShaderProgram.cpp" />
@@ -136,12 +139,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Quaternion.h" />
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\Input.h" />
-    <ClInclude Include="src\Math\Public\Matrix.h" />
-    <ClInclude Include="src\Math\Public\Quaternion.h" />
-    <ClInclude Include="src\Math\Public\Vector.h" />
+    <ClInclude Include="src\Math\Matrix.h" />
+    <ClInclude Include="src\Math\Quaternion.h" />
+    <ClInclude Include="src\Math\Vector.h" />
+    <ClInclude Include="src\Mesh.h" />
+    <ClInclude Include="src\MeshLoader.h" />
+    <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\Shader\FragmentShader.h" />
     <ClInclude Include="src\Shader\Shader.h" />
     <ClInclude Include="src\Shader\ShaderProgram.h" />

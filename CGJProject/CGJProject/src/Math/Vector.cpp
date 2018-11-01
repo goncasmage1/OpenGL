@@ -1,5 +1,5 @@
-#include "../Public/Vector.h"
-#include "../Public/Quaternion.h"
+#include "Vector.h"
+#include "Quaternion.h"
 #include <sstream>
 
 #define DEGREES_TO_RADIANS 0.01745329251994329547

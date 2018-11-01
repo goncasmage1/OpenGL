@@ -1,5 +1,5 @@
-#include "../Public/Matrix.h"
-#include "../Public/Vector.h"
+#include "Matrix.h"
+#include "Vector.h"
 #include <sstream>
 #include <assert.h>
 

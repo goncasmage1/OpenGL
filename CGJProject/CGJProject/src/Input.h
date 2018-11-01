@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "Math/Public/Vector.h"
+#include "Math/Vector.h"
 
 class Input
 {

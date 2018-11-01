@@ -1,6 +1,6 @@
-#include "..\Public\Quaternion.h"
-#include "..\Public\Vector.h"
-#include "..\Public\Matrix.h"
+#include "Quaternion.h"
+#include "Vector.h"
+#include "Matrix.h"
 #include <sstream>
 
 #define DEGREES_TO_RADIANS 0.01745329251994329547

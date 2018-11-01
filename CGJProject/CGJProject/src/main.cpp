@@ -35,12 +35,14 @@
 #include "GL/glew.h"
 #include "GL/freeglut.h"
 
-#include "Math/Public/Vector.h"
-#include "Math/Public/Matrix.h"
-#include "Math/Public/Quaternion.h"
+#include "Math/Vector.h"
+#include "Math/Matrix.h"
+#include "Math/Quaternion.h"
 #include "Shader/ShaderProgram.h"
 #include "Input.h"
 #include "Camera.h"
+#include "MeshLoader.h"
+#include "Mesh.h"
 
 #define CAPTION "Hello Modern 2D World"
 
@@ -114,11 +116,7 @@ GLuint VaoId, VboId[2];
 std::shared_ptr<ShaderProgram> ShaderProg = nullptr;
 std::shared_ptr<Input> input = std::make_shared<Input>();
 std::shared_ptr<Camera> camera = std::make_shared<Camera>();
-
-bool TexcoordsLoaded, NormalsLoaded;
-std::vector <Vec3> Vertices, vertexData, Normals, normalData;
-std::vector <Vec2> Texcoords, texcoordData;
-std::vector <unsigned int> vertexIdx, texcoordIdx, normalIdx;
+std::shared_ptr<MeshLoader> meshLoader = std::make_shared<MeshLoader>();
 
 /////////////////////////////////////////////////////////////////////// ERRORS
 
@@ -222,105 +220,6 @@ void destroyShaderProgram()
 {
 	ShaderProg->Destroy();
 	checkOpenGLError("ERROR: Could not destroy shaders.");
-}
-
-/////////////////////////////////////////////////////////////////////// MESHES
-
-void parseVertex(std::stringstream& sin)
-{
-	Vec3 v;
-	sin >> v;
-	vertexData.push_back(v);
-}
-
-void parseTexcoord(std::stringstream& sin)
-{
-	Vec2 t;
-	sin >> t;
-	texcoordData.push_back(t);
-}
-
-void parseNormal(std::stringstream& sin)
-{
-	Vec3 n;
-	sin >> n;
-	normalData.push_back(n);
-}
-
-void parseFace(std::stringstream& sin)
-{
-	std::string token;
-	for (int i = 0; i < 3; i++)
-	{
-		std::getline(sin, token, '/');
-		if (token.size() > 0) vertexIdx.push_back(std::stoi(token));
-		std::getline(sin, token, '/');
-		if (token.size() > 0) texcoordIdx.push_back(std::stoi(token));
-		std::getline(sin, token, ' ');
-		if (token.size() > 0) normalIdx.push_back(std::stoi(token));
-	}
-}
-
-void parseLine(std::stringstream& sin)
-{
-	std::string s;
-	sin >> s;
-	if (s.compare("v") == 0) parseVertex(sin);
-	else if (s.compare("vt") == 0) parseTexcoord(sin);
-	else if (s.compare("vn") == 0) parseNormal(sin);
-	else if (s.compare("f") == 0) parseFace(sin);
-}
-
-void loadMeshData(const std::string& filename)
-{
-	std::ifstream ifile(filename);
-	std::string line;
-	while (std::getline(ifile, line))
-	{
-		std::stringstream ss = std::stringstream(line);
-		parseLine(ss);
-	}
-	TexcoordsLoaded = (texcoordIdx.size() > 0);
-	NormalsLoaded = (normalIdx.size() > 0);
-}
-
-void processMeshData()
-{
-	for (unsigned int i = 0; i < vertexIdx.size(); i++)
-	{
-		unsigned int vi = vertexIdx[i];
-		Vec3 v = vertexData[vi - 1];
-		Vertices.push_back(v);
-		if (TexcoordsLoaded)
-		{
-			unsigned int ti = texcoordIdx[i];
-			Vec2 t = texcoordData[ti - 1];
-			Texcoords.push_back(t);
-		}
-		if (NormalsLoaded)
-		{
-			unsigned int ni = normalIdx[i];
-			Vec3 n = normalData[ni - 1];
-			Normals.push_back(n);
-		}
-	}
-}
-
-void freeMeshData()
-{
-	vertexData.clear();
-	texcoordData.clear();
-	normalData.clear();
-	vertexIdx.clear();
-	texcoordIdx.clear();
-	normalIdx.clear();
-}
-
-const void createMesh(const std::string& filename)
-{
-	loadMeshData(filename);
-	processMeshData();
-	freeMeshData();
 }
 
 /////////////////////////////////////////////////////////////////////// VAOs & VBOs
@@ -497,14 +396,17 @@ void drawScene()
 
 	GLint UniformId = ShaderProg->GetUniformId("Transformation");
 
-	//TODO Draw all vertices at once
+	//TODO: Draw all vertices at once
 	uint32_t counter = 0;
-	for (int i = 0; i < (Vertices.size() / 3); i++)
+	for (std::shared_ptr<Mesh> mesh : meshLoader->Meshes)
 	{
-		glUniformMatrix4fv(UniformId, 1, GL_FALSE, Mat4::IdentityMat().GetData());
-		glUniformMatrix4fv(ShaderProg->GetUniformId("ModelMatrix"), 1, GL_FALSE, camera->GetModelMatrix().GetData());
-		glDrawArrays(GL_TRIANGLES, counter, 3);
-		counter += 3;
+		for (int i = 0; i < (mesh->Vertices.size() / 3); i++)
+		{
+			glUniformMatrix4fv(UniformId, 1, GL_FALSE, Mat4::IdentityMat().GetData());
+			glUniformMatrix4fv(ShaderProg->GetUniformId("ModelMatrix"), 1, GL_FALSE, camera->GetModelMatrix().GetData());
+			glDrawArrays(GL_TRIANGLES, counter, 3);
+			counter += 3;
+		}
 	}
 
 	glUseProgram(0);
@@ -672,13 +574,8 @@ void init(int argc, char* argv[])
 	setupGLEW();
 	setupOpenGL();
 	setupCallbacks();
-	//createMesh(std::string("../../assets/models/blender_2.79/cube_vn.obj"));
-	//createMesh(std::string("../../assets/models/blender_2.79/cube_vtn.obj"));
-	//createMesh(std::string("../../assets/models/blender_2.79/torus_vn.obj"));
-	//createMesh(std::string("../../assets/models/blender_2.79/torus_smooth_vn.obj"));
-	createMesh(std::string("../../assets/models/blender_2.79/suzanne_vtn.obj"));
-	//createMesh(std::string("../../assets/models/blender_2.79/utah_teapot_vtn.obj"));
-	//createMesh(std::string("../../assets/models/blender_2.79/standford_bunny_vn.obj"));
+
+	meshLoader->CreateMesh(std::string("../../assets/models/Solid Snake.obj"));
 
 	/*createShaderProgram(std::string("../../projects/ModernOpenGL/src/Introduction/shaders/cube_vs.glsl"),
 						std::string("../../projects/ModernOpenGL/src/Introduction/shaders/cube_fs.glsl"));*/
