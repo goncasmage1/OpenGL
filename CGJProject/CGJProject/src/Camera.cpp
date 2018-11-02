@@ -19,10 +19,13 @@ Camera::Camera()
 
 void Camera::RotateCamera(Vec2 rotation)
 {
-	Rotation.x -= rotation.x;
-	Rotation.y += rotation.y;
+	if (!bUseQuaternion)
+	{
+		Rotation.x -= rotation.x;
+		Rotation.y += rotation.y;
+	}
+	else Rotator = FromAngleAxis(Vec4::X(), rotation.y) * FromAngleAxis(Vec4::Y(), rotation.x) * Rotator;
 
-	Rotator = FromAngleAxis(Vec4::Y(), rotation.x) * FromAngleAxis(Vec4::X(), -rotation.y) * Rotator;
 	Mat4 RotMat = bUseQuaternion ? Rotator.GetMatrix() : Mat4::RotationMat(RightVector, Rotation.y) * Mat4::RotationMat(UpVector, -Rotation.x);
 
 	ViewMat = Mat4::TranslationMat(Vec3(0, 0, -Distance)) * RotMat;
