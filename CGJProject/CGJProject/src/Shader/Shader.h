@@ -16,7 +16,7 @@ protected:
 
 public:
 
-	Shader(const std::string& shaderPath);
+	Shader(const std::string& shaderPath, const GLenum shader_type);
 
 	void Attach(GLuint ProgramId);
 	void DetachAndDelete(GLuint ProgramId);

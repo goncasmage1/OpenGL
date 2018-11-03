@@ -9,9 +9,10 @@ ShaderProgram::ShaderProgram(const std::vector<ShaderAttribute>& Attributes, con
 {
 	size_t NumOfShaders = ShaderPaths.size();
 	std::vector<Shader> shaders;
+	std::vector<GLenum> shaderTypes = {GL_VERTEX_SHADER, GL_FRAGMENT_SHADER};
 	int i = 0;
 
-	for (i = 0; i < NumOfShaders; i++) shaders.push_back(Shader(ShaderPaths[i]));
+	for (i = 0; i < NumOfShaders; i++) shaders.push_back(Shader(ShaderPaths[i], shaderTypes[i]));
 
 	ProgramId = glCreateProgram();
 	for (i = 0; i < NumOfShaders; i++) shaders[i].Attach(ProgramId);

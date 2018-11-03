@@ -1,0 +1,290 @@
+# Blender MTL File: 'Solid Snake.blend'
+# Material Count: 24
+
+newmtl arms_Arms.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Arms.png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Arms.png
+
+newmtl bag_Bag.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Bag.png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Bag.png
+
+newmtl bombs_Bombs.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Bombs.png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Bombs.png
+
+newmtl bow_Bow.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Bow.png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Bow.png
+map_d C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Bow.png
+
+newmtl case1_Case1.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Case1.png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Case1.png
+
+newmtl case2_Case2.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Case2.png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Case2.png
+
+newmtl case3_Case3.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Case3.png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Case3.png
+
+newmtl case4_Case4.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Case4.png
+
+newmtl case5_Case5.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Case5.png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Case5.png
+
+newmtl case6_Case6.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Case6.png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Case6.png
+
+newmtl chest_Chest.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Chest.png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Chest.png
+
+newmtl face_Face.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Face.png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Face.png
+
+newmtl groin_Groin.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Groin.png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Groin.png
+
+newmtl hair1_Hair1.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Hair1.png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Hair1.png
+
+newmtl hair2_Hair2.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Hair2.png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Hair2.png
+
+newmtl hair3_Hair3.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Hair3.png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Hair3.png
+map_d C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Hair3.png
+
+newmtl hands_behind_Hands(Be
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Hands(Behind).png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Hands(Behind).png
+
+newmtl hands_front_Hands(Fro
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Hands(Front).png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Hands(Front).png
+
+newmtl leg1_Leg1.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Leg1.png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Leg1.png
+
+newmtl leg2_Leg2.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Leg2.png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Leg2.png
+
+newmtl shoes1_Shoes1.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Shoes1.png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Shoes1.png
+
+newmtl shoes2_Shoes2.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Shoes2.png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Shoes2.png
+
+newmtl shoes3_Shoes3.png
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Shoes3.png
+map_Tr C:\\Users\\LinkWolfen\\Documents\\Solid Snake\\Solid Snake\\Textures\\Shoes3.png
+
+newmtl shoulders_Shoulders.p
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\LinkWolfen\Documents\Solid Snake\Solid Snake\Textures\Shoulders.png

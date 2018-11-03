@@ -113,6 +113,8 @@ unsigned int FrameCount = 0;
 
 GLuint VaoId, VboId[2];
 
+GLsizei numberOfMeshes = 0;
+
 std::shared_ptr<ShaderProgram> ShaderProg = nullptr;
 std::shared_ptr<Input> input = std::make_shared<Input>();
 std::shared_ptr<Camera> camera = std::make_shared<Camera>();
@@ -209,8 +211,8 @@ static void checkOpenGLError(std::string error)
 void createShaderProgram()
 {
 	std::vector<ShaderAttribute> Attributes = { {VERTICES, "in_Position"},
-												{TEXCOORDS, "inTexcoord"},
-												{NORMALS, "inNormal"}
+												{TEXCOORDS, "in_Color"}/*,
+												{NORMALS, "inNormal"}*/
 												};
 	std::vector<std::string> ShaderPaths = { "src/Shader/VertexShader.vert",
 											 "src/Shader/FragmentShader.frag"
@@ -332,55 +334,63 @@ const std::vector<Mat4> Mats[] = {
 
 void createBufferObjects()
 {
+	numberOfMeshes = (GLsizei)meshLoader->Meshes.size();
+
+	if (numberOfMeshes == 0) return;
 	GLuint VboVertices, VboTexcoords, VboNormals;
 
-	glGenVertexArrays(1, &VaoId);
-	glBindVertexArray(VaoId);
+	glGenVertexArrays(numberOfMeshes, &VaoId);
+	for (int i = 0; i < numberOfMeshes; i++)
 	{
-		glGenBuffers(2, VboId);
-
-		glBindBuffer(GL_ARRAY_BUFFER, VboId[0]);
+		glBindVertexArray(VaoId);
 		{
-			glGenBuffers(1, &VboVertices);
-			glBindBuffer(GL_ARRAY_BUFFER, VboVertices);
-			glBufferData(GL_ARRAY_BUFFER, Vertices.size() * sizeof(Vec3), &Vertices[0], GL_STATIC_DRAW);
-			glEnableVertexAttribArray(VERTICES);
-			glVertexAttribPointer(VERTICES, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
+			glGenBuffers(2, VboId);
 
-			if (TexcoordsLoaded)
+			glBindBuffer(GL_ARRAY_BUFFER, VboId[0]);
 			{
-				glGenBuffers(1, &VboTexcoords);
-				glBindBuffer(GL_ARRAY_BUFFER, VboTexcoords);
-				glBufferData(GL_ARRAY_BUFFER, Texcoords.size() * sizeof(Vec2), &Texcoords[0], GL_STATIC_DRAW);
-				glEnableVertexAttribArray(TEXCOORDS);
-				glVertexAttribPointer(TEXCOORDS, 2, GL_FLOAT, GL_FALSE, sizeof(Vec2), 0);
-			}
-			if (NormalsLoaded)
-			{
-				glGenBuffers(1, &VboNormals);
-				glBindBuffer(GL_ARRAY_BUFFER, VboNormals);
-				glBufferData(GL_ARRAY_BUFFER, Normals.size() * sizeof(Vec3), &Normals[0], GL_STATIC_DRAW);
-				glEnableVertexAttribArray(NORMALS);
-				glVertexAttribPointer(NORMALS, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
+				glGenBuffers(1, &VboVertices);
+				glBindBuffer(GL_ARRAY_BUFFER, VboVertices);
+				glBufferData(GL_ARRAY_BUFFER, meshLoader->Meshes[i]->Vertices.size() * sizeof(Vec3), &meshLoader->Meshes[i]->Vertices[0], GL_STATIC_DRAW);
+				glEnableVertexAttribArray(VERTICES);
+				glVertexAttribPointer(VERTICES, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
+
+				if (meshLoader->Meshes[i]->TexcoordsLoaded)
+				{
+					glGenBuffers(1, &VboTexcoords);
+					glBindBuffer(GL_ARRAY_BUFFER, VboTexcoords);
+					glBufferData(GL_ARRAY_BUFFER, meshLoader->Meshes[i]->Texcoords.size() * sizeof(Vec2), &meshLoader->Meshes[i]->Texcoords[0], GL_STATIC_DRAW);
+					glEnableVertexAttribArray(TEXCOORDS);
+					glVertexAttribPointer(TEXCOORDS, 2, GL_FLOAT, GL_FALSE, sizeof(Vec2), 0);
+				}
+				if (meshLoader->Meshes[i]->NormalsLoaded)
+				{
+					glGenBuffers(1, &VboNormals);
+					glBindBuffer(GL_ARRAY_BUFFER, VboNormals);
+					glBufferData(GL_ARRAY_BUFFER, meshLoader->Meshes[i]->Normals.size() * sizeof(Vec3), &meshLoader->Meshes[i]->Normals[0], GL_STATIC_DRAW);
+					glEnableVertexAttribArray(NORMALS);
+					glVertexAttribPointer(NORMALS, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
+				}
 			}
 		}
+		glBindVertexArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glDeleteBuffers(1, &VboVertices);
+		glDeleteBuffers(1, &VboTexcoords);
+		glDeleteBuffers(1, &VboNormals);
 	}
-	glBindVertexArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glDeleteBuffers(1, &VboVertices);
-	glDeleteBuffers(1, &VboTexcoords);
-	glDeleteBuffers(1, &VboNormals);
 
 	checkOpenGLError("ERROR: Could not create VAOs and VBOs.");
 }
 
 void destroyBufferObjects()
 {
+	if (meshLoader->Meshes.size() == 0) return;
+
 	glBindVertexArray(VaoId);
 	glDisableVertexAttribArray(VERTICES);
 	glDisableVertexAttribArray(TEXCOORDS);
 	glDisableVertexAttribArray(NORMALS);
-	glDeleteVertexArrays(1, &VaoId);
+	glDeleteVertexArrays(numberOfMeshes, &VaoId);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
@@ -399,19 +409,15 @@ void drawScene()
 	glBindVertexArray(VaoId);
 	glUseProgram(ShaderProg->GetProgramId());
 
-	GLint UniformId = ShaderProg->GetUniformId("Transformation");
+	GLint TransformationId = ShaderProg->GetUniformId("Transformation");
+	GLint ModelId = ShaderProg->GetUniformId("ModelMatrix");
 
 	//TODO: Draw all vertices at once
-	uint32_t counter = 0;
 	for (std::shared_ptr<Mesh> mesh : meshLoader->Meshes)
 	{
-		for (int i = 0; i < (mesh->Vertices.size() / 3); i++)
-		{
-			glUniformMatrix4fv(UniformId, 1, GL_FALSE, Mat4::IdentityMat().GetData());
-			glUniformMatrix4fv(ShaderProg->GetUniformId("ModelMatrix"), 1, GL_FALSE, camera->GetModelMatrix().GetData());
-			glDrawArrays(GL_TRIANGLES, counter, 3);
-			counter += 3;
-		}
+		glUniformMatrix4fv(TransformationId, 1, GL_FALSE, Mat4::IdentityMat().GetData());
+		glUniformMatrix4fv(ModelId, 1, GL_FALSE, camera->GetModelMatrix().GetData());
+		glDrawArrays(GL_TRIANGLES, 0, (GLsizei)mesh->Vertices.size());
 	}
 
 	glUseProgram(0);
@@ -581,9 +587,6 @@ void init(int argc, char* argv[])
 	setupCallbacks();
 
 	meshLoader->CreateMesh(std::string("../../assets/models/Solid Snake.obj"));
-
-	/*createShaderProgram(std::string("../../projects/ModernOpenGL/src/Introduction/shaders/cube_vs.glsl"),
-						std::string("../../projects/ModernOpenGL/src/Introduction/shaders/cube_fs.glsl"));*/
 	createShaderProgram();
 	createBufferObjects();
 }

@@ -1,7 +1,7 @@
 #include "Shader.h"
 #include <fstream>
 
-Shader::Shader(const std::string& shaderPath)
+Shader::Shader(const std::string& shaderPath, const GLenum shader_type)
 {
 	std::ifstream myReadFile(shaderPath);
 	std::string content((std::istreambuf_iterator<char>(myReadFile)),
@@ -9,7 +9,7 @@ Shader::Shader(const std::string& shaderPath)
 
 	const GLchar* shader = content.c_str();
 
-	id = glCreateShader(GL_FRAGMENT_SHADER);
+	id = glCreateShader(shader_type);
 
 	glShaderSource(id, 1, &shader, 0);
 	glCompileShader(id);
