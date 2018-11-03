@@ -50,63 +50,6 @@
 #define TEXCOORDS 1
 #define NORMALS 2
 
-#define CENTERED_RIGHT_TRIANGLE(base, height, color_r, color_g, color_b) \
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
-	{ { base, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
-	{ { base/2, height, 0.0f, 1.0f }, {color_r, color_g, color_b, 1.0f } },
-#define CENTERED_RIGHT_TRIANGLE_BACK(base, height, color_r, color_g, color_b) \
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
-	{ { base/2, height, 0.0f, 1.0f }, {color_r, color_g, color_b, 1.0f } },\
-	{ { base, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },
-
-#define LEFT_LEAN_RIGHT_TRIANGLE(base, height, color_r, color_g, color_b) \
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
-	{ { base, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
-	{ { 0.f, height, 0.0f, 1.0f }, {color_r, color_g, color_b, 1.0f } },
-#define LEFT_LEAN_RIGHT_TRIANGLE_BACK(base, height, color_r, color_g, color_b) \
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
-	{ { 0.f, height, 0.0f, 1.0f }, {color_r, color_g, color_b, 1.0f } },\
-	{ { base, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },
-
-#define RIGHT_LEAN_RIGHT_TRIANGLE(base, height, color_r, color_g, color_b) \
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
-	{ { base, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
-	{ { base, height, 0.0f, 1.0f }, {color_r, color_g, color_b, 1.0f } },
-#define RIGHT_LEAN_RIGHT_TRIANGLE_BACK(base, height, color_r, color_g, color_b) \
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
-	{ { base, height, 0.0f, 1.0f }, {color_r, color_g, color_b, 1.0f } },\
-	{ { base, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },
-
-#define SQUARE(side, color_r, color_g, color_b) \
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f }},\
-	{ { side, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
-	{ { 0.00f, side, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
-	{ { side, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
-	{ { side, side, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
-	{ { 0.00f, side, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },
-#define SQUARE_BACK(side, color_r, color_g, color_b) \
-	{{ 0.00f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f }},\
-	{ { 0.00f, side, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
-	{ { side, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
-	{ { side, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
-	{ { 0.00f, side, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },\
-	{ { side, side, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },
-
-#define PARALELOGRAM(base, height, offset, color_r, color_g, color_b) \
-	{ { 0.0f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } }, \
-	{ { base, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } }, \
-	{ { base + offset, height, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } }, \
-	{ { 0.0f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } }, \
-	{ { base + offset, height, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } }, \
-	{ { offset, height, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },
-#define PARALELOGRAM_BACK(base, height, offset, color_r, color_g, color_b) \
-	{ { 0.0f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } }, \
-	{ { base + offset, height, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } }, \
-	{ { base, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } }, \
-	{ { 0.0f, 0.0f, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } }, \
-	{ { offset, height, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } }, \
-	{ { base + offset, height, 0.0f, 1.0f }, { color_r, color_g, color_b, 1.0f } },
-
 int WinX = 800, WinY = 800;
 int WindowHandle = 0;
 unsigned int FrameCount = 0;
