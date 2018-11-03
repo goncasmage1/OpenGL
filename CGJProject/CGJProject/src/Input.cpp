@@ -32,6 +32,12 @@ void Input::keyboardButtontDown(unsigned char Key)
 		case 'g':
 			bGDown = !bGDown;
 			break;
+		case 'm':
+			AnimationDirection += 1;
+			break;
+		case 'n':
+			AnimationDirection -= 1;
+			break;
 		case 27:
 			exit(1);
 			break;
@@ -59,6 +65,12 @@ void Input::keyboardButtonUp(unsigned char Key)
 			break;
 		case 'q':
 			movement.y += 1.f;
+			break;
+		case 'm':
+			AnimationDirection -= 1;
+			break;
+		case 'n':
+			AnimationDirection += 1;
 			break;
 		case 27:
 			exit(1);

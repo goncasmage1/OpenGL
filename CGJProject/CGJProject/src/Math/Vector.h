@@ -45,6 +45,7 @@ struct Vec2
 	void Clean();
 	friend const Vec2 Normalized(const Vec2& V);
 	friend const float Dot(const Vec2& V1, const Vec2& V2);
+	friend const Vec2 Lerp(const Vec2& From, const Vec2& To, float progress);
 };
 
 struct Vec3
@@ -94,7 +95,8 @@ struct Vec3
 	friend const float Dot(const Vec3& V1, const Vec3& V2);
 	friend const Vec3 Cross(const Vec3& V1, const Vec3& V2);
 	friend const Vec3 RotateVector(const Vec3& V, const Vec3& a, const float degrees);
-	 
+	friend const Vec3 Lerp(const Vec3& From, const Vec3& To, float progress);
+
 };
 
 struct Vec4
@@ -142,6 +144,7 @@ struct Vec4
 	void Clean();
 	friend const Vec4 Normalized(const Vec4& V);
 	friend const float Dot(const Vec4& V1, const Vec4& V2);
-	friend const struct Quat FromAngleAxis(const Vec4& axis, float degrees);
+	friend struct Quat FromAngleAxis(const Vec4& axis, float degrees);
+	friend const Vec4 Lerp(const Vec4& From, const Vec4& To, float progress);
 
 };

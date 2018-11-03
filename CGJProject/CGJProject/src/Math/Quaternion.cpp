@@ -7,18 +7,18 @@
 #define RADIANS_TO_DEGREES 57.29577951308232185913
 #define TOLERANCE 0.000001f
 
-Quat::Quat()
+Quat::Quat() :
+	t(1.f), x(0.f), y(0.f), z(0.f)
 {
-	t = x = y = z = 0.f;
 }
 
 Quat::Quat(float val) :
-	t(val), x(val), y(val), z(val)
+	t(1.f), x(val), y(val), z(val)
 {
 }
 
 Quat::Quat(float newX, float newY, float newZ) :
-	t(0), x(newX), y(newY), z(newZ)
+	t(1.f), x(newX), y(newY), z(newZ)
 {
 }
 

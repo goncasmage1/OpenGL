@@ -53,6 +53,7 @@
 int WinX = 800, WinY = 800;
 int WindowHandle = 0;
 unsigned int FrameCount = 0;
+float animationProgress = 0.f;
 
 GLuint VaoId, VboId[2];
 
@@ -62,6 +63,12 @@ std::shared_ptr<ShaderProgram> ShaderProg = nullptr;
 std::shared_ptr<Input> input = std::make_shared<Input>();
 std::shared_ptr<Camera> camera = std::make_shared<Camera>();
 std::shared_ptr<MeshLoader> meshLoader = std::make_shared<MeshLoader>();
+
+struct Animation
+{
+	Transform From;
+	Transform To;
+};
 
 /////////////////////////////////////////////////////////////////////// ERRORS
 
@@ -174,104 +181,104 @@ void destroyShaderProgram()
 
 /////////////////////////////////////////////////////////////////////// VAOs & VBOs
 
-const std::vector<Mat4> Mats[] = {
-	//Triangle 1
+const std::vector<Animation> animations = {
 	{
-		Mat4::RotationMat(Vec3::Z(), 180),
-		Mat4::TranslationMat(Vec3(0.25, 0.5, 0)),
-		Mat4::ScaleMat(1.5),
+		//From Triangle 1
+		Transform(
+				Vec3(0.25f, 0.5f, 0.f),
+				FromAngleAxis(Vec4::Z(), 180.f),
+				Vec3(1.5f)
+				),
+		//To Triangle 1
+		Transform(
+				Vec3(0.25f, 0.5f, 0.f),
+				FromAngleAxis(Vec4::Z(), 180.f),
+				Vec3(1.5f)
+				)
 	},
-	//Triangle 2
 	{
-		Mat4::RotationMat(Vec3::Z(), 90),
-		Mat4::TranslationMat(Vec3(0.25, 0, 0)),
-		Mat4::ScaleMat(1.5),
+		//From Triangle 2
+		Transform(
+				Vec3(0.25f, 0.f, 0.f),
+				FromAngleAxis(Vec4::Z(), 90.f),
+				Vec3(1.5f)
+				),
+		//To Triangle 2
+		Transform(
+				Vec3(0.25f, 0.f, 0.f),
+				FromAngleAxis(Vec4::Z(), 90.f),
+				Vec3(1.5f)
+				)
 	},
-	//Triangle 3
 	{
-		Mat4::RotationMat(Vec3::Z(), 135),
-		Mat4::ScaleMat(1.06)
+		//From Triangle 3
+		Transform(
+				Vec3(),
+				FromAngleAxis(Vec4::Z(), 135.f),
+				Vec3(1.06f)
+				),
+		//To Triangle 3
+		Transform(
+				Vec3(),
+				FromAngleAxis(Vec4::Z(), 135.f),
+				Vec3(1.06f)
+				)
 	},
-	//Triangle 4
 	{
-		Mat4::RotationMat(Vec3::Z(), -90),
-		Mat4::ScaleMat(0.75),
-		Mat4::TranslationMat(Vec3(-0.25*0.75, 0.562, 0)),
+		//From Triangle 4
+		Transform(
+				Vec3(-0.25f, 0.75f, 0.f),
+				FromAngleAxis(Vec4::Z(), -90.f),
+				Vec3(0.75f)
+				),
+		//To Triangle 4
+		Transform(
+				Vec3(-0.25f, 0.75f, 0.f),
+				FromAngleAxis(Vec4::Z(), -90.f),
+				Vec3(0.75f)
+				)
 	},
-	//Triangle 5
 	{
-		Mat4::ScaleMat(0.75),
+		//From Triangle 5
+		Transform(
+				Vec3(),
+				Quat(),
+				Vec3(0.75f)
+				),
+		//To Triangle 5
+		Transform(
+				Vec3(),
+				Quat(),
+				Vec3(0.75f)
+				)
 	},
-	//Square 1.1
 	{
-		Mat4::RotationMat(Vec3::Z(), 45),
-		Mat4::ScaleMat(1.06),
+		//From Square
+		Transform(
+				Vec3(),
+				FromAngleAxis(Vec4::Z(), 45.f),
+				Vec3(1.06f)
+				),
+		//To Square
+		Transform(
+				Vec3(),
+				FromAngleAxis(Vec4::Z(), 45.f),
+				Vec3(1.06f)
+				)
 	},
-	//Square 1.2
 	{
-		Mat4::RotationMat(Vec3::Z(), 45),
-		Mat4::ScaleMat(1.06),
-	},
-	//Paralelogram 1.1
-	{
-		Mat4::RotationMat(Vec3::Z(), -90),
-		Mat4::ScaleMat(1.07),
-		Mat4::TranslationMat(Vec3(-0.375, 0.75, 0)),
-	},
-	//Paralelogram 1.2
-	{
-		Mat4::RotationMat(Vec3::Z(), -90),
-		Mat4::ScaleMat(1.08),
-		Mat4::TranslationMat(Vec3(-0.375, 0.75, 0)),
-	},
-	//Triangle 1 back
-	{
-		Mat4::RotationMat(Vec3::Z(), 180),
-		Mat4::TranslationMat(Vec3(0.25, 0.5, 0)),
-		Mat4::ScaleMat(1.5),
-	},
-	//Triangle 2 back
-	{
-		Mat4::RotationMat(Vec3::Z(), 90),
-		Mat4::TranslationMat(Vec3(0.25, 0, 0)),
-		Mat4::ScaleMat(1.5),
-	},
-	//Triangle 3 back
-	{
-		Mat4::RotationMat(Vec3::Z(), 135),
-		Mat4::ScaleMat(1.06)
-	},
-	//Triangle 4 back
-	{
-		Mat4::RotationMat(Vec3::Z(), -90),
-		Mat4::ScaleMat(0.75),
-		Mat4::TranslationMat(Vec3(-0.25*0.75, 0.562, 0)),
-	},
-	//Triangle 5 back
-	{
-		Mat4::ScaleMat(0.75),
-	},
-	//Square 1.1 back
-	{
-		Mat4::RotationMat(Vec3::Z(), 45),
-		Mat4::ScaleMat(1.06),
-	},
-	//Square 1.2 back
-	{
-		Mat4::RotationMat(Vec3::Z(), 45),
-		Mat4::ScaleMat(1.06),
-	},
-	//Paralelogram 1.1 back
-	{
-		Mat4::RotationMat(Vec3::Z(), -90),
-		Mat4::ScaleMat(1.07),
-		Mat4::TranslationMat(Vec3(-0.375, 0.75, 0)),
-	},
-	//Paralelogram 1.2 back
-	{
-		Mat4::RotationMat(Vec3::Z(), -90),
-		Mat4::ScaleMat(1.08),
-		Mat4::TranslationMat(Vec3(-0.375, 0.75, 0)),
+		//From Paralelogram
+		Transform(
+				Vec3(-0.35f, 0.7f, 0.f),
+				FromAngleAxis(Vec4::Z(), -90.f),
+				Vec3(1.07f)
+				),
+		//To Paralelogram
+		Transform(
+				Vec3(-0.35f, 0.7f, 0.f),
+				FromAngleAxis(Vec4::Z(), -90.f),
+				Vec3(1.07f)
+				)
 	},
 };
 
@@ -358,7 +365,8 @@ void drawScene()
 	//TODO: Draw all vertices at once
 	for (std::shared_ptr<Mesh> mesh : meshLoader->Meshes)
 	{
-		glUniformMatrix4fv(TransformationId, 1, GL_FALSE, Mat4::IdentityMat().GetData());
+		mesh->SetAnimationProgress(animationProgress);
+		glUniformMatrix4fv(TransformationId, 1, GL_FALSE, mesh->GetTransformationMatrix().GetData());
 		glUniformMatrix4fv(ModelId, 1, GL_FALSE, camera->GetModelMatrix().GetData());
 		glDrawArrays(GL_TRIANGLES, 0, (GLsizei)mesh->Vertices.size());
 	}
@@ -375,8 +383,11 @@ void processInput()
 	if (input->IsGDown() != camera->UsingQuaternion()) camera->ToggleQuaternion();
 
 	camera->RotateCamera(input->GetMouseDelta());
-	//camera->MoveCamera(input->GetMovement());
 	camera->Zoom(input->GetWheelDelta());
+
+	animationProgress += input->GetAnimationDelta();
+	if (animationProgress > 1.f) animationProgress = 1.f;
+	else if (animationProgress < 0.f) animationProgress = 0.f;
 }
 
 /////////////////////////////////////////////////////////////////////// CALLBACKS
@@ -522,14 +533,24 @@ void setupGLUT(int argc, char* argv[])
 	}
 }
 
+void setupMeshes()
+{
+	meshLoader->CreateMesh(std::string("../../assets/models/Solid Snake.obj"));
+
+	for (int i = 0; i < meshLoader->Meshes.size(); i++)
+	{
+		meshLoader->Meshes[i]->startTransform = animations[i].From;
+		meshLoader->Meshes[i]->endTransform = animations[i].To;
+	}
+}
+
 void init(int argc, char* argv[])
 {
 	setupGLUT(argc, argv);
 	setupGLEW();
 	setupOpenGL();
 	setupCallbacks();
-
-	meshLoader->CreateMesh(std::string("../../assets/models/Solid Snake.obj"));
+	setupMeshes();
 	createShaderProgram();
 	createBufferObjects();
 }

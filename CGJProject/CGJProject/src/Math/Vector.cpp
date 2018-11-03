@@ -223,6 +223,13 @@ const float Dot(const Vec2& V1, const Vec2& V2)
 	return (V1.x*V2.x + V1.y*V2.y);
 }
 
+const Vec2 Lerp(const Vec2 & From, const Vec2 & To, float progress)
+{
+	Vec2 Difference = To - From;
+
+	return (From + Difference * progress);
+}
+
 /////////
 // Vec3
 /////////
@@ -482,6 +489,13 @@ const Vec3 RotateVector(const Vec3& V, const Vec3 & a, const float degrees)
 {
 	Vec3 NewVec = (std::cos(degrees*PI) * V) + (std::sin(degrees*PI)*(Cross(a, V))) + (a * (Dot(a, V)) * (1 - std::cos(degrees*PI)));
 	return NewVec;
+}
+
+const Vec3 Lerp(const Vec3 & From, const Vec3 & To, float progress)
+{
+	Vec3 Difference = To - From;
+
+	return (From + Difference * progress);
 }
 
 
@@ -744,7 +758,7 @@ const float Dot(const Vec4& V1, const Vec4& V2)
 	return (V1.x*V2.x + V1.y*V2.y + V1.z*V2.z + V1.w*V2.w);
 }
 
-const Quat FromAngleAxis(const Vec4 & axis, float degrees)
+Quat FromAngleAxis(const Vec4& axis, float degrees)
 {
 	Vec4 normalizedAxis = Normalized(axis);
 	float a = degrees * (float)DEGREES_TO_RADIANS;
@@ -754,4 +768,11 @@ const Quat FromAngleAxis(const Vec4 & axis, float degrees)
 	q.Clean();
 
 	return Normalized(q);
+}
+
+const Vec4 Lerp(const Vec4 & From, const Vec4 & To, float progress)
+{
+	Vec4 Difference = To - From;
+
+	return (From + Difference * progress);
 }

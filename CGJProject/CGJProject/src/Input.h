@@ -8,10 +8,12 @@ protected:
 
 	struct Vec3 movement = Vec3(0.f);
 	int wheelDirection = 0;
+	int AnimationDirection = 0;
 
 	struct Vec2 MouseSensitivity = Vec2(1.f);
 	struct Vec3 MoveSensitivity = Vec3(0.04f);
 	float WheelSensitivity = 0.2f;
+	float AnimationSpeed = 0.1f;
 
 	struct Vec2 MouseDelta;
 	struct Vec2 PreviousMousePosition;
@@ -36,6 +38,7 @@ public:
 	struct Vec3 GetMovement() { return movement * MoveSensitivity; }
 	float GetWheelDelta();
 	bool IsMiddleMouseButtonDown() const { return bMiddleMouseButtonDown; }
+	float GetAnimationDelta() const { return AnimationDirection * AnimationSpeed; }
 	bool IsPDown() const { return bPDown; }
 	bool IsGDown() const { return bGDown; }
 };
