@@ -6,6 +6,16 @@
 Scene::Scene()
 {
 	root = std::make_shared<SceneNode>(nullptr);
+
+	//CreateBufferObjects();
+}
+
+void Scene::CreateBufferObjects()
+{
+}
+
+void Scene::DestroyBufferObjects()
+{
 }
 
 void Scene::Draw()

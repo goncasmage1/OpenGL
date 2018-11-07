@@ -56,7 +56,7 @@ int WindowHandle = 0;
 unsigned int FrameCount = 0;
 float animationProgress = 0.f;
 
-GLuint VaoId, VboId[2];
+GLuint* VaoId, VboId[2];
 
 GLsizei numberOfMeshes = 0;
 
@@ -70,6 +70,107 @@ struct Animation
 {
 	Transform From;
 	Transform To;
+};
+
+const std::vector<Animation> animations = {
+	{
+		//From Triangle 1
+		Transform(
+				Vec3(0.25f, 0.5f, 0.f),
+				FromAngleAxis(Vec4::Z(), 180.f),
+				Vec3(1.5f)
+				),
+		//To Triangle 1
+		Transform(
+				Vec3(0.25f, 0.5f, 0.f),
+				FromAngleAxis(Vec4::Z(), 180.f),
+				Vec3(1.5f)
+				)
+	},
+	{
+		//From Triangle 2
+		Transform(
+				Vec3(0.25f, 0.f, 0.f),
+				FromAngleAxis(Vec4::Z(), 90.f),
+				Vec3(1.5f)
+				),
+		//To Triangle 2
+		Transform(
+				Vec3(0.25f, 0.f, 0.f),
+				FromAngleAxis(Vec4::Z(), 90.f),
+				Vec3(1.5f)
+				)
+	},
+	{
+		//From Triangle 3
+		Transform(
+				Vec3(),
+				FromAngleAxis(Vec4::Z(), 135.f),
+				Vec3(1.06f)
+				),
+		//To Triangle 3
+		Transform(
+				Vec3(),
+				FromAngleAxis(Vec4::Z(), 135.f),
+				Vec3(1.06f)
+				)
+	},
+	{
+		//From Triangle 4
+		Transform(
+				Vec3(-0.25f, 0.75f, 0.f),
+				FromAngleAxis(Vec4::Z(), -90.f),
+				Vec3(0.75f)
+				),
+		//To Triangle 4
+		Transform(
+				Vec3(-0.25f, 0.75f, 0.f),
+				FromAngleAxis(Vec4::Z(), -90.f),
+				Vec3(0.75f)
+				)
+	},
+	{
+		//From Triangle 5
+		Transform(
+				Vec3(),
+				Quat(),
+				Vec3(0.75f)
+				),
+		//To Triangle 5
+		Transform(
+				Vec3(),
+				Quat(),
+				Vec3(0.75f)
+				)
+	},
+	{
+		//From Square
+		Transform(
+				Vec3(),
+				FromAngleAxis(Vec4::Z(), 45.f),
+				Vec3(1.06f)
+				),
+		//To Square
+		Transform(
+				Vec3(),
+				FromAngleAxis(Vec4::Z(), 45.f),
+				Vec3(1.06f)
+				)
+	},
+	{
+		//From Paralelogram
+		Transform(
+				Vec3(-0.35f, 0.7f, 0.f),
+				FromAngleAxis(Vec4::Z(), -90.f),
+				Vec3(1.07f)
+				),
+		//To Paralelogram
+		Transform(
+				Vec3(-0.35f, 0.7f, 0.f),
+				FromAngleAxis(Vec4::Z(), -90.f),
+				Vec3(1.07f)
+				)
+	},
 };
 
 /////////////////////////////////////////////////////////////////////// ERRORS
@@ -183,118 +284,18 @@ void destroyShaderProgram()
 
 /////////////////////////////////////////////////////////////////////// VAOs & VBOs
 
-const std::vector<Animation> animations = {
-	{
-		//From Triangle 1
-		Transform(
-				Vec3(0.25f, 0.5f, 0.f),
-				FromAngleAxis(Vec4::Z(), 180.f),
-				Vec3(1.5f)
-				),
-		//To Triangle 1
-		Transform(
-				Vec3(0.25f, 0.5f, 0.f),
-				FromAngleAxis(Vec4::Z(), 180.f),
-				Vec3(1.5f)
-				)
-	},
-	{
-		//From Triangle 2
-		Transform(
-				Vec3(0.25f, 0.f, 0.f),
-				FromAngleAxis(Vec4::Z(), 90.f),
-				Vec3(1.5f)
-				),
-		//To Triangle 2
-		Transform(
-				Vec3(0.25f, 0.f, 0.f),
-				FromAngleAxis(Vec4::Z(), 90.f),
-				Vec3(1.5f)
-				)
-	},
-	{
-		//From Triangle 3
-		Transform(
-				Vec3(),
-				FromAngleAxis(Vec4::Z(), 135.f),
-				Vec3(1.06f)
-				),
-		//To Triangle 3
-		Transform(
-				Vec3(),
-				FromAngleAxis(Vec4::Z(), 135.f),
-				Vec3(1.06f)
-				)
-	},
-	{
-		//From Triangle 4
-		Transform(
-				Vec3(-0.25f, 0.75f, 0.f),
-				FromAngleAxis(Vec4::Z(), -90.f),
-				Vec3(0.75f)
-				),
-		//To Triangle 4
-		Transform(
-				Vec3(-0.25f, 0.75f, 0.f),
-				FromAngleAxis(Vec4::Z(), -90.f),
-				Vec3(0.75f)
-				)
-	},
-	{
-		//From Triangle 5
-		Transform(
-				Vec3(),
-				Quat(),
-				Vec3(0.75f)
-				),
-		//To Triangle 5
-		Transform(
-				Vec3(),
-				Quat(),
-				Vec3(0.75f)
-				)
-	},
-	{
-		//From Square
-		Transform(
-				Vec3(),
-				FromAngleAxis(Vec4::Z(), 45.f),
-				Vec3(1.06f)
-				),
-		//To Square
-		Transform(
-				Vec3(),
-				FromAngleAxis(Vec4::Z(), 45.f),
-				Vec3(1.06f)
-				)
-	},
-	{
-		//From Paralelogram
-		Transform(
-				Vec3(-0.35f, 0.7f, 0.f),
-				FromAngleAxis(Vec4::Z(), -90.f),
-				Vec3(1.07f)
-				),
-		//To Paralelogram
-		Transform(
-				Vec3(-0.35f, 0.7f, 0.f),
-				FromAngleAxis(Vec4::Z(), -90.f),
-				Vec3(1.07f)
-				)
-	},
-};
-
 void createBufferObjects()
 {
 	numberOfMeshes = (GLsizei)meshLoader->Meshes.size();
+	VaoId = new GLuint[numberOfMeshes];
 
 	if (numberOfMeshes == 0) return;
 	GLuint VboVertices, VboTexcoords, VboNormals;
 
-	glGenVertexArrays(numberOfMeshes, &VaoId);
+	glGenVertexArrays(numberOfMeshes, VaoId);
 	for (int i = 0; i < numberOfMeshes; i++)
 	{
-		glBindVertexArray(VaoId);
+		glBindVertexArray(VaoId[i]);
 		{
 			glGenBuffers(2, VboId);
 
@@ -336,15 +337,21 @@ void createBufferObjects()
 
 void destroyBufferObjects()
 {
-	if (meshLoader->Meshes.size() == 0) return;
+	numberOfMeshes = (GLsizei)meshLoader->Meshes.size();
+	if (numberOfMeshes == 0) return;
 
-	glBindVertexArray(VaoId);
-	glDisableVertexAttribArray(VERTICES);
-	glDisableVertexAttribArray(TEXCOORDS);
-	glDisableVertexAttribArray(NORMALS);
-	glDeleteVertexArrays(numberOfMeshes, &VaoId);
+	for (int i = 0; i < numberOfMeshes; i++)
+	{
+		glBindVertexArray(VaoId[i]);
+		glDisableVertexAttribArray(VERTICES);
+		glDisableVertexAttribArray(TEXCOORDS);
+		glDisableVertexAttribArray(NORMALS);
+	}
+	glDeleteVertexArrays(numberOfMeshes, VaoId);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+
+	delete VaoId;
 
 	checkOpenGLError("ERROR: Could not destroy VAOs and VBOs.");
 }
@@ -353,22 +360,23 @@ void destroyBufferObjects()
 
 void drawScene()
 {
-	scene->Draw();
+	//scene->Draw();
 
 	glBindBuffer(GL_UNIFORM_BUFFER, VboId[1]);
 	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), camera->GetViewMatrix().GetData());
 	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(Mat4), sizeof(Mat4), camera->GetProjectionMatrix(input->IsPDown()).GetData());
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
-	glBindVertexArray(VaoId);
-	glUseProgram(ShaderProg->GetProgramId());
-
 	GLint TransformationId = ShaderProg->GetUniformId("Transformation");
 	GLint ModelId = ShaderProg->GetUniformId("ModelMatrix");
 
-	//TODO: Draw all vertices at once
+	int i = 0;
 	for (std::shared_ptr<Mesh> mesh : meshLoader->Meshes)
 	{
+		glBindVertexArray(VaoId[i]);
+		i++;
+		glUseProgram(ShaderProg->GetProgramId());
+
 		mesh->SetAnimationProgress(animationProgress);
 		//glUniformMatrix4fv(TransformationId, 1, GL_FALSE, mesh->GetTransformationMatrix().GetData());
 		//glUniformMatrix4fv(ModelId, 1, GL_FALSE, camera->GetModelMatrix().GetData());

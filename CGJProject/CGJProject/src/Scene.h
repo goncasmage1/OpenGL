@@ -7,6 +7,9 @@ class Scene
 
 	std::shared_ptr<class SceneNode> root;
 
+	void CreateBufferObjects();
+	void DestroyBufferObjects();
+
 public:
 
 	Scene();
