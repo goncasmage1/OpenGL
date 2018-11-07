@@ -132,6 +132,7 @@
     <ClCompile Include="src\Mesh.cpp" />
     <ClCompile Include="src\MeshLoader.cpp" />
     <ClCompile Include="src\Scene.cpp" />
+    <ClCompile Include="src\SceneNode.cpp" />
     <ClCompile Include="src\Shader\Shader.cpp" />
     <ClCompile Include="src\Shader\ShaderProgram.cpp" />
   </ItemGroup>
@@ -145,6 +146,7 @@
     <ClInclude Include="src\Mesh.h" />
     <ClInclude Include="src\MeshLoader.h" />
     <ClInclude Include="src\Scene.h" />
+    <ClInclude Include="src\SceneNode.h" />
     <ClInclude Include="src\Shader\Shader.h" />
     <ClInclude Include="src\Shader\ShaderProgram.h" />
   </ItemGroup>

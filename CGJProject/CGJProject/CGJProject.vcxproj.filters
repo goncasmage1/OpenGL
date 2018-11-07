@@ -60,6 +60,9 @@
     <ClCompile Include="src\MeshLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\SceneNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -93,6 +96,9 @@
       <Filter>Header Files\Math</Filter>
     </ClInclude>
     <ClInclude Include="src\MeshLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SceneNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

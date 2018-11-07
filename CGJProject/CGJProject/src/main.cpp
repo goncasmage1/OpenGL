@@ -43,6 +43,7 @@
 #include "Camera.h"
 #include "MeshLoader.h"
 #include "Mesh.h"
+#include "Scene.h"
 
 #define CAPTION "Hello Modern 2D World"
 
@@ -63,6 +64,7 @@ std::shared_ptr<ShaderProgram> ShaderProg = nullptr;
 std::shared_ptr<Input> input = std::make_shared<Input>();
 std::shared_ptr<Camera> camera = std::make_shared<Camera>();
 std::shared_ptr<MeshLoader> meshLoader = std::make_shared<MeshLoader>();
+std::shared_ptr<Scene> scene = std::make_shared<Scene>();
 
 struct Animation
 {
@@ -351,6 +353,8 @@ void destroyBufferObjects()
 
 void drawScene()
 {
+	scene->Draw();
+
 	glBindBuffer(GL_UNIFORM_BUFFER, VboId[1]);
 	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), camera->GetViewMatrix().GetData());
 	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(Mat4), sizeof(Mat4), camera->GetProjectionMatrix(input->IsPDown()).GetData());
@@ -368,7 +372,7 @@ void drawScene()
 		mesh->SetAnimationProgress(animationProgress);
 		//glUniformMatrix4fv(TransformationId, 1, GL_FALSE, mesh->GetTransformationMatrix().GetData());
 		//glUniformMatrix4fv(ModelId, 1, GL_FALSE, camera->GetModelMatrix().GetData());
-		glUniformMatrix4fv(ModelId, 1, GL_FALSE, mesh->GetTransformationMatrix().GetData());
+		glUniformMatrix4fv(ModelId, 1, GL_FALSE, mesh->transform.GetTransformationMatrix().GetData());
 		glDrawArrays(GL_TRIANGLES, 0, (GLsizei)mesh->Vertices.size());
 	}
 

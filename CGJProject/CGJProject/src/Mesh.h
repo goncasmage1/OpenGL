@@ -6,9 +6,17 @@
 
 struct Transform
 {
+private:
+
+	Mat4 TransformationMat;
+
+public:
+
 	Transform();
 	Transform(const Vec3& Pos, const Quat& Rot, const Vec3& Scl);
 	friend const Transform Lerp(const Transform& From, const Transform& To, float progress);
+	void UpdateTransformationMatrix();
+	Mat4 GetTransformationMatrix();
 
 	struct Vec3 Position;
 	struct Quat Rotation;
@@ -18,20 +26,20 @@ struct Transform
 class Mesh
 {
 
-protected:
-
-	struct Mat4 TransformationMat = Mat4();
-
 public:
+
+	Mesh();
+	Mesh(Transform transform);
+	Mesh(Transform transform, Transform startTransform, Transform endTransform);
 
 	bool TexcoordsLoaded, NormalsLoaded;
 	std::vector <struct Vec3> Vertices, vertexData, Normals, normalData;
 	std::vector <struct Vec2> Texcoords, texcoordData;
 	std::vector <unsigned int> vertexIdx, texcoordIdx, normalIdx;
 
-	Transform transform = Transform();
-	Transform startTransform = Transform();
-	Transform endTransform = Transform();
+	Transform transform;
+	Transform startTransform;
+	Transform endTransform;
 
 	void SetAnimationProgress(float progress);
 	Mat4 GetTransformationMatrix();

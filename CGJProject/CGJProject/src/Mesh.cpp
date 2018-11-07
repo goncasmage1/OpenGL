@@ -13,6 +13,7 @@ Transform::Transform()
 Transform::Transform(const Vec3 & Pos, const Quat & Rot, const Vec3 & Scl) :
 	Position(Pos), Rotation(Rot), Scale(Scl)
 {
+	TransformationMat = Mat4::ScaleMat(Scale) * Mat4::TranslationMat(Position) * Rotation.GetMatrix();
 }
 
 const Transform Lerp(const Transform & From, const Transform & To, float progress)
@@ -24,9 +25,35 @@ const Transform Lerp(const Transform & From, const Transform & To, float progres
 	return Lerped;
 }
 
+void Transform::UpdateTransformationMatrix()
+{
+	TransformationMat = Mat4::ScaleMat(Scale) * Mat4::TranslationMat(Position) * Rotation.GetMatrix();
+}
+
+Mat4 Transform::GetTransformationMatrix()
+{
+	return TransformationMat;
+}
+
 /////////////
 //	Mesh
 /////////////
+
+Mesh::Mesh() :
+	transform(), startTransform(), endTransform()
+{
+}
+
+Mesh::Mesh(Transform newTransform) :
+	transform(newTransform)
+{
+}
+
+Mesh::Mesh(Transform newTransform, Transform newStartTransform, Transform newEndTransform) :
+	transform(newTransform), startTransform(newStartTransform), endTransform(newEndTransform)
+{
+}
+
 void Mesh::SetAnimationProgress(float progress)
 {
 	transform = Lerp(startTransform, endTransform, progress);
@@ -34,5 +61,5 @@ void Mesh::SetAnimationProgress(float progress)
 
 Mat4 Mesh::GetTransformationMatrix()
 {
-	return Mat4::ScaleMat(transform.Scale) * Mat4::TranslationMat(transform.Position) * transform.Rotation.GetMatrix();
+	return transform.GetTransformationMatrix();
 }
