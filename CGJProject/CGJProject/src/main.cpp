@@ -366,8 +366,9 @@ void drawScene()
 	for (std::shared_ptr<Mesh> mesh : meshLoader->Meshes)
 	{
 		mesh->SetAnimationProgress(animationProgress);
-		glUniformMatrix4fv(TransformationId, 1, GL_FALSE, mesh->GetTransformationMatrix().GetData());
-		glUniformMatrix4fv(ModelId, 1, GL_FALSE, camera->GetModelMatrix().GetData());
+		//glUniformMatrix4fv(TransformationId, 1, GL_FALSE, mesh->GetTransformationMatrix().GetData());
+		//glUniformMatrix4fv(ModelId, 1, GL_FALSE, camera->GetModelMatrix().GetData());
+		glUniformMatrix4fv(ModelId, 1, GL_FALSE, mesh->GetTransformationMatrix().GetData());
 		glDrawArrays(GL_TRIANGLES, 0, (GLsizei)mesh->Vertices.size());
 	}
 
