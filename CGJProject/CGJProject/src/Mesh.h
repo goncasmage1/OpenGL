@@ -1,5 +1,8 @@
 #pragma once
+#include <iostream>
 #include <vector>
+#include "GL/glew.h"
+#include "GL/freeglut.h"
 #include "Math/Vector.h"
 #include "Math/Quaternion.h"
 #include "Math/Matrix.h"
@@ -26,11 +29,17 @@ public:
 class Mesh
 {
 
+private:
+
+	GLuint VaoId, VboId[2];
+
+	std::shared_ptr<class ShaderProgram> shaderProg = nullptr;
+
 public:
 
-	Mesh();
-	Mesh(Transform transform);
-	Mesh(Transform transform, Transform startTransform, Transform endTransform);
+	Mesh(std::shared_ptr<class ShaderProgram> newShaderProg);
+	Mesh(std::shared_ptr<class ShaderProgram> newShaderProg, Transform transform);
+	Mesh(std::shared_ptr<class ShaderProgram> newShaderProg, Transform transform, Transform startTransform, Transform endTransform);
 
 	bool TexcoordsLoaded, NormalsLoaded;
 	std::vector <struct Vec3> Vertices, vertexData, Normals, normalData;
@@ -43,5 +52,8 @@ public:
 
 	void SetAnimationProgress(float progress);
 	Mat4 GetTransformationMatrix();
+	void CreateBufferObjects();
+	void DestroyBufferObjects();
+	void Draw(float* ViewMatrixData, float* ProjectionMatrixData);
 
 };

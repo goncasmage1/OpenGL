@@ -24,5 +24,7 @@ public:
 	std::vector<std::shared_ptr<class Mesh>> Meshes;
 
 	const std::shared_ptr<class Mesh> CreateMesh(const std::string& filename);
+	void CreateBufferObjects();
+	void DestroyBufferObjects();
 
 };

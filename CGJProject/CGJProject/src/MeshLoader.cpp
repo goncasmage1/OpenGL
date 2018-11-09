@@ -96,11 +96,28 @@ void MeshLoader::FreeMeshData()
 
 const std::shared_ptr<Mesh> MeshLoader::CreateMesh(const std::string& filename)
 {
-	std::shared_ptr<Mesh> LoadedMesh = std::make_shared<Mesh>();
+	//TODO: 
+	std::shared_ptr<Mesh> LoadedMesh = std::make_shared<Mesh>(nullptr);
 	TempMeshRef = LoadedMesh;
 	Meshes.push_back(LoadedMesh);
 	LoadMeshData(filename);
 	ProcessMeshData();
 	FreeMeshData();
 	return LoadedMesh;
+}
+
+void MeshLoader::CreateBufferObjects()
+{
+	for (std::shared_ptr<Mesh> mesh : Meshes)
+	{
+		mesh->CreateBufferObjects();
+	}
+}
+
+void MeshLoader::DestroyBufferObjects()
+{
+	for (std::shared_ptr<Mesh> mesh : Meshes)
+	{
+		mesh->DestroyBufferObjects();
+	}
 }

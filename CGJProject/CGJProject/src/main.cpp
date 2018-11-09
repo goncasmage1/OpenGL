@@ -47,16 +47,10 @@
 
 #define CAPTION "Hello Modern 2D World"
 
-#define VERTICES 0
-#define TEXCOORDS 1
-#define NORMALS 2
-
 int WinX = 800, WinY = 800;
 int WindowHandle = 0;
 unsigned int FrameCount = 0;
 float animationProgress = 0.f;
-
-GLuint* VaoId, VboId[2];
 
 GLsizei numberOfMeshes = 0;
 
@@ -263,15 +257,16 @@ static void checkOpenGLError(std::string error)
 
 void createShaderProgram()
 {
-	std::vector<ShaderAttribute> Attributes = { {VERTICES, "in_Position"},
-												{TEXCOORDS, "in_Color"}/*,
-												{NORMALS, "inNormal"}*/
-												};
-	std::vector<std::string> ShaderPaths = { "src/Shader/VertexShader.vert",
-											 "src/Shader/FragmentShader.frag"
-											};
+	//TODO: 
+	//std::vector<ShaderAttribute> Attributes = { {VERTICES, "in_Position"},
+	//											{TEXCOORDS, "in_Color"}/*,
+	//											{NORMALS, "inNormal"}*/
+	//											};
+	//std::vector<std::string> ShaderPaths = { "src/Shader/VertexShader.vert",
+	//										 "src/Shader/FragmentShader.frag"
+	//										};
 
-	ShaderProg = std::make_shared<ShaderProgram>(Attributes, ShaderPaths);
+	//ShaderProg = std::make_shared<ShaderProgram>(Attributes, ShaderPaths);
 
 	checkOpenGLError("ERROR: Could not create shaders.");
 }
@@ -286,72 +281,14 @@ void destroyShaderProgram()
 
 void createBufferObjects()
 {
-	numberOfMeshes = (GLsizei)meshLoader->Meshes.size();
-	VaoId = new GLuint[numberOfMeshes];
-
-	if (numberOfMeshes == 0) return;
-	GLuint VboVertices, VboTexcoords, VboNormals;
-
-	glGenVertexArrays(numberOfMeshes, VaoId);
-	for (int i = 0; i < numberOfMeshes; i++)
-	{
-		glBindVertexArray(VaoId[i]);
-		{
-			glGenBuffers(2, VboId);
-
-			glBindBuffer(GL_ARRAY_BUFFER, VboId[0]);
-			{
-				glGenBuffers(1, &VboVertices);
-				glBindBuffer(GL_ARRAY_BUFFER, VboVertices);
-				glBufferData(GL_ARRAY_BUFFER, meshLoader->Meshes[i]->Vertices.size() * sizeof(Vec3), &meshLoader->Meshes[i]->Vertices[0], GL_STATIC_DRAW);
-				glEnableVertexAttribArray(VERTICES);
-				glVertexAttribPointer(VERTICES, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
-
-				if (meshLoader->Meshes[i]->TexcoordsLoaded)
-				{
-					glGenBuffers(1, &VboTexcoords);
-					glBindBuffer(GL_ARRAY_BUFFER, VboTexcoords);
-					glBufferData(GL_ARRAY_BUFFER, meshLoader->Meshes[i]->Texcoords.size() * sizeof(Vec2), &meshLoader->Meshes[i]->Texcoords[0], GL_STATIC_DRAW);
-					glEnableVertexAttribArray(TEXCOORDS);
-					glVertexAttribPointer(TEXCOORDS, 2, GL_FLOAT, GL_FALSE, sizeof(Vec2), 0);
-				}
-				if (meshLoader->Meshes[i]->NormalsLoaded)
-				{
-					glGenBuffers(1, &VboNormals);
-					glBindBuffer(GL_ARRAY_BUFFER, VboNormals);
-					glBufferData(GL_ARRAY_BUFFER, meshLoader->Meshes[i]->Normals.size() * sizeof(Vec3), &meshLoader->Meshes[i]->Normals[0], GL_STATIC_DRAW);
-					glEnableVertexAttribArray(NORMALS);
-					glVertexAttribPointer(NORMALS, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
-				}
-			}
-		}
-		glBindVertexArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glDeleteBuffers(1, &VboVertices);
-		glDeleteBuffers(1, &VboTexcoords);
-		glDeleteBuffers(1, &VboNormals);
-	}
+	meshLoader->CreateBufferObjects();
 
 	checkOpenGLError("ERROR: Could not create VAOs and VBOs.");
 }
 
 void destroyBufferObjects()
 {
-	numberOfMeshes = (GLsizei)meshLoader->Meshes.size();
-	if (numberOfMeshes == 0) return;
-
-	for (int i = 0; i < numberOfMeshes; i++)
-	{
-		glBindVertexArray(VaoId[i]);
-		glDisableVertexAttribArray(VERTICES);
-		glDisableVertexAttribArray(TEXCOORDS);
-		glDisableVertexAttribArray(NORMALS);
-	}
-	glDeleteVertexArrays(numberOfMeshes, VaoId);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-
-	delete VaoId;
+	meshLoader->DestroyBufferObjects();
 
 	checkOpenGLError("ERROR: Could not destroy VAOs and VBOs.");
 }
@@ -360,32 +297,7 @@ void destroyBufferObjects()
 
 void drawScene()
 {
-	//scene->Draw();
-
-	glBindBuffer(GL_UNIFORM_BUFFER, VboId[1]);
-	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), camera->GetViewMatrix().GetData());
-	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(Mat4), sizeof(Mat4), camera->GetProjectionMatrix(input->IsPDown()).GetData());
-	glBindBuffer(GL_UNIFORM_BUFFER, 0);
-
-	GLint TransformationId = ShaderProg->GetUniformId("Transformation");
-	GLint ModelId = ShaderProg->GetUniformId("ModelMatrix");
-
-	int i = 0;
-	for (std::shared_ptr<Mesh> mesh : meshLoader->Meshes)
-	{
-		glBindVertexArray(VaoId[i]);
-		i++;
-		glUseProgram(ShaderProg->GetProgramId());
-
-		mesh->SetAnimationProgress(animationProgress);
-		//glUniformMatrix4fv(TransformationId, 1, GL_FALSE, mesh->GetTransformationMatrix().GetData());
-		//glUniformMatrix4fv(ModelId, 1, GL_FALSE, camera->GetModelMatrix().GetData());
-		glUniformMatrix4fv(ModelId, 1, GL_FALSE, mesh->transform.GetTransformationMatrix().GetData());
-		glDrawArrays(GL_TRIANGLES, 0, (GLsizei)mesh->Vertices.size());
-	}
-
-	glUseProgram(0);
-	glBindVertexArray(0);
+	scene->Draw();
 
 	checkOpenGLError("ERROR: Could not draw scene.");
 }

@@ -5,7 +5,8 @@
 class Scene
 {
 
-	std::shared_ptr<class SceneNode> root;
+	std::shared_ptr<class SceneNode> root = nullptr;
+	std::shared_ptr<class Camera> camera = nullptr;
 
 	void CreateBufferObjects();
 	void DestroyBufferObjects();
@@ -13,6 +14,7 @@ class Scene
 public:
 
 	Scene();
+	Scene(std::shared_ptr<class Camera> newCamera);
 
 	std::shared_ptr<class SceneNode> GetRoot() { return root; }
 
