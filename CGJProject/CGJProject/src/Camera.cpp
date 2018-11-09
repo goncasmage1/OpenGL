@@ -15,6 +15,14 @@ Camera::Camera()
 
 	Rotation = Vec2();
 	Rotator = Quat(1, 0, 0, 0);
+
+	glGenBuffers(1, &VboId);
+	glBindBuffer(GL_UNIFORM_BUFFER, VboId[1]);
+	{
+		glBufferData(GL_UNIFORM_BUFFER, sizeof(Matrix) * 2, 0, GL_STREAM_DRAW);
+		glBindBufferBase(GL_UNIFORM_BUFFER, UBO_BP, VboId[1]);
+	}
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 }
 
 void Camera::RotateCamera(Vec2 rotation)

@@ -41,6 +41,11 @@ void ShaderProgram::CheckLinkage()
 	}
 }
 
+void ShaderProgram::Use()
+{
+	glUseProgram(ProgramId);
+}
+
 void ShaderProgram::Destroy()
 {
 	glUseProgram(0);

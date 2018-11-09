@@ -33,13 +33,11 @@ private:
 
 	GLuint VaoId, VboId[2];
 
-	std::shared_ptr<class ShaderProgram> shaderProg = nullptr;
-
 public:
 
-	Mesh(std::shared_ptr<class ShaderProgram> newShaderProg);
-	Mesh(std::shared_ptr<class ShaderProgram> newShaderProg, Transform transform);
-	Mesh(std::shared_ptr<class ShaderProgram> newShaderProg, Transform transform, Transform startTransform, Transform endTransform);
+	Mesh();
+	Mesh(Transform transform);
+	Mesh(Transform transform, Transform startTransform, Transform endTransform);
 
 	bool TexcoordsLoaded, NormalsLoaded;
 	std::vector <struct Vec3> Vertices, vertexData, Normals, normalData;
@@ -54,6 +52,6 @@ public:
 	Mat4 GetTransformationMatrix();
 	void CreateBufferObjects();
 	void DestroyBufferObjects();
-	void Draw(float* ViewMatrixData, float* ProjectionMatrixData);
+	void Draw();
 
 };

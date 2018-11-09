@@ -1,12 +1,13 @@
 #include "SceneNode.h"
+#include "Shader/ShaderProgram.h"
 
-SceneNode::SceneNode(std::shared_ptr<class Mesh> newMesh, std::shared_ptr<SceneNode> newParent) :
-	childNodes(std::vector<std::shared_ptr<SceneNode>>()), transform(), mesh(newMesh), parent(newParent)
+SceneNode::SceneNode(std::shared_ptr<class Mesh> newMesh, std::shared_ptr<SceneNode> newParent, std::shared_ptr<ShaderProgram> newShaderProg) :
+	childNodes(std::vector<std::shared_ptr<SceneNode>>()), transform(), mesh(newMesh), parent(newParent), shaderProg(newShaderProg)
 {
 }
 
-SceneNode::SceneNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, std::shared_ptr<SceneNode> newParent) :
-	childNodes(std::vector<std::shared_ptr<SceneNode>>()), transform(newTransform), mesh(newMesh), parent(newParent)
+SceneNode::SceneNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, std::shared_ptr<SceneNode> newParent, std::shared_ptr<ShaderProgram> newShaderProg) :
+	childNodes(std::vector<std::shared_ptr<SceneNode>>()), transform(newTransform), mesh(newMesh), parent(newParent), shaderProg(newShaderProg)
 {
 }
 
@@ -29,12 +30,15 @@ void SceneNode::SetTransform(Transform newTransform)
 	transform = newTransform;
 }
 
-void SceneNode::Draw(float * ViewMatrixData, float * ProjectionMatrixData)
+void SceneNode::Draw()
 {
-	mesh->Draw(ViewMatrixData, ProjectionMatrixData);
+	shaderProg->Use();
+	glUniformMatrix4fv(shaderProg->GetUniformId("ModelMatrix"), 1, GL_FALSE, transform.GetTransformationMatrix().GetData());
+
+	mesh->Draw();
 	for (std::shared_ptr<SceneNode> node : childNodes)
 	{
-		node->Draw(ViewMatrixData, ProjectionMatrixData);
+		node->Draw();
 	}
 }
 

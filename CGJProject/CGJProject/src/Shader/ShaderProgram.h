@@ -29,6 +29,7 @@ public:
 	GLuint GetUniformId(const GLchar* param) const { return glGetUniformLocation(ProgramId, param); }
 	GLuint GetUboId(const GLchar* param) const { return glGetUniformBlockIndex(ProgramId, param); }
 	const GLuint GetUBO_BP() const { return UBO_BP; }
+	void Use();
 
 	void Destroy();
 };

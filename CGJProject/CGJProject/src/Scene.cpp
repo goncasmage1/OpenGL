@@ -24,9 +24,14 @@ void Scene::DestroyBufferObjects()
 
 void Scene::Draw()
 {
+	glBindBuffer(GL_UNIFORM_BUFFER, VboId[1]);
+	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), camera->GetViewMatrix().GetData());
+	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(Mat4), sizeof(Mat4), camera->GetProjectionMatrix(true).GetData());
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
 	for (std::shared_ptr<SceneNode> node : root->GetChildren())
 	{
-		node->Draw(camera->GetViewMatrix().GetData(), camera->GetProjectionMatrix(true).GetData());
+		node->Draw();
 	}
 }
 

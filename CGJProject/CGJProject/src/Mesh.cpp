@@ -1,5 +1,4 @@
 #include "Mesh.h"
-#include "Shader/ShaderProgram.h"
 
 #define VERTICES 0
 #define TEXCOORDS 1
@@ -18,7 +17,7 @@ Transform::Transform()
 Transform::Transform(const Vec3 & Pos, const Quat & Rot, const Vec3 & Scl) :
 	Position(Pos), Rotation(Rot), Scale(Scl)
 {
-	TransformationMat = Mat4::TranslationMat(Position) * Rotation.GetMatrix() * Mat4::ScaleMat(Scale);
+	TransformationMat = Mat4::ScaleMat(Scale) * Mat4::TranslationMat(Position) * Rotation.GetMatrix();
 }
 
 const Transform Lerp(const Transform & From, const Transform & To, float progress)
@@ -44,18 +43,18 @@ Mat4 Transform::GetTransformationMatrix()
 //	Mesh
 /////////////
 
-Mesh::Mesh(std::shared_ptr<ShaderProgram> newShaderProg) :
-	shaderProg(newShaderProg), transform(), startTransform(), endTransform()
+Mesh::Mesh() :
+	transform(), startTransform(), endTransform()
 {
 }
 
-Mesh::Mesh(std::shared_ptr<ShaderProgram> newShaderProg, Transform newTransform) :
-	shaderProg(newShaderProg), transform(newTransform)
+Mesh::Mesh(Transform newTransform) :
+	transform(newTransform)
 {
 }
 
-Mesh::Mesh(std::shared_ptr<ShaderProgram> newShaderProg, Transform newTransform, Transform newStartTransform, Transform newEndTransform) :
-	shaderProg(newShaderProg), transform(newTransform), startTransform(newStartTransform), endTransform(newEndTransform)
+Mesh::Mesh(Transform newTransform, Transform newStartTransform, Transform newEndTransform) :
+	transform(newTransform), startTransform(newStartTransform), endTransform(newEndTransform)
 {
 }
 
@@ -122,18 +121,11 @@ void Mesh::DestroyBufferObjects()
 	glBindVertexArray(0);
 }
 
-void Mesh::Draw(float* ViewMatrixData, float* ProjectionMatrixData)
+void Mesh::Draw()
 {
-	glBindBuffer(GL_UNIFORM_BUFFER, VboId[1]);
-	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), ViewMatrixData);
-	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(Mat4), sizeof(Mat4), ProjectionMatrixData);
-	glBindBuffer(GL_UNIFORM_BUFFER, 0);
-
 	glBindVertexArray(VaoId);
-	glUseProgram(shaderProg->GetProgramId());
 
-	glUniformMatrix4fv(shaderProg->GetUniformId("ModelMatrix"), 1, GL_FALSE, transform.GetTransformationMatrix().GetData());
-	glDrawArrays(GL_TRIANGLES, Vertices.size(), 3);
+	glDrawArrays(GL_TRIANGLES, (GLuint)Vertices.size(), 3);
 
 	glUseProgram(0);
 	glBindVertexArray(0);
