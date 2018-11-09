@@ -282,7 +282,6 @@ void destroyShaderProgram()
 
 void createBufferObjects()
 {
-	//scene->CreateBufferObjects();
 	meshLoader->CreateBufferObjects();
 	camera->CreateBufferObjects();
 
@@ -291,7 +290,6 @@ void createBufferObjects()
 
 void destroyBufferObjects()
 {
-	//scene->DestroyBufferObjects();
 	meshLoader->DestroyBufferObjects();
 	camera->DestroyBufferObjects();
 

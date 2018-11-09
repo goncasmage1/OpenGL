@@ -7,11 +7,10 @@
 /////////////
 //	Transform
 /////////////
-Transform::Transform()
+Transform::Transform() : 
+	Position(Vec3(0.f)), Rotation(FromAngleAxis(Vec4(0.f, 1.f, 0.f, 1.f), 45.f)), Scale(Vec3(1.f))
 {
-	Position = Vec3(0.f);
-	Rotation = Quat(1.f, 0.f, 0.f, 0.f);
-	Scale = Vec3(1.f);
+	TransformationMat = Mat4::ScaleMat(Scale) * Mat4::TranslationMat(Position) * Rotation.GetMatrix();
 }
 
 Transform::Transform(const Vec3 & Pos, const Quat & Rot, const Vec3 & Scl) :
