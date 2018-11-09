@@ -31,7 +31,7 @@ class Mesh
 
 private:
 
-	GLuint VaoId, VboId[2];
+	GLuint VaoId, VboId;
 
 public:
 

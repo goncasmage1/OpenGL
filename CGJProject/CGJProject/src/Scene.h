@@ -6,15 +6,15 @@ class Scene
 {
 private:
 
-	GLuint VaoId, VboId[2];
-
 	std::shared_ptr<class SceneNode> root = nullptr;
 	std::shared_ptr<class Camera> camera = nullptr;
+	std::shared_ptr<class ShaderProgram> shaderProg = nullptr;
 
 public:
 
-	Scene();
-	Scene(std::shared_ptr<class Camera> newCamera);
+	Scene(std::shared_ptr<class Camera> newCamera, std::shared_ptr<class ShaderProgram> newShaderProgram);
+
+	void Init();
 
 	void CreateBufferObjects();
 	void DestroyBufferObjects();

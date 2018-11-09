@@ -13,14 +13,14 @@ SceneNode::SceneNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform
 
 std::shared_ptr<SceneNode> SceneNode::CreateNode(std::shared_ptr<class Mesh> newMesh)
 {
-	std::shared_ptr<SceneNode> newChild = std::make_shared<SceneNode>(newMesh, shared_from_this());
+	std::shared_ptr<SceneNode> newChild = std::make_shared<SceneNode>(newMesh, shared_from_this(), shaderProg);
 	childNodes.push_back(newChild);
 	return newChild;
 }
 
 std::shared_ptr<SceneNode> SceneNode::CreateNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform)
 {
-	std::shared_ptr<SceneNode> newChild = std::make_shared<SceneNode>(newMesh, newTransform, shared_from_this());
+	std::shared_ptr<SceneNode> newChild = std::make_shared<SceneNode>(newMesh, newTransform, shared_from_this(), shaderProg);
 	childNodes.push_back(newChild);
 	return newChild;
 }
@@ -40,6 +40,7 @@ void SceneNode::Draw()
 	{
 		node->Draw();
 	}
+	glUseProgram(0);
 }
 
 std::vector<std::shared_ptr<SceneNode>> SceneNode::GetChildren()

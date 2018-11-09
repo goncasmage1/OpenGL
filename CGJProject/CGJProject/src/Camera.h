@@ -1,5 +1,7 @@
 #pragma once
 
+#include "GL/glew.h"
+#include "GL/freeglut.h"
 #include "Math/Vector.h"
 #include "Math/Matrix.h"
 #include "Math/Quaternion.h"
@@ -8,8 +10,10 @@ class Camera
 {
 protected:
 
-	Vec3 Offset;
+	GLuint VboId;
+	const GLuint UBO_BP = 0;
 
+	Vec3 Offset;
 	Vec3 Direction;
 	Vec3 RightVector;
 	Vec3 UpVector;
@@ -28,6 +32,10 @@ protected:
 public:
 
 	Camera();
+
+	void CreateBufferObjects();
+	void DestroyBufferObjects();
+	void Draw();
 
 	Mat4 GetProjectionMatrix(bool bUsePerspective) { return (bUsePerspective ? Projection : Orthographic); }
 	Mat4 GetViewMatrix() { return ViewMat; }

@@ -94,7 +94,7 @@ void MeshLoader::FreeMeshData()
 	TempMeshRef = nullptr;
 }
 
-const std::shared_ptr<Mesh> MeshLoader::CreateMesh(const std::string& filename)
+std::shared_ptr<Mesh> MeshLoader::CreateMesh(const std::string& filename)
 {
 	//TODO: 
 	std::shared_ptr<Mesh> LoadedMesh = std::make_shared<Mesh>();

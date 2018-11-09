@@ -137,7 +137,6 @@
     <ClCompile Include="src\Shader\ShaderProgram.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\Math\Matrix.h" />

@@ -44,6 +44,7 @@
 #include "MeshLoader.h"
 #include "Mesh.h"
 #include "Scene.h"
+#include "SceneNode.h"
 
 #define CAPTION "Hello Modern 2D World"
 
@@ -58,7 +59,7 @@ std::shared_ptr<ShaderProgram> ShaderProg = nullptr;
 std::shared_ptr<Input> input = std::make_shared<Input>();
 std::shared_ptr<Camera> camera = std::make_shared<Camera>();
 std::shared_ptr<MeshLoader> meshLoader = std::make_shared<MeshLoader>();
-std::shared_ptr<Scene> scene = std::make_shared<Scene>();
+std::shared_ptr<Scene> scene = nullptr;
 
 struct Animation
 {
@@ -257,16 +258,16 @@ static void checkOpenGLError(std::string error)
 
 void createShaderProgram()
 {
-	//TODO: 
-	//std::vector<ShaderAttribute> Attributes = { {VERTICES, "in_Position"},
-	//											{TEXCOORDS, "in_Color"}/*,
-	//											{NORMALS, "inNormal"}*/
-	//											};
-	//std::vector<std::string> ShaderPaths = { "src/Shader/VertexShader.vert",
-	//										 "src/Shader/FragmentShader.frag"
-	//										};
+	//TODO: Fix!
+	std::vector<ShaderAttribute> Attributes = { {0, "in_Position"},
+												{1, "in_Color"}/*,
+												{NORMALS, "inNormal"}*/
+												};
+	std::vector<std::string> ShaderPaths = { "src/Shader/VertexShader.vert",
+											 "src/Shader/FragmentShader.frag"
+											};
 
-	//ShaderProg = std::make_shared<ShaderProgram>(Attributes, ShaderPaths);
+	ShaderProg = std::make_shared<ShaderProgram>(Attributes, ShaderPaths);
 
 	checkOpenGLError("ERROR: Could not create shaders.");
 }
@@ -281,16 +282,20 @@ void destroyShaderProgram()
 
 void createBufferObjects()
 {
+	//scene->CreateBufferObjects();
 	meshLoader->CreateBufferObjects();
+	camera->CreateBufferObjects();
 
-	checkOpenGLError("ERROR: Could not create VAOs and VBOs.");
+	checkOpenGLError("ERROR: Could not create VAOs, VBOs and UBOs.");
 }
 
 void destroyBufferObjects()
 {
+	//scene->DestroyBufferObjects();
 	meshLoader->DestroyBufferObjects();
+	camera->DestroyBufferObjects();
 
-	checkOpenGLError("ERROR: Could not destroy VAOs and VBOs.");
+	checkOpenGLError("ERROR: Could not destroy VAOs, VBOs and UBOs.");
 }
 
 /////////////////////////////////////////////////////////////////////// SCENE
@@ -305,7 +310,6 @@ void drawScene()
 void processInput()
 {
 	if (input->IsMiddleMouseButtonDown() != camera->IsOrbiting()) camera->ToggleOrbiting();
-	if (input->IsGDown() != camera->UsingQuaternion()) camera->ToggleQuaternion();
 
 	camera->RotateCamera(input->GetMouseDelta());
 	camera->Zoom(input->GetWheelDelta());
@@ -460,7 +464,8 @@ void setupGLUT(int argc, char* argv[])
 
 void setupMeshes()
 {
-	meshLoader->CreateMesh(std::string("../../assets/models/Solid Snake.obj"));
+	std::shared_ptr<Mesh> newMesh = meshLoader->CreateMesh(std::string("../../assets/models/Square.obj"));
+	scene->GetRoot()->CreateNode(newMesh);
 
 	for (int i = 0; i < meshLoader->Meshes.size(); i++)
 	{
@@ -475,8 +480,9 @@ void init(int argc, char* argv[])
 	setupGLEW();
 	setupOpenGL();
 	setupCallbacks();
-	setupMeshes();
 	createShaderProgram();
+	scene = std::make_shared<Scene>(camera, ShaderProg);
+	setupMeshes();
 	createBufferObjects();
 }
 
