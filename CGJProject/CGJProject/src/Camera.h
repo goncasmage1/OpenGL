@@ -13,6 +13,8 @@ protected:
 	GLuint VboId;
 	const GLuint UBO_BP = 0;
 
+	int WinX, WinY;
+
 	Vec3 Offset;
 	Vec3 Direction;
 	Vec3 RightVector;
@@ -31,7 +33,7 @@ protected:
 
 public:
 
-	Camera();
+	Camera(int newWinX, int newWinY, int FOV);
 
 	void CreateBufferObjects();
 	void DestroyBufferObjects();

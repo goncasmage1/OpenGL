@@ -55,17 +55,26 @@ float animationProgress = 0.f;
 
 GLsizei numberOfMeshes = 0;
 
-std::shared_ptr<ShaderProgram> ShaderProg = nullptr;
-std::shared_ptr<Input> input = std::make_shared<Input>();
-std::shared_ptr<Camera> camera = std::make_shared<Camera>();
-std::shared_ptr<MeshLoader> meshLoader = std::make_shared<MeshLoader>();
-std::shared_ptr<Scene> scene = nullptr;
+enum AnimationProgress
+{
+	Start,
+	Middle,
+	End
+};
 
 struct Animation
 {
 	Transform From;
 	Transform To;
 };
+
+std::shared_ptr<ShaderProgram> ShaderProg = nullptr;
+std::shared_ptr<Input> input = std::make_shared<Input>();
+std::shared_ptr<Camera> camera = std::make_shared<Camera>(WinX, WinY, 90);
+std::shared_ptr<MeshLoader> meshLoader = std::make_shared<MeshLoader>();
+std::shared_ptr<Scene> scene = nullptr;
+
+AnimationProgress animationProgress = AnimationProgress::Start;
 
 const std::vector<Animation> animations = {
 	{
@@ -305,6 +314,14 @@ void drawScene()
 	checkOpenGLError("ERROR: Could not draw scene.");
 }
 
+void processAnimation()
+{
+	//TODO: Complete
+	animationProgress += input->GetAnimationDelta();
+	if (animationProgress > 1.f) animationProgress = 1.f;
+	else if (animationProgress < 0.f) animationProgress = 0.f;
+}
+
 void processInput()
 {
 	if (input->IsMiddleMouseButtonDown() != camera->IsOrbiting()) camera->ToggleOrbiting();
@@ -312,9 +329,7 @@ void processInput()
 	camera->RotateCamera(input->GetMouseDelta());
 	camera->Zoom(input->GetWheelDelta());
 
-	animationProgress += input->GetAnimationDelta();
-	if (animationProgress > 1.f) animationProgress = 1.f;
-	else if (animationProgress < 0.f) animationProgress = 0.f;
+	processAnimation();	
 }
 
 /////////////////////////////////////////////////////////////////////// CALLBACKS
@@ -463,11 +478,15 @@ void setupGLUT(int argc, char* argv[])
 void setupMeshes()
 {
 	std::shared_ptr<Mesh> newMesh = meshLoader->CreateMesh(std::string("../../assets/models/Square.obj"));
-	std::shared_ptr<SceneNode> newNode = scene->GetRoot()->CreateNode(newMesh);
+	//std::shared_ptr<Mesh> newMesh = meshLoader->CreateMesh(std::string("../../assets/models/Square.obj"));
 
-	//TODO: Add logic for all nodes
-	newNode->startTransform = animations[0].From;
-	newNode->endTransform = animations[0].To;
+	for (int i = 0; i < meshLoader->Meshes.size(); i++)
+	{
+		std::shared_ptr<SceneNode> newNode = scene->root->CreateNode(meshLoader->Meshes[i]);
+
+		newNode->startTransform = animations[i].From;
+		newNode->endTransform = animations[i].To;
+	}
 }
 
 void init(int argc, char* argv[])

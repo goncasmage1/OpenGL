@@ -1,7 +1,10 @@
 #include "Camera.h"
 
-Camera::Camera()
+Camera::Camera(int newWinX, int newWinY, int FOV)
 {
+	WinX = newWinX;
+	WinY = newWinY;
+
 	Offset = Vec3();
 	ModelMat = Mat4::IdentityMat();
 
@@ -11,7 +14,7 @@ Camera::Camera()
 	ViewMat = Mat4::ViewMat(Direction, UpVector);
 
 	Orthographic = Mat4::OrthographicMat(0.01f, 100, -1, 1, -1, 1);
-	Projection = Mat4::ProjectionMat(90, 640 / 480, 0.01f, 100);
+	Projection = Mat4::ProjectionMat(FOV, WinX / WinY, 0.01f, 100);
 
 	Rotation = Vec2();
 	Rotator = Quat(1, 0, 0, 0);

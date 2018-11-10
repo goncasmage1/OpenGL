@@ -10,18 +10,6 @@ Scene::Scene(std::shared_ptr<Camera> newCamera, std::shared_ptr<ShaderProgram> n
 {
 }
 
-void Scene::Init()
-{
-}
-
-void Scene::CreateBufferObjects()
-{
-}
-
-void Scene::DestroyBufferObjects()
-{
-}
-
 void Scene::Draw()
 {
 	camera->Draw();
