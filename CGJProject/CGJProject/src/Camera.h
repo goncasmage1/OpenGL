@@ -21,7 +21,7 @@ protected:
 	Quat Rotator;
 	float Distance = 3.f;
 
-	bool bOrbiting = false;
+	bool bOrbiting = true;
 	bool bUseQuaternion = false;
 
 	Mat4 ModelMat;

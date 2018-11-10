@@ -28,9 +28,10 @@ const Transform Lerp(const Transform & From, const Transform & To, float progres
 	return Lerped;
 }
 
-void Transform::UpdateTransformationMatrix()
+void Transform::UpdateTransformationMatrix(const Mat4 parentTransform)
 {
 	TransformationMat = Mat4::ScaleMat(Scale) * Mat4::TranslationMat(Position) * Rotation.GetMatrix();
+	TransformationMat *= parentTransform;
 }
 
 Mat4 Transform::GetTransformationMatrix()

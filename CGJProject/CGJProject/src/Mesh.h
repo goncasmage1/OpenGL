@@ -18,7 +18,7 @@ public:
 	Transform();
 	Transform(const Vec3& Pos, const Quat& Rot, const Vec3& Scl);
 	friend const Transform Lerp(const Transform& From, const Transform& To, float progress);
-	void UpdateTransformationMatrix();
+	void UpdateTransformationMatrix(const Mat4 parentTransform);
 	Mat4 GetTransformationMatrix();
 
 	struct Vec3 Position;

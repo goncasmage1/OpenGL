@@ -10,7 +10,6 @@ class SceneNode : public std::enable_shared_from_this<SceneNode>
 
 protected:
 
-	Transform transform;
 	std::shared_ptr<class Mesh> mesh;
 
 	std::shared_ptr<SceneNode> parent = nullptr;
@@ -19,13 +18,16 @@ protected:
 
 public:
 
+	Transform transform;
+	Mat4 transformationMatrix;
+
 	SceneNode(std::shared_ptr<class Mesh> newMesh, std::shared_ptr<SceneNode> newParent, std::shared_ptr<class ShaderProgram> newShaderProg);
 	SceneNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, std::shared_ptr<SceneNode> newParent, std::shared_ptr<class ShaderProgram> newShaderProg);
 
 	std::shared_ptr<SceneNode> CreateNode(std::shared_ptr<class Mesh> newMesh);
 	std::shared_ptr<SceneNode> CreateNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform);
 
-	void SetTransform(Transform newTransform);
+	void UpdateTransformationMatrix();
 	void Draw();
 
 	std::vector<std::shared_ptr<SceneNode>> GetChildren();
