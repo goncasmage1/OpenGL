@@ -96,8 +96,3 @@ void SceneNode::Draw()
 	}
 	glUseProgram(0);
 }
-
-std::vector<std::shared_ptr<SceneNode>> SceneNode::GetChildren()
-{
-	return childNodes;
-}

@@ -35,7 +35,6 @@ protected:
 
 	std::shared_ptr<SceneNode> parent = nullptr;
 	std::shared_ptr<class ShaderProgram> shaderProg = nullptr;
-	std::vector<std::shared_ptr<SceneNode>> childNodes;
 
 public:
 
@@ -43,6 +42,8 @@ public:
 	Transform startTransform;
 	Transform endTransform;
 	Mat4 transformationMatrix;
+
+	std::vector<std::shared_ptr<SceneNode>> childNodes;
 
 	SceneNode(std::shared_ptr<class Mesh> newMesh, std::shared_ptr<SceneNode> newParent, std::shared_ptr<class ShaderProgram> newShaderProg);
 	SceneNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, std::shared_ptr<SceneNode> newParent, std::shared_ptr<class ShaderProgram> newShaderProg);
@@ -53,7 +54,5 @@ public:
 	void UpdateTransformationMatrix();
 	void SetAnimationProgress(float progress);
 	void Draw();
-
-	std::vector<std::shared_ptr<SceneNode>> GetChildren();
 
 };

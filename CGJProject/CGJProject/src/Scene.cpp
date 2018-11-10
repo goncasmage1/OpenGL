@@ -26,7 +26,7 @@ void Scene::Draw()
 {
 	camera->Draw();
 
-	for (std::shared_ptr<SceneNode> node : root->GetChildren())
+	for (std::shared_ptr<SceneNode> node : root->childNodes)
 	{
 		node->Draw();
 	}
