@@ -1,5 +1,6 @@
 #include "MeshLoader.h"
 #include "Mesh.h"
+#include "Math/Vector.h"
 #include <sstream>
 #include <fstream>
 

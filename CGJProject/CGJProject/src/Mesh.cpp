@@ -1,72 +1,9 @@
 #include "Mesh.h"
+#include "Math/Vector.h"
 
 #define VERTICES 0
 #define TEXCOORDS 1
 #define NORMALS 2
-
-/////////////
-//	Transform
-/////////////
-Transform::Transform() : 
-	Position(Vec3(0.f)), Rotation(FromAngleAxis(Vec4(0.f, 1.f, 0.f, 1.f), 45.f)), Scale(Vec3(1.f))
-{
-	TransformationMat = Mat4::ScaleMat(Scale) * Mat4::TranslationMat(Position) * Rotation.GetMatrix();
-}
-
-Transform::Transform(const Vec3 & Pos, const Quat & Rot, const Vec3 & Scl) :
-	Position(Pos), Rotation(Rot), Scale(Scl)
-{
-	TransformationMat = Mat4::ScaleMat(Scale) * Mat4::TranslationMat(Position) * Rotation.GetMatrix();
-}
-
-const Transform Lerp(const Transform & From, const Transform & To, float progress)
-{
-	Transform Lerped = Transform();
-	Lerped.Position = Lerp(From.Position, To.Position, progress);
-	Lerped.Rotation = Lerp(From.Rotation, To.Rotation, progress);
-	Lerped.Scale = Lerp(From.Scale, To.Scale, progress);
-	return Lerped;
-}
-
-void Transform::UpdateTransformationMatrix(const Mat4 parentTransform)
-{
-	TransformationMat = Mat4::ScaleMat(Scale) * Mat4::TranslationMat(Position) * Rotation.GetMatrix();
-	TransformationMat *= parentTransform;
-}
-
-Mat4 Transform::GetTransformationMatrix()
-{
-	return TransformationMat;
-}
-
-/////////////
-//	Mesh
-/////////////
-
-Mesh::Mesh() :
-	transform(), startTransform(), endTransform()
-{
-}
-
-Mesh::Mesh(Transform newTransform) :
-	transform(newTransform)
-{
-}
-
-Mesh::Mesh(Transform newTransform, Transform newStartTransform, Transform newEndTransform) :
-	transform(newTransform), startTransform(newStartTransform), endTransform(newEndTransform)
-{
-}
-
-void Mesh::SetAnimationProgress(float progress)
-{
-	transform = Lerp(startTransform, endTransform, progress);
-}
-
-Mat4 Mesh::GetTransformationMatrix()
-{
-	return transform.GetTransformationMatrix();
-}
 
 void Mesh::CreateBufferObjects()
 {

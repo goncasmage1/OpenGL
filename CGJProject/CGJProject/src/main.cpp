@@ -463,13 +463,11 @@ void setupGLUT(int argc, char* argv[])
 void setupMeshes()
 {
 	std::shared_ptr<Mesh> newMesh = meshLoader->CreateMesh(std::string("../../assets/models/Square.obj"));
-	scene->GetRoot()->CreateNode(newMesh);
+	std::shared_ptr<SceneNode> newNode = scene->GetRoot()->CreateNode(newMesh);
 
-	for (int i = 0; i < meshLoader->Meshes.size(); i++)
-	{
-		meshLoader->Meshes[i]->startTransform = animations[i].From;
-		meshLoader->Meshes[i]->endTransform = animations[i].To;
-	}
+	//TODO: Add logic for all nodes
+	newNode->startTransform = animations[0].From;
+	newNode->endTransform = animations[0].To;
 }
 
 void init(int argc, char* argv[])
