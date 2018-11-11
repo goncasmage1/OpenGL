@@ -53,12 +53,10 @@ int WindowHandle = 0;
 unsigned int FrameCount = 0;
 float animationProgress = 0.f;
 
-GLsizei numberOfMeshes = 0;
-
 enum AnimationState
 {
 	Start,
-	Middle,
+	Lift,
 	End
 };
 
@@ -74,7 +72,7 @@ std::shared_ptr<Camera> camera = std::make_shared<Camera>(WinX, WinY, 90);
 std::shared_ptr<MeshLoader> meshLoader = std::make_shared<MeshLoader>();
 std::shared_ptr<Scene> scene = nullptr;
 
-AnimationState animatinoState = AnimationState::Start;
+AnimationState animationState = AnimationState::Start;
 
 const std::vector<Animation> animations = {
 	{
@@ -314,12 +312,71 @@ void drawScene()
 	checkOpenGLError("ERROR: Could not draw scene.");
 }
 
+void subProcessAnimation(float progress)
+{
+	int i = 0;
+	std::vector<std::shared_ptr<SceneNode>> children = scene->root->childNodes;
+	switch (animationState)
+	{
+		case Start:
+			for (int i = 0; i < children.size(); i++)
+			{
+				children[i]->transform.Position.z = i*progress;
+				children[i]->UpdateTransformationMatrix();
+			}
+			break;
+		case Lift:
+			for (int i = 0; i < children.size(); i++)
+			{
+				float previousZ = children[i]->transform.Position.z;
+				children[i]->transform.Position = Lerp(children[i]->startTransform.Position, children[i]->endTransform.Position, progress);
+				children[i]->transform.Position.z = previousZ;
+				children[i]->transform.Rotation = Lerp(children[i]->startTransform.Rotation, children[i]->endTransform.Rotation, progress);
+				children[i]->UpdateTransformationMatrix();
+			}
+			break;
+		case End:
+			for (int i = 0; i < children.size(); i++)
+			{
+				children[i]->transform.Position.z = i * (1.f - progress);
+				children[i]->UpdateTransformationMatrix();
+			}
+			break;
+		default:
+			break;
+	}
+}
+
 void processAnimation()
 {
-	//TODO: Complete
-	animationProgress += input->GetAnimationDelta();
-	if (animationProgress > 1.f) animationProgress = 1.f;
-	else if (animationProgress < 0.f) animationProgress = 0.f;
+	float animationDelta = input->GetAnimationDelta();
+	animationProgress += animationDelta;
+
+	if (animationDelta > 0)
+	{
+		if (animationProgress > 1.f)
+		{
+			subProcessAnimation(1.f);
+			if (animationState != AnimationState::End)
+			{
+				animationProgress = animationProgress - 1.f;
+				animationState = static_cast<AnimationState>(static_cast<int>(animationState) + 1);
+			}
+		}
+	}
+	else
+	{
+		if (animationProgress < 0.f)
+		{
+			subProcessAnimation(0.f);
+			if (animationState != AnimationState::Start)
+			{
+				animationProgress = 1.f + animationProgress;
+				animationState = static_cast<AnimationState>(static_cast<int>(animationState) - 1);
+			}
+		}
+	}
+	subProcessAnimation(animationProgress);
 }
 
 void processInput()
@@ -477,12 +534,27 @@ void setupGLUT(int argc, char* argv[])
 
 void setupMeshes()
 {
-	std::shared_ptr<Mesh> newMesh = meshLoader->CreateMesh(std::string("../../assets/models/Square.obj"));
-	//std::shared_ptr<Mesh> newMesh = meshLoader->CreateMesh(std::string("../../assets/models/Square.obj"));
+	/*meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));
+	meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));
+	meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));
+	meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));
+	meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));*/
+	meshLoader->CreateMesh(std::string("../../assets/models/Square.obj"));
+	meshLoader->CreateMesh(std::string("../../assets/models/Paralelogram.obj"));
+
+	Vec4 colors[] = {
+		Vec4(1.f, 0.f, 0.f, 1.f),
+		Vec4(0.f, 1.f, 0.f, 1.f),
+		Vec4(0.f, 0.f, 1.f, 1.f),
+		Vec4(1.f, 1.f, 0.f, 1.f),
+		Vec4(1.f, 0.f, 1.f, 1.f),
+		Vec4(0.f, 1.f, 1.f, 1.f),
+		Vec4(1.f, 1.f, 1.f, 1.f),
+	};
 
 	for (int i = 0; i < meshLoader->Meshes.size(); i++)
 	{
-		std::shared_ptr<SceneNode> newNode = scene->root->CreateNode(meshLoader->Meshes[i]);
+		std::shared_ptr<SceneNode> newNode = scene->root->CreateNode(meshLoader->Meshes[i], Transform(), colors[i]);
 
 		newNode->startTransform = animations[i].From;
 		newNode->endTransform = animations[i].To;

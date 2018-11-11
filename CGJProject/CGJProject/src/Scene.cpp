@@ -6,7 +6,7 @@
 #include "Math/Matrix.h"
 
 Scene::Scene(std::shared_ptr<Camera> newCamera, std::shared_ptr<ShaderProgram> newShaderProgram) :
-	camera(newCamera), shaderProg(newShaderProgram), root(std::make_shared<SceneNode>(nullptr, nullptr, newShaderProgram))
+	camera(newCamera), shaderProg(newShaderProgram), root(std::make_shared<SceneNode>(nullptr, Transform(), nullptr, newShaderProgram))
 {
 }
 

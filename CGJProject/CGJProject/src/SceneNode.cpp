@@ -41,29 +41,17 @@ Mat4 Transform::GetTransformationMatrix()
 //	SceneNode
 /////////////
 
-SceneNode::SceneNode(std::shared_ptr<class Mesh> newMesh, std::shared_ptr<SceneNode> newParent, std::shared_ptr<ShaderProgram> newShaderProg) :
-	childNodes(std::vector<std::shared_ptr<SceneNode>>()), transform(), mesh(newMesh), parent(newParent), shaderProg(newShaderProg), transformationMatrix(Mat4::IdentityMat())
-{
-	UpdateTransformationMatrix();
-}
-
 SceneNode::SceneNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, std::shared_ptr<SceneNode> newParent, std::shared_ptr<ShaderProgram> newShaderProg) :
 	childNodes(std::vector<std::shared_ptr<SceneNode>>()), transform(newTransform), mesh(newMesh), parent(newParent), shaderProg(newShaderProg), transformationMatrix(Mat4::IdentityMat())
 {
 	UpdateTransformationMatrix();
 }
 
-std::shared_ptr<SceneNode> SceneNode::CreateNode(std::shared_ptr<class Mesh> newMesh)
-{
-	std::shared_ptr<SceneNode> newChild = std::make_shared<SceneNode>(newMesh, shared_from_this(), shaderProg);
-	childNodes.push_back(newChild);
-	return newChild;
-}
-
-std::shared_ptr<SceneNode> SceneNode::CreateNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform)
+std::shared_ptr<SceneNode> SceneNode::CreateNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, Vec3 newColor)
 {
 	std::shared_ptr<SceneNode> newChild = std::make_shared<SceneNode>(newMesh, newTransform, shared_from_this(), shaderProg);
 	childNodes.push_back(newChild);
+	color = newColor;
 	return newChild;
 }
 
@@ -88,6 +76,7 @@ void SceneNode::Draw()
 	shaderProg->Use();
 
 	glUniformMatrix4fv(shaderProg->GetUniformId("ModelMatrix"), 1, GL_FALSE, transformationMatrix.GetData());
+	glUniform3fv(shaderProg->GetUniformId("in_color"), 1, color.GetData());
 
 	mesh->Draw();
 	for (std::shared_ptr<SceneNode> node : childNodes)
