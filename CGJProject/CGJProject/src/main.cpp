@@ -269,8 +269,8 @@ void createShaderProgram()
 {
 	//TODO: Fix!
 	std::vector<ShaderAttribute> Attributes = { {0, "in_Position"},
-												{1, "in_Color"}/*,
-												{NORMALS, "inNormal"}*/
+												{1, "in_Coordinates"},
+												{2, "in_Normal"}
 												};
 	std::vector<std::string> ShaderPaths = { "src/Shader/VertexShader.vert",
 											 "src/Shader/FragmentShader.frag"

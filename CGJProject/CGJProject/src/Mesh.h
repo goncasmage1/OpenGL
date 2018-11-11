@@ -8,7 +8,7 @@ class Mesh
 
 private:
 
-	GLuint VaoId, VboId;
+	GLuint VAO, VBO;
 
 public:
 

@@ -9,12 +9,12 @@ void Mesh::CreateBufferObjects()
 {
 	GLuint VboVertices, VboTexcoords, VboNormals;
 
-	glGenVertexArrays(1, &VaoId);
-	glBindVertexArray(VaoId);
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
 	{
-		glGenBuffers(1, &VboId);
+		glGenBuffers(1, &VBO);
 
-		glBindBuffer(GL_ARRAY_BUFFER, VboId);
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		{
 			glGenBuffers(1, &VboVertices);
 			glBindBuffer(GL_ARRAY_BUFFER, VboVertices);
@@ -49,19 +49,19 @@ void Mesh::CreateBufferObjects()
 
 void Mesh::DestroyBufferObjects()
 {
-	glBindVertexArray(VaoId);
+	glBindVertexArray(VAO);
 	glDisableVertexAttribArray(VERTICES);
 	glDisableVertexAttribArray(TEXCOORDS);
 	glDisableVertexAttribArray(NORMALS);
-	glDeleteBuffers(1, &VboId);
-	glDeleteVertexArrays(1, &VaoId);
+	glDeleteBuffers(1, &VBO);
+	glDeleteVertexArrays(1, &VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 }
 
 void Mesh::Draw()
 {
-	glBindVertexArray(VaoId);
-	glDrawArrays(GL_TRIANGLES, (GLuint)Vertices.size(), 3);
+	glBindVertexArray(VAO);
+	glDrawArrays(GL_TRIANGLES, 0, 3*(GLuint)Vertices.size());
 	glBindVertexArray(0);
 }
