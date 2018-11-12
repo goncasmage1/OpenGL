@@ -53,6 +53,9 @@ int WindowHandle = 0;
 unsigned int FrameCount = 0;
 float animationProgress = 0.f;
 
+clock_t begin;
+clock_t end;
+
 enum AnimationState
 {
 	Start,
@@ -350,6 +353,7 @@ void subProcessAnimation(float progress)
 void processAnimation()
 {
 	float animationDelta = input->GetAnimationDelta();
+	animationDelta *= (float)(clock() - begin) / CLOCKS_PER_SEC;
 	animationProgress += animationDelta;
 
 	if (animationDelta > 0)
@@ -404,6 +408,8 @@ void display()
 	processInput();
 	drawScene();
 	glutSwapBuffers();
+
+	begin = clock();
 }
 
 void idle()
@@ -570,6 +576,8 @@ void init(int argc, char* argv[])
 	scene = std::make_shared<Scene>(camera, ShaderProg);
 	setupMeshes();
 	createBufferObjects();
+	begin = clock();
+	end = clock();
 }
 
 int main(int argc, char* argv[])

@@ -45,7 +45,7 @@ std::shared_ptr<SceneNode> SceneNode::CreateNode(std::shared_ptr<class Mesh> new
 
 void SceneNode::UpdateTransformationMatrix()
 {
-	transformationMatrix = Mat4::TranslationMat(transform.Position) * transform.Rotation.GetMatrix() * Mat4::ScaleMat(transform.Scale);
+	transformationMatrix = Mat4::TranslationMat(transform.Position) * (transform.Rotation.GetMatrix() * Mat4::ScaleMat(transform.Scale));
 	if (parent != nullptr) transformationMatrix *= parent->transformationMatrix;
 	for (std::shared_ptr<SceneNode> node : childNodes)
 	{

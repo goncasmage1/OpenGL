@@ -13,7 +13,7 @@ protected:
 	struct Vec2 MouseSensitivity = Vec2(1.f);
 	struct Vec3 MoveSensitivity = Vec3(0.04f);
 	float WheelSensitivity = 0.5f;
-	float AnimationSpeed = 0.1f;
+	float AnimationSpeed = 2.f;
 
 	struct Vec2 MouseDelta;
 	struct Vec2 PreviousMousePosition;
