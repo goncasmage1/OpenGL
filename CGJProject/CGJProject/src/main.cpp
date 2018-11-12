@@ -29,7 +29,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include <ctime>
+#include <chrono>
 #include <cassert>
 
 #include "GL/glew.h"
@@ -53,8 +53,8 @@ int WindowHandle = 0;
 unsigned int FrameCount = 0;
 float animationProgress = 0.f;
 
-clock_t begin;
-clock_t end;
+auto begin = std::chrono::steady_clock::now();
+auto end = std::chrono::steady_clock::now();
 
 enum AnimationState
 {
@@ -353,7 +353,7 @@ void subProcessAnimation(float progress)
 void processAnimation()
 {
 	float animationDelta = input->GetAnimationDelta();
-	animationDelta *= (float)(clock() - begin) / CLOCKS_PER_SEC;
+	animationDelta *= ((float)(std::chrono::steady_clock::now() - begin).count()) / 1000;
 	animationProgress += animationDelta;
 
 	if (animationDelta > 0)
@@ -409,7 +409,7 @@ void display()
 	drawScene();
 	glutSwapBuffers();
 
-	begin = clock();
+	begin = std::chrono::steady_clock::now();
 }
 
 void idle()
@@ -576,8 +576,8 @@ void init(int argc, char* argv[])
 	scene = std::make_shared<Scene>(camera, ShaderProg);
 	setupMeshes();
 	createBufferObjects();
-	begin = clock();
-	end = clock();
+	begin = std::chrono::steady_clock::now();
+	end = std::chrono::steady_clock::now();
 }
 
 int main(int argc, char* argv[])
