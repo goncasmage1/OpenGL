@@ -6,7 +6,7 @@ in vec3 in_Normal;
 out vec4 ex_Color;
 
 uniform mat4 ModelMatrix;
-uniform vec4 in_color;
+uniform vec4 VertColor;
 uniform SharedMatrices
 {
 	mat4 ViewMatrix;
@@ -16,5 +16,5 @@ uniform SharedMatrices
 void main(void)
 {
 	gl_Position = ProjectionMatrix * ViewMatrix * ModelMatrix * in_Position;
-	ex_Color = in_color;
+	ex_Color = VertColor;
 }

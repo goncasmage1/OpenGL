@@ -534,11 +534,11 @@ void setupGLUT(int argc, char* argv[])
 
 void setupMeshes()
 {
-	/*meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));
-	meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));*/
+	meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));
+	meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/Square.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/Paralelogram.obj"));
 
@@ -554,8 +554,7 @@ void setupMeshes()
 
 	for (int i = 0; i < meshLoader->Meshes.size(); i++)
 	{
-		std::shared_ptr<SceneNode> newNode = scene->root->CreateNode(meshLoader->Meshes[i], Transform(), colors[i]);
-
+		std::shared_ptr<SceneNode> newNode = scene->root->CreateNode(meshLoader->Meshes[i], animations[i].From, colors[i]);
 		newNode->startTransform = animations[i].From;
 		newNode->endTransform = animations[i].To;
 	}
@@ -573,141 +572,10 @@ void init(int argc, char* argv[])
 	createBufferObjects();
 }
 
-void q1test()
-{
-	Quat q = FromAngleAxis(Vec4(0.0f, 1.0f, 0.0f, 1.0f), 90.0f);
-	std::cout << "q " << q << std::endl;
-
-	Quat vi = { 0.0f, 7.0f, 0.0f, 0.0f };
-	std::cout << "vi " << vi << std::endl;
-
-	Quat qe = { 0.0f, 0.0f, 0.0f, -7.0f };
-	std::cout << "qe " << qe << std::endl;
-
-	Quat qinv = Inversed(q);
-	qinv.Clean();
-	std::cout << "qinv " << qinv << std::endl;
-
-	Quat qf = (q * vi) * qinv;
-	std::cout << "qf " << qf << std::endl;
-
-	assert(qf == qe);
-}
-
-void q2test()
-{
-	Quat q = FromAngleAxis(Vec4(0.0f, 1.0f, 0.0f, 1.0f), 90.0f);
-	std::cout << "q " << q << std::endl;
-
-	Vec4 vi = { 7.0f, 0.0f, 0.0f, 0.0f };
-	std::cout << "vi " << vi << std::endl;
-
-	//Vec4 ve = { 0.0f, 0.0f, -7.0f, 1.0f };
-	Vec4 ve = { 0.0f, 0.0f, -7.0f, 0.0f };
-	std::cout << "ve " << ve << std::endl;
-
-	Mat4 m = q.GetMatrix();
-	std::cout << "m " << m << std::endl;
-
-	Vec4 vf = m * vi;
-	std::cout << "vf " << vf << std::endl;
-
-	assert(vf == ve);
-}
-
-void q3test()
-{
-	Vec4 axis_x = { 1.0f, 0.0f, 0.0f, 1.0f };
-	Vec4 axis_y = { 0.0f, 1.0f, 0.0f, 1.0f };
-	Vec4 axis_z = { 0.0f, 0.0f, 1.0f, 1.0f };
-
-	Quat qyaw900 = FromAngleAxis(axis_y, 900.0f);
-	std::cout << "qyaw900 " << qyaw900 << std::endl;
-
-	Quat qroll180 = FromAngleAxis(axis_x, 180.0f);
-	std::cout << "qroll180 " << qroll180 << std::endl;
-	Quat qpitch180 = FromAngleAxis(axis_z, 180.0f);
-	std::cout << "qpitch180 " << qpitch180 << std::endl;
-	Quat qrp = qpitch180 * qroll180;
-	std::cout << "qrp " << qrp << std::endl;
-	Quat qpr = qroll180 * qpitch180;
-	std::cout << "qpr " << qpr << std::endl;
-
-	Quat qi = { 0.0f, 1.0f, 0.0f, 0.0f }; // x-axis
-	std::cout << "qi " << qi << std::endl;
-	Quat qe = { 0.0f, -1.0f, 0.0f, 0.0f };
-	std::cout << "qe " << qe << std::endl;
-
-	Quat qyaw900inv = Inversed(qyaw900);
-	Quat qfy = (qyaw900 * qi) * qyaw900inv;
-	std::cout << "qfy " << qfy << std::endl;
-	assert(qe == qfy);
-
-	Quat qrpinv = Inversed(qrp);
-	Quat qfrp = (qrp * qi) * qrpinv;
-	std::cout << "qfrp " << qfrp << std::endl;
-	assert(qe == qfrp);
-
-	Quat qprinv = Inversed(qpr);
-	Quat qfpr = (qpr * qi) * qprinv;
-	std::cout << "qfpr " << qfpr << std::endl;
-	assert(qe == qfpr);
-}
-
-void q4test()
-{
-	float thetai = 45.0f;
-	Vec4 axis_i = { 0.0f, 1.0f, 0.0f, 1.0f };
-	Quat q = FromAngleAxis(axis_i, thetai);
-	std::cout << thetai << " ";
-	std::cout << "axis_i " << axis_i << std::endl;
-
-	float thetaf;
-	Vec4 axis_f;
-	ToAngleAxis(q, thetaf, axis_f);
-	std::cout << thetaf << " ";
-	std::cout << "thetaf " << thetaf << std::endl;
-
-	bool b1 = (std::abs(thetai - thetaf) < 0.00001f);
-	bool b2 = axis_i == axis_f;
-	assert(b1 && b2);
-}
-
-void q5test()
-{
-	Vec4 axis = { 0.0f, 1.0f, 0.0f, 1.0f };
-	Quat q0 = FromAngleAxis(axis, 0.0f);
-	std::cout << "q0 " << q0 << std::endl;
-	Quat q1 = FromAngleAxis(axis, 90.0f);
-	std::cout << "q1 " << q1 << std::endl;
-	Quat qe = FromAngleAxis(axis, 30.0f);
-	std::cout << "qe " << qe << std::endl;
-
-	Quat qLerp0 = Lerp(q0, q1, 0.0f);
-	std::cout << "lerp(0) " << qLerp0 << std::endl;
-	assert(qLerp0 == q0);
-
-	Quat qLerp1 = Lerp(q0, q1, 1.0f);
-	std::cout << "lerp(1) " << qLerp1 << std::endl;
-	assert(qLerp1 == q1);
-
-	Quat qlerp = Lerp(q0, q1, 1 / 3.0f);
-	std::cout << "lerp(1/3) " << qlerp << std::endl;
-
-	assert(qlerp != qe);
-}
-
 int main(int argc, char* argv[])
 {
 	init(argc, argv);
 	glutMainLoop();
-
-	//q1test();
-	//q2test();
-	//q3test();
-	//q4test();
-	//q5test();
-
 	std::cin.ignore(1);
 	exit(EXIT_SUCCESS);
 }
