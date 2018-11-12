@@ -12,7 +12,7 @@
 /////////
 
 Vec2::Vec2() :
-	x(0), y(0)
+	x(0.f), y(0.f)
 {
 }
 Vec2::Vec2(float newXY) :
@@ -42,12 +42,12 @@ Vec2::Vec2(const Vec4 V) :
 
 Vec2 Vec2::X()
 {
-	return Vec2(1, 0);
+	return Vec2(1.f, 0.f);
 }
 
 Vec2 Vec2::Y()
 {
-	return Vec2(1, 0);
+	return Vec2(1.f, 0.f);
 }
 
 float* Vec2::GetData() const
@@ -235,7 +235,7 @@ const Vec2 Lerp(const Vec2 & From, const Vec2 & To, float progress)
 /////////
 
 Vec3::Vec3(): 
-	x(0), y(0), z(0)
+	x(0.f), y(0.f), z(0.f)
 {
 }
 Vec3::Vec3(float newXYZ) :
@@ -255,7 +255,7 @@ Vec3::Vec3(const Vec3 & newV3)
 }
 
 Vec3::Vec3(const Vec2 V) :
-	x(V.x), y(V.y), z(0)
+	x(V.x), y(V.y), z(0.f)
 {
 }
 
@@ -273,17 +273,17 @@ Vec3::Vec3(const Quat & Q)
 
 Vec3 Vec3::X()
 {
-	return Vec3(1, 0, 0);
+	return Vec3(1.f, 0.f, 0.f);
 }
 
 Vec3 Vec3::Y()
 {
-	return Vec3(0, 1, 0);
+	return Vec3(0.f, 1.f, 0.f);
 }
 
 Vec3 Vec3::Z()
 {
-	return Vec3(0, 0, 1);
+	return Vec3(0.f, 0.f, 1.f);
 }
 
 float* Vec3::GetData() const
@@ -504,7 +504,7 @@ const Vec3 Lerp(const Vec3 & From, const Vec3 & To, float progress)
 /////////
 
 Vec4::Vec4() :
-	x(0), y(0), z(0), w(0)
+	x(0.f), y(0.f), z(0.f), w(0.f)
 {
 }
 Vec4::Vec4(float newXYZW) :
@@ -517,12 +517,12 @@ Vec4::Vec4(float newX, float newY, float newZ, float newW) :
 }
 
 Vec4::Vec4(const Vec2 V) :
-	x(V.x), y(V.x), z(0), w(0)
+	x(V.x), y(V.x), z(0.f), w(0.f)
 {
 }
 
 Vec4::Vec4(const Vec3 V) :
-	x(V.x), y(V.y), z(V.z), w(0)
+	x(V.x), y(V.y), z(V.z), w(0.f)
 {
 }
 
@@ -543,17 +543,17 @@ Vec4::Vec4(const Quat & Q) :
 
 Vec4 Vec4::X()
 {
-	return Vec4(1, 0, 0, 1);
+	return Vec4(1.f, 0.f, 0.f, 1.f);
 }
 
 Vec4 Vec4::Y()
 {
-	return Vec4(0, 1, 0, 1);
+	return Vec4(0.f, 1.f, 0.f, 1.f);
 }
 
 Vec4 Vec4::Z()
 {
-	return Vec4(0, 0, 1, 1);
+	return Vec4(0.f, 0.f, 1.f, 1.f);
 }
 
 float* Vec4::GetData() const

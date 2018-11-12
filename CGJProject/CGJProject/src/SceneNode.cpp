@@ -5,7 +5,7 @@
 //	Transform
 /////////////
 Transform::Transform() :
-	Position(Vec3(0.f)), Rotation(FromAngleAxis(Vec4(0.f, 1.f, 0.f, 1.f), 45.f)), Scale(Vec3(1.f))
+	Position(Vec3(0.f)), Rotation(Quat()), Scale(Vec3(1.f))
 {
 	TransformationMat = Mat4::ScaleMat(Scale) * Mat4::TranslationMat(Position) * Rotation.GetMatrix();
 }
@@ -23,17 +23,6 @@ const Transform Lerp(const Transform & From, const Transform & To, float progres
 	Lerped.Rotation = Lerp(From.Rotation, To.Rotation, progress);
 	Lerped.Scale = Lerp(From.Scale, To.Scale, progress);
 	return Lerped;
-}
-
-void Transform::UpdateTransformationMatrix(const Mat4 parentTransform)
-{
-	TransformationMat = Mat4::ScaleMat(Scale) * Mat4::TranslationMat(Position) * Rotation.GetMatrix();
-	TransformationMat *= parentTransform;
-}
-
-Mat4 Transform::GetTransformationMatrix()
-{
-	return TransformationMat;
 }
 
 
@@ -56,7 +45,7 @@ std::shared_ptr<SceneNode> SceneNode::CreateNode(std::shared_ptr<class Mesh> new
 
 void SceneNode::UpdateTransformationMatrix()
 {
-	transformationMatrix = Mat4::ScaleMat(transform.Scale) * Mat4::TranslationMat(transform.Position) * transform.Rotation.GetMatrix();
+	transformationMatrix = Mat4::TranslationMat(transform.Position) * transform.Rotation.GetMatrix() * Mat4::ScaleMat(transform.Scale);
 	if (parent != nullptr) transformationMatrix *= parent->transformationMatrix;
 	for (std::shared_ptr<SceneNode> node : childNodes)
 	{
