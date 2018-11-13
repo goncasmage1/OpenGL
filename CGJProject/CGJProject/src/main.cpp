@@ -25,6 +25,7 @@
 ///////////////////////////////////////////////////////////////////////
 
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -54,7 +55,6 @@ unsigned int FrameCount = 0;
 float animationProgress = 0.f;
 
 auto begin = std::chrono::steady_clock::now();
-auto end = std::chrono::steady_clock::now();
 
 enum AnimationState
 {
@@ -353,11 +353,16 @@ void subProcessAnimation(float progress)
 void processAnimation()
 {
 	float animationDelta = input->GetAnimationDelta();
-	animationDelta *= ((float)(std::chrono::steady_clock::now() - begin).count()) / 1000;
-	animationProgress += animationDelta;
+	float deltaTime = (std::chrono::duration<float>(std::chrono::steady_clock::now() - begin)).count();
+	if (animationDelta == 0.f) return;
+	
+	animationDelta *= deltaTime;
 
-	if (animationDelta > 0)
+	std::cout << "Progress: " << animationProgress << std::endl;
+
+	if (animationDelta > 0 && (animationState != AnimationState::End || animationProgress < 1.f))
 	{
+		animationProgress += animationDelta;
 		if (animationProgress > 1.f)
 		{
 			subProcessAnimation(1.f);
@@ -366,10 +371,15 @@ void processAnimation()
 				animationProgress = animationProgress - 1.f;
 				animationState = static_cast<AnimationState>(static_cast<int>(animationState) + 1);
 			}
+			else
+			{
+				animationProgress = 1.f;
+			}
 		}
 	}
-	else
+	else if (animationDelta < 0 && (animationState != AnimationState::Start || animationProgress > 0.f))
 	{
+		animationProgress += animationDelta;
 		if (animationProgress < 0.f)
 		{
 			subProcessAnimation(0.f);
@@ -377,6 +387,10 @@ void processAnimation()
 			{
 				animationProgress = 1.f + animationProgress;
 				animationState = static_cast<AnimationState>(static_cast<int>(animationState) - 1);
+			}
+			else
+			{
+				animationProgress = 0.f;
 			}
 		}
 	}
@@ -576,8 +590,8 @@ void init(int argc, char* argv[])
 	scene = std::make_shared<Scene>(camera, ShaderProg);
 	setupMeshes();
 	createBufferObjects();
+	std::cout << std::setprecision(8) << std::fixed;
 	begin = std::chrono::steady_clock::now();
-	end = std::chrono::steady_clock::now();
 }
 
 int main(int argc, char* argv[])
