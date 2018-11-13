@@ -3,6 +3,7 @@
 #include "Math/Vector.h"
 #include <sstream>
 #include <fstream>
+#include <algorithm>
 
 void MeshLoader::ParseVertex(std::stringstream& sin)
 {
@@ -27,8 +28,18 @@ void MeshLoader::ParseNormal(std::stringstream& sin)
 
 void MeshLoader::ParseFace(std::stringstream& sin)
 {
+	if (TempMeshRef->VerticesPerFace == 0)
+	{
+		int len = sin.tellg();
+		std::string line;
+		std::getline(sin, line);
+		size_t barCount = std::count(line.begin(), line.end(), '/');
+		TempMeshRef->VerticesPerFace = barCount/2;
+		sin.seekg(len, std::ios_base::beg);
+	}
+
 	std::string token;
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < TempMeshRef->VerticesPerFace; i++)
 	{
 		std::getline(sin, token, '/');
 		if (token.size() > 0) TempMeshRef->vertexIdx.push_back(std::stoi(token));

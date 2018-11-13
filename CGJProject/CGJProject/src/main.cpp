@@ -74,6 +74,7 @@ std::shared_ptr<Input> input = std::make_shared<Input>();
 std::shared_ptr<Camera> camera = std::make_shared<Camera>(WinX, WinY, 90);
 std::shared_ptr<MeshLoader> meshLoader = std::make_shared<MeshLoader>();
 std::shared_ptr<Scene> scene = nullptr;
+std::shared_ptr<SceneNode> table = nullptr;
 
 AnimationState animationState = AnimationState::Start;
 
@@ -399,10 +400,29 @@ void processAnimation()
 
 void processInput()
 {
-	if (input->IsMiddleMouseButtonDown() != camera->IsOrbiting()) camera->ToggleOrbiting();
-
 	camera->RotateCamera(input->GetMouseDelta());
 	camera->Zoom(input->GetWheelDelta());
+
+	Vec3 movement = input->GetMovement();
+
+	bool bChanged = false;
+
+	if (movement.x != 0.f)
+	{
+		bChanged = true;
+		table->transform.Position.x += movement.x;
+	}
+	if (movement.y != 0.f)
+	{
+		bChanged = true;
+		table->transform.Position.y += movement.y;
+	}
+	if (movement.z != 0.f)
+	{
+		bChanged = true;
+		table->transform.Position.z -= movement.z;
+	}
+	if (bChanged) table->UpdateTransformationMatrix();
 
 	processAnimation();	
 }
@@ -554,6 +574,7 @@ void setupGLUT(int argc, char* argv[])
 
 void setupMeshes()
 {
+	meshLoader->CreateMesh(std::string("../../assets/models/TableTri.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));
@@ -572,9 +593,11 @@ void setupMeshes()
 		Vec4(1.f, 1.f, 1.f, 1.f),
 	};
 
-	for (int i = 0; i < meshLoader->Meshes.size(); i++)
+	table = scene->root->CreateNode(meshLoader->Meshes[0], Transform(), Vec4(0.6f, 0.4f, 0.0f, 1.f));
+
+	for (int i = 0; i < meshLoader->Meshes.size()-1; i++)
 	{
-		std::shared_ptr<SceneNode> newNode = scene->root->CreateNode(meshLoader->Meshes[i], animations[i].From, colors[i]);
+		std::shared_ptr<SceneNode> newNode = table->CreateNode(meshLoader->Meshes[i+1], animations[i].From, colors[i]);
 		newNode->startTransform = animations[i].From;
 		newNode->endTransform = animations[i].To;
 	}

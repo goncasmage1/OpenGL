@@ -6,12 +6,13 @@
 class Mesh
 {
 
-private:
+protected:
 
 	GLuint VAO, VBO;
 
 public:
 
+	int VerticesPerFace = 0;
 	bool TexcoordsLoaded, NormalsLoaded;
 	std::vector<struct Vec3> Vertices, vertexData, Normals, normalData;
 	std::vector<struct Vec2> Texcoords, texcoordData;
