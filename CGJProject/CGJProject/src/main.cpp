@@ -319,13 +319,13 @@ void drawScene()
 void subProcessAnimation(float progress)
 {
 	int i = 0;
-	std::vector<std::shared_ptr<SceneNode>> children = scene->root->childNodes;
+	std::vector<std::shared_ptr<SceneNode>> children = table->childNodes;
 	switch (animationState)
 	{
 		case Start:
 			for (int i = 0; i < children.size(); i++)
 			{
-				children[i]->transform.Position.z = i*progress;
+				children[i]->transform.Position.z = (i+1)*progress*0.1f;
 				children[i]->UpdateTransformationMatrix();
 			}
 			break;
@@ -342,7 +342,7 @@ void subProcessAnimation(float progress)
 		case End:
 			for (int i = 0; i < children.size(); i++)
 			{
-				children[i]->transform.Position.z = i * (1.f - progress);
+				children[i]->transform.Position.z = (i+1) * (1.f - progress) * 0.1f;
 				children[i]->UpdateTransformationMatrix();
 			}
 			break;
