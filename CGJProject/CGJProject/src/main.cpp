@@ -82,13 +82,13 @@ const std::vector<Animation> animations = {
 	{
 		//From Triangle 1
 		Transform(
-				Vec3(0.25f, 0.0f, 0.f),
+				Vec3(0.25f, 0.0f, 0.2f),
 				FromAngleAxis(Vec4::Z(), 180.f),
 				Vec3(1.5f)
 				),
 		//To Triangle 1
 		Transform(
-				Vec3(0.25f, 0.5f, 0.f),
+				Vec3(0.25f, 0.5f, 0.2f),
 				FromAngleAxis(Vec4::Z(), 180.f),
 				Vec3(1.5f)
 				)
@@ -96,13 +96,13 @@ const std::vector<Animation> animations = {
 	{
 		//From Triangle 2
 		Transform(
-				Vec3(0.25f, 0.f, 0.f),
+				Vec3(0.25f, 0.f, 0.2f),
 				FromAngleAxis(Vec4::Z(), 90.f),
 				Vec3(1.5f)
 				),
 		//To Triangle 2
 		Transform(
-				Vec3(0.25f, 0.f, 0.f),
+				Vec3(0.25f, 0.f, 0.2f),
 				FromAngleAxis(Vec4::Z(), 45.f),
 				Vec3(1.5f)
 				)
@@ -110,13 +110,13 @@ const std::vector<Animation> animations = {
 	{
 		//From Triangle 3
 		Transform(
-				Vec3(),
+				Vec3(0.f, 0.f, 0.2f),
 				FromAngleAxis(Vec4::Z(), 135.f),
 				Vec3(1.06f)
 				),
 		//To Triangle 3
 		Transform(
-				Vec3(-0.25f*1.06f, -0.5f*1.2f*1.06f, 0.f),
+				Vec3(-0.25f*1.06f, -0.5f*1.2f*1.06f, 0.2f),
 				Quat(),
 				Vec3(1.06f)
 				)
@@ -124,13 +124,13 @@ const std::vector<Animation> animations = {
 	{
 		//From Triangle 4
 		Transform(
-				Vec3(-0.25f, 0.75f, 0.f),
+				Vec3(-0.25f, 0.75f, 0.2f),
 				FromAngleAxis(Vec4::Z(), -90.f),
 				Vec3(0.75f)
 				),
 		//To Triangle 4
 		Transform(
-				Vec3(-0.26f * 2.f, -0.37f, 0.f),
+				Vec3(-0.26f * 2.f, -0.37f, 0.2f),
 				FromAngleAxis(Vec4::Z(), -45.f),
 				Vec3(0.75f)
 				)
@@ -138,13 +138,13 @@ const std::vector<Animation> animations = {
 	{
 		//From Triangle 5
 		Transform(
-				Vec3(),
+				Vec3(0.f, 0.f, 0.2f),
 				Quat(),
 				Vec3(0.75f)
 				),
 		//To Triangle 5
 		Transform(
-				Vec3(0.26f, -0.635f, 0.f),
+				Vec3(0.26f, -0.635f, 0.2f),
 				FromAngleAxis(Vec4::Z(), 45.f),
 				Vec3(0.75f)
 				)
@@ -152,13 +152,13 @@ const std::vector<Animation> animations = {
 	{
 		//From Square
 		Transform(
-				Vec3(),
+				Vec3(0.f, 0.f, 0.2f),
 				FromAngleAxis(Vec4::Z(), 45.f),
 				Vec3(1.06f)
 				),
 		//To Square
 		Transform(
-				Vec3(),
+				Vec3(0.f, 0.f, 0.2f),
 				FromAngleAxis(Vec4::Z(), 45.f),
 				Vec3(1.06f)
 				)
@@ -166,13 +166,13 @@ const std::vector<Animation> animations = {
 	{
 		//From Paralelogram
 		Transform(
-				Vec3(-0.35f, 0.7f, 0.f),
+				Vec3(-0.35f, 0.7f, 0.2f),
 				FromAngleAxis(Vec4::Z(), -90.f),
 				Vec3(1.07f)
 				),
 		//To Paralelogram
 		Transform(
-				Vec3(-0.56f, 0.56f, 0.f),
+				Vec3(-0.56f, 0.56f, 0.2f),
 				FromAngleAxis(Vec4::Z(), -90.f),
 				Vec3(1.07f)
 				)
