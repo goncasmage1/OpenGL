@@ -62,7 +62,15 @@ void Mesh::DestroyBufferObjects()
 void Mesh::Draw()
 {
 	glBindVertexArray(VAO);
-	if (VerticesPerFace == 3) glDrawArrays(GL_TRIANGLES, 0, 3*(GLuint)Vertices.size());
-	//else if (VerticesPerFace == 4) glDrawArrays(GL_POLYGON, 0, 4 * (GLuint)Vertices.size());
+	GLuint size = (GLuint)Vertices.size();
+	if (VerticesPerFace == 3) glDrawArrays(GL_TRIANGLES, 0, size);
+	/*else if (VerticesPerFace == 4)
+	{
+		for (int i = 0; i < size/4; i++)
+		{
+			glDrawArrays(GL_TRIANGLES, i*4, 3);
+			glDrawArrays(GL_TRIANGLES, i*4 + 1, 3);
+		}
+	}*/
 	glBindVertexArray(0);
 }
