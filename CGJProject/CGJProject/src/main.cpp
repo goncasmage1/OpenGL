@@ -359,8 +359,6 @@ void processAnimation()
 	
 	animationDelta *= deltaTime;
 
-	std::cout << "Progress: " << animationProgress << std::endl;
-
 	if (animationDelta > 0 && (animationState != AnimationState::End || animationProgress < 1.f))
 	{
 		animationProgress += animationDelta;
@@ -398,11 +396,8 @@ void processAnimation()
 	subProcessAnimation(animationProgress);
 }
 
-void processInput()
+void processMovement()
 {
-	camera->RotateCamera(input->GetMouseDelta());
-	camera->Zoom(input->GetWheelDelta());
-
 	Vec3 movement = input->GetMovement();
 
 	bool bChanged = false;
@@ -423,6 +418,14 @@ void processInput()
 		table->transform.Position.z -= movement.z;
 	}
 	if (bChanged) table->UpdateTransformationMatrix();
+}
+
+void processInput()
+{
+	camera->RotateCamera(input->GetMouseDelta());
+	camera->Zoom(input->GetWheelDelta());
+
+	processMovement();
 
 	processAnimation();	
 }

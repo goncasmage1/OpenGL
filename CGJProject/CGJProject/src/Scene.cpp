@@ -13,8 +13,6 @@ Scene::Scene(std::shared_ptr<Camera> newCamera, std::shared_ptr<ShaderProgram> n
 
 void Scene::Draw()
 {
-	camera->Draw();
-
 	for (std::shared_ptr<SceneNode> node : root->childNodes)
 	{
 		node->Draw();

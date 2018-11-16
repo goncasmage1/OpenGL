@@ -19,12 +19,10 @@ protected:
 	Vec3 Direction;
 	Vec3 RightVector;
 	Vec3 UpVector;
-	Vec2 Rotation;
 	Quat Rotator;
-	float Distance = 3.f;
+	float Distance;
 
 	bool bOrbiting = true;
-	bool bUseQuaternion = false;
 
 	Mat4 ModelMat;
 	Mat4 ViewMat;
@@ -37,18 +35,16 @@ public:
 
 	void CreateBufferObjects();
 	void DestroyBufferObjects();
-	void Draw();
 
 	Mat4 GetProjectionMatrix(bool bUsePerspective) { return (bUsePerspective ? Projection : Orthographic); }
 	Mat4 GetViewMatrix() { return ViewMat; }
-	Mat4 GetModelMatrix() { return ModelMat; }
+	//void SetViewMatrix();
+	void SetPerspectiveMatrix(float FOV, float aspectRation, float near, float far);
+	void SetOrthographicMatrix(float n, float f, float b, float t, float r, float l);
 	bool IsOrbiting() { return bOrbiting; }
 	void ToggleOrbiting() { bOrbiting = !bOrbiting; }
-	bool UsingQuaternion() { return bUseQuaternion; }
-	void ToggleQuaternion() { bUseQuaternion = !bUseQuaternion; }
 
 	void RotateCamera(Vec2 rotation);
-	void MoveCamera(Vec3 movement);
 	void Zoom(float amount);
 
 };

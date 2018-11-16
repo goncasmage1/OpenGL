@@ -64,13 +64,12 @@ void Mesh::Draw()
 	glBindVertexArray(VAO);
 	GLuint size = (GLuint)Vertices.size();
 	if (VerticesPerFace == 3) glDrawArrays(GL_TRIANGLES, 0, size);
-	/*else if (VerticesPerFace == 4)
+	else if (VerticesPerFace == 4)
 	{
 		for (int i = 0; i < size/4; i++)
 		{
-			glDrawArrays(GL_TRIANGLES, i*4, 3);
-			glDrawArrays(GL_TRIANGLES, i*4 + 1, 3);
+			glDrawArrays(GL_TRIANGLE_STRIP, i*4, 4);
 		}
-	}*/
+	}
 	glBindVertexArray(0);
 }
