@@ -579,13 +579,12 @@ void setupMeshes()
 {
 	meshLoader->CreateMesh(std::string("../../assets/models/TableTri.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));
-	meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));
-	meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));
-	meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));
-	meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/Square.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/Paralelogram.obj"));
 
+	int meshIndices[] = {
+		1,1,1,1,1,2,3
+	};
 	Vec4 colors[] = {
 		Vec4(1.f, 0.f, 0.f, 1.f),
 		Vec4(0.f, 1.f, 0.f, 1.f),
@@ -598,9 +597,9 @@ void setupMeshes()
 
 	table = scene->root->CreateNode(meshLoader->Meshes[0], Transform(), Vec4(0.6f, 0.4f, 0.0f, 1.f));
 
-	for (int i = 0; i < meshLoader->Meshes.size()-1; i++)
+	for (int i = 0; i < (sizeof(meshIndices) / sizeof(*meshIndices)); i++)
 	{
-		std::shared_ptr<SceneNode> newNode = table->CreateNode(meshLoader->Meshes[i+1], animations[i].From, colors[i]);
+		std::shared_ptr<SceneNode> newNode = table->CreateNode(meshLoader->Meshes[meshIndices[i]], animations[i].From, colors[i]);
 		newNode->startTransform = animations[i].From;
 		newNode->endTransform = animations[i].To;
 	}
