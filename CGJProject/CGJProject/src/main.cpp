@@ -1,29 +1,3 @@
-///////////////////////////////////////////////////////////////////////
-//
-//  Loading OBJ mesh from external file
-//
-//	Final individual assignment:
-//	1.	Create classes: Scene, Camera and Mesh (that loads a mesh from
-//		a Wavefront OBJ file to an indexed format) and build a small
-//		scenegraph of your tangram scene (you may create more 
-//		classes if needed).
-//	2.	Create a ground object and couple the tangram figure to the
-//		ground. Press keys to move the ground about: the tangram
-//		figure must follow the ground.
-//	3.	Animate between closed puzzle (initial square) and tangram
-//		figure by pressing a key.
-//	4.	Spherical camera interaction through mouse. It should be
-//		possible to interact while animation is playing.
-//
-//	Team assignment:
-//	Pick your team (2 elements from one same lab) for the team
-//	assignment you will be working until the end of the semester,
-//	and register it online.
-//
-// (c) 2013-18 by Carlos Martinho
-//
-///////////////////////////////////////////////////////////////////////
-
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -37,7 +11,7 @@
 #include "GL/freeglut.h"
 
 #include "Math/Vector.h"
-#include "Math/Matrix.h"
+//#include "Math/Matrix.h"
 #include "Math/Quaternion.h"
 #include "Shader/ShaderProgram.h"
 #include "Input.h"
@@ -615,7 +589,6 @@ void init(int argc, char* argv[])
 	scene = std::make_shared<Scene>(camera, ShaderProg);
 	setupMeshes();
 	createBufferObjects();
-	std::cout << std::setprecision(8) << std::fixed;
 	begin = std::chrono::steady_clock::now();
 }
 
