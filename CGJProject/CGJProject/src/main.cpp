@@ -569,11 +569,11 @@ void setupMeshes()
 		Vec4(1.f, 1.f, 1.f, 1.f),
 	};
 
-	table = scene->root->CreateNode(meshLoader->Meshes[0], Transform(), Vec4(0.6f, 0.4f, 0.0f, 1.f));
+	table = scene->root->CreateNode(meshLoader->Meshes[0], Transform(), Vec4(0.6f, 0.4f, 0.0f, 1.f), ShaderProg);
 
 	for (int i = 0; i < (sizeof(meshIndices) / sizeof(*meshIndices)); i++)
 	{
-		std::shared_ptr<SceneNode> newNode = table->CreateNode(meshLoader->Meshes[meshIndices[i]], animations[i].From, colors[i]);
+		std::shared_ptr<SceneNode> newNode = table->CreateNode(meshLoader->Meshes[meshIndices[i]], animations[i].From, colors[i], ShaderProg);
 		newNode->startTransform = animations[i].From;
 		newNode->endTransform = animations[i].To;
 	}

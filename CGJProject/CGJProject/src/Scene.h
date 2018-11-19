@@ -7,7 +7,6 @@ class Scene
 private:
 
 	std::shared_ptr<class Camera> camera = nullptr;
-	std::shared_ptr<class ShaderProgram> shaderProg = nullptr;
 
 public:
 

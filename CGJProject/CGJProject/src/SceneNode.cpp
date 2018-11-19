@@ -36,9 +36,9 @@ SceneNode::SceneNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform
 	UpdateTransformationMatrix();
 }
 
-std::shared_ptr<SceneNode> SceneNode::CreateNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, Vec4 newColor)
+std::shared_ptr<SceneNode> SceneNode::CreateNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, Vec4 newColor, std::shared_ptr<ShaderProgram> newShaderProg)
 {
-	std::shared_ptr<SceneNode> newChild = std::make_shared<SceneNode>(newMesh, newTransform, shared_from_this(), shaderProg, newColor);
+	std::shared_ptr<SceneNode> newChild = std::make_shared<SceneNode>(newMesh, newTransform, shared_from_this(), newShaderProg, newColor);
 	childNodes.push_back(newChild);
 	return newChild;
 }

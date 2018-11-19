@@ -46,7 +46,7 @@ public:
 
 	SceneNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, std::shared_ptr<SceneNode> newParent, std::shared_ptr<class ShaderProgram> newShaderProg, struct Vec4 newColor);
 
-	std::shared_ptr<SceneNode> CreateNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, struct Vec4 newColor);
+	std::shared_ptr<SceneNode> CreateNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, struct Vec4 newColor, std::shared_ptr<ShaderProgram> newShaderProg);
 
 	void UpdateTransformationMatrix();
 	void SetAnimationProgress(float progress);
