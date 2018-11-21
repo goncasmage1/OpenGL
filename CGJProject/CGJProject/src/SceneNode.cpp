@@ -63,12 +63,16 @@ void SceneNode::SetAnimationProgress(float progress)
 
 void SceneNode::Draw()
 {
-	shaderProg->Use();
+	if (shaderProg != nullptr)
+	{
+		shaderProg->Use();
 
-	glUniformMatrix4fv(shaderProg->GetUniformId("ModelMatrix"), 1, GL_FALSE, transformationMatrix.GetData());
-	glUniform4fv(shaderProg->GetUniformId("VertColor"), 1, color.GetData());
+		glUniformMatrix4fv(shaderProg->GetUniformId("ModelMatrix"), 1, GL_FALSE, transformationMatrix.GetData());
+		glUniform4fv(shaderProg->GetUniformId("VertColor"), 1, color.GetData());
 
-	mesh->Draw();
+		mesh->Draw();
+	}
+
 	for (std::shared_ptr<SceneNode> node : childNodes)
 	{
 		node->Draw();

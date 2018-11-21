@@ -48,7 +48,6 @@ struct Animation
 	Transform To;
 };
 
-std::shared_ptr<ShaderProgram> ShaderProg = nullptr;
 std::shared_ptr<Input> input = std::make_shared<Input>();
 std::shared_ptr<Camera> camera = std::make_shared<Camera>(WinX, WinY, 90);
 std::shared_ptr<MeshLoader> meshLoader = std::make_shared<MeshLoader>();
@@ -249,23 +248,25 @@ static void checkOpenGLError(std::string error)
 
 void createShaderProgram()
 {
-	shaders.push_back(std::make_shared<ShaderProgram>(std::vector<ShaderAttribute>{
-														ShaderAttribute(0, "in_Position"),
-														ShaderAttribute(1, "in_Coordinates"),
-														ShaderAttribute(2, "in_Normal")
-													  },
-													  std::vector<std::string>{
-														"src/Shader/VertexShader.vert",
-														"src/Shader/FragmentShader.frag"
-													  }
-													  ));
+	shaders.push_back(std::make_shared<ShaderProgram>(
+	std::vector<ShaderAttribute>{
+		ShaderAttribute(0, "in_Position"),
+		ShaderAttribute(1, "in_Coordinates"),
+		ShaderAttribute(2, "in_Normal")
+	},
+	std::vector<std::string>{
+		"src/Shader/VertexShader.vert",
+		"src/Shader/FragmentShader.frag"
+	}
+	));
 
 	checkOpenGLError("ERROR: Could not create shaders.");
 }
 
 void destroyShaderProgram()
 {
-	ShaderProg->Destroy();
+	for (int i = 0; i < shaders.size(); i++) shaders[i]->Destroy();
+	
 	checkOpenGLError("ERROR: Could not destroy shaders.");
 }
 
@@ -598,7 +599,7 @@ void init(int argc, char* argv[])
 	setupOpenGL();
 	setupCallbacks();
 	createShaderProgram();
-	scene = std::make_shared<Scene>(camera, ShaderProg);
+	scene = std::make_shared<Scene>(camera);
 	setupMeshes();
 	createBufferObjects();
 	begin = std::chrono::steady_clock::now();

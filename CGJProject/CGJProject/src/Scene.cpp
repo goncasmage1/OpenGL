@@ -6,8 +6,8 @@
 #include "Math/Matrix.h"
 #include "Math/Vector.h"
 
-Scene::Scene(std::shared_ptr<Camera> newCamera, std::shared_ptr<ShaderProgram> newShaderProgram) :
-	camera(newCamera), root(std::make_shared<SceneNode>(nullptr, Transform(), nullptr, newShaderProgram, Vec3()))
+Scene::Scene(std::shared_ptr<Camera> newCamera) :
+	camera(newCamera), root(std::make_shared<SceneNode>(nullptr, Transform(), nullptr, nullptr, Vec3()))
 {
 }
 

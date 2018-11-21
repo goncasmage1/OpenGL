@@ -10,7 +10,7 @@ private:
 
 public:
 
-	Scene(std::shared_ptr<class Camera> newCamera, std::shared_ptr<class ShaderProgram> newShaderProgram);
+	Scene(std::shared_ptr<class Camera> newCamera);
 
 	std::shared_ptr<class SceneNode> root = nullptr;
 
