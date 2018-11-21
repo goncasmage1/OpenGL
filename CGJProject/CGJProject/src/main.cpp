@@ -11,7 +11,6 @@
 #include "GL/freeglut.h"
 
 #include "Math/Vector.h"
-//#include "Math/Matrix.h"
 #include "Math/Quaternion.h"
 #include "Shader/ShaderProgram.h"
 #include "Input.h"
@@ -37,6 +36,12 @@ enum AnimationState
 	End
 };
 
+struct MeshData
+{
+	int MeshIndex = 0;
+	int ShaderIndex = 0;
+};
+
 struct Animation
 {
 	Transform From;
@@ -49,6 +54,7 @@ std::shared_ptr<Camera> camera = std::make_shared<Camera>(WinX, WinY, 90);
 std::shared_ptr<MeshLoader> meshLoader = std::make_shared<MeshLoader>();
 std::shared_ptr<Scene> scene = nullptr;
 std::shared_ptr<SceneNode> table = nullptr;
+std::vector<std::shared_ptr<ShaderProgram>> shaders = std::vector<std::shared_ptr<ShaderProgram>>();
 
 AnimationState animationState = AnimationState::Start;
 
@@ -243,16 +249,16 @@ static void checkOpenGLError(std::string error)
 
 void createShaderProgram()
 {
-	//TODO: Fix!
-	std::vector<ShaderAttribute> Attributes = { {0, "in_Position"},
-												{1, "in_Coordinates"},
-												{2, "in_Normal"}
-												};
-	std::vector<std::string> ShaderPaths = { "src/Shader/VertexShader.vert",
-											 "src/Shader/FragmentShader.frag"
-											};
-
-	ShaderProg = std::make_shared<ShaderProgram>(Attributes, ShaderPaths);
+	shaders.push_back(std::make_shared<ShaderProgram>(std::vector<ShaderAttribute>{
+														ShaderAttribute(0, "in_Position"),
+														ShaderAttribute(1, "in_Coordinates"),
+														ShaderAttribute(2, "in_Normal")
+													  },
+													  std::vector<std::string>{
+														"src/Shader/VertexShader.vert",
+														"src/Shader/FragmentShader.frag"
+													  }
+													  ));
 
 	checkOpenGLError("ERROR: Could not create shaders.");
 }
@@ -556,8 +562,14 @@ void setupMeshes()
 	meshLoader->CreateMesh(std::string("../../assets/models/Square.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/Paralelogram.obj"));
 
-	int meshIndices[] = {
-		1,1,1,1,1,2,3
+	MeshData meshData[] = {
+		{1, 0},
+		{1, 0},
+		{1, 0},
+		{1, 0},
+		{1, 0},
+		{2, 0},
+		{3, 0},
 	};
 	Vec4 colors[] = {
 		Vec4(1.f, 0.f, 0.f, 1.f),
@@ -569,11 +581,11 @@ void setupMeshes()
 		Vec4(1.f, 1.f, 1.f, 1.f),
 	};
 
-	table = scene->root->CreateNode(meshLoader->Meshes[0], Transform(), Vec4(0.6f, 0.4f, 0.0f, 1.f), ShaderProg);
+	table = scene->root->CreateNode(meshLoader->Meshes[0], Transform(), Vec4(0.6f, 0.4f, 0.0f, 1.f), shaders[0]);
 
-	for (int i = 0; i < (sizeof(meshIndices) / sizeof(*meshIndices)); i++)
+	for (int i = 0; i < (sizeof(meshData) / sizeof(*meshData)); i++)
 	{
-		std::shared_ptr<SceneNode> newNode = table->CreateNode(meshLoader->Meshes[meshIndices[i]], animations[i].From, colors[i], ShaderProg);
+		std::shared_ptr<SceneNode> newNode = table->CreateNode(meshLoader->Meshes[meshData[i].MeshIndex], animations[i].From, colors[i], shaders[meshData[i].ShaderIndex]);
 		newNode->startTransform = animations[i].From;
 		newNode->endTransform = animations[i].To;
 	}

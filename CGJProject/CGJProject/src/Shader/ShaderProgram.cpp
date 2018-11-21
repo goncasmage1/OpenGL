@@ -5,7 +5,20 @@
 #define VERTICES 0
 #define COLORS 1
 
-ShaderProgram::ShaderProgram(const std::vector<ShaderAttribute>& Attributes, const std::vector<std::string>& ShaderPaths)
+///////////////////////
+//	ShaderAttribute
+///////////////////////
+
+ShaderAttribute::ShaderAttribute(int newIndex, const GLchar * newName) :
+	index(newIndex), name(newName)
+{
+}
+
+///////////////////////
+//	ShaderProgram
+///////////////////////
+
+ShaderProgram::ShaderProgram(const std::vector<ShaderAttribute> Attributes, const std::vector<std::string> ShaderPaths)
 {
 	size_t NumOfShaders = ShaderPaths.size();
 	std::vector<Shader> shaders;
@@ -51,3 +64,5 @@ void ShaderProgram::Destroy()
 	glUseProgram(0);
 	glDeleteProgram(ProgramId);
 }
+
+
