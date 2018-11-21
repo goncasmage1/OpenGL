@@ -1,5 +1,6 @@
 #include "MeshLoader.h"
 #include "Mesh.h"
+#include "QuadMesh.h"
 #include "Math/Vector.h"
 #include <sstream>
 #include <fstream>
@@ -116,6 +117,13 @@ std::shared_ptr<Mesh> MeshLoader::CreateMesh(const std::string& filename)
 	ProcessMeshData();
 	FreeMeshData();
 	return LoadedMesh;
+}
+
+std::shared_ptr<QuadMesh> MeshLoader::CreateQuadMesh(float size, int division)
+{
+	std::shared_ptr<QuadMesh> newQuad = std::make_shared<QuadMesh>(size, division);
+	Meshes.push_back(newQuad);
+	return newQuad;
 }
 
 void MeshLoader::CreateBufferObjects()

@@ -156,6 +156,20 @@ const std::vector<Animation> animations = {
 				Vec3(1.07f)
 				)
 	},
+	{
+		//From Quad
+		Transform(
+				Vec3(0.f),
+				Quat(),
+				Vec3(1.f)
+				),
+		//To Quad
+		Transform(
+				Vec3(0.f),
+				Quat(),
+				Vec3(1.f)
+				)
+},
 };
 
 /////////////////////////////////////////////////////////////////////// ERRORS
@@ -562,6 +576,7 @@ void setupMeshes()
 	meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/Square.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/Paralelogram.obj"));
+	meshLoader->CreateQuadMesh(5.f, 4);
 
 	MeshData meshData[] = {
 		{1, 0},
@@ -571,6 +586,7 @@ void setupMeshes()
 		{1, 0},
 		{2, 0},
 		{3, 0},
+		{4, 0},
 	};
 	Vec4 colors[] = {
 		Vec4(1.f, 0.f, 0.f, 1.f),
@@ -580,11 +596,13 @@ void setupMeshes()
 		Vec4(1.f, 0.f, 1.f, 1.f),
 		Vec4(0.f, 1.f, 1.f, 1.f),
 		Vec4(1.f, 1.f, 1.f, 1.f),
+		Vec4(1.f, 1.f, 1.f, 1.f),
 	};
 
 	table = scene->root->CreateNode(meshLoader->Meshes[0], Transform(), Vec4(0.6f, 0.4f, 0.0f, 1.f), shaders[0]);
 
-	for (int i = 0; i < (sizeof(meshData) / sizeof(*meshData)); i++)
+	int numberOfMeshes = sizeof(meshData) / sizeof(*meshData);
+	for (int i = 0; i < numberOfMeshes; i++)
 	{
 		std::shared_ptr<SceneNode> newNode = table->CreateNode(meshLoader->Meshes[meshData[i].MeshIndex], animations[i].From, colors[i], shaders[meshData[i].ShaderIndex]);
 		newNode->startTransform = animations[i].From;

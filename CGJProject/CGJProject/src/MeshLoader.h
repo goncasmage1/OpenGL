@@ -24,6 +24,7 @@ public:
 	std::vector<std::shared_ptr<class Mesh>> Meshes;
 
 	std::shared_ptr<class Mesh> CreateMesh(const std::string& filename);
+	std::shared_ptr<class QuadMesh> CreateQuadMesh(float size, int division);
 	void CreateBufferObjects();
 	void DestroyBufferObjects();
 
