@@ -311,6 +311,22 @@ void drawScene()
 	checkOpenGLError("ERROR: Could not draw scene.");
 }
 
+void processCamera()
+{
+	if (camera->IsOrbiting() != input->IsMiddleMouseButtonDown()) camera->ToggleOrbiting();
+	camera->RotateCamera(input->GetMouseDelta());
+	camera->MoveCamera(input->GetMovement());
+	camera->Zoom(input->GetWheelDelta());
+
+	Vec3 movementOffset = camera->GetCameraMovement();
+
+	if (movementOffset != scene->root->transform.Position)
+	{
+		scene->root->transform.Position = movementOffset;
+		scene->root->UpdateTransformationMatrix();
+	}
+}
+
 void subProcessAnimation(float progress)
 {
 	int i = 0;
@@ -391,37 +407,9 @@ void processAnimation()
 	subProcessAnimation(animationProgress);
 }
 
-void processMovement()
-{
-	Vec3 movement = input->GetMovement();
-
-	bool bChanged = false;
-
-	if (movement.x != 0.f)
-	{
-		bChanged = true;
-		scene->root->transform.Position.x += movement.x;
-	}
-	if (movement.y != 0.f)
-	{
-		bChanged = true;
-		scene->root->transform.Position.y += movement.y;
-	}
-	if (movement.z != 0.f)
-	{
-		bChanged = true;
-		scene->root->transform.Position.z -= movement.z;
-	}
-	if (bChanged) scene->root->UpdateTransformationMatrix();
-}
-
 void processInput()
 {
-	camera->RotateCamera(input->GetMouseDelta());
-	camera->Zoom(input->GetWheelDelta());
-
-	processMovement();
-
+	processCamera();
 	processAnimation();	
 }
 

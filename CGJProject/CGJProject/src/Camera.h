@@ -23,7 +23,7 @@ protected:
 	Quat Rotator;
 	float Distance;
 
-	bool bOrbiting = false;
+	bool bOrbiting;
 
 	Mat4 ModelMat;
 	Mat4 ViewMat;
@@ -43,6 +43,8 @@ public:
 	void SetOrthographicMatrix(float n, float f, float b, float t, float r, float l);
 	bool IsOrbiting() { return bOrbiting; }
 	void ToggleOrbiting() { bOrbiting = !bOrbiting; }
+	void MoveCamera(Vec3 movement);
+	Vec3 GetCameraMovement() const { return Offset; }
 
 	void RotateCamera(Vec2 rotation);
 	void Zoom(float amount);
