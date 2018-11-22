@@ -400,19 +400,19 @@ void processMovement()
 	if (movement.x != 0.f)
 	{
 		bChanged = true;
-		table->transform.Position.x += movement.x;
+		scene->root->transform.Position.x += movement.x;
 	}
 	if (movement.y != 0.f)
 	{
 		bChanged = true;
-		table->transform.Position.y += movement.y;
+		scene->root->transform.Position.y += movement.y;
 	}
 	if (movement.z != 0.f)
 	{
 		bChanged = true;
-		table->transform.Position.z -= movement.z;
+		scene->root->transform.Position.z -= movement.z;
 	}
-	if (bChanged) table->UpdateTransformationMatrix();
+	if (bChanged) scene->root->UpdateTransformationMatrix();
 }
 
 void processInput()

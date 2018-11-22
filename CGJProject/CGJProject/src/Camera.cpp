@@ -8,9 +8,10 @@ Camera::Camera(int newWinX, int newWinY, int FOV)
 	Offset = Vec3();
 	ModelMat = Mat4::IdentityMat();
 
-	Direction = Vec3(0, 0, 4);
+	Direction = Vec3(1, 1, 1);
 	RightVector = Vec3(1, 0, 0);
 	UpVector = Vec3(0, 1, 0);
+	Rotation = Vec2();
 	Rotator = Quat(1, 0, 0, 0);
 	Distance = 3.f;
 	Mat4 RotMat = Rotator.GetMatrix();
@@ -56,11 +57,17 @@ void Camera::RotateCamera(Vec2 rotation)
 {
 	if (rotation == Vec2(0.f, 0.f)) return;
 
-	Rotator = FromAngleAxis(Vec4::X(), rotation.y) * FromAngleAxis(Vec4::Y(), rotation.x) * Rotator;
-	Mat4 RotMat = Rotator.GetMatrix();
-	ViewMat = Mat4::TranslationMat(Vec3(0, 0, -Distance)) * RotMat;
+	UpVector = RotateVector(UpVector, RightVector, rotation.y);
+	RightVector = RotateVector(RightVector, UpVector, -rotation.x);
+	Direction = Cross(RightVector, UpVector);
+	//Direction.Clean();
+
+	std::cout << Direction << std::endl;
+	//Rotator = FromAngleAxis(Vec4::X(), rotation.y) * FromAngleAxis(Vec4::Y(), rotation.x) * Rotator;
+	//Mat4 RotMat = bOrbiting ? Rotator.GetMatrix() : Mat4::RotationMat(RightVector, Rotation.y) * Mat4::RotationMat(UpVector, -Rotation.x);
+	ViewMat = /*bOrbiting ? Mat4::TranslationMat(Vec3(0, 0, -Distance)) * RotMat :*/ Mat4::ViewMat(Direction, UpVector);
 	glBindBuffer(GL_UNIFORM_BUFFER, VboId);
-	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), GetViewMatrix().GetData());
+	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), ViewMat.GetData());
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 }
 
@@ -77,6 +84,6 @@ void Camera::Zoom(float amount)
 
 	ViewMat = Mat4::TranslationMat(Vec3(0, 0, -Distance)) * RotMat;
 	glBindBuffer(GL_UNIFORM_BUFFER, VboId);
-	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), GetViewMatrix().GetData());
+	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), ViewMat.GetData());
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 }

@@ -19,10 +19,11 @@ protected:
 	Vec3 Direction;
 	Vec3 RightVector;
 	Vec3 UpVector;
+	Vec2 Rotation;
 	Quat Rotator;
 	float Distance;
 
-	bool bOrbiting = true;
+	bool bOrbiting = false;
 
 	Mat4 ModelMat;
 	Mat4 ViewMat;
@@ -38,7 +39,6 @@ public:
 
 	Mat4 GetProjectionMatrix(bool bUsePerspective) { return (bUsePerspective ? Projection : Orthographic); }
 	Mat4 GetViewMatrix() { return ViewMat; }
-	//void SetViewMatrix();
 	void SetPerspectiveMatrix(float FOV, float aspectRation, float near, float far);
 	void SetOrthographicMatrix(float n, float f, float b, float t, float r, float l);
 	bool IsOrbiting() { return bOrbiting; }
