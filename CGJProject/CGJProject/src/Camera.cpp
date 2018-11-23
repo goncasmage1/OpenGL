@@ -7,7 +7,6 @@ Camera::Camera(int newWinX, int newWinY, int FOV)
 
 	bOrbiting = false;
 
-	Offset = Vec3(5.f);
 	ModelMat = Mat4::IdentityMat();
 
 	Direction = Vec3(1, 1, 1);
@@ -16,6 +15,7 @@ Camera::Camera(int newWinX, int newWinY, int FOV)
 	Rotation = Vec2();
 	Rotator = Quat(1, 0, 0, 0);
 	Distance = 3.f;
+	Offset = Vec3(Distance);
 	Mat4 RotMat = Rotator.GetMatrix();
 	ViewMat = bOrbiting ? Mat4::TranslationMat(Vec3(0, 0, -Distance)) * RotMat : Mat4::ViewMat(Direction, UpVector);
 

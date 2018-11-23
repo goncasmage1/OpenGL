@@ -29,148 +29,17 @@ float animationProgress = 0.f;
 
 auto begin = std::chrono::steady_clock::now();
 
-enum AnimationState
-{
-	Start,
-	Lift,
-	End
-};
-
 struct MeshData
 {
 	int MeshIndex = 0;
 	int ShaderIndex = 0;
 };
 
-struct Animation
-{
-	Transform From;
-	Transform To;
-};
-
 std::shared_ptr<Input> input = std::make_shared<Input>();
 std::shared_ptr<Camera> camera = std::make_shared<Camera>(WinX, WinY, 90);
 std::shared_ptr<MeshLoader> meshLoader = std::make_shared<MeshLoader>();
 std::shared_ptr<Scene> scene = nullptr;
-std::shared_ptr<SceneNode> table = nullptr;
 std::vector<std::shared_ptr<ShaderProgram>> shaders = std::vector<std::shared_ptr<ShaderProgram>>();
-
-AnimationState animationState = AnimationState::Start;
-
-const std::vector<Animation> animations = {
-	{
-		//From Triangle 1
-		Transform(
-				Vec3(0.25f, 0.25f, 0.05f),
-				FromAngleAxis(Vec4::Z(), 180.f),
-				Vec3(1.5f)
-				),
-		//To Triangle 1
-		Transform(
-				Vec3(0.25f, 0.f, 0.05f),
-				FromAngleAxis(Vec4::Z(), 180.f),
-				Vec3(1.5f)
-				)
-	},
-	{
-		//From Triangle 2
-		Transform(
-				Vec3(0.25f, -0.25f, 0.05f),
-				FromAngleAxis(Vec4::Z(), 90.f),
-				Vec3(1.5f)
-				),
-		//To Triangle 2
-		Transform(
-				Vec3(0.25f, 0.f, 0.05f),
-				FromAngleAxis(Vec4::Z(), 45.f),
-				Vec3(1.5f)
-				)
-	},
-	{
-		//From Triangle 3
-		Transform(
-				Vec3(0.0f, -0.35f, 0.05f),
-				FromAngleAxis(Vec4::Z(), 135.f),
-				Vec3(1.06f)
-				),
-		//To Triangle 3
-		Transform(
-				Vec3(-0.25f, -0.5f*1.2f, 0.05f),
-				Quat(),
-				Vec3(1.06f)
-				)
-	},
-	{
-		//From Triangle 4
-		Transform(
-				Vec3(-0.25f, 0.25f, 0.05f),
-				FromAngleAxis(Vec4::Z(), -90.f),
-				Vec3(0.75f)
-				),
-		//To Triangle 4
-		Transform(
-				Vec3(-0.7f, -0.5f, 0.05f),
-				FromAngleAxis(Vec4::Z(), -45.f),
-				Vec3(0.75f)
-				)
-	},
-	{
-		//From Triangle 5
-		Transform(
-				Vec3(0.f, -0.5f, 0.05f),
-				Quat(),
-				Vec3(0.75f)
-				),
-		//To Triangle 5
-		Transform(
-				Vec3(0.35f, -0.85f, 0.05f),
-				FromAngleAxis(Vec4::Z(), 45.f),
-				Vec3(0.75f)
-				)
-	},
-	{
-		//From Square
-		Transform(
-				Vec3(0.f, -0.35f, 0.05f),
-				FromAngleAxis(Vec4::Z(), 45.f),
-				Vec3(1.06f)
-				),
-		//To Square
-		Transform(
-				Vec3(0.f, 0.f, 0.05f),
-				FromAngleAxis(Vec4::Z(), 45.f),
-				Vec3(1.06f)
-				)
-	},
-	{
-		//From Paralelogram
-		Transform(
-				Vec3(-0.35f, 0.35f, 0.05f),
-				FromAngleAxis(Vec4::Z(), -90.f),
-				Vec3(1.07f)
-				),
-		//To Paralelogram
-		Transform(
-				Vec3(-0.5f, 0.56f, 0.05f),
-				FromAngleAxis(Vec4::Z(), -90.f),
-				Vec3(1.07f)
-				)
-	},
-	{
-		//From Quad
-		Transform(
-				Vec3(0.f),
-				Quat(),
-				Vec3(1.f)
-				),
-		//To Quad
-		Transform(
-				Vec3(0.f),
-				Quat(),
-				Vec3(1.f)
-				)
-},
-};
 
 /////////////////////////////////////////////////////////////////////// ERRORS
 
@@ -269,7 +138,19 @@ void createShaderProgram()
 		ShaderAttribute(2, "in_Normal")
 	},
 	std::vector<std::string>{
-		"src/Shader/VertexShader.vert",
+		"src/Shader/WhiteShader.vert",
+		"src/Shader/FragmentShader.frag"
+	}
+	));
+
+	shaders.push_back(std::make_shared<ShaderProgram>(
+		std::vector<ShaderAttribute>{
+		ShaderAttribute(0, "in_Position"),
+		ShaderAttribute(1, "in_Coordinates"),
+		ShaderAttribute(2, "in_Normal")
+	},
+	std::vector<std::string>{
+		"src/Shader/BrownShader.vert",
 		"src/Shader/FragmentShader.frag"
 	}
 	));
@@ -327,90 +208,9 @@ void processCamera()
 	}
 }
 
-void subProcessAnimation(float progress)
-{
-	int i = 0;
-	std::vector<std::shared_ptr<SceneNode>> children = table->childNodes;
-	switch (animationState)
-	{
-		case Start:
-			for (int i = 0; i < children.size(); i++)
-			{
-				children[i]->transform.Position.z = (i+1)*progress*0.1f + 0.05f;
-				children[i]->UpdateTransformationMatrix();
-			}
-			break;
-		case Lift:
-			for (int i = 0; i < children.size(); i++)
-			{
-				float previousZ = children[i]->transform.Position.z;
-				children[i]->transform.Position = Lerp(children[i]->startTransform.Position, children[i]->endTransform.Position, progress);
-				children[i]->transform.Position.z = previousZ;
-				children[i]->transform.Rotation = Lerp(children[i]->startTransform.Rotation, children[i]->endTransform.Rotation, progress);
-				children[i]->UpdateTransformationMatrix();
-			}
-			break;
-		case End:
-			for (int i = 0; i < children.size(); i++)
-			{
-				children[i]->transform.Position.z = (i+1) * (1.f - progress) * 0.1f + 0.05f;
-				children[i]->UpdateTransformationMatrix();
-			}
-			break;
-		default:
-			break;
-	}
-}
-
-void processAnimation()
-{
-	float animationDelta = input->GetAnimationDelta();
-	float deltaTime = (std::chrono::duration<float>(std::chrono::steady_clock::now() - begin)).count();
-	if (animationDelta == 0.f) return;
-	
-	animationDelta *= deltaTime;
-
-	if (animationDelta > 0 && (animationState != AnimationState::End || animationProgress < 1.f))
-	{
-		animationProgress += animationDelta;
-		if (animationProgress > 1.f)
-		{
-			subProcessAnimation(1.f);
-			if (animationState != AnimationState::End)
-			{
-				animationProgress = animationProgress - 1.f;
-				animationState = static_cast<AnimationState>(static_cast<int>(animationState) + 1);
-			}
-			else
-			{
-				animationProgress = 1.f;
-			}
-		}
-	}
-	else if (animationDelta < 0 && (animationState != AnimationState::Start || animationProgress > 0.f))
-	{
-		animationProgress += animationDelta;
-		if (animationProgress < 0.f)
-		{
-			subProcessAnimation(0.f);
-			if (animationState != AnimationState::Start)
-			{
-				animationProgress = 1.f + animationProgress;
-				animationState = static_cast<AnimationState>(static_cast<int>(animationState) - 1);
-			}
-			else
-			{
-				animationProgress = 0.f;
-			}
-		}
-	}
-	subProcessAnimation(animationProgress);
-}
-
 void processInput()
 {
 	processCamera();
-	processAnimation();	
 }
 
 /////////////////////////////////////////////////////////////////////// CALLBACKS
@@ -561,41 +361,15 @@ void setupGLUT(int argc, char* argv[])
 void setupMeshes()
 {
 	meshLoader->CreateMesh(std::string("../../assets/models/TableTri.obj"));
-	meshLoader->CreateMesh(std::string("../../assets/models/CenteredRightTriangle.obj"));
-	meshLoader->CreateMesh(std::string("../../assets/models/Square.obj"));
-	meshLoader->CreateMesh(std::string("../../assets/models/Paralelogram.obj"));
 	meshLoader->CreateQuadMesh(5.f, 4);
 
-	MeshData meshData[] = {
+	/*MeshData meshData[] = {
 		{1, 0},
-		{1, 0},
-		{1, 0},
-		{1, 0},
-		{1, 0},
-		{2, 0},
-		{3, 0},
-		{4, 0},
-	};
-	Vec4 colors[] = {
-		Vec4(1.f, 0.f, 0.f, 1.f),
-		Vec4(0.f, 1.f, 0.f, 1.f),
-		Vec4(0.f, 0.f, 1.f, 1.f),
-		Vec4(1.f, 1.f, 0.f, 1.f),
-		Vec4(1.f, 0.f, 1.f, 1.f),
-		Vec4(0.f, 1.f, 1.f, 1.f),
-		Vec4(1.f, 1.f, 1.f, 1.f),
-		Vec4(1.f, 1.f, 1.f, 1.f),
-	};
+		{2, 1},
+	};*/
 
-	table = scene->root->CreateNode(meshLoader->Meshes[0], Transform(), Vec4(0.6f, 0.4f, 0.0f, 1.f), shaders[0]);
-
-	int numberOfMeshes = sizeof(meshData) / sizeof(*meshData);
-	for (int i = 0; i < numberOfMeshes; i++)
-	{
-		std::shared_ptr<SceneNode> newNode = table->CreateNode(meshLoader->Meshes[meshData[i].MeshIndex], animations[i].From, colors[i], shaders[meshData[i].ShaderIndex]);
-		newNode->startTransform = animations[i].From;
-		newNode->endTransform = animations[i].To;
-	}
+	scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[1]);
+	scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
 }
 
 void init(int argc, char* argv[])

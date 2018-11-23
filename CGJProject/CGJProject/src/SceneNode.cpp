@@ -30,15 +30,15 @@ const Transform Lerp(const Transform & From, const Transform & To, float progres
 //	SceneNode
 /////////////
 
-SceneNode::SceneNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, std::shared_ptr<SceneNode> newParent, std::shared_ptr<ShaderProgram> newShaderProg, Vec4 newColor) :
-	childNodes(std::vector<std::shared_ptr<SceneNode>>()), transform(newTransform), mesh(newMesh), parent(newParent), shaderProg(newShaderProg), transformationMatrix(Mat4::IdentityMat()), color(newColor)
+SceneNode::SceneNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, std::shared_ptr<SceneNode> newParent, std::shared_ptr<ShaderProgram> newShaderProg) :
+	childNodes(std::vector<std::shared_ptr<SceneNode>>()), transform(newTransform), mesh(newMesh), parent(newParent), shaderProg(newShaderProg), transformationMatrix(Mat4::IdentityMat())
 {
 	UpdateTransformationMatrix();
 }
 
-std::shared_ptr<SceneNode> SceneNode::CreateNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, Vec4 newColor, std::shared_ptr<ShaderProgram> newShaderProg)
+std::shared_ptr<SceneNode> SceneNode::CreateNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, std::shared_ptr<ShaderProgram> newShaderProg)
 {
-	std::shared_ptr<SceneNode> newChild = std::make_shared<SceneNode>(newMesh, newTransform, shared_from_this(), newShaderProg, newColor);
+	std::shared_ptr<SceneNode> newChild = std::make_shared<SceneNode>(newMesh, newTransform, shared_from_this(), newShaderProg);
 	childNodes.push_back(newChild);
 	return newChild;
 }
@@ -55,12 +55,6 @@ void SceneNode::UpdateTransformationMatrix()
 	}
 }
 
-void SceneNode::SetAnimationProgress(float progress)
-{
-	transform = Lerp(startTransform, endTransform, progress);
-	UpdateTransformationMatrix();
-}
-
 void SceneNode::Draw()
 {
 	if (shaderProg != nullptr)
@@ -68,7 +62,6 @@ void SceneNode::Draw()
 		shaderProg->Use();
 
 		glUniformMatrix4fv(shaderProg->GetUniformId("ModelMatrix"), 1, GL_FALSE, transformationMatrix.GetData());
-		glUniform4fv(shaderProg->GetUniformId("VertColor"), 1, color.GetData());
 
 		mesh->Draw();
 	}

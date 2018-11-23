@@ -7,7 +7,7 @@
 #include "Math/Vector.h"
 
 Scene::Scene(std::shared_ptr<Camera> newCamera) :
-	camera(newCamera), root(std::make_shared<SceneNode>(nullptr, Transform(), nullptr, nullptr, Vec3()))
+	camera(newCamera), root(std::make_shared<SceneNode>(nullptr, Transform(), nullptr, nullptr))
 {
 }
 
