@@ -45,7 +45,7 @@ public:
 	std::shared_ptr<SceneNode> CreateNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, std::shared_ptr<ShaderProgram> newShaderProg);
 
 	void UpdateTransformationMatrix();
-	void SetAnimationProgress(float progress);
 	void Draw();
+	virtual void SetupUniforms();
 
 };

@@ -18,8 +18,8 @@ public:
 	std::vector<struct Vec2> Texcoords, texcoordData;
 	std::vector<unsigned int> vertexIdx, texcoordIdx, normalIdx;
 
-	void CreateBufferObjects();
-	void DestroyBufferObjects();
+	virtual void CreateBufferObjects();
+	virtual void DestroyBufferObjects();
 	void Draw();
 
 };

@@ -60,9 +60,7 @@ void SceneNode::Draw()
 	if (shaderProg != nullptr)
 	{
 		shaderProg->Use();
-
-		glUniformMatrix4fv(shaderProg->GetUniformId("ModelMatrix"), 1, GL_FALSE, transformationMatrix.GetData());
-
+		SetupUniforms();
 		mesh->Draw();
 	}
 
@@ -71,4 +69,9 @@ void SceneNode::Draw()
 		node->Draw();
 	}
 	glUseProgram(0);
+}
+
+void SceneNode::SetupUniforms()
+{
+	glUniformMatrix4fv(shaderProg->GetUniformId("ModelMatrix"), 1, GL_FALSE, transformationMatrix.GetData());
 }

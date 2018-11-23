@@ -131,18 +131,10 @@ static void checkOpenGLError(std::string error)
 
 void createShaderProgram()
 {
-	shaders.push_back(std::make_shared<ShaderProgram>(
-	std::vector<ShaderAttribute>{
-		ShaderAttribute(0, "in_Position"),
-		ShaderAttribute(1, "in_Coordinates"),
-		ShaderAttribute(2, "in_Normal")
-	},
-	std::vector<std::string>{
-		"src/Shader/WhiteShader.vert",
-		"src/Shader/FragmentShader.frag"
-	}
-	));
+	//Instantiate specific ShaderProgram class
+	shaders.push_back(std::make_shared<ShaderProgram>());
 
+	//or send attributes explicitly
 	shaders.push_back(std::make_shared<ShaderProgram>(
 		std::vector<ShaderAttribute>{
 		ShaderAttribute(0, "in_Position"),
@@ -150,8 +142,8 @@ void createShaderProgram()
 		ShaderAttribute(2, "in_Normal")
 	},
 	std::vector<std::string>{
-		"src/Shader/BrownShader.vert",
-		"src/Shader/FragmentShader.frag"
+		"src/Shader/BrownShader.glsl",
+		"src/Shader/FragmentShader.glsl"
 	}
 	));
 
@@ -194,10 +186,10 @@ void drawScene()
 
 void processCamera()
 {
-	if (camera->IsOrbiting() != input->IsMiddleMouseButtonDown()) camera->ToggleOrbiting();
+	//if (camera->IsOrbiting() != input->IsMiddleMouseButtonDown()) camera->ToggleOrbiting();
 	camera->RotateCamera(input->GetMouseDelta());
 	camera->MoveCamera(input->GetMovement());
-	camera->Zoom(input->GetWheelDelta());
+	//camera->Zoom(input->GetWheelDelta());
 
 	Vec3 movementOffset = camera->GetCameraMovement();
 
@@ -360,9 +352,11 @@ void setupGLUT(int argc, char* argv[])
 
 void setupMeshes()
 {
+	//MeshLoader loads all necessary meshes
 	meshLoader->CreateMesh(std::string("../../assets/models/TableTri.obj"));
 	meshLoader->CreateQuadMesh(5.f, 4);
 
+	//Optionally indicate mesh and shader index to use for each SceneNode
 	/*MeshData meshData[] = {
 		{1, 0},
 		{2, 1},

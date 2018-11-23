@@ -11,7 +11,7 @@ protected:
 	int AnimationDirection = 0;
 
 	struct Vec2 MouseSensitivity = Vec2(1.f);
-	struct Vec3 MoveSensitivity = Vec3(0.04f);
+	struct Vec3 MoveSensitivity = Vec3(0.1f);
 	float WheelSensitivity = 0.9f;
 	float AnimationSpeed = 50.f;
 

@@ -18,11 +18,31 @@ ShaderAttribute::ShaderAttribute(int newIndex, const GLchar * newName) :
 //	ShaderProgram
 ///////////////////////
 
+ShaderProgram::ShaderProgram()
+{
+	std::vector<ShaderAttribute> shaderAttributes = {
+		ShaderAttribute(0, "in_Position"),
+		ShaderAttribute(1, "in_Coordinates"),
+		ShaderAttribute(2, "in_Normal")
+	};
+	std::vector<std::string> shaderPaths = {
+		"src/Shader/WhiteShader.glsl",
+		"src/Shader/FragmentShader.glsl"
+	};
+
+	BuildShader(shaderAttributes, shaderPaths);
+}
+
 ShaderProgram::ShaderProgram(const std::vector<ShaderAttribute> Attributes, const std::vector<std::string> ShaderPaths)
+{
+	BuildShader(Attributes, ShaderPaths);
+}
+
+void ShaderProgram::BuildShader(const std::vector<ShaderAttribute> Attributes, const std::vector<std::string> ShaderPaths)
 {
 	size_t NumOfShaders = ShaderPaths.size();
 	std::vector<Shader> shaders;
-	std::vector<GLenum> shaderTypes = {GL_VERTEX_SHADER, GL_FRAGMENT_SHADER};
+	std::vector<GLenum> shaderTypes = { GL_VERTEX_SHADER, GL_FRAGMENT_SHADER };
 
 	int i = 0;
 	for (i = 0; i < NumOfShaders; i++) shaders.push_back(Shader(ShaderPaths[i], shaderTypes[i]));

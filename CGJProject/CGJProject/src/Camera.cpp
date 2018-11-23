@@ -9,9 +9,9 @@ Camera::Camera(int newWinX, int newWinY, int FOV)
 
 	ModelMat = Mat4::IdentityMat();
 
-	Direction = Vec3(1, 1, 1);
 	RightVector = Vec3(1, 0, 0);
 	UpVector = Vec3(0, 1, 0);
+	Direction = Cross(RightVector, UpVector);;
 	Rotation = Vec2();
 	Rotator = Quat(1, 0, 0, 0);
 	Distance = 3.f;
