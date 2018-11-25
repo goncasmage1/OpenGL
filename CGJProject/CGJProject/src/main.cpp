@@ -13,6 +13,9 @@
 #include "Math/Vector.h"
 #include "Math/Quaternion.h"
 #include "Shader/ShaderProgram.h"
+#include "Shader/SailShader.h"
+#include "Shader/WaterShader.h"
+#include "Shader/WoodShader.h"
 #include "Input.h"
 #include "Camera.h"
 #include "MeshLoader.h"
@@ -22,7 +25,7 @@
 
 #define CAPTION "Hello Modern 2D World"
 
-int WinX = 800, WinY = 800;
+int WinX = 1600, WinY = 900;
 int WindowHandle = 0;
 unsigned int FrameCount = 0;
 float animationProgress = 0.f;
@@ -142,10 +145,14 @@ void createShaderProgram()
 		ShaderAttribute(2, "in_Normal")
 	},
 	std::vector<std::string>{
-		"src/Shader/BrownShader.glsl",
-		"src/Shader/FragmentShader.glsl"
+		"src/Shader/GLSL/BrownShader.glsl",
+		"src/Shader/GLSL/FragmentShader.glsl"
 	}
 	));
+
+	shaders.push_back(std::make_shared<SailShader>());
+	shaders.push_back(std::make_shared<WaterShader>());
+	shaders.push_back(std::make_shared<WoodShader>());
 
 	checkOpenGLError("ERROR: Could not create shaders.");
 }

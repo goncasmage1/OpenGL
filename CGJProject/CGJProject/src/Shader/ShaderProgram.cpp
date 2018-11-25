@@ -26,8 +26,8 @@ ShaderProgram::ShaderProgram()
 		ShaderAttribute(2, "in_Normal")
 	};
 	std::vector<std::string> shaderPaths = {
-		"src/Shader/WhiteShader.glsl",
-		"src/Shader/FragmentShader.glsl"
+		"src/Shader/GLSL/WhiteShader.glsl",
+		"src/Shader/GLSL/FragmentShader.glsl"
 	};
 
 	BuildShader(shaderAttributes, shaderPaths);

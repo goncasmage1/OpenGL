@@ -20,7 +20,7 @@ Camera::Camera(int newWinX, int newWinY, int FOV)
 	ViewMat = bOrbiting ? Mat4::TranslationMat(Vec3(0, 0, -Distance)) * RotMat : Mat4::ViewMat(Direction, UpVector);
 
 	Orthographic = Mat4::OrthographicMat(0.01f, 100, -1, 1, -1, 1);
-	Projection = Mat4::ProjectionMat(FOV, WinX / WinY, 0.01f, 100);
+	Projection = Mat4::ProjectionMat(FOV, (float)WinX / (float)WinY, 0.01f, 100);
 }
 
 void Camera::CreateBufferObjects()

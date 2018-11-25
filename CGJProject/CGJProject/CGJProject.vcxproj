@@ -141,8 +141,11 @@
     <ClCompile Include="src\QuadMesh.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\SceneNode.cpp" />
+    <ClCompile Include="src\Shader\SailShader.cpp" />
     <ClCompile Include="src\Shader\Shader.cpp" />
     <ClCompile Include="src\Shader\ShaderProgram.cpp" />
+    <ClCompile Include="src\Shader\WaterShader.cpp" />
+    <ClCompile Include="src\Shader\WoodShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Camera.h" />
@@ -155,12 +158,22 @@
     <ClInclude Include="src\QuadMesh.h" />
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\SceneNode.h" />
+    <ClInclude Include="src\Shader\SailShader.h" />
     <ClInclude Include="src\Shader\Shader.h" />
     <ClInclude Include="src\Shader\ShaderProgram.h" />
+    <ClInclude Include="src\Shader\WaterShader.h" />
+    <ClInclude Include="src\Shader\WoodShader.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\Shader\FragmentShader.frag" />
-    <None Include="src\Shader\VertexShader.vert" />
+    <None Include="src\Shader\GLSL\BrownShader.glsl" />
+    <None Include="src\Shader\GLSL\FragmentShader.glsl" />
+    <None Include="src\Shader\GLSL\SailFragmentShader.glsl" />
+    <None Include="src\Shader\GLSL\SailVertexShader.glsl" />
+    <None Include="src\Shader\GLSL\WaterFragmentShader.glsl" />
+    <None Include="src\Shader\GLSL\WaterVertexShader.glsl" />
+    <None Include="src\Shader\GLSL\WhiteShader.glsl" />
+    <None Include="src\Shader\GLSL\WoodFragmentShader.glsl" />
+    <None Include="src\Shader\GLSL\WoodVertexShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

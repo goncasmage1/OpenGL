@@ -25,6 +25,9 @@
     <Filter Include="Header Files\Math">
       <UniqueIdentifier>{643019fd-0dd6-408d-9b73-f338c04518d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Shader\GLSL">
+      <UniqueIdentifier>{ed55b52a-84bf-4837-afb6-da5f30aaf8bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Shader\Shader.cpp">
@@ -66,6 +69,15 @@
     <ClCompile Include="src\QuadMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Shader\WaterShader.cpp">
+      <Filter>Source Files\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shader\SailShader.cpp">
+      <Filter>Source Files\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shader\WoodShader.cpp">
+      <Filter>Source Files\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Camera.h">
@@ -104,13 +116,43 @@
     <ClInclude Include="src\QuadMesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Shader\WaterShader.h">
+      <Filter>Header Files\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader\SailShader.h">
+      <Filter>Header Files\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader\WoodShader.h">
+      <Filter>Header Files\Shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\Shader\FragmentShader.frag">
-      <Filter>Source Files\Shader</Filter>
+    <None Include="src\Shader\GLSL\BrownShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
     </None>
-    <None Include="src\Shader\VertexShader.vert">
-      <Filter>Source Files\Shader</Filter>
+    <None Include="src\Shader\GLSL\FragmentShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
+    <None Include="src\Shader\GLSL\SailFragmentShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
+    <None Include="src\Shader\GLSL\SailVertexShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
+    <None Include="src\Shader\GLSL\WaterFragmentShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
+    <None Include="src\Shader\GLSL\WaterVertexShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
+    <None Include="src\Shader\GLSL\WhiteShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
+    <None Include="src\Shader\GLSL\WoodFragmentShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
+    <None Include="src\Shader\GLSL\WoodVertexShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
     </None>
   </ItemGroup>
 </Project>
