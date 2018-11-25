@@ -38,7 +38,6 @@ public:
 	struct Vec3 GetMovement() { return movement * MoveSensitivity; }
 	float GetWheelDelta();
 	bool IsMiddleMouseButtonDown() const { return bMiddleMouseButtonDown; }
-	float GetAnimationDelta() const { return AnimationDirection * AnimationSpeed; }
 	bool IsPDown() const { return bPDown; }
 	bool IsGDown() const { return bGDown; }
 };

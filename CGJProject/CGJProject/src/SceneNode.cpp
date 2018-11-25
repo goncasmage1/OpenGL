@@ -57,7 +57,7 @@ void SceneNode::UpdateTransformationMatrix()
 
 void SceneNode::Draw()
 {
-	if (shaderProg != nullptr)
+	if (shaderProg != nullptr && mesh != nullptr)
 	{
 		shaderProg->Use();
 		SetupUniforms();
