@@ -7,10 +7,10 @@ class QuadMesh : public Mesh
 
 protected:
 
-	void GenerateQuads(float side, int division);
+	void GenerateQuads(float side, int xRepeat, int yRepeat);
 
 public:
 
-	QuadMesh(float side, int division);
+	QuadMesh(float side, int xRepeat, int yRepeat);
 
 };
