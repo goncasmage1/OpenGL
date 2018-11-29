@@ -119,9 +119,9 @@ std::shared_ptr<Mesh> MeshLoader::CreateMesh(const std::string& filename)
 	return LoadedMesh;
 }
 
-std::shared_ptr<QuadMesh> MeshLoader::CreateQuadMesh(float size, int division)
+std::shared_ptr<QuadMesh> MeshLoader::CreateQuadMesh(float size, int xRepeat, int yRepeat)
 {
-	std::shared_ptr<QuadMesh> newQuad = std::make_shared<QuadMesh>(size, division);
+	std::shared_ptr<QuadMesh> newQuad = std::make_shared<QuadMesh>(size, xRepeat, yRepeat);
 	Meshes.push_back(newQuad);
 	return newQuad;
 }
