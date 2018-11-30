@@ -9,6 +9,7 @@
 
 #include "GL/glew.h"
 #include "GL/freeglut.h"
+#include "NvCloth/Factory.h"
 
 #include "Math/Vector.h"
 #include "Math/Quaternion.h"
