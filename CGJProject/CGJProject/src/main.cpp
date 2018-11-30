@@ -5,11 +5,14 @@
 #include <string>
 #include <vector>
 #include <chrono>
-#include <cassert>
+#include <assert.h>
 
 #include "GL/glew.h"
 #include "GL/freeglut.h"
+
 #include "NvCloth/Factory.h"
+#include "NvClothExt/ClothFabricCooker.h"
+//#include "cuda.h"
 
 #include "Math/Vector.h"
 #include "Math/Quaternion.h"
@@ -44,6 +47,8 @@ std::shared_ptr<Camera> camera = std::make_shared<Camera>(WinX, WinY, 90);
 std::shared_ptr<MeshLoader> meshLoader = std::make_shared<MeshLoader>();
 std::shared_ptr<Scene> scene = nullptr;
 std::vector<std::shared_ptr<ShaderProgram>> shaders = std::vector<std::shared_ptr<ShaderProgram>>();
+
+nv::cloth::Factory* factory = nullptr;
 
 /////////////////////////////////////////////////////////////////////// ERRORS
 
@@ -129,6 +134,40 @@ static void checkOpenGLError(std::string error)
 		std::cin.ignore(1);
 		exit(EXIT_FAILURE);
 	}
+}
+
+/////////////////////////////////////////////////////////////////////// NvCloth
+
+void setupNvCloth()
+{
+
+	//nv::cloth::InitializeNvCloth();
+
+	//CUcontext cudaContext;
+	//int deviceCount = 0;
+	//CUresult result = cuDeviceGetCount(&deviceCount);
+	//assert(CUDA_SUCCESS == result);
+	//assert(deviceCount >= 1);
+
+	//result = cuCtxCreate(&cudaContext, 0, 0); //Pick first device
+	//assert(CUDA_SUCCESS == result);
+
+	/*factory = NvClothCreateFactoryCPU();
+	if (factory == nullptr)
+	{
+		std::cerr << "ERROR:" << std::endl;
+		std::cerr << "  source:     " << "NvCloth" << std::endl;
+		std::cerr << "  severity:   " << "Error" << std::endl;
+		std::cerr << "  debug call: " << "Could not create NvCloth Factory" << std::endl;
+	}*/
+
+	//nv::cloth::ClothMeshDesc meshDesc;
+
+}
+
+void PxAllocate(size_t size, const char *typeName, const char *filename, int line)
+{
+
 }
 
 /////////////////////////////////////////////////////////////////////// SHADERs
@@ -219,6 +258,7 @@ void cleanup()
 {
 	destroyShaderProgram();
 	destroyBufferObjects();
+	NvClothDestroyFactory(factory);
 }
 
 void display()
@@ -380,6 +420,7 @@ void init(int argc, char* argv[])
 	setupGLEW();
 	setupOpenGL();
 	setupCallbacks();
+	setupNvCloth();
 	createShaderProgram();
 	scene = std::make_shared<Scene>(camera);
 	setupMeshes();
