@@ -14,6 +14,11 @@
 #include "NvClothExt/ClothFabricCooker.h"
 //#include "cuda.h"
 
+#include "PxCallbacks/CustomAllocator.h"
+#include "PxCallbacks/CustomAssertHandler.h"
+#include "PxCallbacks/CustomError.h"
+#include "PxCallbacks/CustomProfiler.h"
+
 #include "Math/Vector.h"
 #include "Math/Quaternion.h"
 #include "Shader/ShaderProgram.h"
@@ -47,6 +52,11 @@ std::shared_ptr<Camera> camera = std::make_shared<Camera>(WinX, WinY, 90);
 std::shared_ptr<MeshLoader> meshLoader = std::make_shared<MeshLoader>();
 std::shared_ptr<Scene> scene = nullptr;
 std::vector<std::shared_ptr<ShaderProgram>> shaders = std::vector<std::shared_ptr<ShaderProgram>>();
+
+CustomAllocator* customAllocator = new CustomAllocator();
+CustomAssertHandler* customAssert = new CustomAssertHandler();
+CustomError* customError = new CustomError();
+CustomProfiler* customProfiler = new CustomProfiler();
 
 nv::cloth::Factory* factory = nullptr;
 
@@ -141,7 +151,7 @@ static void checkOpenGLError(std::string error)
 void setupNvCloth()
 {
 
-	//nv::cloth::InitializeNvCloth();
+	nv::cloth::InitializeNvCloth(customAllocator, customError, customAssert, customProfiler);
 
 	//CUcontext cudaContext;
 	//int deviceCount = 0;
@@ -152,22 +162,26 @@ void setupNvCloth()
 	//result = cuCtxCreate(&cudaContext, 0, 0); //Pick first device
 	//assert(CUDA_SUCCESS == result);
 
-	/*factory = NvClothCreateFactoryCPU();
+	factory = NvClothCreateFactoryCPU();
 	if (factory == nullptr)
 	{
 		std::cerr << "ERROR:" << std::endl;
 		std::cerr << "  source:     " << "NvCloth" << std::endl;
 		std::cerr << "  severity:   " << "Error" << std::endl;
 		std::cerr << "  debug call: " << "Could not create NvCloth Factory" << std::endl;
-	}*/
+	}
 
 	//nv::cloth::ClothMeshDesc meshDesc;
-
 }
 
-void PxAllocate(size_t size, const char *typeName, const char *filename, int line)
+void destroyNvCloth()
 {
+	NvClothDestroyFactory(factory);
 
+	delete customAllocator;
+	delete customAssert;
+	delete customError;
+	delete customProfiler;
 }
 
 /////////////////////////////////////////////////////////////////////// SHADERs
@@ -258,7 +272,7 @@ void cleanup()
 {
 	destroyShaderProgram();
 	destroyBufferObjects();
-	NvClothDestroyFactory(factory);
+	destroyNvCloth();
 }
 
 void display()

@@ -28,6 +28,12 @@
     <Filter Include="Source Files\Shader\GLSL">
       <UniqueIdentifier>{ed55b52a-84bf-4837-afb6-da5f30aaf8bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\PxCallbacks">
+      <UniqueIdentifier>{d88c4d88-2d29-4b1a-8c91-e2970161aae9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\PxCallbacks">
+      <UniqueIdentifier>{a34a8040-ec25-437c-8ad7-1261004f588c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Shader\Shader.cpp">
@@ -78,6 +84,18 @@
     <ClCompile Include="src\Shader\WoodShader.cpp">
       <Filter>Source Files\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="src\PxCallbacks\CustomAllocator.cpp">
+      <Filter>Source Files\PxCallbacks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PxCallbacks\CustomError.cpp">
+      <Filter>Source Files\PxCallbacks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PxCallbacks\CustomAssertHandler.cpp">
+      <Filter>Source Files\PxCallbacks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PxCallbacks\CustomProfiler.cpp">
+      <Filter>Source Files\PxCallbacks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Camera.h">
@@ -124,6 +142,18 @@
     </ClInclude>
     <ClInclude Include="src\Shader\WoodShader.h">
       <Filter>Header Files\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PxCallbacks\CustomAllocator.h">
+      <Filter>Header Files\PxCallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PxCallbacks\CustomError.h">
+      <Filter>Header Files\PxCallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PxCallbacks\CustomAssertHandler.h">
+      <Filter>Header Files\PxCallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PxCallbacks\CustomProfiler.h">
+      <Filter>Header Files\PxCallbacks</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
