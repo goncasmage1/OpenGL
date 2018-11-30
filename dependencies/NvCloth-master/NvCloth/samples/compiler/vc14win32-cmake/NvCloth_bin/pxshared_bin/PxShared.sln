@@ -1,0 +1,51 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ALL_BUILD", "ALL_BUILD.vcxproj", "{9DB42A06-ED71-31AF-BF6A-7C2451949381}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B4EF0E94-F658-3516-B77C-90D78065FF61} = {B4EF0E94-F658-3516-B77C-90D78065FF61}
+		{CB273367-D70C-38F0-A49D-F188733F3F15} = {CB273367-D70C-38F0-A49D-F188733F3F15}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PxFoundation", "PxFoundation.vcxproj", "{B4EF0E94-F658-3516-B77C-90D78065FF61}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CB273367-D70C-38F0-A49D-F188733F3F15} = {CB273367-D70C-38F0-A49D-F188733F3F15}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZERO_CHECK", "..\..\\ZERO_CHECK.vcxproj", "{CB273367-D70C-38F0-A49D-F188733F3F15}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		debug|Win32 = debug|Win32
+		checked|Win32 = checked|Win32
+		profile|Win32 = profile|Win32
+		release|Win32 = release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9DB42A06-ED71-31AF-BF6A-7C2451949381}.debug|Win32.ActiveCfg = debug|Win32
+		{9DB42A06-ED71-31AF-BF6A-7C2451949381}.checked|Win32.ActiveCfg = checked|Win32
+		{9DB42A06-ED71-31AF-BF6A-7C2451949381}.profile|Win32.ActiveCfg = profile|Win32
+		{9DB42A06-ED71-31AF-BF6A-7C2451949381}.release|Win32.ActiveCfg = release|Win32
+		{B4EF0E94-F658-3516-B77C-90D78065FF61}.debug|Win32.ActiveCfg = debug|Win32
+		{B4EF0E94-F658-3516-B77C-90D78065FF61}.debug|Win32.Build.0 = debug|Win32
+		{B4EF0E94-F658-3516-B77C-90D78065FF61}.checked|Win32.ActiveCfg = checked|Win32
+		{B4EF0E94-F658-3516-B77C-90D78065FF61}.checked|Win32.Build.0 = checked|Win32
+		{B4EF0E94-F658-3516-B77C-90D78065FF61}.profile|Win32.ActiveCfg = profile|Win32
+		{B4EF0E94-F658-3516-B77C-90D78065FF61}.profile|Win32.Build.0 = profile|Win32
+		{B4EF0E94-F658-3516-B77C-90D78065FF61}.release|Win32.ActiveCfg = release|Win32
+		{B4EF0E94-F658-3516-B77C-90D78065FF61}.release|Win32.Build.0 = release|Win32
+		{CB273367-D70C-38F0-A49D-F188733F3F15}.debug|Win32.ActiveCfg = debug|Win32
+		{CB273367-D70C-38F0-A49D-F188733F3F15}.debug|Win32.Build.0 = debug|Win32
+		{CB273367-D70C-38F0-A49D-F188733F3F15}.checked|Win32.ActiveCfg = checked|Win32
+		{CB273367-D70C-38F0-A49D-F188733F3F15}.checked|Win32.Build.0 = checked|Win32
+		{CB273367-D70C-38F0-A49D-F188733F3F15}.profile|Win32.ActiveCfg = profile|Win32
+		{CB273367-D70C-38F0-A49D-F188733F3F15}.profile|Win32.Build.0 = profile|Win32
+		{CB273367-D70C-38F0-A49D-F188733F3F15}.release|Win32.ActiveCfg = release|Win32
+		{CB273367-D70C-38F0-A49D-F188733F3F15}.release|Win32.Build.0 = release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

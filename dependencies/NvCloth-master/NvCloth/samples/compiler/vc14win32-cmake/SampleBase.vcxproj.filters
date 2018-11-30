@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core\Application.cpp">
+      <Filter>Source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core\DeviceManager.cpp">
+      <Filter>Source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core\SampleController.cpp">
+      <Filter>Source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core\SampleManager.cpp">
+      <Filter>Source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\ConvexRenderMesh.cpp">
+      <Filter>Source\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\CustomRenderMesh.cpp">
+      <Filter>Source\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\ClothRenderMesh.cpp">
+      <Filter>Source\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\Mesh.cpp">
+      <Filter>Source\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\PrimitiveRenderMesh.cpp">
+      <Filter>Source\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\Renderable.cpp">
+      <Filter>Source\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\Renderer.cpp">
+      <Filter>Source\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\RendererHBAO.cpp">
+      <Filter>Source\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\RendererShadow.cpp">
+      <Filter>Source\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\RenderMaterial.cpp">
+      <Filter>Source\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\ResourceManager.cpp">
+      <Filter>Source\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\SkinnedRenderMesh.cpp">
+      <Filter>Source\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\SceneController.cpp">
+      <Filter>Source\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\Scene.cpp">
+      <Filter>Source\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\SimpleScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\WindScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\TetherScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\FrictionScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\FreeFallScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\SphereScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\StiffnessPerConstraintScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\GeodesicScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\LocalGlobalScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\DistanceConstraintScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\InterCollisionScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\SelfCollisionScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\TriangleScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\ConvexCollisionScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\PlaneCollisionScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\CapsuleScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\CCDScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\CCDScene2.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\MultiSolverScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\ScaledScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\TimeStepScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\VirtualParticleScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\TeleportScene.cpp">
+      <Filter>Source\scene\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\ui\CommonUIController.cpp">
+      <Filter>Source\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\ui\imgui_impl_dx11.cpp">
+      <Filter>Source\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\SampleProfiler.cpp">
+      <Filter>Source\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\Utils.cpp">
+      <Filter>Source\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\ClothMeshGenerator.cpp">
+      <Filter>Source\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\CallbackImplementations.cpp">
+      <Filter>Source\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\JobManager.cpp">
+      <Filter>Source\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\DebugLineRenderBuffer.cpp">
+      <Filter>Source\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\MeshGenerator.cpp">
+      <Filter>Source\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\DataStream.cpp">
+      <Filter>Source\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\Main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49\imgui.cpp">
+      <Filter>Source\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49\imgui_demo.cpp">
+      <Filter>Source\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49\imgui_draw.cpp">
+      <Filter>Source\imgui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core\Application.h">
+      <Filter>Source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core\DeviceManager.h">
+      <Filter>Source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core\SampleController.h">
+      <Filter>Source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core\SampleManager.h">
+      <Filter>Source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\ConvexRenderMesh.h">
+      <Filter>Source\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\CustomRenderMesh.h">
+      <Filter>Source\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\ClothRenderMesh.h">
+      <Filter>Source\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\DebugRenderBuffer.h">
+      <Filter>Source\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\Mesh.h">
+      <Filter>Source\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\PrimitiveRenderMesh.h">
+      <Filter>Source\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\PxPhysXCommonConfig.h">
+      <Filter>Source\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\PxRenderBuffer.h">
+      <Filter>Source\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\Renderable.h">
+      <Filter>Source\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\Renderer.h">
+      <Filter>Source\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\RendererHBAO.h">
+      <Filter>Source\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\RendererShadow.h">
+      <Filter>Source\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\RenderMaterial.h">
+      <Filter>Source\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\RenderUtils.h">
+      <Filter>Source\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\ResourceManager.h">
+      <Filter>Source\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\ShaderUtils.h">
+      <Filter>Source\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\SkinnedRenderMesh.h">
+      <Filter>Source\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\SceneController.h">
+      <Filter>Source\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\Scene.h">
+      <Filter>Source\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\SimpleScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\WindScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\TetherScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\FrictionScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\FreeFallScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\SphereScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\StiffnessPerConstraintScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\GeodesicScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\LocalGlobalScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\DistanceConstraintScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\InterCollisionScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\SelfCollisionScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\TriangleScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\ConvexCollisionScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\PlaneCollisionScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\CapsuleScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\CCDScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\CCDScene2.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\MultiSolverScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\ScaledScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\TimeStepScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\VirtualParticleScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\TeleportScene.h">
+      <Filter>Source\scene\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\ui\CommonUIController.h">
+      <Filter>Source\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\ui\imgui_impl_dx11.h">
+      <Filter>Source\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\SampleProfiler.h">
+      <Filter>Source\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\SampleTime.h">
+      <Filter>Source\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\UIHelpers.h">
+      <Filter>Source\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\Utils.h">
+      <Filter>Source\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\ClothMeshGenerator.h">
+      <Filter>Source\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\CallbackImplementations.h">
+      <Filter>Source\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\JobManager.h">
+      <Filter>Source\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\DebugLineRenderBuffer.h">
+      <Filter>Source\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\MeshGenerator.h">
+      <Filter>Source\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\DataStream.h">
+      <Filter>Source\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\task\PxCpuDispatcher.h">
+      <Filter>Source\task</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\task\PxGpuDispatcher.h">
+      <Filter>Source\task</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\task\PxGpuTask.h">
+      <Filter>Source\task</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\task\PxTask.h">
+      <Filter>Source\task</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\task\PxTaskDefine.h">
+      <Filter>Source\task</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\task\PxTaskManager.h">
+      <Filter>Source\task</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\Sample.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49\imconfig.h">
+      <Filter>Source\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49\imgui.h">
+      <Filter>Source\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49\imgui_internal.h">
+      <Filter>Source\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49\stb_rect_pack.h">
+      <Filter>Source\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49\stb_textedit.h">
+      <Filter>Source\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49\stb_truetype.h">
+      <Filter>Source\imgui</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{878E7474-C603-33F8-BBB4-444BB07707C0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\scene\scenes">
+      <UniqueIdentifier>{2B3B618B-1EF2-3F26-A6DB-856C4CBAB704}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\core">
+      <UniqueIdentifier>{9F56A1A8-C6E4-3EB5-A722-8DA70DC43F40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\imgui">
+      <UniqueIdentifier>{8D7FDBE4-FE5D-3E5B-B9ED-0460DC1BDF20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\renderer">
+      <UniqueIdentifier>{1DFFF50B-58CF-3AC6-9689-BFC0EE1E6E6F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\scene">
+      <UniqueIdentifier>{2788046E-CEA2-3303-8ABF-B9AAA14468BF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ui">
+      <UniqueIdentifier>{2B7E78EF-F980-3E01-A7BC-91DFA16AACDB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\utils">
+      <UniqueIdentifier>{94745870-D354-3517-9CD3-D1B5E30A52DF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\task">
+      <UniqueIdentifier>{A080D819-8F01-31D7-9A2F-C77C8EFB8B4B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

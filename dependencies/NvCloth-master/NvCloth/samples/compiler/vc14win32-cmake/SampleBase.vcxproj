@@ -1,0 +1,633 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="debug|Win32">
+      <Configuration>debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="checked|Win32">
+      <Configuration>checked</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="profile|Win32">
+      <Configuration>profile</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="release|Win32">
+      <Configuration>release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{C4B3162F-301D-343F-A9BB-4FC67E62E226}</ProjectGUID>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>SampleBase</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='checked|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='profile|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\bin\vc14win32-cmake\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">SampleBase.dir\debug\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">SampleBase</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">.exe</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">true</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='checked|Win32'">D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\bin\vc14win32-cmake\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='checked|Win32'">SampleBase.dir\checked\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='checked|Win32'">SampleBase</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='checked|Win32'">.exe</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='checked|Win32'">true</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='checked|Win32'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='profile|Win32'">D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\bin\vc14win32-cmake\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='profile|Win32'">SampleBase.dir\profile\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='profile|Win32'">SampleBase</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='profile|Win32'">.exe</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='profile|Win32'">true</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='profile|Win32'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='release|Win32'">D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\bin\vc14win32-cmake\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='release|Win32'">SampleBase.dir\release\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='release|Win32'">SampleBase</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='release|Win32'">.exe</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='release|Win32'">false</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='release|Win32'">true</GenerateManifest>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">
+    <ClCompile>
+      <AdditionalOptions> /d2Zi+ /Zc:inline /RTCsu %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DirectXTex\10.5.2016.2\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Optional;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\shadow_lib;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\hbao;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\ui;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include\foundation;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\extensions\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>debug/</AssemblerListingLocation>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4005;4244</DisableSpecificWarnings>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <MinimalRebuild>false</MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH;_ALLOW_RUNTIME_LIBRARY_MISMATCH;__GFSDK_DX11__;_DEBUG;NV_DEBUG=1;CMAKE_INTDIR="debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\bin\vc14win32-cmake\SampleBaseDEBUG_x86.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH;_ALLOW_RUNTIME_LIBRARY_MISMATCH;__GFSDK_DX11__;_DEBUG;NV_DEBUG=1;CMAKE_INTDIR=\"debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DirectXTex\10.5.2016.2\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Optional;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\shadow_lib;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\hbao;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\ui;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include\foundation;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\extensions\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DirectXTex\10.5.2016.2\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Optional;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\shadow_lib;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\hbao;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\ui;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include\foundation;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\extensions\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>		</Message>
+      <Command>setlocal
+D:\packman-repo\chk\cmake-x64\3.7.0\bin\cmake.exe -E copy_if_different D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/external/shadow_lib/GFSDK_ShadowLib_DX11.win32.dll D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\\bin\vc14win32-cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+D:\packman-repo\chk\cmake-x64\3.7.0\bin\cmake.exe -E copy_if_different D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/external/hbao/GFSDK_SSAO_D3D11.win32.dll D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\\bin\vc14win32-cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+D:\packman-repo\chk\cmake-x64\3.7.0\bin\cmake.exe -E copy_if_different "$(VC_ExecutablePath_x86_x86)/d3dcompiler_47.dll" D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\\bin\vc14win32-cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;d3dcompiler.lib;d3d11.lib;dxgi.lib;comctl32.lib;..\..\external\hbao\GFSDK_SSAO_D3D11.win32.lib;..\..\external\shadow_lib\GFSDK_ShadowLib_DX11.win32.lib;..\..\external\DXUT\9.15.2016.1\Core\Bin\dynamiccrt\vs2015\Win32\Debug\DXUT.lib;..\..\external\DXUT\9.15.2016.1\Optional\Bin\dynamiccrt\vs2015\Win32\Debug\DXUTOpt.lib;..\..\external\DirectXTex\10.5.2016.2\bin\dynamiccrt\vs2015\Win32\Debug\DirectXTex.lib;..\..\lib\vc14win32-cmake\NvClothDEBUG_x86.lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\lib\Win32\cuda.lib;..\..\lib\vc14win32-cmake\PxFoundationDEBUG_x86.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/lib/vc14win32-cmake/SampleBase.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/bin/vc14win32-cmake/SampleBase.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='checked|Win32'">
+    <ClCompile>
+      <AdditionalOptions> /d2Zi+ /Zc:inline %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DirectXTex\10.5.2016.2\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Optional;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\shadow_lib;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\hbao;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\ui;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include\foundation;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\extensions\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>checked/</AssemblerListingLocation>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4005;4244</DisableSpecificWarnings>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <MinimalRebuild>false</MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Full</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH;_ALLOW_RUNTIME_LIBRARY_MISMATCH;__GFSDK_DX11__;NDEBUG;NV_CHECKED=1;CMAKE_INTDIR="checked";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\bin\vc14win32-cmake\SampleBaseCHECKED_x86.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH;_ALLOW_RUNTIME_LIBRARY_MISMATCH;__GFSDK_DX11__;NDEBUG;NV_CHECKED=1;CMAKE_INTDIR=\"checked\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DirectXTex\10.5.2016.2\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Optional;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\shadow_lib;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\hbao;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\ui;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include\foundation;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\extensions\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DirectXTex\10.5.2016.2\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Optional;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\shadow_lib;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\hbao;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\ui;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include\foundation;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\extensions\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>		</Message>
+      <Command>setlocal
+D:\packman-repo\chk\cmake-x64\3.7.0\bin\cmake.exe -E copy_if_different D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/external/shadow_lib/GFSDK_ShadowLib_DX11.win32.dll D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\\bin\vc14win32-cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+D:\packman-repo\chk\cmake-x64\3.7.0\bin\cmake.exe -E copy_if_different D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/external/hbao/GFSDK_SSAO_D3D11.win32.dll D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\\bin\vc14win32-cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+D:\packman-repo\chk\cmake-x64\3.7.0\bin\cmake.exe -E copy_if_different "$(VC_ExecutablePath_x86_x86)/d3dcompiler_47.dll" D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\\bin\vc14win32-cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;d3dcompiler.lib;d3d11.lib;dxgi.lib;comctl32.lib;..\..\external\hbao\GFSDK_SSAO_D3D11.win32.lib;..\..\external\shadow_lib\GFSDK_ShadowLib_DX11.win32.lib;..\..\external\DXUT\9.15.2016.1\Core\Bin\dynamiccrt\vs2015\Win32\Release\DXUT.lib;..\..\external\DXUT\9.15.2016.1\Optional\Bin\dynamiccrt\vs2015\Win32\Release\DXUTOpt.lib;..\..\external\DirectXTex\10.5.2016.2\bin\dynamiccrt\vs2015\Win32\Release\DirectXTex.lib;..\..\lib\vc14win32-cmake\NvClothCHECKED_x86.lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\lib\Win32\cuda.lib;..\..\lib\vc14win32-cmake\PxFoundationCHECKED_x86.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/lib/vc14win32-cmake/SampleBase.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/bin/vc14win32-cmake/SampleBase.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='profile|Win32'">
+    <ClCompile>
+      <AdditionalOptions> /d2Zi+ /Zc:inline %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DirectXTex\10.5.2016.2\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Optional;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\shadow_lib;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\hbao;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\ui;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include\foundation;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\extensions\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>profile/</AssemblerListingLocation>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4005;4244</DisableSpecificWarnings>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <MinimalRebuild>false</MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Full</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH;_ALLOW_RUNTIME_LIBRARY_MISMATCH;__GFSDK_DX11__;NDEBUG;NV_PROFILE=1;CMAKE_INTDIR="profile";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\bin\vc14win32-cmake\SampleBasePROFILE_x86.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH;_ALLOW_RUNTIME_LIBRARY_MISMATCH;__GFSDK_DX11__;NDEBUG;NV_PROFILE=1;CMAKE_INTDIR=\"profile\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DirectXTex\10.5.2016.2\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Optional;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\shadow_lib;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\hbao;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\ui;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include\foundation;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\extensions\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DirectXTex\10.5.2016.2\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Optional;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\shadow_lib;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\hbao;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\ui;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include\foundation;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\extensions\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>		</Message>
+      <Command>setlocal
+D:\packman-repo\chk\cmake-x64\3.7.0\bin\cmake.exe -E copy_if_different D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/external/shadow_lib/GFSDK_ShadowLib_DX11.win32.dll D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\\bin\vc14win32-cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+D:\packman-repo\chk\cmake-x64\3.7.0\bin\cmake.exe -E copy_if_different D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/external/hbao/GFSDK_SSAO_D3D11.win32.dll D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\\bin\vc14win32-cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+D:\packman-repo\chk\cmake-x64\3.7.0\bin\cmake.exe -E copy_if_different "$(VC_ExecutablePath_x86_x86)/d3dcompiler_47.dll" D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\\bin\vc14win32-cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;d3dcompiler.lib;d3d11.lib;dxgi.lib;comctl32.lib;..\..\external\hbao\GFSDK_SSAO_D3D11.win32.lib;..\..\external\shadow_lib\GFSDK_ShadowLib_DX11.win32.lib;..\..\external\DXUT\9.15.2016.1\Core\Bin\dynamiccrt\vs2015\Win32\Release\DXUT.lib;..\..\external\DXUT\9.15.2016.1\Optional\Bin\dynamiccrt\vs2015\Win32\Release\DXUTOpt.lib;..\..\external\DirectXTex\10.5.2016.2\bin\dynamiccrt\vs2015\Win32\Release\DirectXTex.lib;..\..\lib\vc14win32-cmake\NvClothPROFILE_x86.lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\lib\Win32\cuda.lib;..\..\lib\vc14win32-cmake\PxFoundationPROFILE_x86.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/lib/vc14win32-cmake/SampleBase.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/bin/vc14win32-cmake/SampleBase.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release|Win32'">
+    <ClCompile>
+      <AdditionalOptions> /d2Zi+ /Zc:inline %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DirectXTex\10.5.2016.2\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Optional;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\shadow_lib;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\hbao;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\ui;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include\foundation;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\extensions\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>release/</AssemblerListingLocation>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4005;4244</DisableSpecificWarnings>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <MinimalRebuild>false</MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Full</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH;_ALLOW_RUNTIME_LIBRARY_MISMATCH;__GFSDK_DX11__;NDEBUG;CMAKE_INTDIR="release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\bin\vc14win32-cmake\SampleBase_x86.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH;_ALLOW_RUNTIME_LIBRARY_MISMATCH;__GFSDK_DX11__;NDEBUG;CMAKE_INTDIR=\"release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DirectXTex\10.5.2016.2\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Optional;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\shadow_lib;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\hbao;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\ui;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include\foundation;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\extensions\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DirectXTex\10.5.2016.2\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\DXUT\9.15.2016.1\Optional;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\shadow_lib;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\hbao;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\ui;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include\foundation;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\extensions\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>		</Message>
+      <Command>setlocal
+D:\packman-repo\chk\cmake-x64\3.7.0\bin\cmake.exe -E copy_if_different D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/external/shadow_lib/GFSDK_ShadowLib_DX11.win32.dll D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\\bin\vc14win32-cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+D:\packman-repo\chk\cmake-x64\3.7.0\bin\cmake.exe -E copy_if_different D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/external/hbao/GFSDK_SSAO_D3D11.win32.dll D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\\bin\vc14win32-cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+D:\packman-repo\chk\cmake-x64\3.7.0\bin\cmake.exe -E copy_if_different "$(VC_ExecutablePath_x86_x86)/d3dcompiler_47.dll" D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\\bin\vc14win32-cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;d3dcompiler.lib;d3d11.lib;dxgi.lib;comctl32.lib;..\..\external\hbao\GFSDK_SSAO_D3D11.win32.lib;..\..\external\shadow_lib\GFSDK_ShadowLib_DX11.win32.lib;..\..\external\DXUT\9.15.2016.1\Core\Bin\dynamiccrt\vs2015\Win32\Release\DXUT.lib;..\..\external\DXUT\9.15.2016.1\Optional\Bin\dynamiccrt\vs2015\Win32\Release\DXUTOpt.lib;..\..\external\DirectXTex\10.5.2016.2\bin\dynamiccrt\vs2015\Win32\Release\DirectXTex.lib;..\..\lib\vc14win32-cmake\NvCloth_x86.lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\lib\Win32\cuda.lib;..\..\lib\vc14win32-cmake\PxFoundation_x86.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/lib/vc14win32-cmake/SampleBase.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/bin/vc14win32-cmake/SampleBase.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">Building Custom Rule D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">setlocal
+D:\packman-repo\chk\cmake-x64\3.7.0\bin\cmake.exe -HD:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples -BD:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win32-cmake --check-stamp-file D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\CMakeLists.txt;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineSystem.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeSystem.cmake.in;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\3.7.0\CMakeSystem.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineCXXCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows-Determine-CXX.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineCompilerId.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCompilerIdDetection.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\GNU-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\MIPSpro-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\TI-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CompilerId\VS-10.vcxproj.in;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeFindBinUtils.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCXXCompiler.cmake.in;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineRCCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeRCCompiler.cmake.in;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\3.7.0\CMakeRCCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeTestRCCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeTestCXXCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeTestCompilerCommon.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineCompilerABI.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseImplicitLinkInfo.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCXXCompilerABI.cpp;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineCompileFeatures.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Internal\FeatureTesting.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\feature_tests.cxx;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCXXCompiler.cmake.in;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\SetOutputPaths.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindPxShared.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\FindNvCloth.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\SampleBase.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindPxShared.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindDXUT.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindDirectXTex.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\Findimgui.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindAssimp.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\SampleBase.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindCUDA.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindCUDA\select_compute_arch.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\SampleBase-AT.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='checked|Win32'">Building Custom Rule D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='checked|Win32'">setlocal
+D:\packman-repo\chk\cmake-x64\3.7.0\bin\cmake.exe -HD:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples -BD:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win32-cmake --check-stamp-file D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='checked|Win32'">D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\CMakeLists.txt;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineSystem.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeSystem.cmake.in;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\3.7.0\CMakeSystem.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineCXXCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows-Determine-CXX.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineCompilerId.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCompilerIdDetection.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\GNU-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\MIPSpro-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\TI-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CompilerId\VS-10.vcxproj.in;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeFindBinUtils.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCXXCompiler.cmake.in;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineRCCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeRCCompiler.cmake.in;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\3.7.0\CMakeRCCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeTestRCCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeTestCXXCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeTestCompilerCommon.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineCompilerABI.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseImplicitLinkInfo.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCXXCompilerABI.cpp;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineCompileFeatures.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Internal\FeatureTesting.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\feature_tests.cxx;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCXXCompiler.cmake.in;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\SetOutputPaths.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindPxShared.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\FindNvCloth.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\SampleBase.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindPxShared.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindDXUT.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindDirectXTex.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\Findimgui.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindAssimp.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\SampleBase.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindCUDA.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindCUDA\select_compute_arch.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\SampleBase-AT.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='checked|Win32'">D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='checked|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='profile|Win32'">Building Custom Rule D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='profile|Win32'">setlocal
+D:\packman-repo\chk\cmake-x64\3.7.0\bin\cmake.exe -HD:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples -BD:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win32-cmake --check-stamp-file D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='profile|Win32'">D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\CMakeLists.txt;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineSystem.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeSystem.cmake.in;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\3.7.0\CMakeSystem.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineCXXCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows-Determine-CXX.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineCompilerId.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCompilerIdDetection.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\GNU-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\MIPSpro-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\TI-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CompilerId\VS-10.vcxproj.in;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeFindBinUtils.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCXXCompiler.cmake.in;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineRCCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeRCCompiler.cmake.in;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\3.7.0\CMakeRCCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeTestRCCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeTestCXXCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeTestCompilerCommon.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineCompilerABI.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseImplicitLinkInfo.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCXXCompilerABI.cpp;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineCompileFeatures.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Internal\FeatureTesting.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\feature_tests.cxx;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCXXCompiler.cmake.in;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\SetOutputPaths.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindPxShared.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\FindNvCloth.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\SampleBase.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindPxShared.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindDXUT.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindDirectXTex.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\Findimgui.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindAssimp.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\SampleBase.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindCUDA.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindCUDA\select_compute_arch.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\SampleBase-AT.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='profile|Win32'">D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='profile|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='release|Win32'">Building Custom Rule D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='release|Win32'">setlocal
+D:\packman-repo\chk\cmake-x64\3.7.0\bin\cmake.exe -HD:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples -BD:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win32-cmake --check-stamp-file D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='release|Win32'">D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\CMakeLists.txt;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineSystem.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeSystem.cmake.in;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\3.7.0\CMakeSystem.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineCXXCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows-Determine-CXX.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineCompilerId.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCompilerIdDetection.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\GNU-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\MIPSpro-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\TI-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CompilerId\VS-10.vcxproj.in;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeFindBinUtils.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCXXCompiler.cmake.in;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineRCCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeRCCompiler.cmake.in;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\3.7.0\CMakeRCCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeTestRCCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeTestCXXCompiler.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeTestCompilerCommon.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineCompilerABI.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseImplicitLinkInfo.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCXXCompilerABI.cpp;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeDetermineCompileFeatures.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Internal\FeatureTesting.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\feature_tests.cxx;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCXXCompiler.cmake.in;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\SetOutputPaths.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindPxShared.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\FindNvCloth.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\SampleBase.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindPxShared.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindDXUT.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindDirectXTex.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\Findimgui.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindAssimp.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\SampleBase.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindCUDA.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindCUDA\select_compute_arch.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\SampleBase-AT.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='release|Win32'">D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='release|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core\Application.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core\DeviceManager.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core\SampleController.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core\SampleManager.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\ConvexRenderMesh.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\CustomRenderMesh.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\ClothRenderMesh.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\DebugRenderBuffer.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\Mesh.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\PrimitiveRenderMesh.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\PxPhysXCommonConfig.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\PxRenderBuffer.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\Renderable.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\Renderer.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\RendererHBAO.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\RendererShadow.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\RenderMaterial.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\RenderUtils.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\ResourceManager.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\ShaderUtils.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\SkinnedRenderMesh.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\SceneController.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\Scene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\SimpleScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\WindScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\TetherScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\FrictionScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\FreeFallScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\SphereScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\StiffnessPerConstraintScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\GeodesicScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\LocalGlobalScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\DistanceConstraintScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\InterCollisionScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\SelfCollisionScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\TriangleScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\ConvexCollisionScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\PlaneCollisionScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\CapsuleScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\CCDScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\CCDScene2.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\MultiSolverScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\ScaledScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\TimeStepScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\VirtualParticleScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\TeleportScene.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\ui\CommonUIController.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\ui\imgui_impl_dx11.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\SampleProfiler.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\SampleTime.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\UIHelpers.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\Utils.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\ClothMeshGenerator.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\CallbackImplementations.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\JobManager.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\DebugLineRenderBuffer.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\MeshGenerator.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\DataStream.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\task\PxCpuDispatcher.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\task\PxGpuDispatcher.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\task\PxGpuTask.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\task\PxTask.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\task\PxTaskDefine.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\task\PxTaskManager.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\Sample.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49\imconfig.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49\imgui.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49\imgui_internal.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49\stb_rect_pack.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49\stb_textedit.h" />
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49\stb_truetype.h" />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core\Application.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core\DeviceManager.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core\SampleController.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\core\SampleManager.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\ConvexRenderMesh.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\CustomRenderMesh.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\ClothRenderMesh.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\Mesh.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\PrimitiveRenderMesh.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\Renderable.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\Renderer.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\RendererHBAO.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\RendererShadow.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\RenderMaterial.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\ResourceManager.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\renderer\SkinnedRenderMesh.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\SceneController.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\Scene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\SimpleScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\WindScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\TetherScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\FrictionScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\FreeFallScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\SphereScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\StiffnessPerConstraintScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\GeodesicScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\LocalGlobalScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\DistanceConstraintScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\InterCollisionScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\SelfCollisionScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\TriangleScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\ConvexCollisionScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\PlaneCollisionScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\CapsuleScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\CCDScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\CCDScene2.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\MultiSolverScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\ScaledScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\TimeStepScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\VirtualParticleScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\scene\scenes\TeleportScene.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\ui\CommonUIController.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\ui\imgui_impl_dx11.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\SampleProfiler.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\Utils.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\ClothMeshGenerator.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\CallbackImplementations.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\JobManager.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\DebugLineRenderBuffer.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\MeshGenerator.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\utils\DataStream.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\SampleBase\Main.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49\imgui.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49\imgui_demo.cpp"  />
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\imgui\1.49\imgui_draw.cpp"  />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win32-cmake/ZERO_CHECK.vcxproj">
+      <Project>CB273367-D70C-38F0-A49D-F188733F3F15</Project>
+    </ProjectReference>
+    <ProjectReference Include="D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win32-cmake/NvCloth_bin/NvCloth.vcxproj">
+      <Project>B13247ED-97DC-3AC4-85FE-B988F5AFFAC6</Project>
+    </ProjectReference>
+    <ProjectReference Include="D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win32-cmake/NvCloth_bin/pxshared_bin/PxFoundation.vcxproj">
+      <Project>B4EF0E94-F658-3516-B77C-90D78065FF61</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

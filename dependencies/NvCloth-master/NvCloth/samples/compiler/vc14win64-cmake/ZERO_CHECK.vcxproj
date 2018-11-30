@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="debug|x64">
+      <Configuration>debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="checked|x64">
+      <Configuration>checked</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="profile|x64">
+      <Configuration>profile</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="release|x64">
+      <Configuration>release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{F550B5A4-D2C4-376F-9FDC-F759A0185A2E}</ProjectGUID>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>ZERO_CHECK</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='checked|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='profile|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='checked|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='profile|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='checked|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='profile|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\CMakeFiles\373f5f4677867b68a182fc21f15aaea7\generate.stamp.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='debug|x64'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='debug|x64'">setlocal
+D:\packman-repo\chk\cmake-x64\3.7.0\bin\cmake.exe -HD:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples -BD:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win64-cmake --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "$(SolutionPath)"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='debug|x64'">D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win64-cmake/CMakeFiles/373f5f4677867b68a182fc21f15aaea7/generate.stamp.rule;D:\GitHub\OpenGL\dependencies\NvCloth-master\Externals\CMakeModules\FindPxShared.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\Externals\CMakeModules\SetOutputPaths.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\FindNvCloth.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\common\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\common\NvCloth.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\NvCloth.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\SampleBase.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\SampleBase-AT.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\SampleBase.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\CMakeFiles\3.7.0\CMakeRCCompiler.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\CMakeFiles\3.7.0\CMakeSystem.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\NvCloth_bin\CMakeFiles\cuda_compile_fatbin_1.dir\__\__\__\src\cuda\cuda_compile_fatbin_1_generated_CuSolverKernel.cu.fatbin.depend;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindAssimp.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindDXUT.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindDirectXTex.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindPxShared.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\Findimgui.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\SetOutputPaths.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\compiler\cmake\common\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\compiler\cmake\common\PxFoundation.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\compiler\cmake\windows\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\compiler\cmake\windows\PxFoundation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindCUDA.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindCUDA\run_nvcc.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindCUDA\select_compute_arch.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='debug|x64'">D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\CMakeFiles\generate.stamp;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\NvCloth_bin\CMakeFiles\generate.stamp;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\NvCloth_bin\pxshared_bin\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='checked|x64'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='checked|x64'">setlocal
+D:\packman-repo\chk\cmake-x64\3.7.0\bin\cmake.exe -HD:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples -BD:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win64-cmake --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "$(SolutionPath)"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='checked|x64'">D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win64-cmake/CMakeFiles/373f5f4677867b68a182fc21f15aaea7/generate.stamp.rule;D:\GitHub\OpenGL\dependencies\NvCloth-master\Externals\CMakeModules\FindPxShared.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\Externals\CMakeModules\SetOutputPaths.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\FindNvCloth.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\common\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\common\NvCloth.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\NvCloth.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\SampleBase.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\SampleBase-AT.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\SampleBase.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\CMakeFiles\3.7.0\CMakeRCCompiler.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\CMakeFiles\3.7.0\CMakeSystem.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\NvCloth_bin\CMakeFiles\cuda_compile_fatbin_1.dir\__\__\__\src\cuda\cuda_compile_fatbin_1_generated_CuSolverKernel.cu.fatbin.depend;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindAssimp.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindDXUT.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindDirectXTex.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindPxShared.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\Findimgui.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\SetOutputPaths.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\compiler\cmake\common\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\compiler\cmake\common\PxFoundation.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\compiler\cmake\windows\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\compiler\cmake\windows\PxFoundation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindCUDA.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindCUDA\run_nvcc.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindCUDA\select_compute_arch.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='checked|x64'">D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\CMakeFiles\generate.stamp;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\NvCloth_bin\CMakeFiles\generate.stamp;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\NvCloth_bin\pxshared_bin\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='checked|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='profile|x64'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='profile|x64'">setlocal
+D:\packman-repo\chk\cmake-x64\3.7.0\bin\cmake.exe -HD:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples -BD:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win64-cmake --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "$(SolutionPath)"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='profile|x64'">D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win64-cmake/CMakeFiles/373f5f4677867b68a182fc21f15aaea7/generate.stamp.rule;D:\GitHub\OpenGL\dependencies\NvCloth-master\Externals\CMakeModules\FindPxShared.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\Externals\CMakeModules\SetOutputPaths.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\FindNvCloth.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\common\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\common\NvCloth.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\NvCloth.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\SampleBase.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\SampleBase-AT.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\SampleBase.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\CMakeFiles\3.7.0\CMakeRCCompiler.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\CMakeFiles\3.7.0\CMakeSystem.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\NvCloth_bin\CMakeFiles\cuda_compile_fatbin_1.dir\__\__\__\src\cuda\cuda_compile_fatbin_1_generated_CuSolverKernel.cu.fatbin.depend;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindAssimp.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindDXUT.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindDirectXTex.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindPxShared.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\Findimgui.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\SetOutputPaths.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\compiler\cmake\common\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\compiler\cmake\common\PxFoundation.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\compiler\cmake\windows\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\compiler\cmake\windows\PxFoundation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindCUDA.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindCUDA\run_nvcc.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindCUDA\select_compute_arch.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='profile|x64'">D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\CMakeFiles\generate.stamp;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\NvCloth_bin\CMakeFiles\generate.stamp;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\NvCloth_bin\pxshared_bin\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='profile|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='release|x64'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='release|x64'">setlocal
+D:\packman-repo\chk\cmake-x64\3.7.0\bin\cmake.exe -HD:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples -BD:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win64-cmake --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "$(SolutionPath)"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='release|x64'">D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win64-cmake/CMakeFiles/373f5f4677867b68a182fc21f15aaea7/generate.stamp.rule;D:\GitHub\OpenGL\dependencies\NvCloth-master\Externals\CMakeModules\FindPxShared.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\Externals\CMakeModules\SetOutputPaths.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\FindNvCloth.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\common\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\common\NvCloth.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\NvCloth.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\SampleBase.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\SampleBase-AT.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\cmake\windows\SampleBase.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\CMakeFiles\3.7.0\CMakeRCCompiler.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\CMakeFiles\3.7.0\CMakeSystem.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\NvCloth_bin\CMakeFiles\cuda_compile_fatbin_1.dir\__\__\__\src\cuda\cuda_compile_fatbin_1_generated_CuSolverKernel.cu.fatbin.depend;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindAssimp.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindDXUT.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindDirectXTex.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\FindPxShared.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\Findimgui.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\external\CMakeModules\SetOutputPaths.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\compiler\cmake\common\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\compiler\cmake\common\PxFoundation.cmake;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\compiler\cmake\windows\CMakeLists.txt;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\compiler\cmake\windows\PxFoundation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindCUDA.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindCUDA\run_nvcc.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindCUDA\select_compute_arch.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\packman-repo\chk\cmake-x64\3.7.0\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='release|x64'">D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\CMakeFiles\generate.stamp;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\NvCloth_bin\CMakeFiles\generate.stamp;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win64-cmake\NvCloth_bin\pxshared_bin\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='release|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

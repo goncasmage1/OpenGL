@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuCloth.cpp">
+      <Filter>src\cuda</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuClothClone.cpp">
+      <Filter>src\cuda</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuClothData.cpp">
+      <Filter>src\cuda</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuContextLock.cpp">
+      <Filter>src\cuda</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuFabric.cpp">
+      <Filter>src\cuda</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuFactory.cpp">
+      <Filter>src\cuda</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuSolver.cpp">
+      <Filter>src\cuda</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\dx\DxCloth.cpp">
+      <Filter>src\dx</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\dx\DxClothClone.cpp">
+      <Filter>src\dx</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\dx\DxClothData.cpp">
+      <Filter>src\dx</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\dx\DxContextLock.cpp">
+      <Filter>src\dx</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\dx\DxFabric.cpp">
+      <Filter>src\dx</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\dx\DxFactory.cpp">
+      <Filter>src\dx</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\dx\DxSolver.cpp">
+      <Filter>src\dx</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\avx\SwSolveConstraints.cpp">
+      <Filter>src\avx</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\Allocator.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\Callbacks.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\Factory.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\PhaseConfig.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\SwCloth.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\SwClothData.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\SwCollision.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\SwFabric.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\SwFactory.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\SwInterCollision.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\SwSelfCollision.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\SwSolver.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\SwSolverKernel.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\TripletScheduler.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\extensions\src\ClothFabricCooker.cpp">
+      <Filter>extensions\src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\extensions\src\ClothGeodesicTetherCooker.cpp">
+      <Filter>extensions\src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\extensions\src\ClothMeshQuadifier.cpp">
+      <Filter>extensions\src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\extensions\src\ClothSimpleTetherCooker.cpp">
+      <Filter>extensions\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuCheckSuccess.h">
+      <Filter>src\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuCloth.h">
+      <Filter>src\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuClothData.h">
+      <Filter>src\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuCollision.h">
+      <Filter>src\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuContextLock.h">
+      <Filter>src\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuDevicePointer.h">
+      <Filter>src\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuDeviceVector.h">
+      <Filter>src\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuFabric.h">
+      <Filter>src\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuFactory.h">
+      <Filter>src\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuPhaseConfig.h">
+      <Filter>src\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuPinnedAllocator.h">
+      <Filter>src\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuSelfCollision.h">
+      <Filter>src\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuSolver.h">
+      <Filter>src\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuSolverKernel.h">
+      <Filter>src\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuSolverKernelBlob.h">
+      <Filter>src\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\dx\DxBatchedVector.h">
+      <Filter>src\dx</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\dx\DxCheckSuccess.h">
+      <Filter>src\dx</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\dx\DxCloth.h">
+      <Filter>src\dx</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\dx\DxClothData.h">
+      <Filter>src\dx</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\dx\DxContextLock.h">
+      <Filter>src\dx</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\dx\DxDeviceVector.h">
+      <Filter>src\dx</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\dx\DxFabric.h">
+      <Filter>src\dx</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\dx\DxFactory.h">
+      <Filter>src\dx</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\dx\DxSolver.h">
+      <Filter>src\dx</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\dx\DxSolverKernelBlob.h">
+      <Filter>src\dx</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include\NvCloth\Allocator.h">
+      <Filter>include\NvCloth</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include\NvCloth\Callbacks.h">
+      <Filter>include\NvCloth</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include\NvCloth\Cloth.h">
+      <Filter>include\NvCloth</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include\NvCloth\DxContextManagerCallback.h">
+      <Filter>include\NvCloth</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include\NvCloth\Fabric.h">
+      <Filter>include\NvCloth</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include\NvCloth\Factory.h">
+      <Filter>include\NvCloth</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include\NvCloth\PhaseConfig.h">
+      <Filter>include\NvCloth</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include\NvCloth\Range.h">
+      <Filter>include\NvCloth</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\include\NvCloth\Solver.h">
+      <Filter>include\NvCloth</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\BoundingBox.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\ClothBase.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\ClothClone.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\ClothImpl.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\IndexPair.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\IterationState.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\MovingAverage.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\PointInterpolator.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\Simd.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\StackAllocator.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\SwCloth.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\SwClothData.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\SwCollision.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\SwCollisionHelpers.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\SwFabric.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\SwFactory.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\SwInterCollision.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\SwSelfCollision.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\SwSolver.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\SwSolverKernel.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\TripletScheduler.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\Vec4T.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\NvSimd\NvSimd4f.h">
+      <Filter>src\NvSimd</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\NvSimd\NvSimd4i.h">
+      <Filter>src\NvSimd</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\NvSimd\NvSimdTypes.h">
+      <Filter>src\NvSimd</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\NvSimd\neon\NvNeonSimd4f.h">
+      <Filter>src\NvSimd\neon</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\NvSimd\neon\NvNeonSimd4i.h">
+      <Filter>src\NvSimd\neon</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\NvSimd\neon\NvNeonSimdTypes.h">
+      <Filter>src\NvSimd\neon</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\NvSimd\scalar\NvScalarSimd4f.h">
+      <Filter>src\NvSimd\scalar</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\NvSimd\scalar\NvScalarSimd4i.h">
+      <Filter>src\NvSimd\scalar</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\NvSimd\scalar\NvScalarSimdTypes.h">
+      <Filter>src\NvSimd\scalar</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\NvSimd\sse2\NvSse2Simd4f.h">
+      <Filter>src\NvSimd\sse2</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\NvSimd\sse2\NvSse2Simd4i.h">
+      <Filter>src\NvSimd\sse2</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\NvSimd\sse2\NvSse2SimdTypes.h">
+      <Filter>src\NvSimd\sse2</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\scalar\SwCollisionHelpers.h">
+      <Filter>src\scalar</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\sse2\SwCollisionHelpers.h">
+      <Filter>src\sse2</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\sse2\SwSolveConstraints.h">
+      <Filter>src\sse2</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\extensions\include\NvClothExt\ClothFabricCooker.h">
+      <Filter>extensions\include\NvClothExt</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\extensions\include\NvClothExt\ClothMeshDesc.h">
+      <Filter>extensions\include\NvClothExt</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\extensions\include\NvClothExt\ClothMeshQuadifier.h">
+      <Filter>extensions\include\NvClothExt</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\extensions\include\NvClothExt\ClothTetherCooker.h">
+      <Filter>extensions\include\NvClothExt</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\cuda\CuSolverKernel.cu">
+      <Filter>src\cuda</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\CMakeLists.txt" />
+    <CustomBuild Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\compiler\vc14win32-cmake\CMakeFiles\b7a122eedfefeb3c47b688d4e6c20641\CuSolverKernelBlob.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <FXCompile Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\dx\DxSolverKernel.hlsl">
+      <Filter>src\dx</Filter>
+    </FXCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\src\dx\DxSortKernel.inc">
+      <Filter>src\dx</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="extensions\include\NvClothExt">
+      <UniqueIdentifier>{F552396F-E93C-3F91-83E5-74A17FA3406A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\NvCloth">
+      <UniqueIdentifier>{D46184A8-4E81-3925-A3CF-EB65C2611E50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NvSimd\neon">
+      <UniqueIdentifier>{4222C878-6075-365F-B6DC-C347D5DB56E8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NvSimd\scalar">
+      <UniqueIdentifier>{5263D81C-7EC7-31C9-9E37-B4510C1EC39B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NvSimd\sse2">
+      <UniqueIdentifier>{73ED3F94-E519-3B0C-883B-854DB2503452}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\cuda">
+      <UniqueIdentifier>{BED3672F-32C9-3A78-A1BD-370E8BC03E87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\dx">
+      <UniqueIdentifier>{80BADE8E-8FB3-311A-A22F-304C9C78AA60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\avx">
+      <UniqueIdentifier>{F7D998FC-9B7F-399E-887A-599BE496A24F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NvSimd">
+      <UniqueIdentifier>{05426818-9767-356D-A1A6-B3563960F3F3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\scalar">
+      <UniqueIdentifier>{9D4E0669-FE1B-30F8-98DF-865E4ADF1553}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\sse2">
+      <UniqueIdentifier>{52A26ED2-F064-39B2-A291-502FA5F6391A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extensions\include">
+      <UniqueIdentifier>{47DD33ED-BB75-31E2-B5C2-B61C34210859}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extensions\src">
+      <UniqueIdentifier>{B25DD578-4B7A-3E95-9D33-72F665A890FA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{2727940D-03AA-3E96-BC98-CB3D9B716420}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{A3C3C385-F155-3025-8E71-D66ABEAF52BE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{175F3DE0-5291-3EAA-BBF3-2D1C7EA86130}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extensions">
+      <UniqueIdentifier>{9288E562-B902-3599-8F9B-92E9CE8049FC}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

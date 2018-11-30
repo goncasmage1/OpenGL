@@ -1,0 +1,66 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ALL_BUILD", "ALL_BUILD.vcxproj", "{F50D801F-D056-3C90-AA71-0F46C8DB1651}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A1306B99-C630-3E17-892A-C9CF16A2A857} = {A1306B99-C630-3E17-892A-C9CF16A2A857}
+		{8C2B6764-C921-33EB-9045-E4624BCC8842} = {8C2B6764-C921-33EB-9045-E4624BCC8842}
+		{BDF87713-1071-36BE-AED7-2930B75E1093} = {BDF87713-1071-36BE-AED7-2930B75E1093}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NvCloth", "NvCloth.vcxproj", "{A1306B99-C630-3E17-892A-C9CF16A2A857}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8C2B6764-C921-33EB-9045-E4624BCC8842} = {8C2B6764-C921-33EB-9045-E4624BCC8842}
+		{BDF87713-1071-36BE-AED7-2930B75E1093} = {BDF87713-1071-36BE-AED7-2930B75E1093}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PxFoundation", "pxshared_bin\PxFoundation.vcxproj", "{8C2B6764-C921-33EB-9045-E4624BCC8842}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BDF87713-1071-36BE-AED7-2930B75E1093} = {BDF87713-1071-36BE-AED7-2930B75E1093}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZERO_CHECK", "ZERO_CHECK.vcxproj", "{BDF87713-1071-36BE-AED7-2930B75E1093}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		debug|x64 = debug|x64
+		checked|x64 = checked|x64
+		profile|x64 = profile|x64
+		release|x64 = release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F50D801F-D056-3C90-AA71-0F46C8DB1651}.debug|x64.ActiveCfg = debug|x64
+		{F50D801F-D056-3C90-AA71-0F46C8DB1651}.checked|x64.ActiveCfg = checked|x64
+		{F50D801F-D056-3C90-AA71-0F46C8DB1651}.profile|x64.ActiveCfg = profile|x64
+		{F50D801F-D056-3C90-AA71-0F46C8DB1651}.release|x64.ActiveCfg = release|x64
+		{A1306B99-C630-3E17-892A-C9CF16A2A857}.debug|x64.ActiveCfg = debug|x64
+		{A1306B99-C630-3E17-892A-C9CF16A2A857}.debug|x64.Build.0 = debug|x64
+		{A1306B99-C630-3E17-892A-C9CF16A2A857}.checked|x64.ActiveCfg = checked|x64
+		{A1306B99-C630-3E17-892A-C9CF16A2A857}.checked|x64.Build.0 = checked|x64
+		{A1306B99-C630-3E17-892A-C9CF16A2A857}.profile|x64.ActiveCfg = profile|x64
+		{A1306B99-C630-3E17-892A-C9CF16A2A857}.profile|x64.Build.0 = profile|x64
+		{A1306B99-C630-3E17-892A-C9CF16A2A857}.release|x64.ActiveCfg = release|x64
+		{A1306B99-C630-3E17-892A-C9CF16A2A857}.release|x64.Build.0 = release|x64
+		{8C2B6764-C921-33EB-9045-E4624BCC8842}.debug|x64.ActiveCfg = debug|x64
+		{8C2B6764-C921-33EB-9045-E4624BCC8842}.debug|x64.Build.0 = debug|x64
+		{8C2B6764-C921-33EB-9045-E4624BCC8842}.checked|x64.ActiveCfg = checked|x64
+		{8C2B6764-C921-33EB-9045-E4624BCC8842}.checked|x64.Build.0 = checked|x64
+		{8C2B6764-C921-33EB-9045-E4624BCC8842}.profile|x64.ActiveCfg = profile|x64
+		{8C2B6764-C921-33EB-9045-E4624BCC8842}.profile|x64.Build.0 = profile|x64
+		{8C2B6764-C921-33EB-9045-E4624BCC8842}.release|x64.ActiveCfg = release|x64
+		{8C2B6764-C921-33EB-9045-E4624BCC8842}.release|x64.Build.0 = release|x64
+		{BDF87713-1071-36BE-AED7-2930B75E1093}.debug|x64.ActiveCfg = debug|x64
+		{BDF87713-1071-36BE-AED7-2930B75E1093}.debug|x64.Build.0 = debug|x64
+		{BDF87713-1071-36BE-AED7-2930B75E1093}.checked|x64.ActiveCfg = checked|x64
+		{BDF87713-1071-36BE-AED7-2930B75E1093}.checked|x64.Build.0 = checked|x64
+		{BDF87713-1071-36BE-AED7-2930B75E1093}.profile|x64.ActiveCfg = profile|x64
+		{BDF87713-1071-36BE-AED7-2930B75E1093}.profile|x64.Build.0 = profile|x64
+		{BDF87713-1071-36BE-AED7-2930B75E1093}.release|x64.ActiveCfg = release|x64
+		{BDF87713-1071-36BE-AED7-2930B75E1093}.release|x64.Build.0 = release|x64
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

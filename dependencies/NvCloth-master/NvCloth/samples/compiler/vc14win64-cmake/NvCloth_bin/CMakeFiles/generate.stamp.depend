@@ -1,0 +1,18 @@
+# CMake generation dependency list for this directory.
+D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/compiler/cmake/windows/CMakeLists.txt
+D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/compiler/cmake/common/CMakeLists.txt
+D:/GitHub/OpenGL/dependencies/NvCloth-master/Externals/CMakeModules/SetOutputPaths.cmake
+D:/GitHub/OpenGL/dependencies/NvCloth-master/Externals/CMakeModules/FindPxShared.cmake
+D:/packman-repo/chk/cmake-x64/3.7.0/share/cmake-3.7/Modules/FindPackageHandleStandardArgs.cmake
+D:/packman-repo/chk/cmake-x64/3.7.0/share/cmake-3.7/Modules/FindPackageMessage.cmake
+D:/packman-repo/chk/cmake-x64/3.7.0/share/cmake-3.7/Modules/CMakeParseArguments.cmake
+D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/compiler/cmake/windows/NvCloth.cmake
+D:/packman-repo/chk/cmake-x64/3.7.0/share/cmake-3.7/Modules/FindCUDA.cmake
+D:/packman-repo/chk/cmake-x64/3.7.0/share/cmake-3.7/Modules/FindPackageHandleStandardArgs.cmake
+D:/packman-repo/chk/cmake-x64/3.7.0/share/cmake-3.7/Modules/FindPackageMessage.cmake
+D:/packman-repo/chk/cmake-x64/3.7.0/share/cmake-3.7/Modules/CMakeParseArguments.cmake
+D:/packman-repo/chk/cmake-x64/3.7.0/share/cmake-3.7/Modules/FindCUDA/select_compute_arch.cmake
+D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win64-cmake/NvCloth_bin/CMakeFiles/cuda_compile_fatbin_1.dir/__/__/__/src/cuda/cuda_compile_fatbin_1_generated_CuSolverKernel.cu.fatbin.depend
+D:/packman-repo/chk/cmake-x64/3.7.0/share/cmake-3.7/Modules/FindCUDA/run_nvcc.cmake
+D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/compiler/cmake/common/NvCloth.cmake
+D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win64-cmake/NvCloth_bin/CMakeFiles/cuda_compile_fatbin_1.dir/__/__/__/src/cuda/cuda_compile_fatbin_1_generated_CuSolverKernel.cu.fatbin.cmake.pre-gen
