@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "NvCloth/Factory.h"
 
 class MeshLoader
 {
@@ -22,10 +23,14 @@ protected:
 public:
 
 	std::vector<std::shared_ptr<class Mesh>> Meshes;
+	std::vector<std::shared_ptr<class SailMesh>> Sails;
 
 	std::shared_ptr<class Mesh> CreateMesh(const std::string& filename);
 	std::shared_ptr<class QuadMesh> CreateQuadMesh(float size, int xRepeat, int yRepeat);
+	std::shared_ptr<class SailMesh> CreateSailMesh(nv::cloth::Factory* newFactory, nv::cloth::Solver* newSolver, float size, int xRepeat, int yRepeat);
+
 	void CreateBufferObjects();
 	void DestroyBufferObjects();
 
+	void UpdateSailData(physx::PxVec3 windVel);
 };

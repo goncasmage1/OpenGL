@@ -14,3 +14,4 @@ SailShader::SailShader()
 
 	BuildShader(shaderAttributes, shaderPaths);
 }
+

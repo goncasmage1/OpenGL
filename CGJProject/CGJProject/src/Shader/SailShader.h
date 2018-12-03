@@ -4,6 +4,8 @@
 
 class SailShader : public ShaderProgram
 {
+protected:
+
 
 public:
 

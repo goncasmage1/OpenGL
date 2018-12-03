@@ -1,6 +1,7 @@
 #include "MeshLoader.h"
 #include "Mesh.h"
 #include "QuadMesh.h"
+#include "SailMesh.h"
 #include "Math/Vector.h"
 #include <sstream>
 #include <fstream>
@@ -126,6 +127,14 @@ std::shared_ptr<QuadMesh> MeshLoader::CreateQuadMesh(float size, int xRepeat, in
 	return newQuad;
 }
 
+std::shared_ptr<class SailMesh> MeshLoader::CreateSailMesh(nv::cloth::Factory * newFactory, nv::cloth::Solver* newSolver, float size, int xRepeat, int yRepeat)
+{
+	std::shared_ptr<SailMesh> newSail = std::make_shared<SailMesh>(newFactory, newSolver, size, xRepeat, yRepeat);
+	Meshes.push_back(newSail);
+	Sails.push_back(newSail);
+	return newSail;
+}
+
 void MeshLoader::CreateBufferObjects()
 {
 	for (std::shared_ptr<Mesh> mesh : Meshes)
@@ -139,5 +148,20 @@ void MeshLoader::DestroyBufferObjects()
 	for (std::shared_ptr<Mesh> mesh : Meshes)
 	{
 		mesh->DestroyBufferObjects();
+	}
+}
+
+void MeshLoader::UpdateSailData(physx::PxVec3 windVel)
+{
+	for (std::shared_ptr<SailMesh> sail : Sails)
+	{
+		sail->cloth->setWindVelocity(windVel);
+		nv::cloth::MappedRange<physx::PxVec4> particles = sail->cloth->getCurrentParticles();
+		for (int i = 0; i < particles.size(); i++)
+		{
+			//do something with particles[i]
+			//the xyz components are the current positions
+			//the w component is the invMass.
+		}
 	}
 }

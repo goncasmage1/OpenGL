@@ -11,8 +11,9 @@
 #include "GL/freeglut.h"
 
 #include "NvCloth/Factory.h"
+#include "NvCloth/Solver.h"
 #include "NvClothExt/ClothFabricCooker.h"
-//#include "cuda.h"
+#include "cuda.h"
 
 #include "PxCallbacks/CustomAllocator.h"
 #include "PxCallbacks/CustomAssertHandler.h"
@@ -59,6 +60,8 @@ CustomError* customError = new CustomError();
 CustomProfiler* customProfiler = new CustomProfiler();
 
 nv::cloth::Factory* factory = nullptr;
+CUcontext cudaContext;
+nv::cloth::Solver* solver = nullptr;
 
 /////////////////////////////////////////////////////////////////////// ERRORS
 
@@ -150,19 +153,16 @@ static void checkOpenGLError(std::string error)
 
 void setupNvCloth()
 {
-
 	nv::cloth::InitializeNvCloth(customAllocator, customError, customAssert, customProfiler);
+	
+	int deviceCount = 0;
+	CUresult result = cuDeviceGetCount(&deviceCount);
+	assert(CUDA_SUCCESS == result);
+	assert(deviceCount >= 1);
+	result = cuCtxCreate(&cudaContext, 0, 0); //Pick first device
+	assert(CUDA_SUCCESS == result);
 
-	//CUcontext cudaContext;
-	//int deviceCount = 0;
-	//CUresult result = cuDeviceGetCount(&deviceCount);
-	//assert(CUDA_SUCCESS == result);
-	//assert(deviceCount >= 1);
-
-	//result = cuCtxCreate(&cudaContext, 0, 0); //Pick first device
-	//assert(CUDA_SUCCESS == result);
-
-	factory = NvClothCreateFactoryCPU();
+	nv::cloth::Factory* factory = NvClothCreateFactoryCUDA(cudaContext);
 	if (factory == nullptr)
 	{
 		std::cerr << "ERROR:" << std::endl;
@@ -171,17 +171,15 @@ void setupNvCloth()
 		std::cerr << "  debug call: " << "Could not create NvCloth Factory" << std::endl;
 	}
 
-	//nv::cloth::ClothMeshDesc meshDesc;
+	solver = factory->createSolver();
 }
 
 void destroyNvCloth()
 {
 	NvClothDestroyFactory(factory);
-
-	delete customAllocator;
-	delete customAssert;
-	delete customError;
-	delete customProfiler;
+	cuCtxDestroy(cudaContext);
+	NV_CLOTH_DELETE(solver);
+	NvClothDestroyFactory(factory);
 }
 
 /////////////////////////////////////////////////////////////////////// SHADERs
@@ -195,14 +193,14 @@ void createShaderProgram()
 	shaders.push_back(std::make_shared<ShaderProgram>(
 		std::vector<ShaderAttribute>{
 		ShaderAttribute(0, "in_Position"),
-		ShaderAttribute(1, "in_Coordinates"),
-		ShaderAttribute(2, "in_Normal")
+			ShaderAttribute(1, "in_Coordinates"),
+			ShaderAttribute(2, "in_Normal")
 	},
-	std::vector<std::string>{
-		"src/Shader/GLSL/BrownShader.glsl",
-		"src/Shader/GLSL/FragmentShader.glsl"
-	}
-	));
+		std::vector<std::string>{
+			"src/Shader/GLSL/BrownShader.glsl",
+				"src/Shader/GLSL/FragmentShader.glsl"
+		}
+		));
 
 	shaders.push_back(std::make_shared<SailShader>());
 	shaders.push_back(std::make_shared<WaterShader>());
@@ -214,7 +212,7 @@ void createShaderProgram()
 void destroyShaderProgram()
 {
 	for (int i = 0; i < shaders.size(); i++) shaders[i]->Destroy();
-	
+
 	checkOpenGLError("ERROR: Could not destroy shaders.");
 }
 
@@ -266,6 +264,20 @@ void processInput()
 	processCamera();
 }
 
+void processCloth()
+{
+	float deltaTime = (std::chrono::duration<float>(std::chrono::steady_clock::now() - begin)).count();
+	solver->beginSimulation(deltaTime);
+	for (int i = 0; i < solver->getSimulationChunkCount(); i++)
+	{
+		solver->simulateChunk(i);
+	}
+	solver->endSimulation();
+
+	physx::PxVec3 windVelocity(1.0, 1.0, 1.0);
+	meshLoader->UpdateSailData(windVelocity);
+}
+
 /////////////////////////////////////////////////////////////////////// CALLBACKS
 
 void cleanup()
@@ -280,6 +292,7 @@ void display()
 	++FrameCount;
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	processInput();
+	processCloth();
 	drawScene();
 	glutSwapBuffers();
 
@@ -416,7 +429,7 @@ void setupMeshes()
 {
 	//MeshLoader loads all necessary meshes
 	meshLoader->CreateMesh(std::string("../../assets/models/TableTri.obj"));
-	meshLoader->CreateQuadMesh(1.f, 6, 4);
+	meshLoader->CreateSailMesh(factory, solver, 1.f, 6, 4);
 
 	//Optionally indicate mesh and shader index to use for each SceneNode
 	/*MeshData meshData[] = {

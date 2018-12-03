@@ -91,7 +91,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\..\dependencies\glew\include;$(SolutionDir)\..\dependencies\freeglut\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\src\foundation\include;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\extensions\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\..\dependencies\glew\include;$(SolutionDir)\..\dependencies\freeglut\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\ProgramFiles\Cuda\v 10.0\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\extensions\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)\..\dependencies\glew\lib\Release\x64\;$(SolutionDir)\..\dependencies\freeglut\lib\x64\;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\lib\vc14win64-cmake\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -143,6 +143,7 @@
     <ClCompile Include="src\PxCallbacks\CustomError.cpp" />
     <ClCompile Include="src\PxCallbacks\CustomProfiler.cpp" />
     <ClCompile Include="src\QuadMesh.cpp" />
+    <ClCompile Include="src\SailMesh.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\SceneNode.cpp" />
     <ClCompile Include="src\Shader\SailShader.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="src\PxCallbacks\CustomError.h" />
     <ClInclude Include="src\PxCallbacks\CustomProfiler.h" />
     <ClInclude Include="src\QuadMesh.h" />
+    <ClInclude Include="src\SailMesh.h" />
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\SceneNode.h" />
     <ClInclude Include="src\Shader\SailShader.h" />
