@@ -348,17 +348,26 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="CMake Rules">
-      <UniqueIdentifier>{1AAE8F8C-63BB-313D-AB30-01772ED59A85}</UniqueIdentifier>
+    <Filter Include="src\NvSimd\neon">
+      <UniqueIdentifier>{5AF782CD-7A28-31DD-958F-6EF5D9CB91CC}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src">
-      <UniqueIdentifier>{04428F15-DBBB-39F8-8DD9-36661880A6FE}</UniqueIdentifier>
+    <Filter Include="src\NvSimd\scalar">
+      <UniqueIdentifier>{19D08BEA-0D2D-3354-B108-934AD7CEB702}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include">
-      <UniqueIdentifier>{998AE138-E887-3D16-8C5C-D05C47A981D0}</UniqueIdentifier>
+    <Filter Include="src\NvSimd\sse2">
+      <UniqueIdentifier>{0879C638-4E51-351F-B78D-FDB69003FF9A}</UniqueIdentifier>
     </Filter>
-    <Filter Include="extensions">
-      <UniqueIdentifier>{2853BEB6-4147-3E91-BDB6-D6E87DB102CA}</UniqueIdentifier>
+    <Filter Include="extensions\include">
+      <UniqueIdentifier>{69466D1A-32F4-3110-BD05-C958CD4F676F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extensions\src">
+      <UniqueIdentifier>{0FFAF04B-ED03-3662-83D9-4F0DC8321294}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\NvCloth">
+      <UniqueIdentifier>{71697239-8494-3939-A0A5-54B689FF33BF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extensions\include\NvClothExt">
+      <UniqueIdentifier>{36784C2C-B510-3EDB-B569-85951236B2E4}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\cuda">
       <UniqueIdentifier>{7F687006-E0C6-32A0-A694-502A986F9A75}</UniqueIdentifier>
@@ -378,26 +387,17 @@
     <Filter Include="src\sse2">
       <UniqueIdentifier>{B7E06C00-F4AD-35F0-8AD2-6F7B4EF4C3CD}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\NvCloth">
-      <UniqueIdentifier>{71697239-8494-3939-A0A5-54B689FF33BF}</UniqueIdentifier>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{1AAE8F8C-63BB-313D-AB30-01772ED59A85}</UniqueIdentifier>
     </Filter>
-    <Filter Include="extensions\include\NvClothExt">
-      <UniqueIdentifier>{36784C2C-B510-3EDB-B569-85951236B2E4}</UniqueIdentifier>
+    <Filter Include="src">
+      <UniqueIdentifier>{04428F15-DBBB-39F8-8DD9-36661880A6FE}</UniqueIdentifier>
     </Filter>
-    <Filter Include="extensions\include">
-      <UniqueIdentifier>{69466D1A-32F4-3110-BD05-C958CD4F676F}</UniqueIdentifier>
+    <Filter Include="include">
+      <UniqueIdentifier>{998AE138-E887-3D16-8C5C-D05C47A981D0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="extensions\src">
-      <UniqueIdentifier>{0FFAF04B-ED03-3662-83D9-4F0DC8321294}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\NvSimd\neon">
-      <UniqueIdentifier>{5AF782CD-7A28-31DD-958F-6EF5D9CB91CC}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\NvSimd\scalar">
-      <UniqueIdentifier>{19D08BEA-0D2D-3354-B108-934AD7CEB702}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\NvSimd\sse2">
-      <UniqueIdentifier>{0879C638-4E51-351F-B78D-FDB69003FF9A}</UniqueIdentifier>
+    <Filter Include="extensions">
+      <UniqueIdentifier>{2853BEB6-4147-3E91-BDB6-D6E87DB102CA}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

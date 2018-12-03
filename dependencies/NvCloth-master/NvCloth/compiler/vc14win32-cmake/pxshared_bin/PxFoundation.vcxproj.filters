@@ -301,14 +301,14 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="src\include\windows">
-      <UniqueIdentifier>{67D42059-BEA4-31E8-869A-0B670F0A898D}</UniqueIdentifier>
+    <Filter Include="src\src\windows">
+      <UniqueIdentifier>{D5C6A220-AE74-3F35-8944-6DDFCA8E34E5}</UniqueIdentifier>
     </Filter>
     <Filter Include="include\windows">
       <UniqueIdentifier>{5E8B2386-0D01-313D-B72C-0250290CB959}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\src\windows">
-      <UniqueIdentifier>{D5C6A220-AE74-3F35-8944-6DDFCA8E34E5}</UniqueIdentifier>
+    <Filter Include="src\include\windows">
+      <UniqueIdentifier>{67D42059-BEA4-31E8-869A-0B670F0A898D}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\src">
       <UniqueIdentifier>{38986A30-5F08-3AA4-AECB-30D6C80D486D}</UniqueIdentifier>

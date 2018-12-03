@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 #include "foundation/PxAllocatorCallback.h"
 
 class CustomAllocator : public physx::PxAllocatorCallback

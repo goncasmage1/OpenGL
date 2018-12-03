@@ -301,6 +301,21 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
+    <Filter Include="src\include\windows">
+      <UniqueIdentifier>{148EA714-3A0E-32B5-9C8B-EADEF54A4E72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\windows">
+      <UniqueIdentifier>{F9C7255C-F748-3AEA-83AA-73C82EDAE799}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\src\windows">
+      <UniqueIdentifier>{DB2D7134-059E-3E8D-828E-1E1C5AA4E98B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\src">
+      <UniqueIdentifier>{89B62F1D-0234-3638-879F-F568EB504925}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\include">
+      <UniqueIdentifier>{977179F0-4019-37FA-9C61-1B2EE25212AA}</UniqueIdentifier>
+    </Filter>
     <Filter Include="resource">
       <UniqueIdentifier>{A49A927E-6004-3E98-9CF3-B55EC8D77620}</UniqueIdentifier>
     </Filter>
@@ -309,21 +324,6 @@
     </Filter>
     <Filter Include="src">
       <UniqueIdentifier>{37C62E02-E243-37AA-A0FB-AB17FBE8B5CF}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\src">
-      <UniqueIdentifier>{89B62F1D-0234-3638-879F-F568EB504925}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\include">
-      <UniqueIdentifier>{977179F0-4019-37FA-9C61-1B2EE25212AA}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\src\windows">
-      <UniqueIdentifier>{DB2D7134-059E-3E8D-828E-1E1C5AA4E98B}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\include\windows">
-      <UniqueIdentifier>{148EA714-3A0E-32B5-9C8B-EADEF54A4E72}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="include\windows">
-      <UniqueIdentifier>{F9C7255C-F748-3AEA-83AA-73C82EDAE799}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

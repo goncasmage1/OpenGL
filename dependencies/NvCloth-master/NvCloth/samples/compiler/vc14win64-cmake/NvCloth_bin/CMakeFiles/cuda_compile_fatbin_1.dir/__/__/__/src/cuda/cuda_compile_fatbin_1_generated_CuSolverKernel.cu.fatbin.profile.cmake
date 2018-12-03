@@ -69,11 +69,11 @@ set(generated_file_path "D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/sa
 set(generated_file_internal "D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win64-cmake/NvCloth_bin/cuda_compile_fatbin_1_generated_CuSolverKernel.cu.fatbin") # path
 set(generated_cubin_file_internal "D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win64-cmake/NvCloth_bin/cuda_compile_fatbin_1_generated_CuSolverKernel.cu.fatbin.cubin.txt") # path
 
-set(CUDA_NVCC_EXECUTABLE "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v10.0/bin/nvcc.exe") # path
+set(CUDA_NVCC_EXECUTABLE "D:/ProgramFiles/Cuda/v 10.0/bin/nvcc.exe") # path
 set(CUDA_NVCC_FLAGS -use_fast_math;-ftz=true;-prec-div=false;-prec-sqrt=false;-lineinfo;-gencode;arch=compute_30,code=sm_30;-gencode;arch=compute_35,code=sm_35;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_50,code=compute_50;-gencode;arch=compute_60,code=sm_60;-D_USE_MATH_DEFINES;-DNDEBUG;-DPX_PROFILE=1 ;; ) # list
 
 set(nvcc_flags -m64) # list
-set(CUDA_NVCC_INCLUDE_DIRS "D:/GitHub/OpenGL/dependencies/NvCloth-master/PxShared/include;D:/GitHub/OpenGL/dependencies/NvCloth-master/PxShared/src/foundation/include;D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/compiler/cmake/windows/../../..//include/NvCloth;C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v10.0/include;") # list (needs to be in quotes to handle spaces properly).
+set(CUDA_NVCC_INCLUDE_DIRS "D:/GitHub/OpenGL/dependencies/NvCloth-master/PxShared/include;D:/GitHub/OpenGL/dependencies/NvCloth-master/PxShared/src/foundation/include;D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/compiler/cmake/windows/../../..//include/NvCloth;D:/ProgramFiles/Cuda/v 10.0/include;") # list (needs to be in quotes to handle spaces properly).
 set(CUDA_NVCC_COMPILE_DEFINITIONS "WIN64;WIN64") # list (needs to be in quotes to handle spaces properly).
 set(format_flag "-fatbin") # string
 set(cuda_language_flag ) # list

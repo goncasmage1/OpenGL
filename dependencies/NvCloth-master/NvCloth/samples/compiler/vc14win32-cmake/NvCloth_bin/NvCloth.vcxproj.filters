@@ -348,6 +348,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Filter Include="extensions\include">
+      <UniqueIdentifier>{47DD33ED-BB75-31E2-B5C2-B61C34210859}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extensions\src">
+      <UniqueIdentifier>{B25DD578-4B7A-3E95-9D33-72F665A890FA}</UniqueIdentifier>
+    </Filter>
     <Filter Include="extensions\include\NvClothExt">
       <UniqueIdentifier>{F552396F-E93C-3F91-83E5-74A17FA3406A}</UniqueIdentifier>
     </Filter>
@@ -362,6 +368,18 @@
     </Filter>
     <Filter Include="src\NvSimd\sse2">
       <UniqueIdentifier>{73ED3F94-E519-3B0C-883B-854DB2503452}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{2727940D-03AA-3E96-BC98-CB3D9B716420}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{A3C3C385-F155-3025-8E71-D66ABEAF52BE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{175F3DE0-5291-3EAA-BBF3-2D1C7EA86130}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extensions">
+      <UniqueIdentifier>{9288E562-B902-3599-8F9B-92E9CE8049FC}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\cuda">
       <UniqueIdentifier>{BED3672F-32C9-3A78-A1BD-370E8BC03E87}</UniqueIdentifier>
@@ -380,24 +398,6 @@
     </Filter>
     <Filter Include="src\sse2">
       <UniqueIdentifier>{52A26ED2-F064-39B2-A291-502FA5F6391A}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="extensions\include">
-      <UniqueIdentifier>{47DD33ED-BB75-31E2-B5C2-B61C34210859}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="extensions\src">
-      <UniqueIdentifier>{B25DD578-4B7A-3E95-9D33-72F665A890FA}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="CMake Rules">
-      <UniqueIdentifier>{2727940D-03AA-3E96-BC98-CB3D9B716420}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src">
-      <UniqueIdentifier>{A3C3C385-F155-3025-8E71-D66ABEAF52BE}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="include">
-      <UniqueIdentifier>{175F3DE0-5291-3EAA-BBF3-2D1C7EA86130}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="extensions">
-      <UniqueIdentifier>{9288E562-B902-3599-8F9B-92E9CE8049FC}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

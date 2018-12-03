@@ -489,27 +489,8 @@ void cloth::CuSolver::beginFrame()
 		uint32_t numThreadsPerBlock = mFactory.mMaxThreadsPerBlock / numClothsPerSM & ~31;
 		if (mFactory.mNumThreadsPerBlock != numThreadsPerBlock)
 		{
-			/*checkSuccess(
-			    cuFuncSetBlockShape(mKernelFunction, int(mFactory.mNumThreadsPerBlock = numThreadsPerBlock), 1, 1));*/
-			/*CUresult CUDAAPI cuFuncSetBlockShape(CUfunction hfunc, int x, int y, int z);
-			CUresult CUDAAPI cuFuncSetSharedSize(CUfunction hfunc, unsigned int bytes);
-			CUresult CUDAAPI cuParamSetSize(CUfunction hfunc, unsigned int numbytes);
-			CUresult CUDAAPI cuParamSeti(CUfunction hfunc, int offset, unsigned int value);
-			CUresult CUDAAPI cuParamSetf(CUfunction hfunc, int offset, float value);
-			CUresult CUDAAPI cuParamSetv(CUfunction hfunc, int offset, void *ptr, unsigned int numbytes);
-			CUresult CUDAAPI cuLaunchKernel(CUfunction f,
-											unsigned int gridDimX,
-											unsigned int gridDimY,
-											unsigned int gridDimZ,
-											unsigned int blockDimX,
-											unsigned int blockDimY,
-											unsigned int blockDimZ,
-											unsigned int sharedMemBytes,
-											CUstream hStream,
-											void **kernelParams,
-											void **extra);*/
-			/*checkSuccess(
-				cuLaunchKernel(mKernelFunction, 0, 0, 0, int(mFactory.mNumThreadsPerBlock = numThreadsPerBlock), 1, 1, null, null, null, null));*/
+			/* checkSuccess(
+			    cuFuncSetBlockShape(mKernelFunction, int(mFactory.mNumThreadsPerBlock = numThreadsPerBlock), 1, 1)); */
 		}
 
 		// remember num cloths per SM in terms of max shared memory per block

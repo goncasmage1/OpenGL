@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <vector>
 #include "QuadMesh.h"
 #include "NvCloth/Factory.h"
 #include "NvCloth/Fabric.h"
@@ -14,6 +15,8 @@ protected:
 	physx::PxVec3 gravity;
 	float dragCoefficient;
 	float liftCoefficient;
+
+	std::vector<float> inverseMasses;
 
 	void SetupNvCloth();
 

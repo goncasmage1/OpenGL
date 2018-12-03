@@ -386,11 +386,11 @@
     <CustomBuild Include="D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Source">
-      <UniqueIdentifier>{878E7474-C603-33F8-BBB4-444BB07707C0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\scene\scenes">
       <UniqueIdentifier>{2B3B618B-1EF2-3F26-A6DB-856C4CBAB704}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{878E7474-C603-33F8-BBB4-444BB07707C0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\core">
       <UniqueIdentifier>{9F56A1A8-C6E4-3EB5-A722-8DA70DC43F40}</UniqueIdentifier>

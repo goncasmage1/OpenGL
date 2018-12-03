@@ -87,7 +87,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">
     <ClCompile>
       <AdditionalOptions> /d2Zi+ /RTCsu /Zo %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\ProgramFiles\Cuda\v 10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>debug/</AssemblerListingLocation>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <CallingConvention>Cdecl</CallingConvention>
@@ -113,10 +113,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NV_CLOTH_IMPORT=PX_DLL_EXPORT;_DEBUG;PX_DEBUG=1;PX_CHECKED=1;PX_NVTX=0;PX_PHYSX_DLL_NAME_POSTFIX=DEBUG;NV_CLOTH_ENABLE_DX11=1;NV_CLOTH_ENABLE_CUDA=1;CMAKE_INTDIR=\"debug\";NvCloth_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\ProgramFiles\Cuda\v 10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\ProgramFiles\Cuda\v 10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -124,7 +124,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\lib\vc14win32-cmake\PxFoundationDEBUG_x86.lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\lib\Win32\cuda.lib</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\lib\vc14win32-cmake\PxFoundationDEBUG_x86.lib;D:\ProgramFiles\Cuda\v 10.0\lib\Win32\cuda.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <DelayLoadDLLs>nvcuda.dll;PxFoundationDEBUG_x86.dll</DelayLoadDLLs>
       <GenerateDebugInformation>Debug</GenerateDebugInformation>
@@ -142,7 +142,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='checked|Win32'">
     <ClCompile>
       <AdditionalOptions> /d2Zi+ %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\ProgramFiles\Cuda\v 10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>checked/</AssemblerListingLocation>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <CallingConvention>Cdecl</CallingConvention>
@@ -169,10 +169,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NV_CLOTH_IMPORT=PX_DLL_EXPORT;NDEBUG;PX_CHECKED=1;PX_NVTX=0;PX_PHYSX_DLL_NAME_POSTFIX=CHECKED;NV_CLOTH_ENABLE_DX11=1;NV_CLOTH_ENABLE_CUDA=1;CMAKE_INTDIR=\"checked\";NvCloth_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\ProgramFiles\Cuda\v 10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\ProgramFiles\Cuda\v 10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -180,7 +180,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\lib\vc14win32-cmake\PxFoundationCHECKED_x86.lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\lib\Win32\cuda.lib</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\lib\vc14win32-cmake\PxFoundationCHECKED_x86.lib;D:\ProgramFiles\Cuda\v 10.0\lib\Win32\cuda.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <DelayLoadDLLs>nvcuda.dll;PxFoundationCHECKED_x86.dll</DelayLoadDLLs>
       <GenerateDebugInformation>Debug</GenerateDebugInformation>
@@ -199,7 +199,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='profile|Win32'">
     <ClCompile>
       <AdditionalOptions> /d2Zi+ %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\ProgramFiles\Cuda\v 10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>profile/</AssemblerListingLocation>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <CallingConvention>Cdecl</CallingConvention>
@@ -226,10 +226,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NV_CLOTH_IMPORT=PX_DLL_EXPORT;NDEBUG;PX_PROFILE=1;PX_NVTX=0;PX_PHYSX_DLL_NAME_POSTFIX=PROFILE;NV_CLOTH_ENABLE_DX11=1;NV_CLOTH_ENABLE_CUDA=1;CMAKE_INTDIR=\"profile\";NvCloth_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\ProgramFiles\Cuda\v 10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\ProgramFiles\Cuda\v 10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -237,7 +237,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\lib\vc14win32-cmake\PxFoundationPROFILE_x86.lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\lib\Win32\cuda.lib</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\lib\vc14win32-cmake\PxFoundationPROFILE_x86.lib;D:\ProgramFiles\Cuda\v 10.0\lib\Win32\cuda.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <DelayLoadDLLs>nvcuda.dll;PxFoundationPROFILE_x86.dll</DelayLoadDLLs>
       <GenerateDebugInformation>Debug</GenerateDebugInformation>
@@ -256,7 +256,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release|Win32'">
     <ClCompile>
       <AdditionalOptions> /d2Zi+ %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\ProgramFiles\Cuda\v 10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>release/</AssemblerListingLocation>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <CallingConvention>Cdecl</CallingConvention>
@@ -283,10 +283,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NV_CLOTH_IMPORT=PX_DLL_EXPORT;NDEBUG;NV_CLOTH_ENABLE_DX11=1;NV_CLOTH_ENABLE_CUDA=1;CMAKE_INTDIR=\"release\";NvCloth_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\ProgramFiles\Cuda\v 10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\ProgramFiles\Cuda\v 10.0\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\include;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\src;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows\..\..\..\extensions\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -294,7 +294,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\lib\vc14win32-cmake\PxFoundation_x86.lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\lib\Win32\cuda.lib</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\samples\lib\vc14win32-cmake\PxFoundation_x86.lib;D:\ProgramFiles\Cuda\v 10.0\lib\Win32\cuda.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <DelayLoadDLLs>nvcuda.dll;PxFoundation_x86.dll</DelayLoadDLLs>
       <GenerateDebugInformation>Debug</GenerateDebugInformation>
@@ -454,7 +454,7 @@ cd D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows
 if %errorlevel% neq 0 goto :cmEnd
 D:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin\bin2c.exe" --name kCuSolverKernel D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win32-cmake/NvCloth_bin/cuda_compile_fatbin_1_generated_CuSolverKernel.cu.fatbin &gt; D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/compiler/cmake/windows/../../..//src/cuda/CuSolverKernelBlob.h
+"D:\ProgramFiles\Cuda\v 10.0\bin\bin2c.exe" --name kCuSolverKernel D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win32-cmake/NvCloth_bin/cuda_compile_fatbin_1_generated_CuSolverKernel.cu.fatbin &gt; D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/compiler/cmake/windows/../../..//src/cuda/CuSolverKernelBlob.h
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -471,7 +471,7 @@ cd D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows
 if %errorlevel% neq 0 goto :cmEnd
 D:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin\bin2c.exe" --name kCuSolverKernel D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win32-cmake/NvCloth_bin/cuda_compile_fatbin_1_generated_CuSolverKernel.cu.fatbin &gt; D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/compiler/cmake/windows/../../..//src/cuda/CuSolverKernelBlob.h
+"D:\ProgramFiles\Cuda\v 10.0\bin\bin2c.exe" --name kCuSolverKernel D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win32-cmake/NvCloth_bin/cuda_compile_fatbin_1_generated_CuSolverKernel.cu.fatbin &gt; D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/compiler/cmake/windows/../../..//src/cuda/CuSolverKernelBlob.h
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -488,7 +488,7 @@ cd D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows
 if %errorlevel% neq 0 goto :cmEnd
 D:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin\bin2c.exe" --name kCuSolverKernel D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win32-cmake/NvCloth_bin/cuda_compile_fatbin_1_generated_CuSolverKernel.cu.fatbin &gt; D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/compiler/cmake/windows/../../..//src/cuda/CuSolverKernelBlob.h
+"D:\ProgramFiles\Cuda\v 10.0\bin\bin2c.exe" --name kCuSolverKernel D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win32-cmake/NvCloth_bin/cuda_compile_fatbin_1_generated_CuSolverKernel.cu.fatbin &gt; D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/compiler/cmake/windows/../../..//src/cuda/CuSolverKernelBlob.h
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -505,7 +505,7 @@ cd D:\GitHub\OpenGL\dependencies\NvCloth-master\NvCloth\compiler\cmake\windows
 if %errorlevel% neq 0 goto :cmEnd
 D:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin\bin2c.exe" --name kCuSolverKernel D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win32-cmake/NvCloth_bin/cuda_compile_fatbin_1_generated_CuSolverKernel.cu.fatbin &gt; D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/compiler/cmake/windows/../../..//src/cuda/CuSolverKernelBlob.h
+"D:\ProgramFiles\Cuda\v 10.0\bin\bin2c.exe" --name kCuSolverKernel D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/samples/compiler/vc14win32-cmake/NvCloth_bin/cuda_compile_fatbin_1_generated_CuSolverKernel.cu.fatbin &gt; D:/GitHub/OpenGL/dependencies/NvCloth-master/NvCloth/compiler/cmake/windows/../../..//src/cuda/CuSolverKernelBlob.h
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone

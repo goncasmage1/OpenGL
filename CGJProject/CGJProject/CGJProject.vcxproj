@@ -94,8 +94,8 @@
       <AdditionalIncludeDirectories>$(SolutionDir)\..\dependencies\glew\include;$(SolutionDir)\..\dependencies\freeglut\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\ProgramFiles\Cuda\v 10.0\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\extensions\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)\..\dependencies\glew\lib\Release\x64\;$(SolutionDir)\..\dependencies\freeglut\lib\x64\;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\lib\vc14win64-cmake\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut.lib;glew32.lib;NvCloth_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\..\dependencies\glew\lib\Release\x64\;$(SolutionDir)\..\dependencies\freeglut\lib\x64\;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\lib\vc14win64-cmake\;D:\ProgramFiles\Cuda\v 10.0\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freeglut.lib;glew32.lib;NvCloth_x64.lib;PxFoundation_x64.lib;cuda.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -125,8 +125,8 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)\..\dependencies\glew\lib\Release\x64\;$(SolutionDir)\..\dependencies\freeglut\lib\x64\;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\lib\vc14win64-cmake\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut.lib;glew32.lib;NvCloth_x64.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\..\dependencies\glew\lib\Release\x64\;$(SolutionDir)\..\dependencies\freeglut\lib\x64\;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\lib\vc14win64-cmake\;D:\ProgramFiles\Cuda\v 10.0\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freeglut.lib;glew32.lib;NvCloth_x64.lib;PxFoundation_x64.lib;cuda.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

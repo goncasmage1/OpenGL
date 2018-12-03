@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include "foundation/PxAssert.h"
 
 class CustomAssertHandler : public physx::PxAssertHandler

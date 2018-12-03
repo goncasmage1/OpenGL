@@ -28,7 +28,7 @@ void SailMesh::DestroyBufferObjects()
 	NV_CLOTH_DELETE(cloth);
 
 	//TODO: FIX!
-	//fabric->decRefCount();
+	fabric->decRefCount();
 }
 
 void SailMesh::SetupNvCloth()
@@ -39,7 +39,17 @@ void SailMesh::SetupNvCloth()
 	meshDesc.points.data = static_cast<void*>(&Vertices);
 	meshDesc.points.stride = sizeof(Vec3);
 	meshDesc.points.count = Vertices.size();
-	//etc. for quads, triangles and invMasses
+
+	meshDesc.triangles.data = static_cast<void*>(&vertexIdx);
+	meshDesc.triangles.stride = sizeof(unsigned int);
+	meshDesc.triangles.count = vertexIdx.size();
+
+	int i = 0;
+	for (i = 0; i < Vertices.size(); i++) inverseMasses.push_back(1.f);
+
+	meshDesc.invMasses.data = static_cast<void*>(&inverseMasses);
+	meshDesc.invMasses.stride = sizeof(float);
+	meshDesc.invMasses.count = inverseMasses.size();
 
 	physx::PxVec3 gravity(0.0f, -9.8f, 0.0f);
 	nv::cloth::Vector<int32_t>::Type phaseTypeInfo;

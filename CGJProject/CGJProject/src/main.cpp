@@ -60,8 +60,8 @@ CustomError* customError = new CustomError();
 CustomProfiler* customProfiler = new CustomProfiler();
 
 nv::cloth::Factory* factory = nullptr;
-CUcontext cudaContext;
 nv::cloth::Solver* solver = nullptr;
+CUcontext cudaContext;
 
 /////////////////////////////////////////////////////////////////////// ERRORS
 
@@ -153,8 +153,9 @@ static void checkOpenGLError(std::string error)
 
 void setupNvCloth()
 {
-	nv::cloth::InitializeNvCloth(customAllocator, customError, customAssert, customProfiler);
+	nv::cloth::InitializeNvCloth(customAllocator, customError, customAssert, nullptr);
 	
+	cuInit(0);
 	int deviceCount = 0;
 	CUresult result = cuDeviceGetCount(&deviceCount);
 	assert(CUDA_SUCCESS == result);
@@ -162,7 +163,7 @@ void setupNvCloth()
 	result = cuCtxCreate(&cudaContext, 0, 0); //Pick first device
 	assert(CUDA_SUCCESS == result);
 
-	nv::cloth::Factory* factory = NvClothCreateFactoryCUDA(cudaContext);
+	factory = NvClothCreateFactoryCUDA(cudaContext);
 	if (factory == nullptr)
 	{
 		std::cerr << "ERROR:" << std::endl;

@@ -1,6 +1,6 @@
 #pragma once
 
-//#include "foundation/Px.h"
+#include <iostream>
 #include "foundation/PxErrorCallback.h"
 
 class CustomError : public physx::PxErrorCallback
