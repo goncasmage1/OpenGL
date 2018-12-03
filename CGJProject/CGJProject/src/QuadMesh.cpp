@@ -2,7 +2,7 @@
 #include "Math/Vector.h"
 #include <assert.h>
 
-QuadMesh::QuadMesh(float side, int xRepeat, int yRepeat)
+QuadMesh::QuadMesh(float side, int xRepeat, int yRepeat) : Mesh()
 {
 	VerticesPerFace = 3;
 	TexcoordsLoaded = true;
@@ -33,11 +33,11 @@ void QuadMesh::GenerateQuads(float side, int xRepeat, int yRepeat)
 			if (j == 0)
 			{
 				vertexData.push_back(BottomLeft);
-				vertexData.push_back(BottomLeft);
+				vertexData.push_back(BottomRight);
 			}
 			else
 			{
-				vertexData.push_back(BottomLeft);
+				vertexData.push_back(BottomRight);
 			}
 
 			if (i != yRepeat)

@@ -36,16 +36,16 @@ void SailMesh::SetupNvCloth()
 	nv::cloth::ClothMeshDesc meshDesc;
 
 	meshDesc.setToDefault();
-	meshDesc.points.data = static_cast<void*>(&Vertices);
+	meshDesc.points.data = static_cast<void*>(&vertexData);
 	meshDesc.points.stride = sizeof(Vec3);
-	meshDesc.points.count = Vertices.size();
+	meshDesc.points.count = vertexData.size();
 
 	meshDesc.triangles.data = static_cast<void*>(&vertexIdx);
-	meshDesc.triangles.stride = sizeof(unsigned int);
+	meshDesc.triangles.stride = sizeof(unsigned int) * 3;
 	meshDesc.triangles.count = vertexIdx.size();
 
 	int i = 0;
-	for (i = 0; i < Vertices.size(); i++) inverseMasses.push_back(1.f);
+	for (i = 0; i < vertexData.size(); i++) inverseMasses.push_back(1.f);
 
 	meshDesc.invMasses.data = static_cast<void*>(&inverseMasses);
 	meshDesc.invMasses.stride = sizeof(float);
