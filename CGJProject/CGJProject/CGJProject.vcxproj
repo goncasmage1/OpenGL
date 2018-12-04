@@ -95,7 +95,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)\..\dependencies\glew\lib\Release\x64\;$(SolutionDir)\..\dependencies\freeglut\lib\x64\;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\lib\vc14win64-cmake\;D:\ProgramFiles\Cuda\v 10.0\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut.lib;glew32.lib;NvCloth_x64.lib;PxFoundation_x64.lib;cuda.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freeglut.lib;glew32.lib;NvClothDEBUG_x64.lib;PxFoundationDEBUG_x64.lib;cuda.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

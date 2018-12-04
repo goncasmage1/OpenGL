@@ -16,6 +16,7 @@ protected:
 	float dragCoefficient;
 	float liftCoefficient;
 
+	std::vector<Triangle> triangles;
 	std::vector<float> inverseMasses;
 
 	void SetupNvCloth();

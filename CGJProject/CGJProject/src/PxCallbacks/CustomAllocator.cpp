@@ -4,11 +4,11 @@ void * CustomAllocator::allocate(size_t size, const char * typeName, const char 
 {
 	std::cout << filename << " is allocating " << size << " bytes at line " << line << std::endl;
 
-	std::allocator<void *> alloc;
-	return alloc.allocate(size);
+	void* ptr = _aligned_malloc(size, 16);
+	return ptr;
 }
 
 void CustomAllocator::deallocate(void * ptr)
 {
-	delete ptr;
+	_aligned_free(ptr);
 }

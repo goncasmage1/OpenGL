@@ -17,6 +17,8 @@ SailMesh::SailMesh(nv::cloth::Factory* newFactory, nv::cloth::Solver* newSolver,
 	dragCoefficient = 0.5f;
 	liftCoefficient = 0.6f;
 
+	triangles = Triangle::FromIndices(vertexIdx);
+
 	SetupNvCloth();
 }
 
@@ -38,18 +40,18 @@ void SailMesh::SetupNvCloth()
 	meshDesc.setToDefault();
 	meshDesc.points.data = static_cast<void*>(&vertexData);
 	meshDesc.points.stride = sizeof(Vec3);
-	meshDesc.points.count = vertexData.size();
+	meshDesc.points.count = (physx::PxU32)vertexData.size();
 
-	meshDesc.triangles.data = static_cast<void*>(&vertexIdx);
-	meshDesc.triangles.stride = sizeof(unsigned int) * 3;
-	meshDesc.triangles.count = vertexIdx.size();
+	meshDesc.triangles.data = static_cast<void*>(&triangles);
+	meshDesc.triangles.stride = sizeof(Triangle);
+	meshDesc.triangles.count = (physx::PxU32)triangles.size();
 
 	int i = 0;
 	for (i = 0; i < vertexData.size(); i++) inverseMasses.push_back(1.f);
 
 	meshDesc.invMasses.data = static_cast<void*>(&inverseMasses);
 	meshDesc.invMasses.stride = sizeof(float);
-	meshDesc.invMasses.count = inverseMasses.size();
+	meshDesc.invMasses.count = (physx::PxU32)inverseMasses.size();
 
 	physx::PxVec3 gravity(0.0f, -9.8f, 0.0f);
 	nv::cloth::Vector<int32_t>::Type phaseTypeInfo;

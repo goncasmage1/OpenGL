@@ -3,6 +3,28 @@
 #include "GL/glew.h"
 #include "GL/freeglut.h"
 
+struct Triangle
+{
+	Triangle() {}
+	Triangle(uint32_t _a, uint32_t _b, uint32_t _c) :
+		a(_a), b(_b), c(_c)
+	{
+	}
+	uint32_t a, b, c;
+
+	static std::vector<Triangle> FromIndices(std::vector<uint32_t> indices)
+	{
+		std::vector<Triangle> triangles;
+		for (int i = 0; i < indices.size(); i += 3)
+		{
+			triangles.push_back(Triangle(i, i + 1, i + 2));
+		}
+		return triangles;
+	}
+
+	Triangle operator+(uint32_t offset)const { return Triangle(a + offset, b + offset, c + offset); }
+};
+
 class Mesh
 {
 
@@ -16,7 +38,7 @@ public:
 	bool TexcoordsLoaded, NormalsLoaded;
 	std::vector<struct Vec3> Vertices, vertexData, Normals, normalData;
 	std::vector<struct Vec2> Texcoords, texcoordData;
-	std::vector<unsigned int> vertexIdx, texcoordIdx, normalIdx;
+	std::vector<uint32_t> vertexIdx, texcoordIdx, normalIdx;
 
 	virtual void CreateBufferObjects();
 	virtual void DestroyBufferObjects();
