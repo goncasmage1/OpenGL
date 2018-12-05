@@ -318,3 +318,10 @@ ASALocalRun/
 
 # NvCloth files
 NvCloth-master/
+bin/x64/NvCloth_x64\.dll
+
+bin/x64/NvClothDEBUG_x64\.dll
+
+bin/x64/PxFoundation_x64\.dll
+
+bin/x64/PxFoundationDEBUG_x64\.dll
