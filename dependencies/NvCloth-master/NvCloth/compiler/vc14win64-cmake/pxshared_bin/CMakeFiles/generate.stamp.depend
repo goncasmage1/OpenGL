@@ -1,6 +1,0 @@
-# CMake generation dependency list for this directory.
-D:/GitHub/OpenGL/dependencies/NvCloth-master/PxShared/src/compiler/cmake/windows/CMakeLists.txt
-D:/GitHub/OpenGL/dependencies/NvCloth-master/PxShared/src/compiler/cmake/common/CMakeLists.txt
-D:/GitHub/OpenGL/dependencies/NvCloth-master/Externals/CMakeModules/SetOutputPaths.cmake
-D:/GitHub/OpenGL/dependencies/NvCloth-master/PxShared/src/compiler/cmake/windows/PxFoundation.cmake
-D:/GitHub/OpenGL/dependencies/NvCloth-master/PxShared/src/compiler/cmake/common/PxFoundation.cmake
