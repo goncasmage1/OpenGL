@@ -12,6 +12,7 @@
 SailMesh::SailMesh(nv::cloth::Factory* newFactory, nv::cloth::Solver* newSolver, float size, int xRepeat, int yRepeat) : QuadMesh(size, xRepeat, yRepeat)
 {
 	factory = newFactory;
+	solver = newSolver;
 	gravity = physx::PxVec3(0.0f, -9.8f, 0.0f);
 	dragCoefficient = 0.5f;
 	liftCoefficient = 0.6f;
@@ -28,7 +29,6 @@ void SailMesh::DestroyBufferObjects()
 	solver->removeCloth(cloth);
 	NV_CLOTH_DELETE(cloth);
 
-	//TODO: FIX!
 	fabric->decRefCount();
 }
 
@@ -106,6 +106,5 @@ void SailMesh::SetupNvCloth()
 
 	//Add the cloth to the solver for simulation
 	solver->addCloth(cloth);
-
 
 }

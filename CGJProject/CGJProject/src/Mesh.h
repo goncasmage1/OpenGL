@@ -17,7 +17,7 @@ struct Triangle
 		std::vector<Triangle> triangles;
 		for (int i = 0; i < indices.size(); i += 3)
 		{
-			triangles.push_back(Triangle(i, i + 1, i + 2));
+			triangles.push_back(Triangle(indices[i], indices[i + 1], indices[i + 2]));
 		}
 		return triangles;
 	}
