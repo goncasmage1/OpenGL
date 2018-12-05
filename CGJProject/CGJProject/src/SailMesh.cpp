@@ -1,7 +1,6 @@
 #include "SailMesh.h"
 
 #include "NvClothExt/ClothFabricCooker.h"
-//#include "cuda.h"
 
 #include "PxCallbacks/CustomAllocator.h"
 #include "PxCallbacks/CustomAssertHandler.h"
@@ -36,21 +35,21 @@ void SailMesh::DestroyBufferObjects()
 void SailMesh::SetupNvCloth()
 {
 	nv::cloth::ClothMeshDesc meshDesc;
+	size_t i = 0;
 
 	meshDesc.setToDefault();
-	meshDesc.points.data = static_cast<void*>(&vertexData);
-	meshDesc.points.stride = sizeof(Vec3);
+	meshDesc.points.data = &vertexData[0];
+	meshDesc.points.stride = sizeof(vertexData[0]);
 	meshDesc.points.count = (physx::PxU32)vertexData.size();
 
-	meshDesc.triangles.data = static_cast<void*>(&triangles);
-	meshDesc.triangles.stride = sizeof(Triangle);
+	meshDesc.triangles.data = &triangles[0];
+	meshDesc.triangles.stride = sizeof(triangles[0]);
 	meshDesc.triangles.count = (physx::PxU32)triangles.size();
 
-	int i = 0;
 	for (i = 0; i < vertexData.size(); i++) inverseMasses.push_back(1.f);
 
-	meshDesc.invMasses.data = static_cast<void*>(&inverseMasses);
-	meshDesc.invMasses.stride = sizeof(float);
+	meshDesc.invMasses.data = &inverseMasses[0];
+	meshDesc.invMasses.stride = sizeof(inverseMasses[0]);
 	meshDesc.invMasses.count = (physx::PxU32)inverseMasses.size();
 
 	physx::PxVec3 gravity(0.0f, -9.8f, 0.0f);
@@ -59,7 +58,7 @@ void SailMesh::SetupNvCloth()
 
 	std::vector<physx::PxVec4> particles;
 	particles.resize(meshDesc.points.count);
-	for (int i = 0; i < meshDesc.points.count; i++)
+	for (i = 0; i < meshDesc.points.count; i++)
 	{
 		Vec4 vec = Vertices[i];
 		particles[i] = physx::PxVec4(vec.x, vec.y, vec.z, 1.0f);
@@ -76,7 +75,7 @@ void SailMesh::SetupNvCloth()
 	cloth->setLiftCoefficient(liftCoefficient);
 
 	nv::cloth::PhaseConfig* phases = new nv::cloth::PhaseConfig[fabric->getNumPhases()];
-	for (int i = 0; i < fabric->getNumPhases(); i++)
+	for (i = 0; i < fabric->getNumPhases(); i++)
 	{
 		phases[i].mPhaseIndex = i; // Set index to the corresponding set (constraint group)
 

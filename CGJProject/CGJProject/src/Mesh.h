@@ -6,13 +6,13 @@
 struct Triangle
 {
 	Triangle() {}
-	Triangle(uint32_t _a, uint32_t _b, uint32_t _c) :
+	Triangle(uint16_t _a, uint16_t _b, uint16_t _c) :
 		a(_a), b(_b), c(_c)
 	{
 	}
-	uint32_t a, b, c;
+	uint16_t a, b, c;
 
-	static std::vector<Triangle> FromIndices(std::vector<uint32_t> indices)
+	static std::vector<Triangle> FromIndices(std::vector<uint16_t> indices)
 	{
 		std::vector<Triangle> triangles;
 		for (int i = 0; i < indices.size(); i += 3)
@@ -38,7 +38,7 @@ public:
 	bool TexcoordsLoaded, NormalsLoaded;
 	std::vector<struct Vec3> Vertices, vertexData, Normals, normalData;
 	std::vector<struct Vec2> Texcoords, texcoordData;
-	std::vector<uint32_t> vertexIdx, texcoordIdx, normalIdx;
+	std::vector<uint16_t> vertexIdx, texcoordIdx, normalIdx;
 
 	virtual void CreateBufferObjects();
 	virtual void DestroyBufferObjects();

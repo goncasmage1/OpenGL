@@ -110,7 +110,6 @@ void MeshLoader::FreeMeshData()
 
 std::shared_ptr<Mesh> MeshLoader::CreateMesh(const std::string& filename)
 {
-	//TODO: 
 	std::shared_ptr<Mesh> LoadedMesh = std::make_shared<Mesh>();
 	TempMeshRef = LoadedMesh;
 	Meshes.push_back(LoadedMesh);
@@ -157,7 +156,7 @@ void MeshLoader::UpdateSailData(physx::PxVec3 windVel)
 	{
 		sail->cloth->setWindVelocity(windVel);
 		nv::cloth::MappedRange<physx::PxVec4> particles = sail->cloth->getCurrentParticles();
-		for (int i = 0; i < particles.size(); i++)
+		for (size_t i = 0; i < particles.size(); i++)
 		{
 			//do something with particles[i]
 			//the xyz components are the current positions
