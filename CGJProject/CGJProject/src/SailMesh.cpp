@@ -108,3 +108,15 @@ void SailMesh::SetupNvCloth()
 	solver->addCloth(cloth);
 
 }
+
+void SailMesh::UpdateSailData(physx::PxVec3 windVel)
+{
+	cloth->setWindVelocity(windVel);
+	nv::cloth::MappedRange<physx::PxVec4> particles = cloth->getCurrentParticles();
+	for (size_t i = 0; i < particles.size(); i++)
+	{
+		//do something with particles[i]
+		//the xyz components are the current positions
+		//the w component is the invMass.
+	}
+}

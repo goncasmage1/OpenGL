@@ -27,6 +27,8 @@ public:
 
 	virtual void DestroyBufferObjects() override;
 
+	void UpdateSailData(physx::PxVec3 windVel);
+
 	nv::cloth::Factory* factory = nullptr;
 	nv::cloth::Solver* solver = nullptr;
 	nv::cloth::Fabric* fabric = nullptr;

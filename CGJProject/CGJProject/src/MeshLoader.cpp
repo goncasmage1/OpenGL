@@ -154,13 +154,6 @@ void MeshLoader::UpdateSailData(physx::PxVec3 windVel)
 {
 	for (std::shared_ptr<SailMesh> sail : Sails)
 	{
-		sail->cloth->setWindVelocity(windVel);
-		nv::cloth::MappedRange<physx::PxVec4> particles = sail->cloth->getCurrentParticles();
-		for (size_t i = 0; i < particles.size(); i++)
-		{
-			//do something with particles[i]
-			//the xyz components are the current positions
-			//the w component is the invMass.
-		}
+		sail->UpdateSailData(windVel);
 	}
 }
