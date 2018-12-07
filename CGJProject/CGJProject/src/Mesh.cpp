@@ -71,14 +71,17 @@ void Mesh::Draw()
 {
 	glBindVertexArray(VAO);
 	GLuint size = (GLuint)vertexIdx.size();
-	//if (VerticesPerFace == 3) glDrawArrays(GL_TRIANGLES, 0, size);
-	for (size_t i = 0; i < size/3; i += 3)
+	if (VerticesPerFace == 3)
 	{
-		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, &vertexIdx[i]);
+		glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, (GLvoid*)0);
+		/*for (size_t i = 0; i < size/3; i += 3)
+		{
+			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, (GLvoid*)i);
+		}*/
 	}
 	/*else if (VerticesPerFace == 4)
 	{
-		for (int i = 0; i < size/4; i++)
+		for (int i = 0; i < size/4; i+=4)
 		{
 			glDrawArrays(GL_TRIANGLE_STRIP, i*4, 4);
 		}
