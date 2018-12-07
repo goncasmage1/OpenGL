@@ -77,7 +77,7 @@ void SailMesh::SetupNvCloth()
 	nv::cloth::PhaseConfig* phases = new nv::cloth::PhaseConfig[fabric->getNumPhases()];
 	for (i = 0; i < fabric->getNumPhases(); i++)
 	{
-		phases[i].mPhaseIndex = i; // Set index to the corresponding set (constraint group)
+		phases[i].mPhaseIndex = (uint16_t)i; // Set index to the corresponding set (constraint group)
 
 		//Give phases different configs depending on type
 		switch (phaseTypeInfo[i])
@@ -117,4 +117,30 @@ void SailMesh::UpdateSailData(physx::PxVec3 windVel)
 		physx::PxVec4 particleVec = particles[vertexIdx[i]];
 		Vertices[i] = Vec3(particleVec.x, particleVec.y, particleVec.z);
 	}
+
+	//UpdateBuffers();
+}
+
+void SailMesh::UpdateBuffers()
+{
+	GLuint VboVertices, VboTexcoords, VboNormals;
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	{
+		glGenBuffers(1, &VboVertices);
+		glBindBuffer(GL_ARRAY_BUFFER, VboVertices);
+		glBufferData(GL_ARRAY_BUFFER, Vertices.size() * sizeof(Vec3), &Vertices[0], GL_STATIC_DRAW);
+		//glEnableVertexAttribArray(VERTICES);
+		//glVertexAttribPointer(VERTICES, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
+
+		/*if (NormalsLoaded)
+		{
+			glGenBuffers(1, &VboNormals);
+			glBindBuffer(GL_ARRAY_BUFFER, VboNormals);
+			glBufferData(GL_ARRAY_BUFFER, Normals.size() * sizeof(Vec3), &Normals[0], GL_STATIC_DRAW);
+			glEnableVertexAttribArray(NORMALS);
+			glVertexAttribPointer(NORMALS, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
+		}*/
+	}
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

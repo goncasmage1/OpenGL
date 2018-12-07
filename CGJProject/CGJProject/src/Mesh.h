@@ -3,6 +3,10 @@
 #include "GL/glew.h"
 #include "GL/freeglut.h"
 
+#define VERTICES 0
+#define TEXCOORDS 1
+#define NORMALS 2
+
 struct Triangle
 {
 	Triangle() {}

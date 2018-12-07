@@ -1,10 +1,6 @@
 #include "Mesh.h"
 #include "Math/Vector.h"
 
-#define VERTICES 0
-#define TEXCOORDS 1
-#define NORMALS 2
-
 void Mesh::CreateBufferObjects()
 {
 	GLuint VboVertices, VboTexcoords, VboNormals;

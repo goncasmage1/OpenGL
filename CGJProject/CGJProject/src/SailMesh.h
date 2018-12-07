@@ -20,13 +20,13 @@ protected:
 	std::vector<float> inverseMasses;
 
 	void SetupNvCloth();
+	void UpdateBuffers();
 
 public:
 
 	SailMesh(nv::cloth::Factory* newFactory, nv::cloth::Solver* newSolver, float size, int xRepeat, int yRepeat);
 
 	virtual void DestroyBufferObjects() override;
-
 	void UpdateSailData(physx::PxVec3 windVel);
 
 	nv::cloth::Factory* factory = nullptr;
