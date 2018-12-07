@@ -98,10 +98,10 @@ void MeshLoader::ProcessMeshData()
 
 void MeshLoader::FreeMeshData()
 {
-	TempMeshRef->vertexData.clear();
+	//TempMeshRef->vertexData.clear();
 	TempMeshRef->texcoordData.clear();
 	TempMeshRef->normalData.clear();
-	TempMeshRef->vertexIdx.clear();
+	//TempMeshRef->vertexIdx.clear();
 	TempMeshRef->texcoordIdx.clear();
 	TempMeshRef->normalIdx.clear();
 	TempMeshRef = nullptr;

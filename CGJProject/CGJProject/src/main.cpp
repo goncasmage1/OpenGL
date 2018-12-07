@@ -361,7 +361,7 @@ void setupMeshes()
 {
 	//MeshLoader loads all necessary meshes
 	meshLoader->CreateMesh(std::string("../../assets/models/TableTri.obj"));
-	meshLoader->CreateQuadMesh(1.f, 6, 4);
+	//meshLoader->CreateQuadMesh(1.f, 6, 4);
 
 	//Optionally indicate mesh and shader index to use for each SceneNode
 	/*MeshData meshData[] = {
@@ -370,7 +370,7 @@ void setupMeshes()
 	};*/
 
 	scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[1]);
-	scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
+	//scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
 }
 
 void init(int argc, char* argv[])
