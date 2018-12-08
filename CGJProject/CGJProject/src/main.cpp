@@ -40,6 +40,7 @@ int WindowHandle = 0;
 unsigned int FrameCount = 0;
 float animationProgress = 0.f;
 
+float fpsInterval = 1000.f / 60.f;
 auto begin = std::chrono::steady_clock::now();
 
 struct MeshData
@@ -267,15 +268,16 @@ void processInput()
 
 void processCloth()
 {
-	float deltaTime = (std::chrono::duration<float>(std::chrono::steady_clock::now() - begin)).count();
-	solver->beginSimulation(deltaTime/10);
+	//TODO: Fix
+	float deltaTime = std::chrono::duration<float>(std::chrono::steady_clock::now() - begin).count() * 1000.f;
+	solver->beginSimulation(1.f/60.f);
 	for (int i = 0; i < solver->getSimulationChunkCount(); i++)
 	{
 		solver->simulateChunk(i);
 	}
 	solver->endSimulation();
 
-	physx::PxVec3 windVelocity(0.0, 1.f, 0.0);
+	physx::PxVec3 windVelocity(0.0, 0.f, 0.0);
 	meshLoader->UpdateSailData(windVelocity);
 }
 
@@ -290,6 +292,8 @@ void cleanup()
 
 void display()
 {
+	auto frameStart = std::chrono::steady_clock::now();
+
 	++FrameCount;
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	processInput();
@@ -298,6 +302,12 @@ void display()
 	glutSwapBuffers();
 
 	begin = std::chrono::steady_clock::now();
+
+	/*float frameTime = std::chrono::duration<float>(begin - frameStart).count() * 1000.f;
+	std::cout << "Frame Time: " << frameTime << std::endl;
+	float waitTime = fpsInterval - frameTime;
+	
+	if (waitTime > 0.f) Sleep(waitTime);*/
 }
 
 void idle()

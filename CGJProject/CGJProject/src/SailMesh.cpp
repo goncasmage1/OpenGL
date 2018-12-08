@@ -60,7 +60,7 @@ void SailMesh::SetupNvCloth()
 	particles.resize(meshDesc.points.count);
 	for (i = 0; i < meshDesc.points.count; i++)
 	{
-		Vec4 vec = Vertices[i];
+		Vec4 vec = vertexData[i];
 		particles[i] = physx::PxVec4(vec.x, vec.y, vec.z, 1.0f);
 	}
 
@@ -68,7 +68,6 @@ void SailMesh::SetupNvCloth()
 	nv::cloth::Range<physx::PxVec4>(&particles.front(),
 									&particles.back() + 1),
 									*fabric);
-	particles.clear();
 
 	cloth->setGravity(gravity);
 	cloth->setDragCoefficient(dragCoefficient);
@@ -111,15 +110,12 @@ void SailMesh::SetupNvCloth()
 void SailMesh::UpdateSailData(physx::PxVec3 windVel)
 {
 	cloth->setWindVelocity(windVel);
-	nv::cloth::MappedRange<physx::PxVec4> previousParticles = cloth->getPreviousParticles();
 	nv::cloth::MappedRange<physx::PxVec4> newParticles = cloth->getCurrentParticles();
 	for (size_t i = 0; i < vertexIdx.size(); i++)
 	{
 		physx::PxVec4 newParticle = newParticles[vertexIdx[i]];
 		Vertices[i] = Vec3(newParticle.x, newParticle.y, newParticle.z);
-		std::cout << "Distance" << (newParticles[vertexIdx[i]] - previousParticles[vertexIdx[i]]).magnitude() << std::endl;
 	}
-
 	UpdateBuffers();
 }
 
