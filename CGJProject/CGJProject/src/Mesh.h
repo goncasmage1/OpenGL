@@ -8,7 +8,8 @@ class Mesh
 
 protected:
 
-	GLuint VAO, VBO;
+	GLuint VAO;
+	GLuint VBO[2];
 
 public:
 
