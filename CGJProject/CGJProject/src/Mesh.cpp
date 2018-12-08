@@ -3,7 +3,7 @@
 
 void Mesh::CreateBufferObjects()
 {
-	GLuint VboVertices, VboTexcoords, VboNormals;
+	GLuint VboTexcoords, VboNormals;
 
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
@@ -38,7 +38,6 @@ void Mesh::CreateBufferObjects()
 	}
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glDeleteBuffers(1, &VboVertices);
 	glDeleteBuffers(1, &VboTexcoords);
 	glDeleteBuffers(1, &VboNormals);
 }
@@ -49,6 +48,8 @@ void Mesh::DestroyBufferObjects()
 	glDisableVertexAttribArray(VERTICES);
 	glDisableVertexAttribArray(TEXCOORDS);
 	glDisableVertexAttribArray(NORMALS);
+	glDeleteBuffers(1, &VboVertices);
+
 	glDeleteBuffers(1, &VBO);
 	glDeleteVertexArrays(1, &VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -62,7 +63,7 @@ void Mesh::Draw()
 	if (VerticesPerFace == 3) glDrawArrays(GL_TRIANGLES, 0, size);
 	/*else if (VerticesPerFace == 4)
 	{
-		for (int i = 0; i < size/4; i++)
+		for (int i = 0; i < size/4; i+=4)
 		{
 			glDrawArrays(GL_TRIANGLE_STRIP, i*4, 4);
 		}

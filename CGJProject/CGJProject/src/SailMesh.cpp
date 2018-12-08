@@ -111,36 +111,21 @@ void SailMesh::SetupNvCloth()
 void SailMesh::UpdateSailData(physx::PxVec3 windVel)
 {
 	cloth->setWindVelocity(windVel);
-	nv::cloth::MappedRange<physx::PxVec4> particles = cloth->getCurrentParticles();
+	nv::cloth::MappedRange<physx::PxVec4> previousParticles = cloth->getPreviousParticles();
+	nv::cloth::MappedRange<physx::PxVec4> newParticles = cloth->getCurrentParticles();
 	for (size_t i = 0; i < vertexIdx.size(); i++)
 	{
-		physx::PxVec4 particleVec = particles[vertexIdx[i]];
-		Vertices[i] = Vec3(particleVec.x, particleVec.y, particleVec.z);
+		physx::PxVec4 newParticle = newParticles[vertexIdx[i]];
+		Vertices[i] = Vec3(newParticle.x, newParticle.y, newParticle.z);
+		std::cout << "Distance" << (newParticles[vertexIdx[i]] - previousParticles[vertexIdx[i]]).magnitude() << std::endl;
 	}
 
-	//UpdateBuffers();
+	UpdateBuffers();
 }
 
 void SailMesh::UpdateBuffers()
 {
-	GLuint VboVertices, VboTexcoords, VboNormals;
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	{
-		glGenBuffers(1, &VboVertices);
-		glBindBuffer(GL_ARRAY_BUFFER, VboVertices);
-		glBufferData(GL_ARRAY_BUFFER, Vertices.size() * sizeof(Vec3), &Vertices[0], GL_STATIC_DRAW);
-		//glEnableVertexAttribArray(VERTICES);
-		//glVertexAttribPointer(VERTICES, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
-
-		/*if (NormalsLoaded)
-		{
-			glGenBuffers(1, &VboNormals);
-			glBindBuffer(GL_ARRAY_BUFFER, VboNormals);
-			glBufferData(GL_ARRAY_BUFFER, Normals.size() * sizeof(Vec3), &Normals[0], GL_STATIC_DRAW);
-			glEnableVertexAttribArray(NORMALS);
-			glVertexAttribPointer(NORMALS, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
-		}*/
-	}
-	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, VboVertices);
+	glBufferData(GL_ARRAY_BUFFER, Vertices.size() * sizeof(Vec3), &Vertices[0], GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

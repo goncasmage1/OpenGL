@@ -268,14 +268,14 @@ void processInput()
 void processCloth()
 {
 	float deltaTime = (std::chrono::duration<float>(std::chrono::steady_clock::now() - begin)).count();
-	solver->beginSimulation(deltaTime);
+	solver->beginSimulation(deltaTime/10);
 	for (int i = 0; i < solver->getSimulationChunkCount(); i++)
 	{
 		solver->simulateChunk(i);
 	}
 	solver->endSimulation();
 
-	physx::PxVec3 windVelocity(1.0, 1.0, 1.0);
+	physx::PxVec3 windVelocity(0.0, 1.f, 0.0);
 	meshLoader->UpdateSailData(windVelocity);
 }
 
@@ -387,8 +387,8 @@ void setupOpenGL()
 	glDepthMask(GL_TRUE);
 	glDepthRange(0.0, 1.0);
 	glClearDepth(1.0);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
+	//glEnable(GL_CULL_FACE);
+	//glCullFace(GL_BACK);
 	glFrontFace(GL_CCW);
 }
 
@@ -429,8 +429,8 @@ void setupGLUT(int argc, char* argv[])
 void setupMeshes()
 {
 	//MeshLoader loads all necessary meshes
-	meshLoader->CreateMesh(std::string("../../assets/models/TableTri.obj"));
-	meshLoader->CreateSailMesh(factory, solver, 1.f, 6, 4);
+	//meshLoader->CreateMesh(std::string("../../assets/models/TableTri.obj"));
+	meshLoader->CreateSailMesh(factory, solver, 0.5f, 12, 8);
 
 	//Optionally indicate mesh and shader index to use for each SceneNode
 	/*MeshData meshData[] = {
@@ -438,8 +438,8 @@ void setupMeshes()
 		{2, 1},
 	};*/
 
-	scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[1]);
-	scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
+	scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[0]);
+	//scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
 }
 
 void init(int argc, char* argv[])

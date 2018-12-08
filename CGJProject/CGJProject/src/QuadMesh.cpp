@@ -27,8 +27,8 @@ void QuadMesh::GenerateQuads(float side, int xRepeat, int yRepeat)
 	{
 		for (int j = 0; j < xRepeat; j++)
 		{
-			Vec3 BottomLeft = Vec3(-halfXSize + j * side, -halfYSize + i * side, 0.f);
-			Vec3 BottomRight = Vec3(-halfXSize + (j + 1) * side, -halfYSize + i * side, 0.f);
+			Vec3 BottomLeft = Vec3(-halfXSize + j * side, 0.f, -halfYSize + i * side);
+			Vec3 BottomRight = Vec3(-halfXSize + (j + 1) * side, 0.f, -halfYSize + i * side);
 
 			if (j == 0)
 			{
@@ -42,8 +42,8 @@ void QuadMesh::GenerateQuads(float side, int xRepeat, int yRepeat)
 
 			if (i != yRepeat)
 			{
-				Vec3 TopLeft = Vec3(-halfXSize + j * side, -halfYSize + (i + 1) * side, 0.f);
-				Vec3 TopRight = Vec3(-halfXSize + (j + 1) * side, -halfYSize + (i + 1) * side, 0.f);
+				Vec3 TopLeft = Vec3(-halfXSize + j * side, 0.f, -halfYSize + (i + 1) * side);
+				Vec3 TopRight = Vec3(-halfXSize + (j + 1) * side, 0.f, -halfYSize + (i + 1) * side);
 
 				Vertices.push_back(BottomLeft);
 				vertexIdx.push_back(j + i * (xRepeat + 1));

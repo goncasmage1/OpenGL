@@ -2,8 +2,6 @@
 
 void * CustomAllocator::allocate(size_t size, const char * typeName, const char * filename, int line)
 {
-	std::cout << filename << " is allocating " << size << " bytes at line " << line << std::endl;
-
 	void* ptr = _aligned_malloc(size, 16);
 	std::lock_guard<std::mutex> lock(mAllocationsMapLock);
 	mAllocations[ptr] = Allocation(size, typeName, filename, line);
