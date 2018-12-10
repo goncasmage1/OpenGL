@@ -6,8 +6,10 @@
 #include "PxCallbacks/CustomAssertHandler.h"
 #include "PxCallbacks/CustomError.h"
 #include "PxCallbacks/CustomProfiler.h"
+#include "foundation/PxQuat.h"
 
 #include "Math/Vector.h"
+#include "Math/Quaternion.h"
 
 SailMesh::SailMesh(nv::cloth::Factory* newFactory, nv::cloth::Solver* newSolver, float size, int xRepeat, int yRepeat) : QuadMesh(size, xRepeat, yRepeat)
 {
@@ -75,6 +77,8 @@ void SailMesh::SetupNvCloth()
 	cloth->setGravity(gravity);
 	cloth->setDragCoefficient(dragCoefficient);
 	cloth->setLiftCoefficient(liftCoefficient);
+	Quat rotation = FromAngleAxis(Vec4(1.f, 0.f, 0.f, 1.f), 90.f);
+	cloth->setRotation(physx::PxQuat(rotation.x, rotation.y, rotation.z, rotation.t));
 
 	nv::cloth::PhaseConfig* phases = new nv::cloth::PhaseConfig[fabric->getNumPhases()];
 	for (i = 0; i < fabric->getNumPhases(); i++)

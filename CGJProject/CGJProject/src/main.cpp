@@ -277,7 +277,7 @@ void processCloth()
 	}
 	solver->endSimulation();
 
-	physx::PxVec3 windVelocity(0.0f, 0.0f, 0.0f);
+	physx::PxVec3 windVelocity(6.0f, 0.0f, 0.0f);
 	meshLoader->UpdateSailData(windVelocity);
 }
 
@@ -448,7 +448,9 @@ void setupMeshes()
 		{2, 1},
 	};*/
 
-	scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[2]);
+	Transform sailTransform = Transform();
+	sailTransform.Rotation = FromAngleAxis(Vec4(1.f, 0.f, 0.f, 1.f), 90.f);
+	scene->root->CreateNode(meshLoader->Meshes[0], sailTransform, shaders[2]);
 	//scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
 }
 
