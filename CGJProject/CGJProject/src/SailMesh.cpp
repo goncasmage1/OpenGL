@@ -47,6 +47,8 @@ void SailMesh::SetupNvCloth()
 	meshDesc.triangles.count = (physx::PxU32)triangles.size();
 
 	for (i = 0; i < vertexData.size(); i++) inverseMasses.push_back(1.f);
+	//inverseMasses[0] = 0.f;
+	//inverseMasses[yRepeat-1] = 0.f;
 
 	meshDesc.invMasses.data = &inverseMasses[0];
 	meshDesc.invMasses.stride = sizeof(inverseMasses[0]);
@@ -61,7 +63,8 @@ void SailMesh::SetupNvCloth()
 	for (i = 0; i < meshDesc.points.count; i++)
 	{
 		Vec4 vec = vertexData[i];
-		particles[i] = physx::PxVec4(vec.x, vec.y, vec.z, 1.0f);
+		float invMass = i == 0 || i == (xRepeat+1) * (yRepeat) ? 0.f : 1.0f;
+		particles[i] = physx::PxVec4(vec.x, vec.y, vec.z, invMass);
 	}
 
 	cloth = factory->createCloth(

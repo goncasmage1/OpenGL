@@ -2,14 +2,15 @@
 #include "Math/Vector.h"
 #include <assert.h>
 
-QuadMesh::QuadMesh(float side, int xRepeat, int yRepeat) : Mesh()
+QuadMesh::QuadMesh(float newSide, int newXRepeat, int newYRepeat) :
+	Mesh(), side(newSide), xRepeat(newXRepeat), yRepeat(newYRepeat)
 {
 	VerticesPerFace = 3;
 	TexcoordsLoaded = true;
-	GenerateQuads(side, xRepeat, yRepeat);
+	GenerateQuads();
 }
 
-void QuadMesh::GenerateQuads(float side, int xRepeat, int yRepeat)
+void QuadMesh::GenerateQuads()
 {
 	assert(side > 0.f);
 	assert(xRepeat > 0);
