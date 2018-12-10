@@ -448,7 +448,7 @@ void setupMeshes()
 		{2, 1},
 	};*/
 
-	scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[3]);
+	scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[2]);
 	//scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
 }
 
