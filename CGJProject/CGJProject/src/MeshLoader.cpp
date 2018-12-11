@@ -7,6 +7,17 @@
 #include <fstream>
 #include <algorithm>
 
+SailProperties::SailProperties()
+{
+
+}
+
+SailProperties::SailProperties(physx::PxVec3 newGravity, float newDragCoefficient, float newLiftCoefficient, nv::cloth::PhaseConfig newPhaseConfig) :
+	gravity(newGravity), dragCoefficient(newDragCoefficient), liftCoefficient(newLiftCoefficient), phaseConfig(newPhaseConfig)
+{
+
+}
+
 void MeshLoader::ParseVertex(std::stringstream& sin)
 {
 	Vec3 v;
@@ -126,9 +137,9 @@ std::shared_ptr<QuadMesh> MeshLoader::CreateQuadMesh(float size, int xRepeat, in
 	return newQuad;
 }
 
-std::shared_ptr<class SailMesh> MeshLoader::CreateSailMesh(nv::cloth::Factory * newFactory, nv::cloth::Solver* newSolver, float size, int xRepeat, int yRepeat)
+std::shared_ptr<class SailMesh> MeshLoader::CreateSailMesh(SailProperties properties, nv::cloth::Factory * newFactory, nv::cloth::Solver* newSolver, float size, int xRepeat, int yRepeat)
 {
-	std::shared_ptr<SailMesh> newSail = std::make_shared<SailMesh>(newFactory, newSolver, size, xRepeat, yRepeat);
+	std::shared_ptr<SailMesh> newSail = std::make_shared<SailMesh>(properties, newFactory, newSolver, size, xRepeat, yRepeat);
 	Meshes.push_back(newSail);
 	Sails.push_back(newSail);
 	return newSail;

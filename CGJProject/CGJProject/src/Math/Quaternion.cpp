@@ -304,3 +304,8 @@ const Quat Slerp(const Quat & Q1, const Quat & Q2, float alpha)
 
 	return Normalized(Quat(Q1*a1) + Quat(Q2*a2));
 }
+
+const physx::PxQuat ToPhysxQuat(const Quat & Q)
+{
+	return physx::PxQuat(Q.x, Q.y, Q.z, Q.t);
+}

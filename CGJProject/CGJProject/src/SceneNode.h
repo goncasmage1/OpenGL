@@ -43,8 +43,9 @@ public:
 	SceneNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, std::shared_ptr<SceneNode> newParent, std::shared_ptr<class ShaderProgram> newShaderProg);
 
 	std::shared_ptr<SceneNode> CreateNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, std::shared_ptr<ShaderProgram> newShaderProg);
+	std::shared_ptr<class SailNode> CreateSailNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, std::shared_ptr<ShaderProgram> newShaderProg);
 
-	void UpdateTransformationMatrix();
+	virtual void UpdateTransformationMatrix();
 	void Draw();
 	virtual void SetupUniforms();
 

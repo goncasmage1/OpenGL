@@ -2,7 +2,22 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
 #include "NvCloth/Factory.h"
+#include "NvCloth/Cloth.h"
+#include "foundation/PxVec3.h"
+
+struct SailProperties
+{
+	SailProperties();
+	SailProperties(physx::PxVec3 newGravity, float newDragCoefficient, float newLiftCoefficient, nv::cloth::PhaseConfig newPhaseConfig);
+
+	physx::PxVec3 gravity = physx::PxVec3(0.0f, -9.8f, 0.0f);
+	float dragCoefficient = 0.5f;
+	float liftCoefficient = 0.6f;
+
+	nv::cloth::PhaseConfig phaseConfig = nv::cloth::PhaseConfig();
+};
 
 class MeshLoader
 {
@@ -27,7 +42,7 @@ public:
 
 	std::shared_ptr<class Mesh> CreateMesh(const std::string& filename);
 	std::shared_ptr<class QuadMesh> CreateQuadMesh(float size, int xRepeat, int yRepeat);
-	std::shared_ptr<class SailMesh> CreateSailMesh(nv::cloth::Factory* newFactory, nv::cloth::Solver* newSolver, float size, int xRepeat, int yRepeat);
+	std::shared_ptr<class SailMesh> CreateSailMesh(SailProperties properties, nv::cloth::Factory* newFactory, nv::cloth::Solver* newSolver, float size, int xRepeat, int yRepeat);
 
 	void CreateBufferObjects();
 	void DestroyBufferObjects();

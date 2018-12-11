@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "QuadMesh.h"
+#include "MeshLoader.h"
 #include "NvCloth/Factory.h"
 #include "NvCloth/Fabric.h"
 #include "NvCloth/Solver.h"
@@ -12,9 +13,7 @@ class SailMesh : public QuadMesh
 {
 protected:
 
-	physx::PxVec3 gravity;
-	float dragCoefficient;
-	float liftCoefficient;
+	struct SailProperties properties;
 
 	std::vector<Triangle> triangles;
 	std::vector<float> inverseMasses;
@@ -24,7 +23,7 @@ protected:
 
 public:
 
-	SailMesh(nv::cloth::Factory* newFactory, nv::cloth::Solver* newSolver, float size, int xRepeat, int yRepeat);
+	SailMesh(SailProperties newProperties, nv::cloth::Factory* newFactory, nv::cloth::Solver* newSolver, float size, int xRepeat, int yRepeat);
 
 	virtual void DestroyBufferObjects() override;
 	void UpdateSailData(physx::PxVec3 windVel);

@@ -99,6 +99,9 @@
     <ClCompile Include="src\SailMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\SailNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Camera.h">
@@ -159,6 +162,9 @@
       <Filter>Header Files\PxCallbacks</Filter>
     </ClInclude>
     <ClInclude Include="src\SailMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SailNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

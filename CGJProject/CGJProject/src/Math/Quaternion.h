@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "foundation/PxQuat.h"
 
 struct Quat
 {
@@ -49,6 +50,7 @@ struct Quat
 
 	friend const Quat Lerp(const Quat& Q1, const Quat& Q2, float alpha);
 	friend const Quat Slerp(const Quat& Q1, const Quat& Q2, float alpha);
+	friend const physx::PxQuat ToPhysxQuat(const Quat& Q);
 
 };
 

@@ -440,7 +440,7 @@ void setupMeshes()
 {
 	//MeshLoader loads all necessary meshes
 	//meshLoader->CreateMesh(std::string("../../assets/models/TableTri.obj"));
-	meshLoader->CreateSailMesh(factory, solver, 0.5f, 12, 8);
+	meshLoader->CreateSailMesh(SailProperties(), factory, solver, 0.5f, 12, 8);
 
 	//Optionally indicate mesh and shader index to use for each SceneNode
 	/*MeshData meshData[] = {
@@ -450,7 +450,7 @@ void setupMeshes()
 
 	Transform sailTransform = Transform();
 	sailTransform.Rotation = FromAngleAxis(Vec4(1.f, 0.f, 0.f, 1.f), 90.f);
-	scene->root->CreateNode(meshLoader->Meshes[0], sailTransform, shaders[2]);
+	scene->root->CreateSailNode(meshLoader->Meshes[0], sailTransform, shaders[2]);
 	//scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
 }
 

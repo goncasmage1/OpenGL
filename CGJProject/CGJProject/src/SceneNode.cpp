@@ -1,4 +1,5 @@
 #include "SceneNode.h"
+#include "SailNode.h"
 #include "Shader/ShaderProgram.h"
 
 /////////////
@@ -39,6 +40,13 @@ SceneNode::SceneNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform
 std::shared_ptr<SceneNode> SceneNode::CreateNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, std::shared_ptr<ShaderProgram> newShaderProg)
 {
 	std::shared_ptr<SceneNode> newChild = std::make_shared<SceneNode>(newMesh, newTransform, shared_from_this(), newShaderProg);
+	childNodes.push_back(newChild);
+	return newChild;
+}
+
+std::shared_ptr<class SailNode> SceneNode::CreateSailNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, std::shared_ptr<ShaderProgram> newShaderProg)
+{
+	std::shared_ptr<SailNode> newChild = std::make_shared<SailNode>(newMesh, newTransform, shared_from_this(), newShaderProg);
 	childNodes.push_back(newChild);
 	return newChild;
 }

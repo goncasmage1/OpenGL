@@ -2,6 +2,9 @@
 #include <iostream>
 #include <string.h>
 #include <math.h>
+#include "foundation/PxVec2.h"
+#include "foundation/PxVec3.h"
+#include "foundation/PxVec4.h"
 
 struct Vec2
 {
@@ -46,6 +49,7 @@ struct Vec2
 	friend const Vec2 Normalized(const Vec2& V);
 	friend const float Dot(const Vec2& V1, const Vec2& V2);
 	friend const Vec2 Lerp(const Vec2& From, const Vec2& To, float progress);
+	friend const physx::PxVec2 ToPhysxVec(const Vec2& V);
 };
 
 struct Vec3
@@ -96,6 +100,7 @@ struct Vec3
 	friend const Vec3 Cross(const Vec3& V1, const Vec3& V2);
 	friend const Vec3 RotateVector(const Vec3& V, const Vec3& a, const float degrees);
 	friend const Vec3 Lerp(const Vec3& From, const Vec3& To, float progress);
+	friend const physx::PxVec3 ToPhysxVec(const Vec3& V);
 
 };
 
@@ -146,5 +151,6 @@ struct Vec4
 	friend const float Dot(const Vec4& V1, const Vec4& V2);
 	friend struct Quat FromAngleAxis(const Vec4& axis, float degrees);
 	friend const Vec4 Lerp(const Vec4& From, const Vec4& To, float progress);
+	friend const physx::PxVec4 ToPhysxVec(const Vec4& V);
 
 };

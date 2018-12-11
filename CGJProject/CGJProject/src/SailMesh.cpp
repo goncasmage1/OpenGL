@@ -11,13 +11,11 @@
 #include "Math/Vector.h"
 #include "Math/Quaternion.h"
 
-SailMesh::SailMesh(nv::cloth::Factory* newFactory, nv::cloth::Solver* newSolver, float size, int xRepeat, int yRepeat) : QuadMesh(size, xRepeat, yRepeat)
+SailMesh::SailMesh(SailProperties newProperties, nv::cloth::Factory* newFactory, nv::cloth::Solver* newSolver, float size, int xRepeat, int yRepeat) : QuadMesh(size, xRepeat, yRepeat)
 {
 	factory = newFactory;
 	solver = newSolver;
-	gravity = physx::PxVec3(0.0f, -9.8f, 0.0f);
-	dragCoefficient = 0.5f;
-	liftCoefficient = 0.6f;
+	properties = newProperties;
 
 	triangles = Triangle::FromIndices(vertexIdx);
 
@@ -49,8 +47,6 @@ void SailMesh::SetupNvCloth()
 	meshDesc.triangles.count = (physx::PxU32)triangles.size();
 
 	for (i = 0; i < vertexData.size(); i++) inverseMasses.push_back(1.f);
-	//inverseMasses[0] = 0.f;
-	//inverseMasses[yRepeat-1] = 0.f;
 
 	meshDesc.invMasses.data = &inverseMasses[0];
 	meshDesc.invMasses.stride = sizeof(inverseMasses[0]);
@@ -75,10 +71,8 @@ void SailMesh::SetupNvCloth()
 									*fabric);
 
 	cloth->setGravity(gravity);
-	cloth->setDragCoefficient(dragCoefficient);
-	cloth->setLiftCoefficient(liftCoefficient);
-	Quat rotation = FromAngleAxis(Vec4(1.f, 0.f, 0.f, 1.f), 90.f);
-	cloth->setRotation(physx::PxQuat(rotation.x, rotation.y, rotation.z, rotation.t));
+	cloth->setDragCoefficient(properties.dragCoefficient);
+	cloth->setLiftCoefficient(properties.liftCoefficient);
 
 	nv::cloth::PhaseConfig* phases = new nv::cloth::PhaseConfig[fabric->getNumPhases()];
 	for (i = 0; i < fabric->getNumPhases(); i++)
@@ -102,10 +96,10 @@ void SailMesh::SetupNvCloth()
 		}
 
 		//For this example we give every phase the same config
-		phases[i].mStiffness = 1.0f;
-		phases[i].mStiffnessMultiplier = 1.0f;
-		phases[i].mCompressionLimit = 1.0f;
-		phases[i].mStretchLimit = 1.0f;
+		phases[i].mStiffness = properties.phaseConfig.mStiffness;
+		phases[i].mStiffnessMultiplier = properties.phaseConfig.mStiffnessMultiplier;
+		phases[i].mCompressionLimit = properties.phaseConfig.mCompressionLimit;
+		phases[i].mStretchLimit = properties.phaseConfig.mStretchLimit;
 	}
 	cloth->setPhaseConfig(nv::cloth::Range<nv::cloth::PhaseConfig>(phases, phases + fabric->getNumPhases()));
 	delete[] phases;

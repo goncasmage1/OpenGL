@@ -230,6 +230,11 @@ const Vec2 Lerp(const Vec2 & From, const Vec2 & To, float progress)
 	return (From + Difference * progress);
 }
 
+const physx::PxVec2 ToPhysxVec(const Vec2 & V)
+{
+	return physx::PxVec2(V.x, V.y);
+}
+
 /////////
 // Vec3
 /////////
@@ -496,6 +501,11 @@ const Vec3 Lerp(const Vec3 & From, const Vec3 & To, float progress)
 	Vec3 Difference = To - From;
 
 	return (From + Difference * progress);
+}
+
+const physx::PxVec3 ToPhysxVec(const Vec3 & V)
+{
+	return physx::PxVec3(V.x, V.y, V.z);
 }
 
 
@@ -775,4 +785,9 @@ const Vec4 Lerp(const Vec4 & From, const Vec4 & To, float progress)
 	Vec4 Difference = To - From;
 
 	return (From + Difference * progress);
+}
+
+const physx::PxVec4 ToPhysxVec(const Vec4 & V)
+{
+	return physx::PxVec4(V.x, V.y, V.z, V.w);
 }
