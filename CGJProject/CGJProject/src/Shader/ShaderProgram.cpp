@@ -84,5 +84,3 @@ void ShaderProgram::Destroy()
 	glUseProgram(0);
 	glDeleteProgram(ProgramId);
 }
-
-

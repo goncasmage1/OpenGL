@@ -22,10 +22,12 @@
 #include "Mesh.h"
 #include "Scene.h"
 #include "SceneNode.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "Texture.h"
 
 #define CAPTION "Hello Modern 2D World"
 
-int WinX = 1600, WinY = 900;
+int WinX = 1920, WinY = 1080;
 int WindowHandle = 0;
 unsigned int FrameCount = 0;
 float animationProgress = 0.f;
@@ -38,6 +40,7 @@ struct MeshData
 	int ShaderIndex = 0;
 };
 
+std::vector<std::shared_ptr<Texture>> textures = std::vector<std::shared_ptr<Texture>>();
 std::shared_ptr<Input> input = std::make_shared<Input>();
 std::shared_ptr<Camera> camera = std::make_shared<Camera>(WinX, WinY, 90);
 std::shared_ptr<MeshLoader> meshLoader = std::make_shared<MeshLoader>();
@@ -131,6 +134,12 @@ static void checkOpenGLError(std::string error)
 }
 
 /////////////////////////////////////////////////////////////////////// SHADERs
+
+void loadTextures() {
+	Texture testTexture = Texture("C:/Users/pedro/Desktop/test.jpg");
+	testTexture.LoadTexture();
+	textures.push_back(std::make_shared<Texture>(testTexture));
+}
 
 void createShaderProgram()
 {
@@ -379,6 +388,7 @@ void init(int argc, char* argv[])
 	setupGLEW();
 	setupOpenGL();
 	setupCallbacks();
+	loadTextures();
 	createShaderProgram();
 	scene = std::make_shared<Scene>(camera);
 	setupMeshes();
