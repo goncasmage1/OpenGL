@@ -1,5 +1,6 @@
 #include "Mesh.h"
 #include "Math/Vector.h"
+#include "Texture.h"
 
 #define VERTICES 0
 #define TEXCOORDS 1
@@ -61,6 +62,9 @@ void Mesh::DestroyBufferObjects()
 
 void Mesh::Draw()
 {
+	Texture test = Texture("C:/Users/pedro/Desktop/test.jpg");
+	test.LoadTexture();
+	test.UseTexture();
 	glBindVertexArray(VAO);
 	GLuint size = (GLuint)Vertices.size();
 	if (VerticesPerFace == 3) glDrawArrays(GL_TRIANGLES, 0, size);
