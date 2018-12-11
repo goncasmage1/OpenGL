@@ -138,13 +138,14 @@ static void checkOpenGLError(std::string error)
 void loadTextures() {
 	Texture testTexture = Texture("C:/Users/pedro/Desktop/test.jpg");
 	testTexture.LoadTexture();
+	//testTexture.UseTexture();
 	textures.push_back(std::make_shared<Texture>(testTexture));
 }
 
 void createShaderProgram()
 {
 	//Instantiate specific ShaderProgram class
-	shaders.push_back(std::make_shared<ShaderProgram>());
+	//shaders.push_back(std::make_shared<ShaderProgram>());
 
 	//or send attributes explicitly
 	shaders.push_back(std::make_shared<ShaderProgram>(
@@ -159,9 +160,9 @@ void createShaderProgram()
 	}
 	));
 
-	shaders.push_back(std::make_shared<SailShader>());
-	shaders.push_back(std::make_shared<WaterShader>());
-	shaders.push_back(std::make_shared<WoodShader>());
+	//shaders.push_back(std::make_shared<SailShader>());
+	//shaders.push_back(std::make_shared<WaterShader>());
+	//shaders.push_back(std::make_shared<WoodShader>());
 
 	checkOpenGLError("ERROR: Could not create shaders.");
 }
@@ -369,7 +370,7 @@ void setupGLUT(int argc, char* argv[])
 void setupMeshes()
 {
 	//MeshLoader loads all necessary meshes
-	meshLoader->CreateMesh(std::string("../../assets/models/TableTri.obj"));
+	meshLoader->CreateMesh(std::string("../../assets/models/Solid Snake.obj"));
 	meshLoader->CreateQuadMesh(1.f, 6, 4);
 
 	//Optionally indicate mesh and shader index to use for each SceneNode
@@ -378,8 +379,8 @@ void setupMeshes()
 		{2, 1},
 	};*/
 
-	scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[1]);
-	scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
+	scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[0]);
+	//scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
 }
 
 void init(int argc, char* argv[])
@@ -388,11 +389,11 @@ void init(int argc, char* argv[])
 	setupGLEW();
 	setupOpenGL();
 	setupCallbacks();
-	loadTextures();
 	createShaderProgram();
 	scene = std::make_shared<Scene>(camera);
 	setupMeshes();
 	createBufferObjects();
+	loadTextures();
 	begin = std::chrono::steady_clock::now();
 }
 
