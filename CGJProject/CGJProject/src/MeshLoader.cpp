@@ -43,7 +43,7 @@ void MeshLoader::ParseFace(std::stringstream& sin)
 	for (int i = 0; i < TempMeshRef->VerticesPerFace; i++)
 	{
 		std::getline(sin, token, '/');
-		if (token.size() > 0) TempMeshRef->vertexIdx.push_back(std::stoi(token));
+		if (token.size() > 0) TempMeshRef->vertexIdx.push_back((GLuint)std::stoi(token));
 		std::getline(sin, token, '/');
 		if (token.size() > 0) TempMeshRef->texcoordIdx.push_back(std::stoi(token));
 		std::getline(sin, token, ' ');
@@ -109,7 +109,6 @@ void MeshLoader::FreeMeshData()
 
 std::shared_ptr<Mesh> MeshLoader::CreateMesh(const std::string& filename)
 {
-	//TODO: 
 	std::shared_ptr<Mesh> LoadedMesh = std::make_shared<Mesh>();
 	TempMeshRef = LoadedMesh;
 	Meshes.push_back(LoadedMesh);

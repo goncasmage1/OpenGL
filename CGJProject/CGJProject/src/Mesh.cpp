@@ -23,11 +23,11 @@ void Mesh::CreateBufferObjects()
 			{
 				glBufferData(GL_ARRAY_BUFFER, vertexData.size() * sizeof(Vec3), &vertexData[0], GL_STATIC_DRAW);
 				glEnableVertexAttribArray(VERTICES);
-				glVertexAttribPointer(VERTICES, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
+				glVertexAttribPointer(VERTICES, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), (GLvoid*)0);
 			}
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VboVertices[1]);
 			{
-				glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vertexIdx), &vertexIdx[0], GL_STATIC_DRAW);
+				glBufferData(GL_ELEMENT_ARRAY_BUFFER, vertexIdx.size() * sizeof(GLuint), &vertexIdx[0], GL_STATIC_DRAW);
 			}
 
 			if (TexcoordsLoaded)
@@ -72,10 +72,7 @@ void Mesh::Draw()
 	glBindVertexArray(VAO);
 	GLuint size = (GLuint)vertexIdx.size();
 	//if (VerticesPerFace == 3) glDrawArrays(GL_TRIANGLES, 0, size);
-	for (size_t i = 0; i < size/3; i += 3)
-	{
-		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, &vertexIdx[i]);
-	}
+	if (VerticesPerFace == 3) glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, nullptr);
 	/*else if (VerticesPerFace == 4)
 	{
 		for (int i = 0; i < size/4; i++)
