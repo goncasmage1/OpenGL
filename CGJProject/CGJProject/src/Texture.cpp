@@ -1,7 +1,10 @@
 #include "Texture.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 Texture::Texture()
 {
+	isLoaded = false;
 	textureID = 0;
 	WIDTH = 0;
 	HEIGHT = 0;
@@ -15,10 +18,10 @@ Texture::Texture(std::string fileLoc) {
 	HEIGHT = 0;
 	BitDepth = 0;
 	fileLocation = fileLoc;
+	image = stbi_load(fileLocation.c_str(), &WIDTH, &HEIGHT, &BitDepth, 0);
 }
 
 void Texture::LoadTexture() {
-	unsigned char *image = stbi_load(fileLocation.c_str(), &WIDTH, &HEIGHT, &BitDepth, 0);
 
 	if (image == NULL) {
 		printf("Failed to find: %s\n", fileLocation);
@@ -39,7 +42,7 @@ void Texture::LoadTexture() {
 	stbi_image_free(image);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
-
+	isLoaded = true;
 }
 
 void Texture::UseTexture() {
@@ -54,6 +57,7 @@ void Texture::ClearTexture() {
 	HEIGHT = 0;
 	BitDepth = 0;
 	fileLocation = '\0';
+	isLoaded = false;
 }
 
 Texture::~Texture()

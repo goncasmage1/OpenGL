@@ -6,6 +6,7 @@
 #include <vector>
 #include <chrono>
 #include <cassert>
+#include <map>
 
 #include "GL/glew.h"
 #include "GL/freeglut.h"
@@ -136,10 +137,8 @@ static void checkOpenGLError(std::string error)
 /////////////////////////////////////////////////////////////////////// SHADERs
 
 void loadTextures() {
-	Texture testTexture = Texture("C:/Users/pedro/Desktop/test.jpg");
-	testTexture.LoadTexture();
-	//testTexture.UseTexture();
-	textures.push_back(std::make_shared<Texture>(testTexture));
+	Texture test = Texture("C:/Users/pedro/Desktop/test.jpg");
+	textures.push_back(std::make_shared<Texture>(test));
 }
 
 void createShaderProgram()
@@ -379,7 +378,7 @@ void setupMeshes()
 		{2, 1},
 	};*/
 
-	scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[0]);
+	scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[0])->setTexture(textures.at(0));
 	//scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
 }
 
@@ -391,9 +390,9 @@ void init(int argc, char* argv[])
 	setupCallbacks();
 	createShaderProgram();
 	scene = std::make_shared<Scene>(camera);
+	loadTextures();
 	setupMeshes();
 	createBufferObjects();
-	loadTextures();
 	begin = std::chrono::steady_clock::now();
 }
 

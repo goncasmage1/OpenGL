@@ -6,6 +6,7 @@
 #include "Math/Quaternion.h"
 #include "Math/Matrix.h"
 #include "Mesh.h"
+#include "Texture.h"
 
 struct Transform
 {
@@ -32,6 +33,7 @@ protected:
 	std::shared_ptr<class Mesh> mesh;
 	std::shared_ptr<SceneNode> parent = nullptr;
 	std::shared_ptr<class ShaderProgram> shaderProg = nullptr;
+	std::shared_ptr<class Texture> texture;
 
 public:
 
@@ -44,6 +46,7 @@ public:
 
 	std::shared_ptr<SceneNode> CreateNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, std::shared_ptr<ShaderProgram> newShaderProg);
 
+	void setTexture(std::shared_ptr<Texture> newTexture);
 	void UpdateTransformationMatrix();
 	void Draw();
 	virtual void SetupUniforms();

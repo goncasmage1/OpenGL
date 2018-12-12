@@ -55,12 +55,20 @@ void SceneNode::UpdateTransformationMatrix()
 	}
 }
 
+void SceneNode::setTexture(std::shared_ptr<Texture> newTexture) {
+	this->texture = newTexture;
+}
+
 void SceneNode::Draw()
 {
 	if (shaderProg != nullptr && mesh != nullptr)
 	{
 		shaderProg->Use();
 		SetupUniforms();
+		if (texture != nullptr && !texture->isLoaded){
+			texture->LoadTexture();
+		}
+		texture->UseTexture();
 		mesh->Draw();
 	}
 
