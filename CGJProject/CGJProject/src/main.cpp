@@ -440,7 +440,12 @@ void setupMeshes()
 {
 	//MeshLoader loads all necessary meshes
 	//meshLoader->CreateMesh(std::string("../../assets/models/TableTri.obj"));
-	meshLoader->CreateSailMesh(SailProperties(), factory, solver, 0.5f, 12, 8);
+	SailProperties properties = SailProperties();
+	properties.liftCoefficient = 0.7f;
+	properties.dragCoefficient = 0.7f;
+	properties.gravity = physx::PxVec3(0.f, 1.f, 0.f);
+	properties.damping = 0.2f;
+	meshLoader->CreateSailMesh(properties, factory, solver, 0.3f, 30, 20);
 
 	//Optionally indicate mesh and shader index to use for each SceneNode
 	/*MeshData meshData[] = {

@@ -15,6 +15,9 @@ struct SailProperties
 	physx::PxVec3 gravity = physx::PxVec3(0.0f, -9.8f, 0.0f);
 	float dragCoefficient = 0.5f;
 	float liftCoefficient = 0.6f;
+	float damping = 0.5f;
+	float tetherConstraintStiffness = 0.2f;
+	float tetherConstraintScale = 1.1f;
 
 	nv::cloth::PhaseConfig phaseConfig = nv::cloth::PhaseConfig();
 };

@@ -73,6 +73,9 @@ void SailMesh::SetupNvCloth()
 	cloth->setGravity(gravity);
 	cloth->setDragCoefficient(properties.dragCoefficient);
 	cloth->setLiftCoefficient(properties.liftCoefficient);
+	cloth->setDamping(physx::PxVec3(properties.damping));
+	cloth->setTetherConstraintStiffness(properties.tetherConstraintStiffness);
+	cloth->setTetherConstraintScale(properties.tetherConstraintScale);
 
 	nv::cloth::PhaseConfig* phases = new nv::cloth::PhaseConfig[fabric->getNumPhases()];
 	for (i = 0; i < fabric->getNumPhases(); i++)
