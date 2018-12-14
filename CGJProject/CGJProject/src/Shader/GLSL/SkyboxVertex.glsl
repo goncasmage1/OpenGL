@@ -12,6 +12,6 @@ uniform SharedMatrices
 
 void main()
 {
-	gl_Position = ProjectionMatrix * ViewMatrix * position;
+	gl_Position = ProjectionMatrix * mat4(mat3(ViewMatrix)) * position;
 	TexCoords = vec3(position);
 }

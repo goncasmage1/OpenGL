@@ -406,7 +406,7 @@ void setupMeshes()
 		{2, 1},
 	};*/
 
-	scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[0])->setTexture(textures.at(0));
+	scene->root->CreateNode(meshLoader->Meshes[0], Transform(Vec3(0.f), Quat(), Vec3(0.5f)), shaders[0])->setTexture(textures.at(0));
 	//scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[1]);
 }
 
