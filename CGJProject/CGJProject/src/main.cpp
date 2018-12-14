@@ -23,6 +23,7 @@
 #include "Mesh.h"
 #include "Scene.h"
 #include "SceneNode.h"
+#include "Skybox.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "Texture.h"
 
@@ -41,6 +42,7 @@ struct MeshData
 	int ShaderIndex = 0;
 };
 
+Skybox box;
 std::vector<std::shared_ptr<Texture>> textures = std::vector<std::shared_ptr<Texture>>();
 std::shared_ptr<Input> input = std::make_shared<Input>();
 std::shared_ptr<Camera> camera = std::make_shared<Camera>(WinX, WinY, 90);
@@ -136,6 +138,37 @@ static void checkOpenGLError(std::string error)
 
 /////////////////////////////////////////////////////////////////////// SHADERs
 
+void DrawSkyBox() {
+	std::vector<std::string> texturePaths = {
+		"C:/Users/pedro/Desktop/sor_sea/sea_rt.JPG",
+		"C:/Users/pedro/Desktop/sor_sea/sea_lf.JPG",
+		"C:/Users/pedro/Desktop/sor_sea/sea_up.JPG",
+		"C:/Users/pedro/Desktop/sor_sea/sea_dn.JPG",
+		"C:/Users/pedro/Desktop/sor_sea/sea_bk.JPG",
+		"C:/Users/pedro/Desktop/sor_sea/sea_ft.JPG"
+	};
+	box = Skybox();
+
+	//Loading Skybox Textures into Skybox (Respect This Order for now)
+	Texture sky_pos_x = Texture("C:/Users/pedro/Desktop/sor_sea/sea_rt.JPG");
+	box.textures.push_back(std::make_shared<Texture>(sky_pos_x));
+	Texture sky_neg_x = Texture("C:/Users/pedro/Desktop/sor_sea/sea_lf.JPG");
+	box.textures.push_back(std::make_shared<Texture>(sky_neg_x));
+	Texture sky_pos_y = Texture("C:/Users/pedro/Desktop/sor_sea/sea_up.JPG");
+	box.textures.push_back(std::make_shared<Texture>(sky_pos_y));
+	Texture sky_neg_y = Texture("C:/Users/pedro/Desktop/sor_sea/sea_dn.JPG");
+	box.textures.push_back(std::make_shared<Texture>(sky_neg_y));
+	Texture sky_pos_z = Texture("C:/Users/pedro/Desktop/sor_sea/sea_bk.JPG");
+	box.textures.push_back(std::make_shared<Texture>(sky_pos_z));
+	Texture sky_neg_z = Texture("C:/Users/pedro/Desktop/sor_sea/sea_ft.JPG");
+	box.textures.push_back(std::make_shared<Texture>(sky_neg_z));
+	box.Use();
+	box.cube = meshLoader->Meshes[1];
+	box.shaderProg = shaders[1];
+	box.transformationMatrix = Transform().TransformationMat;
+	box.Draw();
+}
+
 void loadTextures() {
 	Texture test = Texture("C:/Users/pedro/Desktop/test.jpg");
 	textures.push_back(std::make_shared<Texture>(test));
@@ -156,6 +189,17 @@ void createShaderProgram()
 	std::vector<std::string>{
 		"src/Shader/GLSL/BrownShader.glsl",
 		"src/Shader/GLSL/FragmentShader.glsl"
+	}
+	));
+
+	//Skybox Shaders
+	shaders.push_back(std::make_shared<ShaderProgram>(
+		std::vector<ShaderAttribute>{
+		ShaderAttribute(0, "in_Position")
+	},
+	std::vector<std::string>{
+		"src/Shader/GLSL/SkyboxVertex.glsl",
+		"src/Shader/GLSL/SkyboxFragment.glsl"
 	}
 	));
 
@@ -195,6 +239,7 @@ void destroyBufferObjects()
 
 void drawScene()
 {
+	box.Draw();
 	scene->Draw();
 
 	checkOpenGLError("ERROR: Could not draw scene.");
@@ -370,6 +415,7 @@ void setupMeshes()
 {
 	//MeshLoader loads all necessary meshes
 	meshLoader->CreateMesh(std::string("../../assets/models/Solid Snake.obj"));
+	meshLoader->CreateMesh(std::string("../../assets/models/skybox.obj"));
 	meshLoader->CreateQuadMesh(1.f, 6, 4);
 
 	//Optionally indicate mesh and shader index to use for each SceneNode
@@ -379,7 +425,7 @@ void setupMeshes()
 	};*/
 
 	scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[0])->setTexture(textures.at(0));
-	//scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
+	//scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[1]);
 }
 
 void init(int argc, char* argv[])
@@ -393,6 +439,7 @@ void init(int argc, char* argv[])
 	loadTextures();
 	setupMeshes();
 	createBufferObjects();
+	DrawSkyBox();
 	begin = std::chrono::steady_clock::now();
 }
 

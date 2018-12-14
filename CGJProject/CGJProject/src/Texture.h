@@ -11,6 +11,8 @@ public:
 	Texture();
 	Texture(std::string fileLoc);
 
+	unsigned char *image;
+	int WIDTH, HEIGHT, BitDepth;
 	bool isLoaded;
 
 	void LoadTexture();
@@ -19,8 +21,6 @@ public:
 
 	~Texture();
 private:
-	unsigned char *image;
 	GLuint textureID;
-	int WIDTH, HEIGHT, BitDepth;
 	std::string fileLocation;
 };

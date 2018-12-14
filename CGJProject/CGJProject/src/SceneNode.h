@@ -12,13 +12,15 @@ struct Transform
 {
 private:
 
-	Mat4 TransformationMat;
+	/*Mat4 TransformationMat;*/
 
 public:
 
 	Transform();
 	Transform(const Vec3& Pos, const Quat& Rot, const Vec3& Scl);
 	friend const Transform Lerp(const Transform& From, const Transform& To, float progress);
+
+	Mat4 TransformationMat;
 
 	struct Vec3 Position;
 	struct Quat Rotation;

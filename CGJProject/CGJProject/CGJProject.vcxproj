@@ -146,6 +146,7 @@
     <ClCompile Include="src\Shader\ShaderProgram.cpp" />
     <ClCompile Include="src\Shader\WaterShader.cpp" />
     <ClCompile Include="src\Shader\WoodShader.cpp" />
+    <ClCompile Include="src\Skybox.cpp" />
     <ClCompile Include="src\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +165,7 @@
     <ClInclude Include="src\Shader\ShaderProgram.h" />
     <ClInclude Include="src\Shader\WaterShader.h" />
     <ClInclude Include="src\Shader\WoodShader.h" />
+    <ClInclude Include="src\Skybox.h" />
     <ClInclude Include="src\stb_image.h" />
     <ClInclude Include="src\Texture.h" />
   </ItemGroup>
@@ -172,6 +174,8 @@
     <None Include="src\Shader\GLSL\FragmentShader.glsl" />
     <None Include="src\Shader\GLSL\SailFragmentShader.glsl" />
     <None Include="src\Shader\GLSL\SailVertexShader.glsl" />
+    <None Include="src\Shader\GLSL\SkyboxFragment.glsl" />
+    <None Include="src\Shader\GLSL\SkyboxVertex.glsl" />
     <None Include="src\Shader\GLSL\WaterFragmentShader.glsl" />
     <None Include="src\Shader\GLSL\WaterVertexShader.glsl" />
     <None Include="src\Shader\GLSL\WhiteShader.glsl" />

@@ -8,9 +8,10 @@ class Mesh
 
 protected:
 
-	GLuint VAO, VBO;
+	//GLuint VAO, VBO;
 
 public:
+	GLuint VAO, VBO;
 
 	int VerticesPerFace = 0;
 	bool TexcoordsLoaded, NormalsLoaded;
