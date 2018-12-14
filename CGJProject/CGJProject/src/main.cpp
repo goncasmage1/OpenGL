@@ -140,37 +140,19 @@ static void checkOpenGLError(std::string error)
 
 void DrawSkyBox() {
 	std::vector<std::string> texturePaths = {
-		"C:/Users/pedro/Desktop/sor_sea/sea_rt.JPG",
-		"C:/Users/pedro/Desktop/sor_sea/sea_lf.JPG",
-		"C:/Users/pedro/Desktop/sor_sea/sea_up.JPG",
-		"C:/Users/pedro/Desktop/sor_sea/sea_dn.JPG",
-		"C:/Users/pedro/Desktop/sor_sea/sea_bk.JPG",
-		"C:/Users/pedro/Desktop/sor_sea/sea_ft.JPG"
+		"src/Textures/sea_rt.JPG",
+		"src/Textures/sea_lf.JPG",
+		"src/Textures/sea_up.JPG",
+		"src/Textures/sea_dn.JPG",
+		"src/Textures/sea_bk.JPG",
+		"src/Textures/sea_ft.JPG"
 	};
-	box = Skybox();
 
-	//Loading Skybox Textures into Skybox (Respect This Order for now)
-	Texture sky_pos_x = Texture("C:/Users/pedro/Desktop/sor_sea/sea_rt.JPG");
-	box.textures.push_back(std::make_shared<Texture>(sky_pos_x));
-	Texture sky_neg_x = Texture("C:/Users/pedro/Desktop/sor_sea/sea_lf.JPG");
-	box.textures.push_back(std::make_shared<Texture>(sky_neg_x));
-	Texture sky_pos_y = Texture("C:/Users/pedro/Desktop/sor_sea/sea_up.JPG");
-	box.textures.push_back(std::make_shared<Texture>(sky_pos_y));
-	Texture sky_neg_y = Texture("C:/Users/pedro/Desktop/sor_sea/sea_dn.JPG");
-	box.textures.push_back(std::make_shared<Texture>(sky_neg_y));
-	Texture sky_pos_z = Texture("C:/Users/pedro/Desktop/sor_sea/sea_bk.JPG");
-	box.textures.push_back(std::make_shared<Texture>(sky_pos_z));
-	Texture sky_neg_z = Texture("C:/Users/pedro/Desktop/sor_sea/sea_ft.JPG");
-	box.textures.push_back(std::make_shared<Texture>(sky_neg_z));
-	box.Use();
-	box.cube = meshLoader->Meshes[1];
-	box.shaderProg = shaders[1];
-	box.transformationMatrix = Transform().TransformationMat;
-	box.Draw();
+	box = Skybox(texturePaths, meshLoader->Meshes[1], shaders[1], Transform().TransformationMat);
 }
 
 void loadTextures() {
-	Texture test = Texture("C:/Users/pedro/Desktop/test.jpg");
+	Texture test = Texture("src/Textures/test.jpg");
 	textures.push_back(std::make_shared<Texture>(test));
 }
 

@@ -5,7 +5,16 @@ Skybox::Skybox()
 
 }
 
-void Skybox::Use() {
+Skybox::Skybox(std::vector<std::string> filePaths, std::shared_ptr<Mesh> cube, std::shared_ptr<ShaderProgram> shaderProg, Mat4 matrix) {
+
+	this->cube = cube;
+	this->shaderProg = shaderProg;
+	this->transformationMatrix = matrix;
+
+	for (int i = 0; i < filePaths.size(); i++) {
+		textures.push_back(std::make_shared<Texture>(Texture(filePaths[i])));
+	}
+
 	glGenTextures(1, &TextureId);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, TextureId);
 
