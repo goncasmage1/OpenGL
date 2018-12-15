@@ -39,6 +39,7 @@ int WinX = 1600, WinY = 900;
 int WindowHandle = 0;
 unsigned int FrameCount = 0;
 float animationProgress = 0.f;
+physx::PxVec3 windVelocity = physx::PxVec3(6.0f, 0.f, 0.f);
 
 float fpsInterval = 1000.f / 60.f;
 auto begin = std::chrono::steady_clock::now();
@@ -277,7 +278,8 @@ void processCloth()
 	}
 	solver->endSimulation();
 
-	physx::PxVec3 windVelocity(6.0f, 0.0f, 0.0f);
+	physx::PxVec3 newWind = windVelocity + (windVelocity.getNormalized() * input->GetWindDelta());
+	if (newWind.magnitude() > 0.1f) windVelocity += (windVelocity.getNormalized() * input->GetWindDelta());
 	meshLoader->UpdateSailData(windVelocity);
 }
 

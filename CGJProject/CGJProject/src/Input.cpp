@@ -26,6 +26,12 @@ void Input::keyboardButtontDown(unsigned char Key)
 		case 'q':
 			movement.y -= 1.f;
 			break;
+		case 'x':
+			windAxis += 1.f;
+			break;
+		case 'z':
+			windAxis -= 1.f;
+			break;
 		case 27:
 			exit(1);
 			break;
@@ -54,6 +60,11 @@ void Input::keyboardButtonUp(unsigned char Key)
 		case 'q':
 			movement.y += 1.f;
 			break;
+		case 'x':
+			windAxis -= 1.f;
+			break;
+		case 'z':
+			windAxis += 1.f;
 	};
 }
 

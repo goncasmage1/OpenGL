@@ -7,6 +7,8 @@ class Input
 protected:
 
 	struct Vec3 movement = Vec3(0.f);
+	float windAxis = 0.f;
+	float windSensitivity = 0.05f;
 	int wheelDirection = 0;
 	int AnimationDirection = 0;
 
@@ -37,6 +39,7 @@ public:
 	struct Vec2 GetMouseDelta();
 	struct Vec3 GetMovement() { return movement * MoveSensitivity; }
 	float GetWheelDelta();
+	float GetWindDelta() const { return windAxis * windSensitivity; }
 	bool IsMiddleMouseButtonDown() const { return bMiddleMouseButtonDown; }
 	bool IsPDown() const { return bPDown; }
 	bool IsGDown() const { return bGDown; }
