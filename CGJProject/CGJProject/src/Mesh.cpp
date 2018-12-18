@@ -10,8 +10,6 @@ void Mesh::CreateBufferObjects()
 	GLuint VboVertices[2];
 	GLuint VboTexcoords, VboNormals;
 
-	for (size_t i = 0; i < vertexIdx.size(); i++) vertexIndices.push_back(vertexIdx[i] - 1);
-
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 	{
@@ -29,7 +27,7 @@ void Mesh::CreateBufferObjects()
 			}
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VboVertices[1]);
 			{
-				glBufferData(GL_ELEMENT_ARRAY_BUFFER, vertexIndices.size() * sizeof(GLuint), &vertexIndices[0], GL_STATIC_DRAW);
+				glBufferData(GL_ELEMENT_ARRAY_BUFFER, vertexIdx.size() * sizeof(GLuint), &vertexIdx[0], GL_STATIC_DRAW);
 			}
 
 			if (TexcoordsLoaded)
@@ -72,7 +70,7 @@ void Mesh::DestroyBufferObjects()
 void Mesh::Draw()
 {
 	glBindVertexArray(VAO);
-	GLuint size = (GLuint)vertexIndices.size();
+	GLuint size = (GLuint)vertexIdx.size();
 	if (VerticesPerFace == 3) glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, nullptr);
 	/*else if (VerticesPerFace == 4)
 	{
