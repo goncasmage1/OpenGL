@@ -18,6 +18,8 @@ public:
 	std::vector<struct Vec2> Texcoords, texcoordData;
 	std::vector<GLuint> vertexIdx, texcoordIdx, normalIdx;
 
+	std::vector<GLuint> vertexIndices;
+
 	virtual void CreateBufferObjects();
 	virtual void DestroyBufferObjects();
 	void Draw();
