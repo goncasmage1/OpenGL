@@ -115,17 +115,20 @@ void SailMesh::UpdateSailData(physx::PxVec3 windVel)
 {
 	cloth->setWindVelocity(windVel);
 	nv::cloth::MappedRange<physx::PxVec4> newParticles = cloth->getCurrentParticles();
-	for (size_t i = 0; i < vertexIdx.size(); i++)
+	for (size_t i = 0; i < vertexData.size(); i++)
 	{
-		physx::PxVec4 newParticle = newParticles[vertexIdx[i]];
-		Vertices[i] = Vec3(newParticle.x, newParticle.y, newParticle.z);
+		physx::PxVec4 newParticle = newParticles[i];
+		vertexData[i].x = newParticles[i].x;
+		vertexData[i].y = newParticles[i].y;
+		vertexData[i].z = newParticles[i].z;
 	}
 	UpdateBuffers();
 }
 
 void SailMesh::UpdateBuffers()
 {
-	glBindBuffer(GL_ARRAY_BUFFER, VboVertices);
-	glBufferData(GL_ARRAY_BUFFER, Vertices.size() * sizeof(Vec3), &Vertices[0], GL_STATIC_DRAW);
+	//glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VboVertices[0]);
+	glBufferData(GL_ARRAY_BUFFER, vertexData.size() * sizeof(Vec3), &vertexData[0], GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

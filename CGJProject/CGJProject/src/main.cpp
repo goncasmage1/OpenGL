@@ -271,7 +271,7 @@ void processCloth()
 {
 	//TODO: Fix
 	float deltaTime = std::chrono::duration<float>(std::chrono::steady_clock::now() - begin).count() * 1000.f;
-	solver->beginSimulation(1.f/60.f);
+	solver->beginSimulation(1.f/30.f);
 	for (int i = 0; i < solver->getSimulationChunkCount(); i++)
 	{
 		solver->simulateChunk(i);
