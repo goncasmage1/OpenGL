@@ -11,11 +11,11 @@ Scene::Scene(std::shared_ptr<Camera> newCamera) :
 {
 }
 
-void Scene::Draw()
+void Scene::Draw(Vec4 plane)
 {
 	for (std::shared_ptr<SceneNode> node : root->childNodes)
 	{
-		node->Draw();
+		node->Draw(plane);
 	}
 }
 

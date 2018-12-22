@@ -40,12 +40,13 @@ public:
 
 	std::vector<std::shared_ptr<SceneNode>> childNodes;
 
+	SceneNode() {}
 	SceneNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, std::shared_ptr<SceneNode> newParent, std::shared_ptr<class ShaderProgram> newShaderProg);
 
 	std::shared_ptr<SceneNode> CreateNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, std::shared_ptr<ShaderProgram> newShaderProg);
 
 	void UpdateTransformationMatrix();
-	void Draw();
+	void Draw(Vec4 plane);
 	virtual void SetupUniforms();
 
 };

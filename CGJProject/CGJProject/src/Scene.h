@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include "Math/Vector.h"
 
 class Scene
 {
@@ -14,6 +15,6 @@ public:
 
 	std::shared_ptr<class SceneNode> root = nullptr;
 
-	void Draw();
+	void Draw(Vec4 plane);
 };
 

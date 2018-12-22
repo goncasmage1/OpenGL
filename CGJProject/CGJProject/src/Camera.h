@@ -5,6 +5,7 @@
 #include "Math/Vector.h"
 #include "Math/Matrix.h"
 #include "Math/Quaternion.h"
+#include <vector>
 
 class Camera
 {
@@ -49,5 +50,12 @@ public:
 	void RotateCamera(Vec2 rotation);
 	void Zoom(float amount);
 
+	Vec3 GetDirection();
+	Vec3 GetUp();
+	Vec3 GetOffset();
+	Mat4 GetModelMat();
+	std::vector<Vec3> FlipView();
+	void UnflipView(std::vector<Vec3> preSettings);
+	void SetModelMat(Mat4 mat);
 };
 

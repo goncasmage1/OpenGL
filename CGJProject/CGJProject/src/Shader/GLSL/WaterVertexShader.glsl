@@ -3,7 +3,11 @@
 in vec4 in_Position;
 in vec2 in_Coordinates;
 in vec3 in_Normal;
-out vec4 ex_Color;
+
+out vec4 clipSpace;
+out vec3 toCameraVector;
+
+uniform vec3 cameraPos;
 
 uniform mat4 ModelMatrix;
 uniform vec4 VertColor;
@@ -13,8 +17,12 @@ uniform SharedMatrices
 	mat4 ProjectionMatrix;
 };
 
+
 void main(void)
 {
-	gl_Position = ProjectionMatrix * ViewMatrix * ModelMatrix * in_Position;
-	ex_Color = vec4(0.6, 0.4, 0.0, 1.0);
+	vec4 worldPosition =   ModelMatrix * vec4(in_Position.x, 0.0, in_Position.z, 1.0);
+	//vec4 worldPosition =   ModelMatrix * in_Position;
+	clipSpace = ProjectionMatrix *  ViewMatrix * worldPosition;
+	gl_Position = clipSpace;
+	toCameraVector = cameraPos - worldPosition.xyz;
 }

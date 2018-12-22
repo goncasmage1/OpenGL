@@ -6,17 +6,20 @@
 #include "GL/glew.h"
 #include "GL/freeglut.h"
 
+#include "../Math/Vector.h"
+
 struct ShaderAttribute
 {
 	ShaderAttribute(int newIndex, const GLchar* newName);
 	int index;
 	const GLchar* name;
+
 };
 
 class ShaderProgram
 {
 protected:
-
+	Vec4 plane;
 	GLuint ProgramId;
 	const GLuint UBO_BP = 0;
 
@@ -35,5 +38,6 @@ public:
 
 	virtual void Use();
 
+	void SetPlane(Vec4 plane) { this->plane = plane; }
 	void Destroy();
 };
