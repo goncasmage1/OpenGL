@@ -165,6 +165,24 @@ void createShaderProgram()
 	shaders.push_back(std::make_shared<WaterShader>());
 	shaders.push_back(std::make_shared<WoodShader>());
 
+	std::shared_ptr<SkyboxShader> skyboxShader = std::make_shared<SkyboxShader>();
+	std::vector<const char*> faces = {
+		"../../assets/Textures/sea/right.jpg",
+		"../../assets/Textures/sea/left.jpg",
+		"../../assets/Textures/sea/top.jpg",
+		"../../assets/Textures/sea/bottom.jpg",
+		"../../assets/Textures/sea/back.jpg",
+		"../../assets/Textures/sea/front.jpg"
+	};
+
+	skyboxShader->LoadCubeMap(faces);
+	shaders.push_back(skyboxShader);
+
+	//Texture 
+	std::shared_ptr<TextureShader> NarutoShader = std::make_shared<TextureShader>();
+	NarutoShader->SetTexture("../../assets/Textures/naruto_kun.png");
+	shaders.push_back(NarutoShader);
+
 	checkOpenGLError("ERROR: Could not create shaders.");
 	/*
 	//RTT Reflection
@@ -445,6 +463,10 @@ void setupGLUT(int argc, char* argv[])
 
 void setupMeshes()
 {
+
+	meshLoader->CreateMesh(std::string("../../assets/models/skybox.obj"));
+
+	scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[5]);
 	//MeshLoader loads all necessary meshes
 	/*meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/skybox.obj"));
@@ -456,7 +478,7 @@ void setupMeshes()
 	//refraction check
 	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));*/
 
-	meshLoader->CreateMesh(std::string("../../assets/models/TableTri.obj"));
+	meshLoader->CreateMesh(std::string("../../assets/models/cube.obj"));
 	//meshLoader->CreateQuadMesh(1.f, 6, 4);
 
 
@@ -480,7 +502,7 @@ void setupMeshes()
 	
 	//Water
 	scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, 0.0, 0.0), Quat(), Vec3(2.0f, 2.0f, 2.0f)), shaders[2]);*/
-	scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[1]);
+	scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[6]);
 	//scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
 }
 

@@ -20,6 +20,6 @@ void main(void)
 {
 	vec4 worldPosition = ModelMatrix * in_Position;
 	gl_Position = ProjectionMatrix * ViewMatrix * worldPosition;
-	gl_ClipDistance[0] = dot(worldPosition, plane);
+	//gl_ClipDistance[0] = dot(worldPosition, plane);
 	ex_textCoord = in_Coordinates;
 }
