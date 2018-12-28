@@ -43,7 +43,7 @@ void MeshLoader::ParseFace(std::stringstream& sin)
 	for (int i = 0; i < TempMeshRef->VerticesPerFace; i++)
 	{
 		std::getline(sin, token, '/');
-		if (token.size() > 0) TempMeshRef->vertexIdx.push_back(std::stoi(token));
+		if (token.size() > 0) TempMeshRef->vertexIdx.push_back((GLuint)std::stoi(token) - 1);
 		std::getline(sin, token, '/');
 		if (token.size() > 0) TempMeshRef->texcoordIdx.push_back(std::stoi(token));
 		std::getline(sin, token, ' ');
@@ -78,9 +78,9 @@ void MeshLoader::ProcessMeshData()
 {
 	for (unsigned int i = 0; i < TempMeshRef->vertexIdx.size(); i++)
 	{
-		unsigned int vi = TempMeshRef->vertexIdx[i];
+		/*unsigned int vi = TempMeshRef->vertexIdx[i];
 		Vec3 v = TempMeshRef->vertexData[vi - 1];
-		TempMeshRef->Vertices.push_back(v);
+		TempMeshRef->Vertices.push_back(v);*/
 		if (TempMeshRef->TexcoordsLoaded)
 		{
 			unsigned int ti = TempMeshRef->texcoordIdx[i];
@@ -98,10 +98,10 @@ void MeshLoader::ProcessMeshData()
 
 void MeshLoader::FreeMeshData()
 {
-	TempMeshRef->vertexData.clear();
+	//TempMeshRef->vertexData.clear();
 	TempMeshRef->texcoordData.clear();
 	TempMeshRef->normalData.clear();
-	TempMeshRef->vertexIdx.clear();
+	//TempMeshRef->vertexIdx.clear();
 	TempMeshRef->texcoordIdx.clear();
 	TempMeshRef->normalIdx.clear();
 	TempMeshRef = nullptr;
@@ -109,7 +109,6 @@ void MeshLoader::FreeMeshData()
 
 std::shared_ptr<Mesh> MeshLoader::CreateMesh(const std::string& filename)
 {
-	//TODO: 
 	std::shared_ptr<Mesh> LoadedMesh = std::make_shared<Mesh>();
 	TempMeshRef = LoadedMesh;
 	Meshes.push_back(LoadedMesh);
