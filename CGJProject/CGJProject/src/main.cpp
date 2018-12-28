@@ -396,7 +396,7 @@ void setupGLUT(int argc, char* argv[])
 void setupMeshes()
 {
 	//MeshLoader loads all necessary meshes
-	meshLoader->CreateMesh(std::string("../../assets/models/Solid Snake.obj"));
+	meshLoader->CreateMesh(std::string("../../assets/models/Square.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/skybox.obj"));
 	meshLoader->CreateQuadMesh(1.f, 6, 4);
 
