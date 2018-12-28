@@ -267,7 +267,7 @@ void processScene()
 void drawScene()
 {
 
-	glEnable(GL_CLIP_DISTANCE0);
+	/*glEnable(GL_CLIP_DISTANCE0);
 	
 	//Render Reflection
 	waterFBO->bindReflectionFrameBuffer();
@@ -286,7 +286,7 @@ void drawScene()
 	//
 	waterFBO->unbindFrameBuffer();
 	//Render Scene Normally
-	glDisable(GL_CLIP_DISTANCE0);
+	glDisable(GL_CLIP_DISTANCE0);*/
 	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, 1000)); //after GL_CLIP disabled this should be redundant. Might depend on the graphic
 	checkOpenGLError("ERROR: Could not draw scene.");
 }
@@ -478,7 +478,7 @@ void setupMeshes()
 	//refraction check
 	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));*/
 
-	meshLoader->CreateMesh(std::string("../../assets/models/cube.obj"));
+	meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
 	//meshLoader->CreateQuadMesh(1.f, 6, 4);
 
 
