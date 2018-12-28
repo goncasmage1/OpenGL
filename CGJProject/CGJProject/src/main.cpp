@@ -60,14 +60,14 @@ static std::string errorType(GLenum type)
 {
 	switch (type)
 	{
-		case GL_DEBUG_TYPE_ERROR:				return "error";
-		case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR:	return "deprecated behavior";
-		case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:	return "undefined behavior";
-		case GL_DEBUG_TYPE_PORTABILITY:			return "portability issue";
-		case GL_DEBUG_TYPE_PERFORMANCE:			return "performance issue";
-		case GL_DEBUG_TYPE_MARKER:				return "stream annotation";
-		case GL_DEBUG_TYPE_OTHER_ARB:			return "other";
-		default:								exit(EXIT_FAILURE);
+	case GL_DEBUG_TYPE_ERROR:				return "error";
+	case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR:	return "deprecated behavior";
+	case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:	return "undefined behavior";
+	case GL_DEBUG_TYPE_PORTABILITY:			return "portability issue";
+	case GL_DEBUG_TYPE_PERFORMANCE:			return "performance issue";
+	case GL_DEBUG_TYPE_MARKER:				return "stream annotation";
+	case GL_DEBUG_TYPE_OTHER_ARB:			return "other";
+	default:								exit(EXIT_FAILURE);
 	}
 }
 
@@ -75,13 +75,13 @@ static std::string errorSource(GLenum source)
 {
 	switch (source)
 	{
-		case GL_DEBUG_SOURCE_API:				return "API";
-		case GL_DEBUG_SOURCE_WINDOW_SYSTEM:		return "window system";
-		case GL_DEBUG_SOURCE_SHADER_COMPILER:	return "shader compiler";
-		case GL_DEBUG_SOURCE_THIRD_PARTY:		return "third party";
-		case GL_DEBUG_SOURCE_APPLICATION:		return "application";
-		case GL_DEBUG_SOURCE_OTHER:				return "other";
-		default:								exit(EXIT_FAILURE);
+	case GL_DEBUG_SOURCE_API:				return "API";
+	case GL_DEBUG_SOURCE_WINDOW_SYSTEM:		return "window system";
+	case GL_DEBUG_SOURCE_SHADER_COMPILER:	return "shader compiler";
+	case GL_DEBUG_SOURCE_THIRD_PARTY:		return "third party";
+	case GL_DEBUG_SOURCE_APPLICATION:		return "application";
+	case GL_DEBUG_SOURCE_OTHER:				return "other";
+	default:								exit(EXIT_FAILURE);
 	}
 }
 
@@ -89,16 +89,16 @@ static std::string errorSeverity(GLenum severity)
 {
 	switch (severity)
 	{
-		case GL_DEBUG_SEVERITY_HIGH:			return "high";
-		case GL_DEBUG_SEVERITY_MEDIUM:			return "medium";
-		case GL_DEBUG_SEVERITY_LOW:				return "low";
-		case GL_DEBUG_SEVERITY_NOTIFICATION:	return "notification";
-		default:								exit(EXIT_FAILURE);
+	case GL_DEBUG_SEVERITY_HIGH:			return "high";
+	case GL_DEBUG_SEVERITY_MEDIUM:			return "medium";
+	case GL_DEBUG_SEVERITY_LOW:				return "low";
+	case GL_DEBUG_SEVERITY_NOTIFICATION:	return "notification";
+	default:								exit(EXIT_FAILURE);
 	}
 }
 
 static void error(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length,
-				  const GLchar *message, const void *userParam)
+	const GLchar *message, const void *userParam)
 {
 	std::cerr << "ERROR:" << std::endl;
 	std::cerr << "  source:     " << errorSource(source) << std::endl;
@@ -146,7 +146,7 @@ static void checkOpenGLError(std::string error)
 void createShaderProgram()
 {
 	//Instantiate specific ShaderProgram class
-	shaders.push_back(std::make_shared<ShaderProgram>());
+	/*shaders.push_back(std::make_shared<ShaderProgram>());
 
 	//or send attributes explicitly
 	shaders.push_back(std::make_shared<ShaderProgram>(
@@ -178,13 +178,13 @@ void createShaderProgram()
 	skyboxShader->LoadCubeMap(faces);
 	shaders.push_back(skyboxShader);
 
-	//Texture 
+	//Texture
 	std::shared_ptr<TextureShader> NarutoShader = std::make_shared<TextureShader>();
 	NarutoShader->SetTexture("../../assets/Textures/naruto_kun.png");
 	shaders.push_back(NarutoShader);
 
-	checkOpenGLError("ERROR: Could not create shaders.");
-	/*
+	checkOpenGLError("ERROR: Could not create shaders.");*/
+
 	//RTT Reflection
 	std::shared_ptr<TextureShader> textureShader = std::make_shared<TextureShader>();
 	textureShader->SetTexture(waterFBO->getReflectionTexture());
@@ -203,7 +203,7 @@ void createShaderProgram()
 
 	skyboxShader->LoadCubeMap(faces);
 	shaders.push_back(skyboxShader);
-	
+
 	//Water Shader
 	water = std::make_shared<WaterShader>();
 	water->SetCamera(camera);
@@ -220,17 +220,17 @@ void createShaderProgram()
 	shaders.push_back(NarutoShader);
 
 	//RTT
-	/*std::shared_ptr<TextureShader> textureRefractShader = std::make_shared<TextureShader>();
+	std::shared_ptr<TextureShader> textureRefractShader = std::make_shared<TextureShader>();
 	textureRefractShader->SetTexture(waterFBO->getRefractionTexture());
 	shaders.push_back(textureRefractShader);
 
-	checkOpenGLError("ERROR: Could not create shaders.");*/
+	checkOpenGLError("ERROR: Could not create shaders.");
 }
 
 void destroyShaderProgram()
 {
 	for (int i = 0; i < shaders.size(); i++) shaders[i]->Destroy();
-	
+
 	checkOpenGLError("ERROR: Could not destroy shaders.");
 }
 
@@ -267,8 +267,8 @@ void processScene()
 void drawScene()
 {
 
-	/*glEnable(GL_CLIP_DISTANCE0);
-	
+	glEnable(GL_CLIP_DISTANCE0);
+
 	//Render Reflection
 	waterFBO->bindReflectionFrameBuffer();
 	std::vector<Vec3> pre = camera->FlipView(); //Set camera for reflection and Saves the previous camera settings
@@ -278,7 +278,7 @@ void drawScene()
 	camera->UnflipView(pre); //Set previous Camera settings
 	processScene();
 	//
-	waterFBO->unbindFrameBuffer();														  
+	waterFBO->unbindFrameBuffer();
 	//Render Refraction
 	waterFBO->bindRefractionFrameBuffer();
 	Vec3 water_height = Vec3(0.0f, 0.5f, 0.0f) + camera->GetCameraMovement(); //FIXME Put me in a class
@@ -286,7 +286,7 @@ void drawScene()
 	//
 	waterFBO->unbindFrameBuffer();
 	//Render Scene Normally
-	glDisable(GL_CLIP_DISTANCE0);*/
+	glDisable(GL_CLIP_DISTANCE0);
 	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, 1000)); //after GL_CLIP disabled this should be redundant. Might depend on the graphic
 	checkOpenGLError("ERROR: Could not draw scene.");
 }
@@ -327,9 +327,9 @@ void display()
 	++FrameCount;
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	processInput();
-	
+
 	drawScene();
-	
+
 	glutSwapBuffers();
 
 	begin = std::chrono::steady_clock::now();
@@ -464,21 +464,22 @@ void setupGLUT(int argc, char* argv[])
 void setupMeshes()
 {
 
-	meshLoader->CreateMesh(std::string("../../assets/models/skybox.obj"));
+	/*meshLoader->CreateMesh(std::string("../../assets/models/skybox.obj"));
 
-	scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[5]);
+	scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[5]);*/
+
 	//MeshLoader loads all necessary meshes
-	/*meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
+	meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/skybox.obj"));
 	//meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));
 
 	//reflection check
-	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));
+	/*meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));
 	//refraction check
-	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));*/
+	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));
 
-	meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
+	meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));*/
 	//meshLoader->CreateQuadMesh(1.f, 6, 4);
 
 
@@ -489,27 +490,26 @@ void setupMeshes()
 	};*/
 
 
-	/*//Skybox must be the first to be drawn in the scene
+	//Skybox must be the first to be drawn in the scene
 	scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[1]);
 
 	//reflection check
 	//scene->root->CreateNode(meshLoader->Meshes[4], Transform(Vec3(6.0, 0.0, -4.0), Quat(), Vec3(0.5f, 0.5f, 0.5f)), shaders[0]);
 	//refraction check
 	//scene->root->CreateNode(meshLoader->Meshes[5], Transform(Vec3(0.0, 0.0, 0.0), Quat(), Vec3(0.5f, 0.5f, 0.5f)), shaders[4]);
-	
+
 	//Naruto
 	scene->root->CreateNode(meshLoader->Meshes[0], Transform(Vec3(-2.0, 0.5, -2.0), Quat(), Vec3(2.0f, 2.0f, 2.0f)), shaders[3]);
-	
+
 	//Water
-	scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, 0.0, 0.0), Quat(), Vec3(2.0f, 2.0f, 2.0f)), shaders[2]);*/
-	scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[6]);
-	//scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
+	scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, 0.0, 0.0), Quat(), Vec3(2.0f, 2.0f, 2.0f)), shaders[2]);
+
 }
 
 void setupFBO()
 {
 	//FIXME: Save window Settings and have a lower resolution for the water
-	waterFBO->initializeWater(WinX, WinY); 
+	waterFBO->initializeWater(WinX, WinY);
 
 }
 
@@ -519,7 +519,7 @@ void init(int argc, char* argv[])
 	setupGLEW();
 	setupOpenGL();
 	setupCallbacks();
-	
+
 	setupFBO();
 	createShaderProgram();
 	scene = std::make_shared<Scene>(camera);
