@@ -55,26 +55,21 @@ void SceneNode::UpdateTransformationMatrix()
 	}
 }
 
-void SceneNode::setTexture(std::shared_ptr<Texture> newTexture) {
-	this->texture = newTexture;
-}
-
-void SceneNode::Draw()
+void SceneNode::Draw(Vec4 plane)
 {
 	if (shaderProg != nullptr && mesh != nullptr)
 	{
+
+		shaderProg->SetPlane(plane);
 		shaderProg->Use();
 		SetupUniforms();
-		if (texture != nullptr && !texture->isLoaded){
-			texture->LoadTexture();
-		}
-		texture->UseTexture();
 		mesh->Draw();
+		glDepthMask(GL_TRUE);
 	}
 
 	for (std::shared_ptr<SceneNode> node : childNodes)
 	{
-		node->Draw();
+		node->Draw(plane);
 	}
 	glUseProgram(0);
 }

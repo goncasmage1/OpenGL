@@ -77,6 +77,11 @@ void ShaderProgram::CheckLinkage()
 void ShaderProgram::Use()
 {
 	glUseProgram(ProgramId);
+
+	if (glGetUniformLocation(ProgramId, "plane"))
+	{
+		glUniform4f(glGetUniformLocation(ProgramId, "plane"), plane.x, plane.y, plane.z, plane.w);
+	}
 }
 
 void ShaderProgram::Destroy()
@@ -84,3 +89,5 @@ void ShaderProgram::Destroy()
 	glUseProgram(0);
 	glDeleteProgram(ProgramId);
 }
+
+

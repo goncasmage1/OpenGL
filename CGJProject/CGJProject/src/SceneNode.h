@@ -7,21 +7,18 @@
 #include "Math/Quaternion.h"
 #include "Math/Matrix.h"
 #include "Mesh.h"
-#include "Texture.h"
 
 struct Transform
 {
 private:
 
-	/*Mat4 TransformationMat;*/
+	Mat4 TransformationMat;
 
 public:
 
 	Transform();
 	Transform(const Vec3& Pos, const Quat& Rot, const Vec3& Scl);
 	friend const Transform Lerp(const Transform& From, const Transform& To, float progress);
-
-	Mat4 TransformationMat;
 
 	struct Vec3 Position;
 	struct Quat Rotation;
@@ -36,7 +33,6 @@ protected:
 	std::shared_ptr<class Mesh> mesh;
 	std::shared_ptr<SceneNode> parent = nullptr;
 	std::shared_ptr<class ShaderProgram> shaderProg = nullptr;
-	std::shared_ptr<class Texture> texture;
 
 public:
 
@@ -45,13 +41,13 @@ public:
 
 	std::vector<std::shared_ptr<SceneNode>> childNodes;
 
+	SceneNode() {}
 	SceneNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, std::shared_ptr<SceneNode> newParent, std::shared_ptr<class ShaderProgram> newShaderProg);
 
 	std::shared_ptr<SceneNode> CreateNode(std::shared_ptr<class Mesh> newMesh, Transform newTransform, std::shared_ptr<ShaderProgram> newShaderProg);
 
-	void setTexture(std::shared_ptr<Texture> newTexture);
 	void UpdateTransformationMatrix();
-	void Draw();
+	void Draw(Vec4 plane);
 	virtual void SetupUniforms();
 
 };
