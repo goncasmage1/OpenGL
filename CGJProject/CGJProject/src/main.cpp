@@ -53,7 +53,7 @@ std::shared_ptr<Scene> scene = nullptr;
 std::vector<std::shared_ptr<ShaderProgram>> shaders = std::vector<std::shared_ptr<ShaderProgram>>();
 
 std::shared_ptr<WaterFrameBuffer> waterFBO = std::make_shared<WaterFrameBuffer>();
-
+std::shared_ptr<WaterShader> water;
 /////////////////////////////////////////////////////////////////////// ERRORS
 
 static std::string errorType(GLenum type)
@@ -183,11 +183,14 @@ void createShaderProgram()
 	shaders.push_back(skyboxShader);
 	
 	//Water Shader
-	std::shared_ptr<WaterShader> waterShader = std::make_shared<WaterShader>();
-	//waterShader->SetSkyboxTexture(skyboxShader->GetTexture());
-	waterShader->SetCamera(camera);
-	waterShader->SetFBO(waterFBO);
-	shaders.push_back(waterShader);
+	water = std::make_shared<WaterShader>();
+	water->SetCamera(camera);
+	water->SetFBO(waterFBO);
+	// ------------------------ LIGHT ------------------------ 
+	water->SetLightPosition(Vec3(0.0f, -10.0f, 0.0f)); //its a vector :) lol
+	water->SetLightColour(Vec3(1.0f, 1.0f, 1.0f)); //white
+	// ------------------------------------------------------- 
+	shaders.push_back(water);
 
 	//Texture 
 	std::shared_ptr<TextureShader> NarutoShader = std::make_shared<TextureShader>();
@@ -241,6 +244,7 @@ void processScene()
 
 void drawScene()
 {
+
 	glEnable(GL_CLIP_DISTANCE0);
 	
 	//Render Reflection
@@ -251,14 +255,14 @@ void drawScene()
 	scene->Draw(Vec4(0.0f, 1.0f, 0.0f, -water_heightRefl.y)); //draws everything upper the surface
 	camera->UnflipView(pre); //Set previous Camera settings
 	processScene();
-	waterFBO->unbindFrameBuffer();
-																			  
+	//
+	waterFBO->unbindFrameBuffer();														  
 	//Render Refraction
 	waterFBO->bindRefractionFrameBuffer();
-	Vec3 water_height = Vec3(0.0f, -0.01f, 0.0f) + camera->GetCameraMovement(); //FIXME Put me in a class
+	Vec3 water_height = Vec3(0.0f, 0.5f, 0.0f) + camera->GetCameraMovement(); //FIXME Put me in a class
 	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, water_height.y)); //draws everything bellow the plane
+	//
 	waterFBO->unbindFrameBuffer();
-
 	//Render Scene Normally
 	glDisable(GL_CLIP_DISTANCE0);
 	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, 1000)); //after GL_CLIP disabled this should be redundant. Might depend on the graphic
@@ -438,11 +442,10 @@ void setupGLUT(int argc, char* argv[])
 void setupMeshes()
 {
 	//MeshLoader loads all necessary meshes
-	meshLoader->CreateMesh(std::string("../../assets/models/cube.obj"));
+	meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/skybox.obj"));
 	//meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));
-	meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
 
 	//reflection check
 	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));
@@ -461,11 +464,10 @@ void setupMeshes()
 	//scene->root->CreateNode(meshLoader->Meshes[4], Transform(Vec3(6.0, 0.0, -4.0), Quat(), Vec3(0.5f, 0.5f, 0.5f)), shaders[0]);
 	//refraction check
 	//scene->root->CreateNode(meshLoader->Meshes[5], Transform(Vec3(0.0, 0.0, 0.0), Quat(), Vec3(0.5f, 0.5f, 0.5f)), shaders[4]);
-
-	//Crystal
-	scene->root->CreateNode(meshLoader->Meshes[0], Transform(Vec3(-2.0, 0.5, -2.0), Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[3]);
+	
 	//Naruto
-	scene->root->CreateNode(meshLoader->Meshes[3], Transform(Vec3(2.0, 2.0, -2.0), Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[3]);
+	scene->root->CreateNode(meshLoader->Meshes[0], Transform(Vec3(-2.0, 0.5, -2.0), Quat(), Vec3(2.0f, 2.0f, 2.0f)), shaders[3]);
+	
 	//Water
 	scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, 0.0, 0.0), Quat(), Vec3(2.0f, 2.0f, 2.0f)), shaders[2]);
 
