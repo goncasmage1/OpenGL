@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include <memory>
 #include "Math/Vector.h"
 #include "Math/Quaternion.h"
 #include "Math/Matrix.h"

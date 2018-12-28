@@ -146,23 +146,27 @@ static void checkOpenGLError(std::string error)
 void createShaderProgram()
 {
 	//Instantiate specific ShaderProgram class
-	//shaders.push_back(std::make_shared<ShaderProgram>());
+	shaders.push_back(std::make_shared<ShaderProgram>());
 
 	//or send attributes explicitly
-	/*shaders.push_back(std::make_shared<ShaderProgram>(
+	shaders.push_back(std::make_shared<ShaderProgram>(
 		std::vector<ShaderAttribute>{
 		ShaderAttribute(0, "in_Position"),
-		ShaderAttribute(1, "in_Coordinates"),
-		ShaderAttribute(2, "in_Normal")
+			ShaderAttribute(1, "in_Coordinates"),
+			ShaderAttribute(2, "in_Normal")
 	},
-	std::vector<std::string>{
-		"src/Shader/GLSL/BrownShader.glsl",
-		"src/Shader/GLSL/FragmentShader.glsl"
-	}
-	));*/
+		std::vector<std::string>{
+			"src/Shader/GLSL/BrownShader.glsl",
+				"src/Shader/GLSL/FragmentShader.glsl"
+		}
+		));
 
-	//shaders.push_back(std::make_shared<SailShader>());
-	
+	shaders.push_back(std::make_shared<SailShader>());
+	shaders.push_back(std::make_shared<WaterShader>());
+	shaders.push_back(std::make_shared<WoodShader>());
+
+	checkOpenGLError("ERROR: Could not create shaders.");
+	/*
 	//RTT Reflection
 	std::shared_ptr<TextureShader> textureShader = std::make_shared<TextureShader>();
 	textureShader->SetTexture(waterFBO->getReflectionTexture());
@@ -200,9 +204,9 @@ void createShaderProgram()
 	//RTT
 	/*std::shared_ptr<TextureShader> textureRefractShader = std::make_shared<TextureShader>();
 	textureRefractShader->SetTexture(waterFBO->getRefractionTexture());
-	shaders.push_back(textureRefractShader);*/
+	shaders.push_back(textureRefractShader);
 
-	checkOpenGLError("ERROR: Could not create shaders.");
+	checkOpenGLError("ERROR: Could not create shaders.");*/
 }
 
 void destroyShaderProgram()
@@ -442,7 +446,7 @@ void setupGLUT(int argc, char* argv[])
 void setupMeshes()
 {
 	//MeshLoader loads all necessary meshes
-	meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
+	/*meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/skybox.obj"));
 	//meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));
@@ -450,14 +454,20 @@ void setupMeshes()
 	//reflection check
 	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));
 	//refraction check
-	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));
+	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));*/
+
+	meshLoader->CreateMesh(std::string("../../assets/models/TableTri.obj"));
+	//meshLoader->CreateQuadMesh(1.f, 6, 4);
+
+
 	//Optionally indicate mesh and shader index to use for each SceneNode
 	/*MeshData meshData[] = {
 		{1, 0},
 		{2, 1},
 	};*/
 
-	//Skybox must be the first to be drawn in the scene
+
+	/*//Skybox must be the first to be drawn in the scene
 	scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[1]);
 
 	//reflection check
@@ -469,14 +479,16 @@ void setupMeshes()
 	scene->root->CreateNode(meshLoader->Meshes[0], Transform(Vec3(-2.0, 0.5, -2.0), Quat(), Vec3(2.0f, 2.0f, 2.0f)), shaders[3]);
 	
 	//Water
-	scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, 0.0, 0.0), Quat(), Vec3(2.0f, 2.0f, 2.0f)), shaders[2]);
-
+	scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, 0.0, 0.0), Quat(), Vec3(2.0f, 2.0f, 2.0f)), shaders[2]);*/
+	scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[1]);
+	//scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
 }
 
 void setupFBO()
 {
 	//FIXME: Save window Settings and have a lower resolution for the water
 	waterFBO->initializeWater(WinX, WinY); 
+
 }
 
 void init(int argc, char* argv[])

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "Math/Vector.h"
+#include <memory>
 
 class Scene
 {
