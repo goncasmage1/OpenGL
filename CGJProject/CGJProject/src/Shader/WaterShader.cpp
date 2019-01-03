@@ -95,6 +95,7 @@ void WaterShader::Use()
 	glUniform1f(glGetUniformLocation(ProgramId, "moveFactor"), moveFactor);
 
 	glUniform3f(glGetUniformLocation(ProgramId, "cameraOffset"), camera->GetCameraMovement().x, camera->GetCameraMovement().y, camera->GetCameraMovement().z);
+	
 	// LIGHT //
 	glUniform3f(glGetUniformLocation(ProgramId, "lightPosition"), lightPosition.x, lightPosition.y, lightPosition.z);
 	glUniform3f(glGetUniformLocation(ProgramId, "lightColour"), lightColour.x, lightColour.y, lightColour.z);
