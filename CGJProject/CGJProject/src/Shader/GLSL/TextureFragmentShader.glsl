@@ -1,11 +1,46 @@
 #version 330 core
 
-in vec2 ex_textCoord;
 out vec4 color;
 
-uniform sampler2D screenTexture;
+in vec2 ex_textCoord;
+
+in VS_OUT{
+	vec3 FragPos;
+	vec3 Normal;
+} fs_in;
+
+uniform sampler2D screenTexture; //Diffuse Texture
+uniform sampler2D normalTexture; //Normal Mapping Texture
+
+uniform vec3 lightPos;	//DONE	
+uniform vec3 viewPos;	//FUCKED
+
+uniform bool normalMapping; //Enable or Disable Normal Mapping	
 
 void main()
 {
-	color = texture(screenTexture, ex_textCoord);
+	vec3 normal = normalize(fs_in.Normal);
+
+	if (normalMapping)
+	{
+		normal = texture(normalTexture, ex_textCoord).rgb;
+		normal = normalize(normal * 2.0 - 1.0);
+	}
+
+	vec3 Normalcolor = texture(screenTexture, ex_textCoord).rgb;
+
+	vec3 ambient = 0.1 * Normalcolor;
+
+	vec3 lightDir = normalize(lightPos - fs_in.FragPos);
+	float diff = max(dot(lightDir, normal), 0.0);
+	vec3 diffuse = diff * Normalcolor;
+
+	vec3 viewDir = normalize(viewPos - fs_in.FragPos);
+	vec3 reflectDir = reflect(-lightDir, normal);
+	vec3 halfwayDir = normalize(lightDir + viewDir);
+	float spec = pow(max(dot(normal, halfwayDir), 0.0), 32.0);
+	vec3 specular = vec3(0.2) * spec;
+
+	color = vec4(ambient + diffuse + specular, 1.0f);
+	//color = texture(screenTexture, ex_textCoord);
 }

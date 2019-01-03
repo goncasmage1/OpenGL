@@ -216,7 +216,10 @@ void createShaderProgram()
 
 	//Texture 
 	std::shared_ptr<TextureShader> NarutoShader = std::make_shared<TextureShader>();
-	NarutoShader->SetTexture("../../assets/Textures/naruto_kun.png");
+	NarutoShader->SetTexture("../../assets/Textures/brickwall.jpg");
+	NarutoShader->SetNormalTexture("../../assets/Textures/brickwall_normal.jpg");
+	NarutoShader->SetLightPosition(Vec3(0.0f, -10.0f, 0.0f));
+	NarutoShader->SetCamera(camera);
 	shaders.push_back(NarutoShader);
 
 	//RTT
