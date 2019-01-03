@@ -6,7 +6,9 @@ TextureShader::TextureShader()
 	std::vector<ShaderAttribute> shaderAttributes = {
 		ShaderAttribute(0, "in_Position"),
 		ShaderAttribute(1, "in_Coordinates"),
-		ShaderAttribute(2, "in_Normal")
+		ShaderAttribute(2, "in_Normal"),
+		ShaderAttribute(3, "tangent"),
+		ShaderAttribute(4, "bitangent")
 	};
 	std::vector<std::string> shaderPaths = {
 		"src/Shader/GLSL/TextureVertexShader.glsl",
@@ -99,6 +101,11 @@ void TextureShader::Use()
 {
 	ShaderProgram::Use();
 
+	SetCameraPos();
+	glUniform3f(glGetUniformLocation(ProgramId, "viewPos"), CameraPositionX, CameraPositionY, CameraPositionZ);
+
+	glUniform3f(glGetUniformLocation(ProgramId, "lightPosition"), CameraPositionX, CameraPositionY, CameraPositionZ);
+
 	if (textureId != 0) {
 		glUniform1i(glGetUniformLocation(ProgramId, "screenTexture"), 0);
 		glActiveTexture(GL_TEXTURE0);
@@ -113,9 +120,5 @@ void TextureShader::Use()
 		glUniform1i(glGetUniformLocation(ProgramId, "normalMapping"), true);
 	}
 
-	glUniform3f(glGetUniformLocation(ProgramId, "lightPosition"), lightPosition.x, lightPosition.y, lightPosition.z);
-
-	SetCameraPos();
-	glUniform3f(glGetUniformLocation(ProgramId, "viewPos"), CameraPositionX, CameraPositionY, CameraPositionZ);
 	//glUniform4f(glGetUniformLocation(ProgramId, "plane"), plane.x, plane.y, plane.z, plane.w);
 }
