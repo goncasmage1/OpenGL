@@ -40,6 +40,7 @@ const float HEIGHT = 1.0f;
 
 auto begin = std::chrono::steady_clock::now();
 
+
 struct MeshData
 {
 	int MeshIndex = 0;
@@ -54,6 +55,8 @@ std::vector<std::shared_ptr<ShaderProgram>> shaders = std::vector<std::shared_pt
 
 std::shared_ptr<WaterFrameBuffer> waterFBO = std::make_shared<WaterFrameBuffer>();
 std::shared_ptr<WaterShader> water;
+std::shared_ptr<SceneNode> Light;
+Vec3 LightPosition = Vec3(0.0f, 10.0f, 0.0f);
 /////////////////////////////////////////////////////////////////////// ERRORS
 
 static std::string errorType(GLenum type)
@@ -209,7 +212,7 @@ void createShaderProgram()
 	water->SetCamera(camera);
 	water->SetFBO(waterFBO);
 	// ------------------------ LIGHT ------------------------ 
-	water->SetLightPosition(Vec3(0.0f, -10.0f, 0.0f)); //its a vector :) lol
+	water->SetLightPosition(LightPosition); 
 	water->SetLightColour(Vec3(1.0f, 1.0f, 1.0f)); //white
 	// ------------------------------------------------------- 
 	shaders.push_back(water);
@@ -217,6 +220,8 @@ void createShaderProgram()
 	//Texture 
 	std::shared_ptr<TextureShader> NarutoShader = std::make_shared<TextureShader>();
 	NarutoShader->SetTexture("../../assets/Textures/naruto_kun.png");
+	NarutoShader->SetLightPosition(LightPosition);
+	NarutoShader->SetLightColour(Vec3(1.0f, 1.0f, 1.0f));
 	shaders.push_back(NarutoShader);
 
 	//RTT
@@ -267,24 +272,28 @@ void processScene()
 void drawScene()
 {
 
+	water->SetLightPosition(Light->transform.Position);
+	std::cout << Light->transform.Position << std::endl;
 	glEnable(GL_CLIP_DISTANCE0);
 
 	//Render Reflection
-	waterFBO->bindReflectionFrameBuffer();
-	std::vector<Vec3> pre = camera->FlipView(); //Set camera for reflection and Saves the previous camera settings
-	Vec3 water_heightRefl = Vec3(0.0f, 0.0f, 0.0f) + camera->GetCameraMovement(); //FIXME Put me in a class
+	waterFBO->bindReflectionFrameBuffer(); //Binds the Reflection Buffer
+	std::vector<Vec3> pre = camera->FlipView(); //Set camera for reflection (flips) and Saves the previous camera settings
+	Vec3 water_heightRefl = Vec3(0.0f, 0.0f, 0.0f) + camera->GetCameraMovement(); 
+	processScene(); 
+	scene->Draw(Vec4(0.0f, 1.0f, 0.0f, -water_heightRefl.y)); // Render the Scene above the surface
+	camera->UnflipView(pre); // Set previous Camera settings
 	processScene();
-	scene->Draw(Vec4(0.0f, 1.0f, 0.0f, -water_heightRefl.y)); //draws everything upper the surface
-	camera->UnflipView(pre); //Set previous Camera settings
-	processScene();
+	waterFBO->unbindFrameBuffer(); //Unbinds the Reflection Buffer
 	//
-	waterFBO->unbindFrameBuffer();
+	
 	//Render Refraction
-	waterFBO->bindRefractionFrameBuffer();
-	Vec3 water_height = Vec3(0.0f, 0.5f, 0.0f) + camera->GetCameraMovement(); //FIXME Put me in a class
+	waterFBO->bindRefractionFrameBuffer(); //Binds the Refraction Buffer
+	Vec3 water_height = Vec3(0.0f, 0.5f, 0.0f) + camera->GetCameraMovement(); // Sets the hight of the plane
 	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, water_height.y)); //draws everything bellow the plane
+	waterFBO->unbindFrameBuffer(); //Unbinds the Refraction Buffer
 	//
-	waterFBO->unbindFrameBuffer();
+
 	//Render Scene Normally
 	glDisable(GL_CLIP_DISTANCE0);
 	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, 1000)); //after GL_CLIP disabled this should be redundant. Might depend on the graphic
@@ -489,6 +498,7 @@ void setupMeshes()
 		{2, 1},
 	};*/
 
+	Light = scene->root->CreateNode(NULL, Transform(LightPosition, Quat(), Vec3(1.0f, 1.0f, 1.0f)), NULL);
 
 	//Skybox must be the first to be drawn in the scene
 	scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[1]);
