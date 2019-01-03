@@ -53,5 +53,6 @@ void main(void)
 	vs_out.TangentViewPos = TBN * viewPos;
 	vs_out.TangentFragPos = TBN * vec3(ModelMatrix * in_Position);
 	//gl_ClipDistance[0] = dot(worldPosition, plane);
+	gl_ClipDistance[0] = dot(worldPosition, plane);
 	
 }

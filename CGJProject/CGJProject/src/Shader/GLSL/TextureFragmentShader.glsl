@@ -20,6 +20,9 @@ uniform sampler2D normalTexture; //Normal Mapping Texture
 
 uniform bool normalMapping; //Enable or Disable Normal Mapping	
 
+uniform vec3 lightPosition;
+uniform vec3 lightColour;
+
 void main()
 {
 	//vec3 normal = normalize(fs_in.Normal);

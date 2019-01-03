@@ -10,7 +10,8 @@ class WaterShader : public ShaderProgram
 {
 private:
 	const char* dudvPath = "../../assets/Textures/Ripple/waterDUDV.png";
-	const char* normalPath = "../../assets/Textures/Ripple/normalMap.png";
+	//const char* normalPath = "../../assets/Textures/Ripple/normalMap.png";
+	const char* normalPath = "../../assets/Textures/Ripple/mNormalMap.png";
 	const float waveSpeed = 0.03f;
 
 	float moveFactor;

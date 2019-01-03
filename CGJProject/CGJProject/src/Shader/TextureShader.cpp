@@ -120,5 +120,10 @@ void TextureShader::Use()
 		glUniform1i(glGetUniformLocation(ProgramId, "normalMapping"), true);
 	}
 
+	glUniform3f(glGetUniformLocation(ProgramId, "lightPosition"), lightPosition.x, lightPosition.y, lightPosition.z);
+
+	SetCameraPos();
+	glUniform3f(glGetUniformLocation(ProgramId, "viewPos"), CameraPositionX, CameraPositionY, CameraPositionZ);
+
 	//glUniform4f(glGetUniformLocation(ProgramId, "plane"), plane.x, plane.y, plane.z, plane.w);
 }

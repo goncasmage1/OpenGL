@@ -30,8 +30,8 @@ const float waveStrenght = 0.01f;
 const float near = 0.1;
 const float far = 500.0;
 
-const float shineDamper = 20.0f;
-const float reflectivity = 0.6f;
+const float shineDamper = 32.0f;
+const float reflectivity = 0.4f;
 
 const vec4 waterColour = vec4(0.0, 0.3, 0.4, 1.0);
 
@@ -74,7 +74,7 @@ void main()
 	vec4 refractionColour = texture(refractionTexture, refractTexCoord);	
 	
 	vec4 normalMapColour = texture(normalMap, distortedTextureCoords);
-	vec3 normal = vec3(normalMapColour.r * 2.0 - 1.0, normalMapColour.b*3.0, normalMapColour* 2.0 - 1.0);
+	vec3 normal = vec3(normalMapColour.r * 2.0 - 1.0, normalMapColour.b*5.0, normalMapColour* 2.0 - 1.0);
 	normal = normalize(normal);
 	
 	vec3 viewVector = normalize(cameraPos - FragPos);
@@ -99,7 +99,7 @@ void main()
 	//vec3 color_result = (ambient + diffuse + specular) * waterColour;
 
 	////////////////////////////////////////////////////////
-	vec3 fromLightVector = normalize(lightPosition - FragPos);
+	vec3 fromLightVector = normalize(FragPos - lightPosition);
 	vec3 reflectedLight = reflect(fromLightVector, normal);
 	float specular = max(dot(viewVector, reflectedLight), 0.0);
 	specular = pow(specular, shineDamper);
@@ -109,6 +109,6 @@ void main()
 	float refractiveFactor = Fresnel(viewVector, vec3(0.0, 1.0, 0.0), indexWater);
 
 	out_color = mix(refractionColour, reflectionColour, refractiveFactor);
-	out_color = mix(out_color, waterColour, 0.1) ;//+ vec4(specularHighlights, 0.0); //blue color
+	out_color = mix(out_color, waterColour, 0.1) + vec4(specularHighlights, 0.0); //blue color
 	//out_color = vec4(waterDepth/25.0); //DEBUG
 }

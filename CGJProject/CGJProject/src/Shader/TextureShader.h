@@ -18,6 +18,7 @@ private:
 public:
 
 	TextureShader();
+
 	void SetTexture(const char* path);
 	void SetNormalTexture(const char * path);
 	void SetCamera(std::shared_ptr<Camera> camera);
