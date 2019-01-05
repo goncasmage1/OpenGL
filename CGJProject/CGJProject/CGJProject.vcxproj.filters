@@ -93,6 +93,9 @@
     <ClCompile Include="src\Shader\WaterShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Shader\RTT.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Camera.h">
@@ -155,6 +158,9 @@
     <ClInclude Include="src\Shader\WaterShader.h">
       <Filter>Header Files\Shader</Filter>
     </ClInclude>
+    <ClInclude Include="src\Shader\RTT.h">
+      <Filter>Header Files\Shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Shader\GLSL\BrownShader.glsl">
@@ -194,6 +200,12 @@
       <Filter>Source Files\Shader\GLSL</Filter>
     </None>
     <None Include="src\Shader\GLSL\WaterVertexShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
+    <None Include="src\Shader\GLSL\RTTVertexShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
+    <None Include="src\Shader\GLSL\RTTFragmentShader.glsl">
       <Filter>Source Files\Shader\GLSL</Filter>
     </None>
   </ItemGroup>

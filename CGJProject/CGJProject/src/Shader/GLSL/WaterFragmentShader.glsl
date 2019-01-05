@@ -3,8 +3,13 @@
 in vec4 clipSpace;
 in vec2 textureCoords;
 in vec3 FragPos;
+in vec3 cameraDir;
+in vec3 cameraPos;
+in vec3 lightPos;
 
 out vec4 out_color;
+
+uniform vec3 cameraDirection;
 
 uniform sampler2D reflectionTexture;
 uniform sampler2D refractionTexture;
@@ -12,10 +17,6 @@ uniform sampler2D dudvMap;
 uniform sampler2D normalMap;
 uniform float moveFactor;
 uniform vec3 lightColour;
-uniform vec3 lightPosition;
-uniform vec3 cameraOffset; //remove me
-uniform vec3 cameraPos;
-
 
 uniform sampler2D depthMap;
 
@@ -74,16 +75,16 @@ void main()
 	vec4 refractionColour = texture(refractionTexture, refractTexCoord);	
 	
 	vec4 normalMapColour = texture(normalMap, distortedTextureCoords);
-	vec3 normal = vec3(normalMapColour.r * 2.0 - 1.0, normalMapColour.b*3.0, normalMapColour* 2.0 - 1.0);
+	vec3 normal = vec3(normalMapColour.r * 2.0 - 1.0, normalMapColour.b*5.0, normalMapColour* 2.0 - 1.0);
 	normal = normalize(normal);
 	
-	vec3 viewVector = normalize(cameraPos - FragPos);
+
 	
 	//Light 
 	////////////////////////////////////////////////////////
 	//Ambient 
-	float ambientStrenght = 0.1f;
-	vec3 ambient = ambientStrenght * lightColour;
+	//float ambientStrenght = 0.1f;
+	//vec3 ambient = ambientStrenght * lightColour;
 
 	//Diffuse
 	//float diff = max(dot(normal, fromLightVector), 0.0);
@@ -99,9 +100,13 @@ void main()
 	//vec3 color_result = (ambient + diffuse + specular) * waterColour;
 
 	////////////////////////////////////////////////////////
-	vec3 fromLightVector = normalize(lightPosition - FragPos);
+
+	vec3 viewVector = normalize(-FragPos - cameraDir);
+	vec3 viewVector2 = normalize(cameraPos - FragPos);
+
+	vec3 fromLightVector = lightPos;
 	vec3 reflectedLight = reflect(fromLightVector, normal);
-	float specular = max(dot(viewVector, reflectedLight), 0.0);
+	float specular = max(dot(reflectedLight, viewVector2), 0.0);
 	specular = pow(specular, shineDamper);
 	vec3 specularHighlights =  specular * reflectivity * lightColour;
 
@@ -109,6 +114,7 @@ void main()
 	float refractiveFactor = Fresnel(viewVector, vec3(0.0, 1.0, 0.0), indexWater);
 
 	out_color = mix(refractionColour, reflectionColour, refractiveFactor);
-	out_color = mix(out_color, waterColour, 0.1) ;//+ vec4(specularHighlights, 0.0); //blue color
-	//out_color = vec4(waterDepth/25.0); //DEBUG
+	out_color = mix(out_color, waterColour, 0.1) + vec4(specularHighlights, 0.0); //blue color
+
+	//out_color = vec4(specularHighlights, 1.0);
 }
