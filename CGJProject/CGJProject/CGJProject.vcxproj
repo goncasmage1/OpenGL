@@ -140,9 +140,12 @@
     <ClCompile Include="src\Math\Vector.cpp" />
     <ClCompile Include="src\Mesh.cpp" />
     <ClCompile Include="src\MeshLoader.cpp" />
+    <ClCompile Include="src\PostProcessingFrameBuffer.cpp" />
+    <ClCompile Include="src\PPFilterMesh.cpp" />
     <ClCompile Include="src\QuadMesh.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\SceneNode.cpp" />
+    <ClCompile Include="src\Shader\PostProcessingShader.cpp" />
     <ClCompile Include="src\Shader\SailShader.cpp" />
     <ClCompile Include="src\Shader\Shader.cpp" />
     <ClCompile Include="src\Shader\ShaderProgram.cpp" />
@@ -162,9 +165,12 @@
     <ClInclude Include="src\Math\Vector.h" />
     <ClInclude Include="src\Mesh.h" />
     <ClInclude Include="src\MeshLoader.h" />
+    <ClInclude Include="src\PostProcessingFrameBuffer.h" />
+    <ClInclude Include="src\PPFilterMesh.h" />
     <ClInclude Include="src\QuadMesh.h" />
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\SceneNode.h" />
+    <ClInclude Include="src\Shader\PostProcessingShader.h" />
     <ClInclude Include="src\Shader\SailShader.h" />
     <ClInclude Include="src\Shader\Shader.h" />
     <ClInclude Include="src\Shader\ShaderProgram.h" />

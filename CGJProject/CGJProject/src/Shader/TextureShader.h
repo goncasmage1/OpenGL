@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include "ShaderProgram.h"
 #include "..\Math\Vector.h"
 #include "..\Camera.h"

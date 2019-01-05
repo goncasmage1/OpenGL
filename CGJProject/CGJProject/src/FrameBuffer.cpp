@@ -7,15 +7,16 @@ int FrameBuffer::createFrameBuffer()
 	unsigned int fbo;
 	glGenFramebuffers(1, &fbo);
 	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-	glDrawBuffer(GL_COLOR_ATTACHMENT0);
+	//glDrawBuffer(GL_COLOR_ATTACHMENT0);
 	return fbo;
 }
 
-int FrameBuffer::createTextureAttachment(int width, int height, GLboolean depth, GLboolean stencil)
+int FrameBuffer::createTextureAttachment(int width, int height, GLboolean depth, GLboolean stencil, GLboolean alpha)
 {
 	//Generates a texture
 	GLenum attachment_type;
-	if (!depth && !stencil)
+	if (alpha) attachment_type = GL_RGBA;
+	else if (!depth && !stencil)
 		attachment_type = GL_RGB;
 	else if (depth && !stencil)
 		attachment_type = GL_DEPTH_COMPONENT;

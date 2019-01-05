@@ -1,5 +1,4 @@
 #include "Mesh.h"
-#include "Math/Vector.h"
 
 #define VERTICES 0
 #define TEXCOORDS 1
@@ -64,12 +63,5 @@ void Mesh::Draw()
 	glBindVertexArray(VAO);
 	GLuint size = (GLuint)Vertices.size();
 	if (VerticesPerFace == 3) glDrawArrays(GL_TRIANGLES, 0, size);
-	/*else if (VerticesPerFace == 4)
-	{
-		for (int i = 0; i < size/4; i++)
-		{
-			glDrawArrays(GL_TRIANGLE_STRIP, i*4, 4);
-		}
-	}*/
 	glBindVertexArray(0);
 }

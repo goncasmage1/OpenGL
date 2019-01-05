@@ -1,6 +1,7 @@
 #include "MeshLoader.h"
 #include "Mesh.h"
 #include "QuadMesh.h"
+#include "PPFilterMesh.h"
 #include "Math/Vector.h"
 #include <sstream>
 #include <fstream>
@@ -123,6 +124,13 @@ std::shared_ptr<QuadMesh> MeshLoader::CreateQuadMesh(float size, int xRepeat, in
 	std::shared_ptr<QuadMesh> newQuad = std::make_shared<QuadMesh>(size, xRepeat, yRepeat);
 	Meshes.push_back(newQuad);
 	return newQuad;
+}
+
+std::shared_ptr<class PPFilterMesh> MeshLoader::CreatePPFilterMesh(GLuint v_coord_id)
+{
+	std::shared_ptr<PPFilterMesh> newPPFilter = std::make_shared<PPFilterMesh>(v_coord_id);
+	Meshes.push_back(newPPFilter);
+	return newPPFilter;
 }
 
 void MeshLoader::CreateBufferObjects()
