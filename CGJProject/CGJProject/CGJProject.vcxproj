@@ -143,6 +143,7 @@
     <ClCompile Include="src\QuadMesh.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\SceneNode.cpp" />
+    <ClCompile Include="src\Shader\RTT.cpp" />
     <ClCompile Include="src\Shader\SailShader.cpp" />
     <ClCompile Include="src\Shader\Shader.cpp" />
     <ClCompile Include="src\Shader\ShaderProgram.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="src\QuadMesh.h" />
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\SceneNode.h" />
+    <ClInclude Include="src\Shader\RTT.h" />
     <ClInclude Include="src\Shader\SailShader.h" />
     <ClInclude Include="src\Shader\Shader.h" />
     <ClInclude Include="src\Shader\ShaderProgram.h" />
@@ -176,6 +178,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Shader\GLSL\BrownShader.glsl" />
+    <None Include="src\Shader\GLSL\RTTFragmentShader.glsl" />
+    <None Include="src\Shader\GLSL\RTTVertexShader.glsl" />
     <None Include="src\Shader\GLSL\SkyboxVertexShader.glsl" />
     <None Include="src\Shader\GLSL\SkyboxFragmentShader.glsl" />
     <None Include="src\Shader\GLSL\FragmentShader.glsl" />
