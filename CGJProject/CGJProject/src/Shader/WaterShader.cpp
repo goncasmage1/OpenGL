@@ -51,6 +51,7 @@ void WaterShader::SetCamera(std::shared_ptr<Camera> camera)
 void WaterShader::SetCameraPos()
 {
 	Vec3 direction = camera->GetDirection();
+	//Vec3 direction = camera->GetCameraMovement();
 	CameraPositionX = direction.x;
 	CameraPositionY = direction.y;
 	CameraPositionZ = direction.z;
@@ -93,8 +94,6 @@ void WaterShader::Use()
 	moveFactor += waveSpeed * 0.008;
 	moveFactor = fmod(moveFactor, 1);
 	glUniform1f(glGetUniformLocation(ProgramId, "moveFactor"), moveFactor);
-
-	glUniform3f(glGetUniformLocation(ProgramId, "cameraOffset"), camera->GetCameraMovement().x, camera->GetCameraMovement().y, camera->GetCameraMovement().z);
 	
 	// LIGHT //
 	glUniform3f(glGetUniformLocation(ProgramId, "lightPosition"), lightPosition.x, lightPosition.y, lightPosition.z);
@@ -102,7 +101,7 @@ void WaterShader::Use()
 	//////////
 
 	SetCameraPos();
-	glUniform3f(glGetUniformLocation(ProgramId, "cameraPos"), CameraPositionX, CameraPositionY, CameraPositionZ);
-	
-	
+	glUniform3f(glGetUniformLocation(ProgramId, "cameraDirection"), CameraPositionX, CameraPositionY, CameraPositionZ);
+	glUniform3f(glGetUniformLocation(ProgramId, "cameraOffset"), camera->GetOffset().x, camera->GetOffset().y, camera->GetOffset().z);
+
 }
