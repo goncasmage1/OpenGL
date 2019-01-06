@@ -4,10 +4,12 @@
 #define VERTICES 0
 #define TEXCOORDS 1
 #define NORMALS 2
+#define TANGENT 3
+#define BITANGENT 4
 
 void Mesh::CreateBufferObjects()
 {
-	GLuint VboVertices, VboTexcoords, VboNormals;
+	GLuint VboVertices, VboTexcoords, VboNormals, VboTangent, VboBiTangent;
 
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
@@ -29,6 +31,19 @@ void Mesh::CreateBufferObjects()
 				glBufferData(GL_ARRAY_BUFFER, Texcoords.size() * sizeof(Vec2), &Texcoords[0], GL_STATIC_DRAW);
 				glEnableVertexAttribArray(TEXCOORDS);
 				glVertexAttribPointer(TEXCOORDS, 2, GL_FLOAT, GL_FALSE, sizeof(Vec2), 0);
+
+				glGenBuffers(1, &VboTangent);
+				glBindBuffer(GL_ARRAY_BUFFER, VboTangent);
+				glBufferData(GL_ARRAY_BUFFER, tangentData.size() * sizeof(Vec3), &tangentData[0], GL_STATIC_DRAW);
+				glEnableVertexAttribArray(TANGENT);
+				glVertexAttribPointer(TANGENT, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
+
+				glGenBuffers(1, &VboBiTangent);
+				glBindBuffer(GL_ARRAY_BUFFER, VboBiTangent);
+				glBufferData(GL_ARRAY_BUFFER, biTangentData.size() * sizeof(Vec3), &biTangentData[0], GL_STATIC_DRAW);
+				glEnableVertexAttribArray(BITANGENT);
+				glVertexAttribPointer(BITANGENT, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
+
 			}
 			if (NormalsLoaded)
 			{
