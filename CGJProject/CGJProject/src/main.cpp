@@ -290,8 +290,10 @@ void drawScene()
 	
 	//Render Refraction
 	waterFBO->bindRefractionFrameBuffer(); //Binds the Refraction Buffer
-	Vec3 water_height = Vec3(0.0f, 0.5f, 0.0f) + camera->GetCameraMovement(); // Sets the hight of the plane
+	glDisable(GL_CULL_FACE);
+	Vec3 water_height = Vec3(0.0f, 0.0f, 0.0f) + camera->GetCameraMovement(); // Sets the hight of the plane
 	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, water_height.y)); //draws everything bellow the plane
+	glEnable(GL_CULL_FACE);
 	waterFBO->unbindFrameBuffer(); //Unbinds the Refraction Buffer
 	//
 
