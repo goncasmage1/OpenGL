@@ -75,24 +75,24 @@ void MeshLoader::LoadMeshData(const std::string& filename)
 
 	//Tangent and Bi-Tangent Calculations for Normal Mapping
 
-	Vec3 pos1, pos2, pos3, tangent1, bitangent1, edge1, edge2, normal;
-	Vec2 uv1, uv2, uv3, deltaUV1, deltaUV2;
+	Vec3 pos1, pos2, pos3, pos4, tangent1, bitangent1, edge1, edge2, normal;
+	Vec2 uv1, uv2, uv3, uv4, deltaUV1, deltaUV2;
 
-	for (int i = 0; i <= TempMeshRef->vertexIdx.size() - 3; i += 3) {
-
-		if (i == 2874) {
-			printf("");
-		}
+	for (int i = 0; i <= TempMeshRef->vertexIdx.size() - 3; i += 1) {
 
 		pos1 = TempMeshRef->vertexData[TempMeshRef->vertexIdx[i]-1];
 		pos2 = TempMeshRef->vertexData[TempMeshRef->vertexIdx[i+1]-1];
 		pos3 = TempMeshRef->vertexData[TempMeshRef->vertexIdx[i+2]-1];
+		//pos4 = TempMeshRef->vertexData[TempMeshRef->vertexIdx[i+3]-1];
 
 		uv1 = TempMeshRef->texcoordData[TempMeshRef->texcoordIdx[i]-1];
 		uv2 = TempMeshRef->texcoordData[TempMeshRef->texcoordIdx[i+1]-1];
 		uv3 = TempMeshRef->texcoordData[TempMeshRef->texcoordIdx[i+2]-1];
+		//uv4 = TempMeshRef->texcoordData[TempMeshRef->texcoordIdx[i+3]-1];
 
 		normal = TempMeshRef->normalData[TempMeshRef->normalIdx[i]-1];
+
+		//Triangle 1
 
 		edge1 = pos2 - pos1;
 		edge2 = pos3 - pos1;
@@ -114,6 +114,30 @@ void MeshLoader::LoadMeshData(const std::string& filename)
 		bitangent1 = Normalized(bitangent1);
 
 		TempMeshRef->biTangentData.push_back(bitangent1);
+
+		//Triangle 2
+
+		//edge1 = pos3 - pos1;
+		//edge2 = pos4 - pos1;
+		//deltaUV1 = uv3 - uv1;
+		//deltaUV2 = uv4 - uv1;
+
+		//f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
+
+		//tangent1.x = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
+		//tangent1.y = f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y);
+		//tangent1.z = f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z);
+		//tangent1 = Normalized(tangent1);
+
+		//TempMeshRef->tangentData.push_back(tangent1);
+
+		//bitangent1.x = f * (-deltaUV2.x * edge1.x + deltaUV1.x * edge2.x);
+		//bitangent1.y = f * (-deltaUV2.x * edge1.y + deltaUV1.x * edge2.y);
+		//bitangent1.z = f * (-deltaUV2.x * edge1.z + deltaUV1.x * edge2.z);
+		//bitangent1 = Normalized(bitangent1);
+
+		//TempMeshRef->biTangentData.push_back(bitangent1);
+
 	}
 }
 
