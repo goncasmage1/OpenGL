@@ -184,6 +184,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Shader\GLSL\BrownShader.glsl" />
+    <None Include="src\Shader\GLSL\PostProcessingFragmentShader.glsl" />
+    <None Include="src\Shader\GLSL\PostProcessingVertexShader.glsl" />
     <None Include="src\Shader\GLSL\RTTFragmentShader.glsl" />
     <None Include="src\Shader\GLSL\RTTVertexShader.glsl" />
     <None Include="src\Shader\GLSL\SkyboxVertexShader.glsl" />

@@ -226,5 +226,11 @@
     <None Include="src\Shader\GLSL\RTTFragmentShader.glsl">
       <Filter>Source Files\Shader\GLSL</Filter>
     </None>
+    <None Include="src\Shader\GLSL\PostProcessingFragmentShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
+    <None Include="src\Shader\GLSL\PostProcessingVertexShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
   </ItemGroup>
 </Project>
