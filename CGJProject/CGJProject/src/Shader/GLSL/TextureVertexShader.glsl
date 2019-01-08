@@ -14,7 +14,6 @@ out VS_OUT{
 	vec3 TangentLightPos;
 	vec3 TangentViewPos;
 	vec3 TangentFragPos;
-	//vec2 TexCoords;
 } vs_out;
 
 uniform mat4 ModelMatrix;
@@ -47,12 +46,11 @@ void main(void)
 
 	vec3 B = cross(T, N);
 
-	mat3 TBN = mat3(T, B, N);
+	mat3 TBN = transpose(mat3(T, B, N));
 
 	vs_out.TangentLightPos = TBN * lightPos;
 	vs_out.TangentViewPos = TBN * viewPos;
-	vs_out.TangentFragPos = TBN * vec3(ModelMatrix * in_Position);
-	//gl_ClipDistance[0] = dot(worldPosition, plane);
+	vs_out.TangentFragPos = TBN * vec3(worldPosition);
 	gl_ClipDistance[0] = dot(worldPosition, plane);
 	
 }

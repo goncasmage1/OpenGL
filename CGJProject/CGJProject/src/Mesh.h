@@ -15,7 +15,7 @@ public:
 
 	int VerticesPerFace = 0;
 	bool TexcoordsLoaded, NormalsLoaded;
-	std::vector<Vec3> Vertices, vertexData, Normals, normalData;
+	std::vector<Vec3> Vertices, vertexData, Normals, normalData, tangentData, biTangentData;
 	std::vector<Vec2> Texcoords, texcoordData;
 	std::vector<unsigned int> vertexIdx, texcoordIdx, normalIdx;
 

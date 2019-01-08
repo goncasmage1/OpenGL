@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{8823B095-F85F-4C94-8905-CD7794948250}</ProjectGuid>
     <RootNamespace>CGJProject</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -145,6 +145,7 @@
     <ClCompile Include="src\QuadMesh.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\SceneNode.cpp" />
+    <ClCompile Include="src\Shader\RTT.cpp" />
     <ClCompile Include="src\Shader\PostProcessingShader.cpp" />
     <ClCompile Include="src\Shader\SailShader.cpp" />
     <ClCompile Include="src\Shader\Shader.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="src\QuadMesh.h" />
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\SceneNode.h" />
+    <ClInclude Include="src\Shader\RTT.h" />
     <ClInclude Include="src\Shader\PostProcessingShader.h" />
     <ClInclude Include="src\Shader\SailShader.h" />
     <ClInclude Include="src\Shader\Shader.h" />
@@ -182,6 +184,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Shader\GLSL\BrownShader.glsl" />
+    <None Include="src\Shader\GLSL\RTTFragmentShader.glsl" />
+    <None Include="src\Shader\GLSL\RTTVertexShader.glsl" />
     <None Include="src\Shader\GLSL\SkyboxVertexShader.glsl" />
     <None Include="src\Shader\GLSL\SkyboxFragmentShader.glsl" />
     <None Include="src\Shader\GLSL\FragmentShader.glsl" />

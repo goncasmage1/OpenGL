@@ -27,6 +27,7 @@
 #include "Scene.h"
 #include "SceneNode.h"
 
+#include "Shader/RTT.h"
 #include "WaterFrameBuffer.h"
 #include "PostProcessingFrameBuffer.h"
 #include "Shader/SkyboxShader.h"
@@ -58,9 +59,10 @@ std::shared_ptr<Scene> scene = nullptr;
 std::vector<std::shared_ptr<ShaderProgram>> shaders = std::vector<std::shared_ptr<ShaderProgram>>();
 
 std::shared_ptr<WaterFrameBuffer> waterFBO = std::make_shared<WaterFrameBuffer>();
+
 std::shared_ptr<WaterShader> water = nullptr;
 std::shared_ptr<SceneNode> Light = nullptr;
-Vec3 LightPosition = Vec3(0.0f, 10.0f, 0.0f);
+Vec3 LightPosition = Vec3(1.2f, 6.0f, 2.0f);
 
 std::shared_ptr<PostProcessingFrameBuffer> ppFBO = std::make_shared<PostProcessingFrameBuffer>();
 std::shared_ptr<PostProcessingShader> ppFilter = nullptr;
@@ -196,7 +198,7 @@ void createShaderProgram()
 	checkOpenGLError("ERROR: Could not create shaders.");*/
 
 	//RTT Reflection
-	std::shared_ptr<TextureShader> textureShader = std::make_shared<TextureShader>();
+	std::shared_ptr<RTT> textureShader = std::make_shared<RTT>();
 	textureShader->SetTexture(waterFBO->getReflectionTexture());
 	shaders.push_back(textureShader);
 
@@ -233,7 +235,7 @@ void createShaderProgram()
 	shaders.push_back(NarutoShader);
 
 	//RTT
-	std::shared_ptr<TextureShader> textureRefractShader = std::make_shared<TextureShader>();
+	std::shared_ptr<RTT> textureRefractShader = std::make_shared<RTT>();
 	textureRefractShader->SetTexture(waterFBO->getRefractionTexture());
 	shaders.push_back(textureRefractShader);
 
@@ -284,10 +286,8 @@ void processScene()
 
 void drawScene()
 {
-	ppFBO->bindFilterFrameBuffer();
 
-	water->SetLightPosition(Light->transform.Position);
-	std::cout << Light->transform.Position << std::endl;
+	water->SetLightPosition(LightPosition + camera->GetCameraMovement());
 	glEnable(GL_CLIP_DISTANCE0);
 
 	//Render Reflection
@@ -301,20 +301,24 @@ void drawScene()
 	waterFBO->unbindFrameBuffer(); //Unbinds the Reflection Buffer
 								   //
 
-								   //Render Refraction
+	//Render Refraction
 	waterFBO->bindRefractionFrameBuffer(); //Binds the Refraction Buffer
-	Vec3 water_height = Vec3(0.0f, 0.5f, 0.0f) + camera->GetCameraMovement(); // Sets the hight of the plane
+	glDisable(GL_CULL_FACE);
+	Vec3 water_height = Vec3(0.0f, 0.0f, 0.0f) + camera->GetCameraMovement(); // Sets the hight of the plane
 	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, water_height.y)); //draws everything bellow the plane
+	glEnable(GL_CULL_FACE);
 	waterFBO->unbindFrameBuffer(); //Unbinds the Refraction Buffer
 								   //
 
-								   //Render Scene Normally
+	//ppFBO->bindFilterFrameBuffer();
+
+	//Render Scene Normally
 	glDisable(GL_CLIP_DISTANCE0);
 	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, 1000)); //after GL_CLIP disabled this should be redundant. Might depend on the graphic
 
 	//Draw scene to texture
-	ppFilter->Use();
-	ppMesh->Draw();
+	/*ppFilter->Use();
+	ppMesh->Draw();*/
 
 	checkOpenGLError("ERROR: Could not draw scene.");
 
@@ -503,31 +507,27 @@ void setupMeshes()
 	//meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));
 
-	//reflection check
-	/*meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));
-	//refraction check
-	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));
-
-	meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));*/
+	meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
 	//meshLoader->CreateQuadMesh(1.f, 6, 4);
 
 	ppMesh = meshLoader->CreatePPFilterMesh(ppFilter->GetVCoordId());
-
-	Light = scene->root->CreateNode(NULL, Transform(LightPosition, Quat(), Vec3(1.0f, 1.0f, 1.0f)), NULL);
 
 	//Skybox must be the first to be drawn in the scene
 	scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[1]);
 
 	//reflection check
-	//scene->root->CreateNode(meshLoader->Meshes[4], Transform(Vec3(6.0, 0.0, -4.0), Quat(), Vec3(0.5f, 0.5f, 0.5f)), shaders[0]);
+	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(-12.0, 0.0, 0.0), Quat(), Vec3(0.5, 0.5, 0.5)), shaders[0]);
 	//refraction check
-	//scene->root->CreateNode(meshLoader->Meshes[5], Transform(Vec3(0.0, 0.0, 0.0), Quat(), Vec3(0.5f, 0.5f, 0.5f)), shaders[4]);
+	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, 0.0, 0.0), Quat(), Vec3(0.5, 0.5, 0.5)), shaders[4]);
 
 	//Naruto
 	scene->root->CreateNode(meshLoader->Meshes[0], Transform(Vec3(-2.0, 0.5, -2.0), Quat(), Vec3(2.0f, 2.0f, 2.0f)), shaders[3]);
 
 	//Water
 	scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, 0.0, 0.0), Quat(), Vec3(2.0f, 2.0f, 2.0f)), shaders[2]);
+	
+	Light = scene->root->CreateNode(meshLoader->Meshes[0], Transform(LightPosition, Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[3]);
+
 }
 
 void setupFBO()
