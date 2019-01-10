@@ -1,10 +1,9 @@
 #pragma once
 
+#include <memory>
 #include "../Camera.h"
 #include "../WaterFrameBuffer.h"
 #include "ShaderProgram.h"
-
-
 
 class WaterShader : public ShaderProgram
 {

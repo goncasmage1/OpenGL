@@ -13,7 +13,7 @@ public:
 	FrameBuffer() {  }
 	FrameBuffer(int width, int height);
 	int createFrameBuffer();
-	int createTextureAttachment(int width, int height, GLboolean depth, GLboolean stencil);
+	int createTextureAttachment(int width, int height, GLboolean depth, GLboolean stencil, GLboolean alpha = false);
 	int createDepthTextureAttachment(int width, int height); //
 	int createDepthBufferAttachment(int width, int height); //
 	GLuint createRenderBuffer(int width, int height);
