@@ -5,15 +5,14 @@ in vec2 in_Coordinates;
 in vec3 in_Normal;
 in vec3 tangent;
 in vec3 bitangent;
-//out vec4 ex_Color;
+
 out vec2 ex_textCoord;
 
 out VS_OUT{
 	vec3 FragPos;
 	vec3 Normal;
-	vec3 TangentLightPos;
-	vec3 TangentViewPos;
-	vec3 TangentFragPos;
+	vec4 LightVec;
+	vec4 ViewVec;
 } vs_out;
 
 uniform mat4 ModelMatrix;
@@ -31,6 +30,7 @@ uniform vec3 viewPos;
 
 void main(void)
 {
+
 	vec4 worldPosition = ModelMatrix * in_Position;
 	gl_Position = ProjectionMatrix * ViewMatrix * worldPosition;
 	vs_out.FragPos = vec3(ModelMatrix * in_Position);
@@ -46,11 +46,18 @@ void main(void)
 
 	vec3 B = cross(T, N);
 
-	mat3 TBN = transpose(mat3(T, B, N));
+	mat4 TBN4 = mat4(
+		vec4(T, 0.0),
+		vec4(B, 0.0),
+		vec4(N, 0.0),
+		worldPosition 
+	);
+	
+	mat4 invTBN4 = inverse(TBN4);
 
-	vs_out.TangentLightPos = TBN * lightPos;
-	vs_out.TangentViewPos = TBN * viewPos;
-	vs_out.TangentFragPos = TBN * vec3(worldPosition);
+    vs_out.LightVec = invTBN4 * vec4(normalize(lightPos - worldPosition.xyz), 0.0);
+    vs_out.ViewVec  = invTBN4 * vec4(normalize(viewPos - worldPosition.xyz), 0.0);
+	//vs_out.TangentFragPos = TBN * vec3(worldPosition);
 	gl_ClipDistance[0] = dot(worldPosition, plane);
 	
 }
