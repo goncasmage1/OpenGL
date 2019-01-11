@@ -11,7 +11,7 @@ Camera::Camera(int newWinX, int newWinY, int FOV)
 
 	RightVector = Vec3(1, 0, 0);
 	UpVector = Vec3(0, 1, 0);
-	Direction = Cross(RightVector, UpVector);;
+	Direction = Cross(RightVector, UpVector);
 	Rotation = Vec2();
 	Rotator = Quat(1, 0, 0, 0);
 	Distance = 3.f;
@@ -20,7 +20,7 @@ Camera::Camera(int newWinX, int newWinY, int FOV)
 	ViewMat = bOrbiting ? Mat4::TranslationMat(Vec3(0, 0, -Distance)) * RotMat : Mat4::ViewMat(Direction, UpVector);
 
 	Orthographic = Mat4::OrthographicMat(0.01f, 100, -1, 1, -1, 1);
-	Projection = Mat4::ProjectionMat(FOV, (float)WinX / (float)WinY, 0.01f, 100);
+	Projection = Mat4::ProjectionMat(FOV, (float)WinX / (float)WinY, 0.01f, 500);
 }
 
 void Camera::CreateBufferObjects()
@@ -87,6 +87,71 @@ void Camera::Zoom(float amount)
 	glBindBuffer(GL_UNIFORM_BUFFER, VboId);
 	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), ViewMat.GetData());
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+}
+
+Vec3 Camera::GetDirection()
+{
+	return Direction;
+}
+
+Vec3 Camera::GetUp()
+{
+	return UpVector;
+}
+
+Vec3 Camera::GetOffset()
+{
+	return Offset;
+}
+
+
+std::vector<Vec3> Camera::FlipView()
+{
+	std::vector<Vec3> result = { Direction, UpVector, RightVector };
+
+	Direction.y = -Direction.y;
+	Direction = Normalized(Direction);
+	
+	UpVector.x = -UpVector.x;
+	UpVector.z = -UpVector.z;
+	UpVector = Normalized(UpVector);
+
+	RightVector = Cross(UpVector, Direction);
+	ViewMat = Mat4({{
+			{RightVector.x, RightVector.y, RightVector.z, 0},
+			{UpVector.x, UpVector.y, UpVector.z, 0},
+			{-Direction.x, -Direction.y, -Direction.z, 0},
+			{0, 0, 0, 1}}});
+
+	ViewMat = Mat4::ViewMat(Direction, UpVector);
+	glBindBuffer(GL_UNIFORM_BUFFER, VboId);
+	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), ViewMat.GetData());
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+	Offset.y = -Offset.y;
+	ModelMat = Mat4::TranslationMat(Offset);
+	return result;
+}
+
+void Camera::UnflipView(std::vector<Vec3> preSettings)
+{	
+	Offset.y = -Offset.y;
+	Direction = preSettings[0];
+	UpVector = preSettings[1];
+	RightVector = preSettings[2];
+
+	ViewMat = Mat4::ViewMat(Direction, UpVector);
+	glBindBuffer(GL_UNIFORM_BUFFER, VboId);
+	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), ViewMat.GetData());
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+	ModelMat = Mat4::TranslationMat(Offset);
+}
+
+
+void Camera::SetModelMat(Mat4 mat)
+{
+	ViewMat = mat;
 }
 
 void Camera::MoveCamera(Vec3 movement)

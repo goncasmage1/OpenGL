@@ -1,6 +1,7 @@
 #include "MeshLoader.h"
 #include "Mesh.h"
 #include "QuadMesh.h"
+#include "PPFilterMesh.h"
 #include "SailMesh.h"
 #include "Math/Vector.h"
 #include <sstream>
@@ -55,7 +56,7 @@ void MeshLoader::ParseFace(std::stringstream& sin)
 	for (int i = 0; i < TempMeshRef->VerticesPerFace; i++)
 	{
 		std::getline(sin, token, '/');
-		if (token.size() > 0) TempMeshRef->vertexIdx.push_back((GLuint)std::stoi(token) - 1);
+		if (token.size() > 0) TempMeshRef->vertexIdx.push_back(std::stoi(token));
 		std::getline(sin, token, '/');
 		if (token.size() > 0) TempMeshRef->texcoordIdx.push_back(std::stoi(token));
 		std::getline(sin, token, ' ');
@@ -84,15 +85,82 @@ void MeshLoader::LoadMeshData(const std::string& filename)
 	}
 	TempMeshRef->TexcoordsLoaded = (TempMeshRef->texcoordIdx.size() > 0);
 	TempMeshRef->NormalsLoaded = (TempMeshRef->normalIdx.size() > 0);
+
+	//Tangent and Bi-Tangent Calculations for Normal Mapping
+
+	Vec3 pos1, pos2, pos3, pos4, tangent1, bitangent1, edge1, edge2, normal;
+	Vec2 uv1, uv2, uv3, uv4, deltaUV1, deltaUV2;
+
+	for (int i = 0; i <= TempMeshRef->vertexIdx.size() - 3; i += 1) {
+
+		pos1 = TempMeshRef->vertexData[TempMeshRef->vertexIdx[i]-1];
+		pos2 = TempMeshRef->vertexData[TempMeshRef->vertexIdx[i+1]-1];
+		pos3 = TempMeshRef->vertexData[TempMeshRef->vertexIdx[i+2]-1];
+		//pos4 = TempMeshRef->vertexData[TempMeshRef->vertexIdx[i+3]-1];
+
+		uv1 = TempMeshRef->texcoordData[TempMeshRef->texcoordIdx[i]-1];
+		uv2 = TempMeshRef->texcoordData[TempMeshRef->texcoordIdx[i+1]-1];
+		uv3 = TempMeshRef->texcoordData[TempMeshRef->texcoordIdx[i+2]-1];
+		//uv4 = TempMeshRef->texcoordData[TempMeshRef->texcoordIdx[i+3]-1];
+
+		normal = TempMeshRef->normalData[TempMeshRef->normalIdx[i]-1];
+
+		//Triangle 1
+
+		edge1 = pos2 - pos1;
+		edge2 = pos3 - pos1;
+		deltaUV1 = uv2 - uv1;
+		deltaUV2 = uv3 - uv1;
+
+		GLfloat f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
+
+		tangent1.x = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
+		tangent1.y = f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y);
+		tangent1.z = f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z);
+		tangent1 = Normalized(tangent1);
+
+		TempMeshRef->tangentData.push_back(tangent1);
+
+		bitangent1.x = f * (-deltaUV2.x * edge1.x + deltaUV1.x * edge2.x);
+		bitangent1.y = f * (-deltaUV2.x * edge1.y + deltaUV1.x * edge2.y);
+		bitangent1.z = f * (-deltaUV2.x * edge1.z + deltaUV1.x * edge2.z);
+		bitangent1 = Normalized(bitangent1);
+
+		TempMeshRef->biTangentData.push_back(bitangent1);
+
+		//Triangle 2
+
+		//edge1 = pos3 - pos1;
+		//edge2 = pos4 - pos1;
+		//deltaUV1 = uv3 - uv1;
+		//deltaUV2 = uv4 - uv1;
+
+		//f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
+
+		//tangent1.x = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
+		//tangent1.y = f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y);
+		//tangent1.z = f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z);
+		//tangent1 = Normalized(tangent1);
+
+		//TempMeshRef->tangentData.push_back(tangent1);
+
+		//bitangent1.x = f * (-deltaUV2.x * edge1.x + deltaUV1.x * edge2.x);
+		//bitangent1.y = f * (-deltaUV2.x * edge1.y + deltaUV1.x * edge2.y);
+		//bitangent1.z = f * (-deltaUV2.x * edge1.z + deltaUV1.x * edge2.z);
+		//bitangent1 = Normalized(bitangent1);
+
+		//TempMeshRef->biTangentData.push_back(bitangent1);
+
+	}
 }
 
 void MeshLoader::ProcessMeshData()
 {
 	for (unsigned int i = 0; i < TempMeshRef->vertexIdx.size(); i++)
 	{
-		/*unsigned int vi = TempMeshRef->vertexIdx[i];
+		unsigned int vi = TempMeshRef->vertexIdx[i];
 		Vec3 v = TempMeshRef->vertexData[vi - 1];
-		TempMeshRef->Vertices.push_back(v);*/
+		TempMeshRef->Vertices.push_back(v);
 		if (TempMeshRef->TexcoordsLoaded)
 		{
 			unsigned int ti = TempMeshRef->texcoordIdx[i];
@@ -110,10 +178,10 @@ void MeshLoader::ProcessMeshData()
 
 void MeshLoader::FreeMeshData()
 {
-	//TempMeshRef->vertexData.clear();
+	TempMeshRef->vertexData.clear();
 	TempMeshRef->texcoordData.clear();
 	TempMeshRef->normalData.clear();
-	//TempMeshRef->vertexIdx.clear();
+	TempMeshRef->vertexIdx.clear();
 	TempMeshRef->texcoordIdx.clear();
 	TempMeshRef->normalIdx.clear();
 	TempMeshRef = nullptr;
@@ -135,6 +203,13 @@ std::shared_ptr<QuadMesh> MeshLoader::CreateQuadMesh(float size, int xRepeat, in
 	std::shared_ptr<QuadMesh> newQuad = std::make_shared<QuadMesh>(size, xRepeat, yRepeat);
 	Meshes.push_back(newQuad);
 	return newQuad;
+}
+
+std::shared_ptr<class PPFilterMesh> MeshLoader::CreatePPFilterMesh(GLuint v_coord_id)
+{
+	std::shared_ptr<PPFilterMesh> newPPFilter = std::make_shared<PPFilterMesh>(v_coord_id);
+	Meshes.push_back(newPPFilter);
+	return newPPFilter;
 }
 
 std::shared_ptr<class SailMesh> MeshLoader::CreateSailMesh(SailProperties properties, nv::cloth::Factory * newFactory, nv::cloth::Solver* newSolver, float size, int xRepeat, int yRepeat)

@@ -63,18 +63,21 @@ void SceneNode::UpdateTransformationMatrix()
 	}
 }
 
-void SceneNode::Draw()
+void SceneNode::Draw(Vec4 plane)
 {
 	if (shaderProg != nullptr && mesh != nullptr)
 	{
+
+		shaderProg->SetPlane(plane);
 		shaderProg->Use();
 		SetupUniforms();
 		mesh->Draw();
+		glDepthMask(GL_TRUE);
 	}
 
 	for (std::shared_ptr<SceneNode> node : childNodes)
 	{
-		node->Draw();
+		node->Draw(plane);
 	}
 	glUseProgram(0);
 }

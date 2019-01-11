@@ -2,6 +2,7 @@
 #include <vector>
 #include "GL/glew.h"
 #include "GL/freeglut.h"
+#include "Math/Vector.h"
 
 #define VERTICES 0
 #define TEXCOORDS 1
@@ -35,18 +36,18 @@ class Mesh
 protected:
 
 	GLuint VAO, VBO;
-	GLuint VboVertices[2];
+	GLuint VboVertices;
 
 public:
 
 	int VerticesPerFace = 0;
 	bool TexcoordsLoaded, NormalsLoaded;
-	std::vector<struct Vec3> vertexData, Normals, normalData;
-	std::vector<struct Vec2> Texcoords, texcoordData;
+	std::vector<Vec3> Vertices, vertexData, Normals, normalData, tangentData, biTangentData;
+	std::vector<Vec2> Texcoords, texcoordData;
 	std::vector<GLuint> vertexIdx, texcoordIdx, normalIdx;
 
 	virtual void CreateBufferObjects();
 	virtual void DestroyBufferObjects();
-	void Draw();
+	virtual void Draw();
 
 };

@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{8823B095-F85F-4C94-8905-CD7794948250}</ProjectGuid>
     <RootNamespace>CGJProject</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -91,11 +91,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\..\dependencies\glew\include;$(SolutionDir)\..\dependencies\freeglut\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\ProgramFiles\Cuda\v 10.0\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\extensions\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\..\dependencies\SOIL\include;$(SolutionDir)\..\dependencies\glew\include;$(SolutionDir)\..\dependencies\freeglut\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\ProgramFiles\Cuda\v 10.0\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\extensions\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\..\dependencies\SOIL\include;D:\ProgramFiles\Cuda\v 10.0\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\src\foundation\include;$(SolutionDir)\..\dependencies\glew\include;$(SolutionDir)\..\dependencies\freeglut\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\src\foundation\include;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\extensions\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)\..\dependencies\glew\lib\Release\x64\;$(SolutionDir)\..\dependencies\freeglut\lib\x64\;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\lib\vc14win64-cmake\;D:\ProgramFiles\Cuda\v 10.0\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut.lib;glew32.lib;NvClothDEBUG_x64.lib;PxFoundationDEBUG_x64.lib;cuda.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\..\dependencies\SOIL\lib\;$(SolutionDir)\..\dependencies\glew\lib\Release\x64\;$(SolutionDir)\..\dependencies\freeglut\lib\x64\;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\lib\vc14win64-cmake\;D:\ProgramFiles\Cuda\v 10.0\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freeglut.lib;glew32.lib;SOIL.lib;NvClothDEBUG_x64.lib;PxFoundationDEBUG_x64.lib;cuda.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -120,17 +121,19 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\..\dependencies\glew\include;$(SolutionDir)\..\dependencies\freeglut\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\src\foundation\include;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\extensions\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\..\dependencies\SOIL\include;D:\ProgramFiles\Cuda\v 10.0\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\src\foundation\include;$(SolutionDir)\..\dependencies\glew\include;$(SolutionDir)\..\dependencies\freeglut\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\src\foundation\include;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\extensions\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)\..\dependencies\glew\lib\Release\x64\;$(SolutionDir)\..\dependencies\freeglut\lib\x64\;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\lib\vc14win64-cmake\;D:\ProgramFiles\Cuda\v 10.0\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut.lib;glew32.lib;NvCloth_x64.lib;PxFoundation_x64.lib;cuda.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freeglut.lib;glew32.lib;SOIL.lib;NvCloth_x64.lib;PxFoundation_x64.lib;cuda.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\..\dependencies\SOIL\lib\;$(SolutionDir)\..\dependencies\glew\lib\Release\x64\;$(SolutionDir)\..\dependencies\freeglut\lib\x64\;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\lib\vc14win64-cmake\;D:\ProgramFiles\Cuda\v 10.0\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\Cubemap.cpp" />
+    <ClCompile Include="src\FrameBuffer.cpp" />
     <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Math\Matrix.cpp" />
@@ -142,25 +145,36 @@
     <ClCompile Include="src\PxCallbacks\CustomAssertHandler.cpp" />
     <ClCompile Include="src\PxCallbacks\CustomError.cpp" />
     <ClCompile Include="src\PxCallbacks\CustomProfiler.cpp" />
+    <ClCompile Include="src\PostProcessingFrameBuffer.cpp" />
+    <ClCompile Include="src\PPFilterMesh.cpp" />
     <ClCompile Include="src\QuadMesh.cpp" />
     <ClCompile Include="src\SailMesh.cpp" />
     <ClCompile Include="src\SailNode.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\SceneNode.cpp" />
+    <ClCompile Include="src\Shader\RTT.cpp" />
+    <ClCompile Include="src\Shader\PostProcessingShader.cpp" />
     <ClCompile Include="src\Shader\SailShader.cpp" />
     <ClCompile Include="src\Shader\Shader.cpp" />
     <ClCompile Include="src\Shader\ShaderProgram.cpp" />
+    <ClCompile Include="src\Shader\SkyboxShader.cpp" />
+    <ClCompile Include="src\Shader\TextureShader.cpp" />
     <ClCompile Include="src\Shader\WaterShader.cpp" />
     <ClCompile Include="src\Shader\WoodShader.cpp" />
+    <ClCompile Include="src\WaterFrameBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Camera.h" />
+    <ClInclude Include="src\Cubemap.h" />
+    <ClInclude Include="src\FrameBuffer.h" />
     <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\Math\Matrix.h" />
     <ClInclude Include="src\Math\Quaternion.h" />
     <ClInclude Include="src\Math\Vector.h" />
     <ClInclude Include="src\Mesh.h" />
     <ClInclude Include="src\MeshLoader.h" />
+    <ClInclude Include="src\PostProcessingFrameBuffer.h" />
+    <ClInclude Include="src\PPFilterMesh.h" />
     <ClInclude Include="src\PxCallbacks\CustomAllocator.h" />
     <ClInclude Include="src\PxCallbacks\CustomAssertHandler.h" />
     <ClInclude Include="src\PxCallbacks\CustomError.h" />
@@ -170,17 +184,30 @@
     <ClInclude Include="src\SailNode.h" />
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\SceneNode.h" />
+    <ClInclude Include="src\Shader\RTT.h" />
+    <ClInclude Include="src\Shader\PostProcessingShader.h" />
     <ClInclude Include="src\Shader\SailShader.h" />
     <ClInclude Include="src\Shader\Shader.h" />
     <ClInclude Include="src\Shader\ShaderProgram.h" />
+    <ClInclude Include="src\Shader\SkyboxShader.h" />
+    <ClInclude Include="src\Shader\TextureShader.h" />
     <ClInclude Include="src\Shader\WaterShader.h" />
     <ClInclude Include="src\Shader\WoodShader.h" />
+    <ClInclude Include="src\WaterFrameBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Shader\GLSL\BrownShader.glsl" />
+    <None Include="src\Shader\GLSL\PostProcessingFragmentShader.glsl" />
+    <None Include="src\Shader\GLSL\PostProcessingVertexShader.glsl" />
+    <None Include="src\Shader\GLSL\RTTFragmentShader.glsl" />
+    <None Include="src\Shader\GLSL\RTTVertexShader.glsl" />
+    <None Include="src\Shader\GLSL\SkyboxVertexShader.glsl" />
+    <None Include="src\Shader\GLSL\SkyboxFragmentShader.glsl" />
     <None Include="src\Shader\GLSL\FragmentShader.glsl" />
     <None Include="src\Shader\GLSL\SailFragmentShader.glsl" />
     <None Include="src\Shader\GLSL\SailVertexShader.glsl" />
+    <None Include="src\Shader\GLSL\TextureFragmentShader.glsl" />
+    <None Include="src\Shader\GLSL\TextureVertexShader.glsl" />
     <None Include="src\Shader\GLSL\WaterFragmentShader.glsl" />
     <None Include="src\Shader\GLSL\WaterVertexShader.glsl" />
     <None Include="src\Shader\GLSL\WhiteShader.glsl" />

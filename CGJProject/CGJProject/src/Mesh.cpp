@@ -1,9 +1,14 @@
 #include "Mesh.h"
-#include "Math/Vector.h"
+
+#define VERTICES 0
+#define TEXCOORDS 1
+#define NORMALS 2
+#define TANGENT 3
+#define BITANGENT 4
 
 void Mesh::CreateBufferObjects()
 {
-	GLuint VboTexcoords, VboNormals;
+	GLuint VboTexcoords, VboNormals, VboTangent, VboBiTangent;
 
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
@@ -12,18 +17,11 @@ void Mesh::CreateBufferObjects()
 
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		{
-			glGenBuffers(2, VboVertices);
-
-			glBindBuffer(GL_ARRAY_BUFFER, VboVertices[0]);
-			{
-				glBufferData(GL_ARRAY_BUFFER, vertexData.size() * sizeof(Vec3), &vertexData[0], GL_STATIC_DRAW);
-				glEnableVertexAttribArray(VERTICES);
-				glVertexAttribPointer(VERTICES, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), (GLvoid*)0);
-			}
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VboVertices[1]);
-			{
-				glBufferData(GL_ELEMENT_ARRAY_BUFFER, vertexIdx.size() * sizeof(GLuint), &vertexIdx[0], GL_STATIC_DRAW);
-			}
+			glGenBuffers(1, &VboVertices);
+			glBindBuffer(GL_ARRAY_BUFFER, VboVertices);
+			glBufferData(GL_ARRAY_BUFFER, Vertices.size() * sizeof(Vec3), &Vertices[0], GL_STATIC_DRAW);
+			glEnableVertexAttribArray(VERTICES);
+			glVertexAttribPointer(VERTICES, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
 
 			if (TexcoordsLoaded)
 			{
@@ -32,6 +30,19 @@ void Mesh::CreateBufferObjects()
 				glBufferData(GL_ARRAY_BUFFER, Texcoords.size() * sizeof(Vec2), &Texcoords[0], GL_STATIC_DRAW);
 				glEnableVertexAttribArray(TEXCOORDS);
 				glVertexAttribPointer(TEXCOORDS, 2, GL_FLOAT, GL_FALSE, sizeof(Vec2), 0);
+
+				glGenBuffers(1, &VboTangent);
+				glBindBuffer(GL_ARRAY_BUFFER, VboTangent);
+				glBufferData(GL_ARRAY_BUFFER, tangentData.size() * sizeof(Vec3), &tangentData[0], GL_STATIC_DRAW);
+				glEnableVertexAttribArray(TANGENT);
+				glVertexAttribPointer(TANGENT, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
+
+				glGenBuffers(1, &VboBiTangent);
+				glBindBuffer(GL_ARRAY_BUFFER, VboBiTangent);
+				glBufferData(GL_ARRAY_BUFFER, biTangentData.size() * sizeof(Vec3), &biTangentData[0], GL_STATIC_DRAW);
+				glEnableVertexAttribArray(BITANGENT);
+				glVertexAttribPointer(BITANGENT, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
+
 			}
 			if (NormalsLoaded)
 			{
@@ -45,6 +56,7 @@ void Mesh::CreateBufferObjects()
 	}
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glDeleteBuffers(1, &VboVertices);
 	glDeleteBuffers(1, &VboTexcoords);
 	glDeleteBuffers(1, &VboNormals);
 }
@@ -55,7 +67,6 @@ void Mesh::DestroyBufferObjects()
 	glDisableVertexAttribArray(VERTICES);
 	glDisableVertexAttribArray(TEXCOORDS);
 	glDisableVertexAttribArray(NORMALS);
-	glDeleteBuffers(2, VboVertices);
 	glDeleteBuffers(1, &VBO);
 	glDeleteVertexArrays(1, &VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -65,11 +76,7 @@ void Mesh::DestroyBufferObjects()
 void Mesh::Draw()
 {
 	glBindVertexArray(VAO);
-	GLuint size = (GLuint)vertexIdx.size();
-	if (VerticesPerFace == 3) glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, nullptr);
-	/*else if (VerticesPerFace == 4)
-	{
-		glDrawElements(GL_TRIANGLE_STRIP, size, GL_UNSIGNED_INT, nullptr);
-	}*/
+	GLuint size = (GLuint)Vertices.size();
+	if (VerticesPerFace == 3) glDrawArrays(GL_TRIANGLES, 0, size);
 	glBindVertexArray(0);
 }

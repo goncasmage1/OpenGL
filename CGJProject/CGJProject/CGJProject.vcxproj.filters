@@ -75,14 +75,41 @@
     <ClCompile Include="src\QuadMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Shader\WaterShader.cpp">
-      <Filter>Source Files\Shader</Filter>
-    </ClCompile>
     <ClCompile Include="src\Shader\SailShader.cpp">
       <Filter>Source Files\Shader</Filter>
     </ClCompile>
     <ClCompile Include="src\Shader\WoodShader.cpp">
       <Filter>Source Files\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FrameBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WaterFrameBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cubemap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shader\SkyboxShader.cpp">
+      <Filter>Source Files\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shader\TextureShader.cpp">
+      <Filter>Source Files\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shader\WaterShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shader\RTT.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PostProcessingFrameBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shader\PostProcessingShader.cpp">
+      <Filter>Source Files\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PPFilterMesh.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\PxCallbacks\CustomAllocator.cpp">
       <Filter>Source Files\PxCallbacks</Filter>
@@ -140,14 +167,41 @@
     <ClInclude Include="src\QuadMesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Shader\WaterShader.h">
-      <Filter>Header Files\Shader</Filter>
-    </ClInclude>
     <ClInclude Include="src\Shader\SailShader.h">
       <Filter>Header Files\Shader</Filter>
     </ClInclude>
     <ClInclude Include="src\Shader\WoodShader.h">
       <Filter>Header Files\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FrameBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WaterFrameBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cubemap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader\SkyboxShader.h">
+      <Filter>Header Files\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader\TextureShader.h">
+      <Filter>Header Files\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader\WaterShader.h">
+      <Filter>Header Files\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader\RTT.h">
+      <Filter>Header Files\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PostProcessingFrameBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader\PostProcessingShader.h">
+      <Filter>Header Files\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PPFilterMesh.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\PxCallbacks\CustomAllocator.h">
       <Filter>Header Files\PxCallbacks</Filter>
@@ -181,12 +235,6 @@
     <None Include="src\Shader\GLSL\SailVertexShader.glsl">
       <Filter>Source Files\Shader\GLSL</Filter>
     </None>
-    <None Include="src\Shader\GLSL\WaterFragmentShader.glsl">
-      <Filter>Source Files\Shader\GLSL</Filter>
-    </None>
-    <None Include="src\Shader\GLSL\WaterVertexShader.glsl">
-      <Filter>Source Files\Shader\GLSL</Filter>
-    </None>
     <None Include="src\Shader\GLSL\WhiteShader.glsl">
       <Filter>Source Files\Shader\GLSL</Filter>
     </None>
@@ -194,6 +242,36 @@
       <Filter>Source Files\Shader\GLSL</Filter>
     </None>
     <None Include="src\Shader\GLSL\WoodVertexShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
+    <None Include="src\Shader\GLSL\SkyboxFragmentShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
+    <None Include="src\Shader\GLSL\SkyboxVertexShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
+    <None Include="src\Shader\GLSL\TextureFragmentShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
+    <None Include="src\Shader\GLSL\TextureVertexShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
+    <None Include="src\Shader\GLSL\WaterFragmentShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
+    <None Include="src\Shader\GLSL\WaterVertexShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
+    <None Include="src\Shader\GLSL\RTTVertexShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
+    <None Include="src\Shader\GLSL\RTTFragmentShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
+    <None Include="src\Shader\GLSL\PostProcessingFragmentShader.glsl">
+      <Filter>Source Files\Shader\GLSL</Filter>
+    </None>
+    <None Include="src\Shader\GLSL\PostProcessingVertexShader.glsl">
       <Filter>Source Files\Shader\GLSL</Filter>
     </None>
   </ItemGroup>

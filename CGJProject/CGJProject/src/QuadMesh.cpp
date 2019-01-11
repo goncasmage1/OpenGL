@@ -45,21 +45,27 @@ void QuadMesh::GenerateQuads()
 				Vec3 TopLeft = Vec3(-halfXSize + j * side, 0.f, -halfYSize + (i + 1) * side);
 				Vec3 TopRight = Vec3(-halfXSize + (j + 1) * side, 0.f, -halfYSize + (i + 1) * side);
 
+				Vertices.push_back(BottomLeft);
 				vertexIdx.push_back(j + i * (xRepeat + 1));
 				Texcoords.push_back(Vec2((float)j / (float)xRepeat, (float)i / (float)yRepeat));
 
+				Vertices.push_back(BottomRight);
 				vertexIdx.push_back((j + 1) + i * (xRepeat + 1));
 				Texcoords.push_back(Vec2((float)(j + 1) / (float)xRepeat, (float)i / (float)yRepeat));
 
+				Vertices.push_back(TopLeft);
 				vertexIdx.push_back(j + (i + 1) * (xRepeat + 1));
 				Texcoords.push_back(Vec2((float)j / (float)xRepeat, (float)(i + 1) / (float)yRepeat));
 
+				Vertices.push_back(TopRight);
 				vertexIdx.push_back(j + (i + 1) * (xRepeat + 1));
 				Texcoords.push_back(Vec2((float)j / (float)xRepeat, (float)(i + 1) / (float)yRepeat));
 
+				Vertices.push_back(BottomRight);
 				vertexIdx.push_back((j + 1) + i * (xRepeat + 1));
 				Texcoords.push_back(Vec2((float)(j + 1) / (float)xRepeat, (float)i / (float)yRepeat));
 
+				Vertices.push_back(TopRight);
 				vertexIdx.push_back((j + 1) + (i + 1) * (xRepeat + 1));
 				Texcoords.push_back(Vec2((float)(j + 1) / (float)xRepeat, (float)(i + 1) / (float)yRepeat));
 

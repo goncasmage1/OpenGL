@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <memory>
+#include "GL/glew.h"
 
 #include "NvCloth/Factory.h"
 #include "NvCloth/Cloth.h"
@@ -45,6 +47,7 @@ public:
 
 	std::shared_ptr<class Mesh> CreateMesh(const std::string& filename);
 	std::shared_ptr<class QuadMesh> CreateQuadMesh(float size, int xRepeat, int yRepeat);
+	std::shared_ptr<class PPFilterMesh> CreatePPFilterMesh(GLuint v_coord_id);
 	std::shared_ptr<class SailMesh> CreateSailMesh(SailProperties properties, nv::cloth::Factory* newFactory, nv::cloth::Solver* newSolver, float size, int xRepeat, int yRepeat);
 
 	void CreateBufferObjects();
