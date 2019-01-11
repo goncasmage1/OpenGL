@@ -50,12 +50,7 @@ void main(void)
 
 	vs_out.TangentLightPos = TBN * lightPos;
 	vs_out.TangentViewPos = TBN * viewPos;
-<<<<<<< HEAD
-	vs_out.TangentFragPos = TBN * vec3(ModelMatrix * in_Position);
-	gl_ClipDistance[0] = dot(worldPosition, plane);
-=======
 	vs_out.TangentFragPos = TBN * vec3(worldPosition);
->>>>>>> master
 	gl_ClipDistance[0] = dot(worldPosition, plane);
 	
 }

@@ -11,6 +11,9 @@ class Camera
 {
 protected:
 
+	////
+	float Yaw, Pitch;
+	////
 	GLuint VboId;
 	const GLuint UBO_BP = 0;
 

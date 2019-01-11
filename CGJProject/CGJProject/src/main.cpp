@@ -64,6 +64,8 @@ std::shared_ptr<WaterShader> water = nullptr;
 std::shared_ptr<SceneNode> Light = nullptr;
 Vec3 LightPosition = Vec3(1.2f, 6.0f, 2.0f);
 
+std::shared_ptr<SkyboxShader> skybox = nullptr;
+
 std::shared_ptr<PostProcessingFrameBuffer> ppFBO = std::make_shared<PostProcessingFrameBuffer>();
 std::shared_ptr<PostProcessingShader> ppFilter = nullptr;
 std::shared_ptr<PPFilterMesh> ppMesh = nullptr;
@@ -241,7 +243,9 @@ void createShaderProgram()
 	};
 
 	skyboxShader->LoadCubeMap(faces);
+	skyboxShader->SetViewMatrix(camera->GetViewMatrix());
 	shaders.push_back(skyboxShader);
+	skybox = skyboxShader;
 
 	//Water Shader
 	water = std::make_shared<WaterShader>();
@@ -301,26 +305,26 @@ void destroyBufferObjects()
 /////////////////////////////////////////////////////////////////////// SCENE
 
 void processScene()
-{
-	Vec3 movementOffset = camera->GetCameraMovement();
+{//FIXME
+	/*Vec3 movementOffset = camera->GetCameraMovement();
 
 	if (movementOffset != scene->root->transform.Position)
 	{
 		scene->root->transform.Position = movementOffset;
 		scene->root->UpdateTransformationMatrix();
-	}
+	}*/
 }
 
 void drawScene()
 {
 
-	water->SetLightPosition(LightPosition + camera->GetCameraMovement());
+	/*water->SetLightPosition(LightPosition + camera->GetCameraMovement());
 	glEnable(GL_CLIP_DISTANCE0);
 
 	//Render Reflection
 	waterFBO->bindReflectionFrameBuffer(); //Binds the Reflection Buffer
 	std::vector<Vec3> pre = camera->FlipView(); //Set camera for reflection (flips) and Saves the previous camera settings
-	Vec3 water_heightRefl = Vec3(0.0f, 0.0f, 0.0f) + camera->GetCameraMovement();
+	Vec3 water_heightRefl = Vec3(0.0f, 0.0f, 0.0f);
 	processScene();
 	scene->Draw(Vec4(0.0f, 1.0f, 0.0f, -water_heightRefl.y)); // Render the Scene above the surface
 	camera->UnflipView(pre); // Set previous Camera settings
@@ -331,7 +335,7 @@ void drawScene()
 	//Render Refraction
 	waterFBO->bindRefractionFrameBuffer(); //Binds the Refraction Buffer
 	glDisable(GL_CULL_FACE);
-	Vec3 water_height = Vec3(0.0f, 0.0f, 0.0f) + camera->GetCameraMovement(); // Sets the hight of the plane
+	Vec3 water_height = Vec3(0.0f, 0.0f, 0.0f); // Sets the hight of the plane
 	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, water_height.y)); //draws everything bellow the plane
 	glEnable(GL_CULL_FACE);
 	waterFBO->unbindFrameBuffer(); //Unbinds the Refraction Buffer
@@ -346,10 +350,10 @@ void drawScene()
 	//Draw scene to texture
 	/*ppFilter->Use();
 	ppMesh->Draw();*/
-
+	skybox->SetViewMatrix(camera->GetViewMatrix());
+	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, 1000));
 	checkOpenGLError("ERROR: Could not draw scene.");
 
-	checkOpenGLError("ERROR: Could not draw scene.");
 }
 
 void processCamera()
@@ -357,15 +361,17 @@ void processCamera()
 	//if (camera->IsOrbiting() != input->IsMiddleMouseButtonDown()) camera->ToggleOrbiting();
 	camera->RotateCamera(input->GetMouseDelta());
 	camera->MoveCamera(input->GetMovement());
+
 	//camera->Zoom(input->GetWheelDelta());
 
-	Vec3 movementOffset = camera->GetCameraMovement();
+
+	/*Vec3 movementOffset = camera->GetCameraMovement();
 
 	if (movementOffset != scene->root->transform.Position)
 	{
 		scene->root->transform.Position = movementOffset;
 		scene->root->UpdateTransformationMatrix();
-	}
+	}*/
 }
 
 void processInput()
@@ -546,12 +552,12 @@ void setupMeshes()
 	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, 0.0, 0.0), Quat(), Vec3(0.5, 0.5, 0.5)), shaders[4]);
 
 	//Naruto
-	scene->root->CreateNode(meshLoader->Meshes[0], Transform(Vec3(-2.0, 0.5, -2.0), Quat(), Vec3(2.0f, 2.0f, 2.0f)), shaders[3]);
+	//scene->root->CreateNode(meshLoader->Meshes[0], Transform(Vec3(-2.0, 0.5, -2.0), Quat(), Vec3(2.0f, 2.0f, 2.0f)), shaders[3]);
 
 	//Water
-	scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, 0.0, 0.0), Quat(), Vec3(2.0f, 2.0f, 2.0f)), shaders[2]);
+	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, 0.0, 0.0), Quat(), Vec3(2.0f, 2.0f, 2.0f)), shaders[2]);
 	
-	Light = scene->root->CreateNode(meshLoader->Meshes[0], Transform(LightPosition, Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[3]);
+	//Light = scene->root->CreateNode(meshLoader->Meshes[0], Transform(LightPosition, Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[3]);
 
 }
 
