@@ -14,18 +14,7 @@ Camera::Camera(int newWinX, int newWinY, int FOV)
 	Pitch = 0.0f;
 
 	Offset = Vec3(0.0, 0.0, 0.0);
-	float YawRadians = Yaw * (float) 0.0174532925;
-	float PitchRadians = Pitch * (float) 0.0174532925;
-	Direction.x = cos(YawRadians) * cos(PitchRadians);
-	Direction.y = sin(PitchRadians);
-	Direction.z = sin(YawRadians) * cos(PitchRadians);
-	Direction.Normalize();
-
-	RightVector = Cross(Direction, Vec3(0.0, 1.0, 0.0));
-	RightVector.Normalize();
-	UpVector = Cross(RightVector, Direction);
-	UpVector.Normalize();
-	ViewMat = Mat4::ViewMatrix(Direction, UpVector, RightVector, Offset);
+	updateCamera();
 	////
 	/*RightVector = Vec3(1, 0, 0);
 	UpVector = Vec3(0, 1, 0);
@@ -40,6 +29,22 @@ Camera::Camera(int newWinX, int newWinY, int FOV)
 	Orthographic = Mat4::OrthographicMat(0.01f, 100, -1, 1, -1, 1);
 	FOV = FOV * (float) 0.0174532925;
 	Projection = Mat4::ProjectionMat(FOV, (float)WinX / (float)WinY, 0.01f, 500);
+}
+
+void Camera::updateCamera()
+{
+	float YawRadians = Yaw * (float) 0.0174532925;
+	float PitchRadians = Pitch * (float) 0.0174532925;
+	Direction.x = cos(YawRadians) * cos(PitchRadians);
+	Direction.y = sin(PitchRadians);
+	Direction.z = sin(YawRadians) * cos(PitchRadians);
+	Direction.Normalize();
+
+	RightVector = Cross(Direction, Vec3(0.0, 1.0, 0.0));
+	RightVector.Normalize();
+	UpVector = Cross(RightVector, Direction);
+	UpVector.Normalize();
+	ViewMat = Mat4::ViewMatrix(Direction, UpVector, RightVector, Offset);
 }
 
 void Camera::CreateBufferObjects()
@@ -87,18 +92,7 @@ void Camera::RotateCamera(Vec2 rotation)
 	if (Pitch < -89.0f)
 		Pitch = -89.0f;
 
-	float YawRadians = Yaw * (float) 0.0174532925;
-	float PitchRadians = Pitch * (float) 0.0174532925;
-	Direction.x = cos(YawRadians) * cos(PitchRadians);
-	Direction.y = sin(PitchRadians);
-	Direction.z = sin(YawRadians) * cos(PitchRadians);
-	Direction.Normalize();
-
-	RightVector = Cross(Direction, Vec3(0.0, 1.0, 0.0));
-	RightVector.Normalize();
-	UpVector = Cross(RightVector, Direction);
-	UpVector.Normalize();
-	ViewMat = Mat4::ViewMatrix(Direction, UpVector, RightVector, Offset);
+	updateCamera();
 
 	/*UpVector = RotateVector(UpVector, RightVector, rotation.y);
 	RightVector = RotateVector(RightVector, UpVector, -rotation.x);
@@ -153,38 +147,38 @@ std::vector<Vec3> Camera::FlipView()
 {
 	std::vector<Vec3> result = { Direction, UpVector, RightVector };
 
-	Direction.y = -Direction.y;
+	/*Direction.y = -Direction.y;
 	Direction = Normalized(Direction);
 	
-	UpVector.x = -UpVector.x;
+	//UpVector.x = -UpVector.x;
 	UpVector.z = -UpVector.z;
 	UpVector = Normalized(UpVector);
 
 	RightVector = Cross(UpVector, Direction);
+	RightVector.Normalize();*/
+	
+	Pitch = -Pitch;
+	Offset.y = -Offset.y;
+	updateCamera();
 
 	ViewMat = Mat4::ViewMatrix(Direction, UpVector, RightVector, Offset);
 	glBindBuffer(GL_UNIFORM_BUFFER, VboId);
 	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), ViewMat.GetData());
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
-	Offset.y = -Offset.y;
-	ModelMat = Mat4::TranslationMat(Offset);
 	return result;
 }
 
 void Camera::UnflipView(std::vector<Vec3> preSettings)
 {	
+	Pitch = -Pitch;
 	Offset.y = -Offset.y;
-	Direction = preSettings[0];
-	UpVector = preSettings[1];
-	RightVector = preSettings[2];
+	updateCamera();
 
 	ViewMat = Mat4::ViewMatrix(Direction, UpVector, RightVector, Offset);
 	glBindBuffer(GL_UNIFORM_BUFFER, VboId);
 	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), ViewMat.GetData());
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
-
-	ModelMat = Mat4::TranslationMat(Offset);
 }
 
 
@@ -203,6 +197,4 @@ void Camera::MoveCamera(Vec3 movement)
 	glBindBuffer(GL_UNIFORM_BUFFER, VboId);
 	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), ViewMat.GetData());
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
-
-	//ModelMat = Mat4::TranslationMat(Offset);
 }

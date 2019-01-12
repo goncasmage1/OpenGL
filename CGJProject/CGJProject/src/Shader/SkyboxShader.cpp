@@ -22,7 +22,6 @@ GLuint SkyboxShader::GetTexture()
 void SkyboxShader::SetViewMatrix(Mat4 view)
 {
 	this->view = Mat4(Mat3(view));
-	std::cout << this->view << std::endl;
 }
 
 void SkyboxShader::LoadCubeMap(std::vector<const char*> faces)

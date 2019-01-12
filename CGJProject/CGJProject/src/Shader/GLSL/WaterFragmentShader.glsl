@@ -2,14 +2,10 @@
 
 in vec4 clipSpace;
 in vec2 textureCoords;
-in vec3 FragPos;
-in vec3 cameraDir;
-in vec3 cameraPos;
-in vec3 lightPos;
+in vec3 toCameraVector;
 
 out vec4 out_color;
 
-uniform vec3 cameraDirection;
 
 uniform sampler2D reflectionTexture;
 uniform sampler2D refractionTexture;
@@ -47,10 +43,11 @@ float Fresnel(vec3 viewDir, vec3 Normal, float RefractiveIndex)
 
 void main()
 {
-
+	//// Normalized Device Space Coordinates ////
 	vec2 ndc = (clipSpace.xy/clipSpace.w) / 2.0 + 0.5;
 	vec2 refractTexCoord = vec2(ndc.x, ndc.y);
 	vec2 reflectTexCoord = vec2(ndc.x, -ndc.y);
+	//////////////////////////////////////////////
 
 	float depth = texture(depthMap, refractTexCoord).r;
 	float floorDistance = 2.0 * near * far / (far + near - (2.0 * depth - 1.0) * (far - near));
@@ -101,20 +98,20 @@ void main()
 
 	////////////////////////////////////////////////////////
 
-	vec3 viewVector = normalize(-FragPos - cameraDir);
-	vec3 viewVector2 = normalize(cameraPos - FragPos);
-
-	vec3 fromLightVector = lightPos;
+	/*vec3 fromLightVector = lightPos;
 	vec3 reflectedLight = reflect(fromLightVector, normal);
-	float specular = max(dot(reflectedLight, viewVector2), 0.0);
+	float specular = max(dot(reflectedLight, viewVector), 0.0);
 	specular = pow(specular, shineDamper);
 	vec3 specularHighlights =  specular * reflectivity * lightColour;
+
+	*/
+	vec3 viewVector = normalize(toCameraVector);
 
 	//Fresnel
 	float refractiveFactor = Fresnel(viewVector, vec3(0.0, 1.0, 0.0), indexWater);
 
 	out_color = mix(refractionColour, reflectionColour, refractiveFactor);
-	out_color = mix(out_color, waterColour, 0.1) + vec4(specularHighlights, 0.0); //blue color
+	//out_color = mix(out_color, waterColour, 0.1) + vec4(specularHighlights, 0.0); //blue color
 
 	//out_color = vec4(specularHighlights, 1.0);
 }

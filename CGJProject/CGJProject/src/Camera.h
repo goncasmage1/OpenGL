@@ -37,6 +37,7 @@ protected:
 public:
 
 	Camera(int newWinX, int newWinY, int FOV);
+	void updateCamera();
 
 	void CreateBufferObjects();
 	void DestroyBufferObjects();
@@ -49,6 +50,7 @@ public:
 	void ToggleOrbiting() { bOrbiting = !bOrbiting; }
 	void MoveCamera(Vec3 movement);
 	Vec3 GetCameraMovement() const { return Offset; }
+
 
 	void RotateCamera(Vec2 rotation);
 	void Zoom(float amount);
