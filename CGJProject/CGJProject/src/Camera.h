@@ -59,8 +59,7 @@ public:
 	Vec3 GetUp();
 	Vec3 GetOffset();
 	Mat4 GetModelMat();
-	std::vector<Vec3> FlipView();
-	void UnflipView(std::vector<Vec3> preSettings);
+	void FlipView();
 	void SetModelMat(Mat4 mat);
 };
 

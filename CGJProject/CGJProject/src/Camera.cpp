@@ -143,33 +143,7 @@ Vec3 Camera::GetOffset()
 }
 
 
-std::vector<Vec3> Camera::FlipView()
-{
-	std::vector<Vec3> result = { Direction, UpVector, RightVector };
-
-	/*Direction.y = -Direction.y;
-	Direction = Normalized(Direction);
-	
-	//UpVector.x = -UpVector.x;
-	UpVector.z = -UpVector.z;
-	UpVector = Normalized(UpVector);
-
-	RightVector = Cross(UpVector, Direction);
-	RightVector.Normalize();*/
-	
-	Pitch = -Pitch;
-	Offset.y = -Offset.y;
-	updateCamera();
-
-	ViewMat = Mat4::ViewMatrix(Direction, UpVector, RightVector, Offset);
-	glBindBuffer(GL_UNIFORM_BUFFER, VboId);
-	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(Mat4), ViewMat.GetData());
-	glBindBuffer(GL_UNIFORM_BUFFER, 0);
-
-	return result;
-}
-
-void Camera::UnflipView(std::vector<Vec3> preSettings)
+void Camera::FlipView()
 {	
 	Pitch = -Pitch;
 	Offset.y = -Offset.y;

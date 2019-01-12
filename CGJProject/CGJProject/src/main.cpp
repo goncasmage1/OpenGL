@@ -313,10 +313,10 @@ void drawScene()
 	glEnable(GL_CLIP_DISTANCE0);
 	//Render Reflection
 	waterFBO->bindReflectionFrameBuffer(); //Binds the Reflection Buffer
-	std::vector<Vec3> pre = camera->FlipView(); //Set camera for reflection (flips) and Saves the previous camera settings
+	camera->FlipView(); //Set camera for reflection (flips) and Saves the previous camera settings
 	skybox->SetViewMatrix(camera->GetViewMatrix()); //Needs to be updated
 	scene->Draw(Vec4(0.0f, 1.0f, 0.0f, -WaterPosition.y+0.01f)); // Render the Scene above the surface
-	camera->UnflipView(pre); // Set previous Camera settings
+	camera->FlipView(); // Set previous Camera settings
 	skybox->SetViewMatrix(camera->GetViewMatrix());
 	waterFBO->unbindFrameBuffer(); //Unbinds the Reflection Buffer
 								   //
