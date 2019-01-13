@@ -1,7 +1,7 @@
 #include "SkyboxShader.h"
 #include <cassert>
 
-SkyboxShader::SkyboxShader()
+SkyboxShader::SkyboxShader(Mat4 view)
 {
 	std::vector<ShaderAttribute> shaderAttributes = {
 	ShaderAttribute(0, "in_Position")
@@ -10,8 +10,9 @@ SkyboxShader::SkyboxShader()
 		"src/Shader/GLSL/SkyboxVertexShader.glsl",
 		"src/Shader/GLSL/SkyboxFragmentShader.glsl"
 	};
-
+	SetViewMatrix(view);
 	BuildShader(shaderAttributes, shaderPaths);
+	LoadCubeMap(faces);
 }
 
 GLuint SkyboxShader::GetTexture()

@@ -28,7 +28,7 @@ const float waveStrenght = 0.01f;
 const float near = 0.1;
 const float far = 500.0;
 
-const float shineDamper = 1.0f;
+const float shineDamper = 32.0f;
 const float reflectivity = 0.6f;
 
 const vec4 waterColour = vec4(0.0, 0.3, 0.4, 1.0);
@@ -78,6 +78,7 @@ void main()
 	
 
 	vec3 viewVector = normalize(toCameraVector);
+	vec3 lightVector = normalize(fromLightVector);
 	
 	////////////////////////////////////////////////////////
 	//Light 
@@ -86,11 +87,11 @@ void main()
 	vec3 ambient = ambientStrenght * lightColour;
 
 	//Diffuse
-	float diff = max(dot(normal, normalize(fromLightVector)), 0.0);
+	float diff = max(dot(normal, lightVector), 0.0);
 	vec3 diffuse = diff * lightColour;
 
 	//Specular
-	vec3 reflectedLight = reflect(normalize(fromLightVector), normal);
+	vec3 reflectedLight = reflect(lightVector, normal);
 	float specular = max(0.0, dot(viewVector, reflectedLight));
 	specular = pow(specular, shineDamper);
 	vec3 specularHighlights = specular * reflectivity * lightColour;
