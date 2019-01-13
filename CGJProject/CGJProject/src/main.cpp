@@ -239,7 +239,6 @@ void createShaderProgram()
 
 	//RTT Reflection
 	std::shared_ptr<RTT> textureShader = std::make_shared<RTT>(waterFBO->getReflectionTexture());
-	//textureShader->SetTexture(waterFBO->getReflectionTexture());
 	shaders.push_back(textureShader);
 	
 	// ------------------------ LIGHT ------------------------ 
@@ -263,7 +262,6 @@ void createShaderProgram()
 
 	//RTT
 	std::shared_ptr<RTT> textureRefractShader = std::make_shared<RTT>(waterFBO->getRefractionTexture());
-	//textureRefractShader->SetTexture(waterFBO->getRefractionTexture());
 	shaders.push_back(textureRefractShader);
 
 	//Post-Processing
@@ -301,17 +299,15 @@ void destroyBufferObjects()
 /////////////////////////////////////////////////////////////////////// SCENE
 
 void drawScene()
-{
-
-	skybox->SetViewMatrix(camera->GetViewMatrix()); //Update Skybox ViewMatrix (without position)
-
+{	
 	glEnable(GL_CLIP_DISTANCE0);
+	
 	//Render Reflection
 	waterFBO->bindReflectionFrameBuffer(); //Binds the Reflection Buffer
 	camera->FlipView(); //Set camera for reflection (flips) and Saves the previous camera settings
-	skybox->SetViewMatrix(camera->GetViewMatrix()); //Needs to be updated
+	skybox->SetViewMatrix(camera->GetViewMatrix()); //Update Skybox ViewMatrix (without position)
 	scene->Draw(Vec4(0.0f, 1.0f, 0.0f, -water->GetPosition().y+0.01f)); // Render the Scene above the surface
-	camera->FlipView(); // Set previous Camera settings
+	camera->FlipView(); // Unflip camera
 	skybox->SetViewMatrix(camera->GetViewMatrix()); //Reset the ViewMatrix
 	waterFBO->unbindFrameBuffer(); //Unbinds the Reflection Buffer
 	//
