@@ -3,7 +3,7 @@
 in vec2 f_texcoord;
 uniform sampler2D fbo_texture;
 uniform int mode = 0;
-uniform vec3 rgbIntensity = vec3(1.0, 0.0, 0.0);
+uniform vec3 rgbIntensity = vec3(0.0, 0.0, 0.0);
 uniform float offset = 0.0;
 out vec4 color;
 
