@@ -62,7 +62,7 @@ std::shared_ptr<WaterFrameBuffer> waterFBO = std::make_shared<WaterFrameBuffer>(
 Vec3 WaterPosition = Vec3(0.0f, 0.0f, 0.0f);
 std::shared_ptr<WaterShader> water = nullptr;
 std::shared_ptr<SceneNode> Light = nullptr;
-Vec3 LightPosition = Vec3(0.0f, 6.0f, 0.0f);
+Vec3 LightPosition = Vec3(1.0f, 10.0f, 1.0f);
 
 std::shared_ptr<SkyboxShader> skybox = nullptr;
 
