@@ -6,55 +6,39 @@
 
 void Input::keyboardButtontDown(unsigned char Key)
 {
-	switch (Key)
+	//Movement
+	if (Key == 'w') movement.z += 1.f;
+	if (Key == 's') movement.z -= 1.f;
+	if (Key == 'd') movement.x += 1.f;
+	if (Key == 'a') movement.x -= 1.f;
+	if (Key == 'e') movement.y += 1.f;
+	if (Key == 'q') movement.y -= 1.f;
+
+	//Post Processing
+	if (Key == 'b') RGBIndex = 0;
+	if (Key == 'n') RGBIndex = 1;
+	if (Key == 'm') RGBIndex = 2;
+	if (Key == '.') intensityChange += 1;
+	if (Key == ',') intensityChange -= 1;
+	if (Key == 'p')
 	{
-		case 'w': 
-			movement.z += 1.f;
-			break;
-		case 's':
-			movement.z -= 1.f;
-			break;
-		case 'd':
-			movement.x += 1.f;
-			break;
-		case 'a':
-			movement.x -= 1.f;
-			break;
-		case 'e':
-			movement.y += 1.f;
-			break;
-		case 'q':
-			movement.y -= 1.f;
-			break;
-		case 27:
-			exit(1);
-			break;
-	};
+		postProcessingMode += 1;
+		if (postProcessingMode >= numModes) postProcessingMode = 0;
+	}
+
+	if (Key == 27) exit(1);
 }
 
 void Input::keyboardButtonUp(unsigned char Key)
 {
-	switch (Key)
-	{
-		case 'w':
-			movement.z -= 1.f;
-			break;
-		case 's':
-			movement.z += 1.f;
-			break;
-		case 'd':
-			movement.x -= 1.f;
-			break;
-		case 'a':
-			movement.x += 1.f;
-			break;
-		case 'e':
-			movement.y -= 1.f;
-			break;
-		case 'q':
-			movement.y += 1.f;
-			break;
-	};
+	if (Key == 'w') movement.z -= 1.f;
+	if (Key == 's') movement.z += 1.f;
+	if (Key == 'd') movement.x -= 1.f;
+	if (Key == 'a') movement.x += 1.f;
+	if (Key == 'e') movement.y -= 1.f;
+	if (Key == 'q') movement.y += 1.f;
+	if (Key == '.') intensityChange -= 1;
+	if (Key == ',') intensityChange += 1;
 }
 
 void Input::mouseButton(int button, int state)
