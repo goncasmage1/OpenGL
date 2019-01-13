@@ -311,6 +311,14 @@ void createShaderProgram()
 		"src/Shader/GLSL/FragmentShader.glsl"
 	}
 	));
+
+	//Texture 
+	std::shared_ptr<TextureShader> tugaShader = std::make_shared<TextureShader>();
+	tugaShader->SetTexture("../../assets/Textures/portugal.jpg");
+	//NarutoShader->SetNormalTexture("../../assets/Textures/brickwall_normal.jpg");
+	//NarutoShader->SetLightPosition(Vec3(0.0f, -10.0f, 0.0f));
+	//NarutoShader->SetCamera(camera);
+	shaders.push_back(tugaShader);
 }
 
 void destroyShaderProgram()
