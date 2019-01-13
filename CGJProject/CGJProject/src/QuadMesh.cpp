@@ -6,7 +6,6 @@ QuadMesh::QuadMesh(float newSide, int newXRepeat, int newYRepeat) :
 	Mesh(), side(newSide), xRepeat(newXRepeat), yRepeat(newYRepeat)
 {
 	VerticesPerFace = 3;
-	TexcoordsLoaded = true;
 	GenerateQuads();
 }
 
@@ -57,15 +56,15 @@ void QuadMesh::GenerateQuads()
 				vertexIdx.push_back(j + (i + 1) * (xRepeat + 1));
 				Texcoords.push_back(Vec2((float)j / (float)xRepeat, (float)(i + 1) / (float)yRepeat));
 
-				Vertices.push_back(TopRight);
+				Vertices.push_back(BottomRight);
 				vertexIdx.push_back(j + (i + 1) * (xRepeat + 1));
 				Texcoords.push_back(Vec2((float)j / (float)xRepeat, (float)(i + 1) / (float)yRepeat));
 
-				Vertices.push_back(BottomRight);
+				Vertices.push_back(TopRight);
 				vertexIdx.push_back((j + 1) + i * (xRepeat + 1));
 				Texcoords.push_back(Vec2((float)(j + 1) / (float)xRepeat, (float)i / (float)yRepeat));
 
-				Vertices.push_back(TopRight);
+				Vertices.push_back(TopLeft);
 				vertexIdx.push_back((j + 1) + (i + 1) * (xRepeat + 1));
 				Texcoords.push_back(Vec2((float)(j + 1) / (float)xRepeat, (float)(i + 1) / (float)yRepeat));
 

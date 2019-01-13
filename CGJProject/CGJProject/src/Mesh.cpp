@@ -56,7 +56,6 @@ void Mesh::CreateBufferObjects()
 	}
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glDeleteBuffers(1, &VboVertices);
 	glDeleteBuffers(1, &VboTexcoords);
 	glDeleteBuffers(1, &VboNormals);
 }
@@ -67,6 +66,7 @@ void Mesh::DestroyBufferObjects()
 	glDisableVertexAttribArray(VERTICES);
 	glDisableVertexAttribArray(TEXCOORDS);
 	glDisableVertexAttribArray(NORMALS);
+	glDeleteBuffers(1, &VboVertices);
 	glDeleteBuffers(1, &VBO);
 	glDeleteVertexArrays(1, &VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);

@@ -609,7 +609,7 @@ void setupMeshes()
 	properties.dragCoefficient = 0.7f;
 	properties.gravity = physx::PxVec3(0.f, 1.f, 0.f);
 	properties.damping = 0.2f;
-	meshLoader->CreateSailMesh(properties, factory, solver, 0.3f, 30, 20);
+	meshLoader->CreateSailMesh(properties, factory, solver, 0.05f, 30, 20);
 
 	//Skybox must be the first to be drawn in the scene
 	scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[1]);
@@ -627,7 +627,7 @@ void setupMeshes()
 	
 	Light = scene->root->CreateNode(meshLoader->Meshes[0], Transform(LightPosition, Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[3]);
 
-	Transform sailTransform = Transform();
+	Transform sailTransform = Transform(Vec3(0.f, 4.f, 0.f), Quat(), Vec3(1.f));
 	sailTransform.Rotation = FromAngleAxis(Vec4(1.f, 0.f, 0.f, 1.f), 90.f);
 	scene->root->CreateSailNode(meshLoader->Meshes[5], sailTransform, shaders[5]);
 }
