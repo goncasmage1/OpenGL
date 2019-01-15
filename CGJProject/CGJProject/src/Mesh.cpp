@@ -57,6 +57,8 @@ void Mesh::CreateBufferObjects()
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glDeleteBuffers(1, &VboTexcoords);
+	glDeleteBuffers(1, &VboTangent);
+	glDeleteBuffers(1, &VboBiTangent);
 	glDeleteBuffers(1, &VboNormals);
 }
 

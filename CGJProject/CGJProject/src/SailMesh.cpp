@@ -125,6 +125,13 @@ void SailMesh::UpdateSailData(physx::PxVec3 windVel)
 	UpdateBuffers();
 }
 
+void SailMesh::Draw()
+{
+	glDisable(GL_CULL_FACE);
+	QuadMesh::Draw();
+	glEnable(GL_CULL_FACE);
+}
+
 void SailMesh::UpdateBuffers()
 {
 	glBindBuffer(GL_ARRAY_BUFFER, VboVertices);
