@@ -32,6 +32,7 @@
 #include "PostProcessingFrameBuffer.h"
 #include "Shader/SkyboxShader.h"
 #include "SOIL.h"
+#include "WaterRenderer.h"
 
 #define CAPTION "Hello Modern 2D World"
 
@@ -71,6 +72,7 @@ Light sun;
 std::shared_ptr<WaterFrameBuffer> waterFBO = std::make_shared<WaterFrameBuffer>();
 std::shared_ptr<WaterShader> water = nullptr;
 
+std::shared_ptr<WaterRenderer> waterRenderer = nullptr;
 
 std::shared_ptr<PostProcessingFrameBuffer> ppFBO = std::make_shared<PostProcessingFrameBuffer>();
 std::shared_ptr<PostProcessingShader> ppFilter = nullptr;
@@ -302,22 +304,12 @@ void drawScene()
 {	
 	glEnable(GL_CLIP_DISTANCE0);
 	
-	//Render Refraction
-	
-	//glEnable(GL_DEPTH_TEST);
-	//glDepthMask(GL_TRUE);
-	glDisable(GL_CULL_FACE);
-	waterFBO->bindRefractionFrameBuffer(); //Binds the Refraction Buffer
-	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, water->GetPosition().y - 0.1f)); //draws everything bellow the plane
-	glEnable(GL_CULL_FACE);
-	waterFBO->unbindFrameBuffer(); //Unbinds the Refraction Buffer
-	//
 
 	//Render Reflection
 	waterFBO->bindReflectionFrameBuffer(); //Binds the Reflection Buffer
 	camera->FlipView(); //Set camera for reflection (flips) and Saves the previous camera settings
 	skybox->SetViewMatrix(camera->GetViewMatrix()); //Update Skybox ViewMatrix (without position)
-	scene->Draw(Vec4(0.0f, 1.0f, 0.0f, -water->GetPosition().y+0.01f)); // Render the Scene above the surface
+	scene->Draw(Vec4(0.0f, 1.0f, 0.0f, -water->GetPosition().y)); // Render the Scene above the surface
 	camera->FlipView(); // Unflip camera
 	skybox->SetViewMatrix(camera->GetViewMatrix()); //Reset the ViewMatrix
 	waterFBO->unbindFrameBuffer(); //Unbinds the Reflection Buffer
@@ -325,10 +317,18 @@ void drawScene()
 
 	//ppFBO->bindFilterFrameBuffer();
 
+	//Render Refraction
+	glDisable(GL_CULL_FACE);
+	waterFBO->bindRefractionFrameBuffer(); //Binds the Refraction Buffer
+	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, water->GetPosition().y)); //draws everything bellow the plane
+	glEnable(GL_CULL_FACE);
+	waterFBO->unbindFrameBuffer(); //Unbinds the Refraction Buffer
+	//
+
 	//Render Scene Normally
 	glDisable(GL_CLIP_DISTANCE0);
 	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, 1000)); //after GL_CLIP disabled this should be redundant. Might depend on the graphic
-
+	waterRenderer->Draw(Vec4(0.0f, -1.0f, 0.0f, 1000));
 	//Draw scene to texture
 	/*ppFilter->Use();
 	ppMesh->Draw();*/
@@ -505,7 +505,7 @@ void setupMeshes()
 	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/terrain2.obj"));
 
-	ppMesh = meshLoader->CreatePPFilterMesh(ppFilter->GetVCoordId());
+	//ppMesh = meshLoader->CreatePPFilterMesh(ppFilter->GetVCoordId());
 
 	//Skybox must be the first to be drawn in the scene
 	std::shared_ptr<SceneNode> sky = scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
@@ -524,8 +524,9 @@ void setupMeshes()
 	scene->root->CreateNode(meshLoader->Meshes[3], Transform(Vec3(1.45f, -1.25f, 15.0f), Quat(), Vec3(6.0f, 6.0f, 6.0f)), shaders[3]);
 	
 	//Water
-	scene->root->CreateNode(meshLoader->Meshes[2], Transform(water->GetPosition(), Quat(), Vec3(3.5f, 3.5f, 3.5f)), water);
-
+	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(water->GetPosition(), Quat(), Vec3(3.5f, 3.5f, 3.5f)), water);
+	waterRenderer = std::make_shared<WaterRenderer>(meshLoader->Meshes[2], Transform(water->GetPosition(), Quat(), Vec3(3.5f, 3.5f, 3.5f)), scene->root, water);
+	
 	//This Object is only to know where the light is coming from (easier for debug, after development this can be deleted)
 	scene->root->CreateNode(meshLoader->Meshes[0], Transform(sun.Position, Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[3]);
 }
