@@ -15,6 +15,9 @@ Camera::Camera(int newWinX, int newWinY, int FOV)
 
 	Offset = Vec3(0.0, 0.0, 0.0);
 	updateCamera();
+
+	Near = 0.1f;
+	Far = 300.f;
 	////
 	/*RightVector = Vec3(1, 0, 0);
 	UpVector = Vec3(0, 1, 0);
@@ -28,7 +31,7 @@ Camera::Camera(int newWinX, int newWinY, int FOV)
 
 	Orthographic = Mat4::OrthographicMat(0.01f, 100, -1, 1, -1, 1);
 	FOV = FOV * (float) 0.0174532925;
-	Projection = Mat4::ProjectionMat(FOV, (float)WinX / (float)WinY, 0.01f, 500);
+	Projection = Mat4::ProjectionMat(FOV, (float)WinX / (float)WinY, Near, Far);
 }
 
 void Camera::updateCamera()

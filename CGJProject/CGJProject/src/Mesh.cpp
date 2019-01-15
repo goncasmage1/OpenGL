@@ -67,6 +67,8 @@ void Mesh::DestroyBufferObjects()
 	glDisableVertexAttribArray(VERTICES);
 	glDisableVertexAttribArray(TEXCOORDS);
 	glDisableVertexAttribArray(NORMALS);
+	glDisableVertexAttribArray(TANGENT);
+	glDisableVertexAttribArray(BITANGENT);
 	glDeleteBuffers(1, &VBO);
 	glDeleteVertexArrays(1, &VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
