@@ -22,6 +22,8 @@ void Input::keyboardButtontDown(unsigned char Key)
 	if (Key == 'm') RGBIndex = 2;
 	if (Key == '.') intensityChange += 1;
 	if (Key == ',') intensityChange -= 1;
+	if (Key == 'l') distortionChange += 1;
+	if (Key == 'k') distortionChange -= 1;
 	if (Key == 'p')
 	{
 		postProcessingMode += 1;
@@ -45,6 +47,8 @@ void Input::keyboardButtonUp(unsigned char Key)
 	
 	if (Key == '.') intensityChange -= 1;
 	if (Key == ',') intensityChange += 1;
+	if (Key == 'l') distortionChange -= 1;
+	if (Key == 'k') distortionChange += 1;
 }
 
 void Input::mouseButton(int button, int state)

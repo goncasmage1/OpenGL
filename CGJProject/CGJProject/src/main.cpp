@@ -97,6 +97,7 @@ std::shared_ptr<PostProcessingShader> ppFilter = nullptr;
 std::shared_ptr<PPFilterMesh> ppMesh = nullptr;
 
 float RGBIntensity[3] = { 0.0f, 0.2f, 0.5f };
+float distortionIntensity = 0.f;
 
 /////////////////////////////////////////////////////////////////////// ERRORS
 
@@ -353,8 +354,7 @@ void processCamera()
 
 void processPostProcessingShader() 
 {
-	float intensityChange = (input->GetIntensityChange());
-	std::cout << intensityChange << std::endl;
+	float intensityChange = input->GetIntensityChange();
 	int RGBIndex = input->GetRGBIndex();
 	if (intensityChange != 0.0f)
 	{
@@ -375,9 +375,31 @@ void processPostProcessingShader()
 			else RGBIntensity[RGBIndex] += intensityChange;
 		}
 	}
+	float distortionChange = input->GetDistortionChange();
+	if (distortionChange != 0.0f)
+	{
+		if (distortionChange > 0.f)
+		{
+			if ((distortionIntensity + distortionChange) >= 0.15f)
+			{
+				distortionIntensity = 0.15f;
+			}
+			else distortionIntensity += distortionChange;
+		}
+		else
+		{
+			if ((distortionIntensity + distortionChange) <= 0.f)
+			{
+				distortionIntensity = 0.f;
+			}
+			else distortionIntensity += distortionChange;
+		}
+	}
+	std::cout << distortionIntensity << std::endl;
 	glUseProgram(ppFilter->GetProgramId());
 	glUniform3f(glGetUniformLocation(ppFilter->GetProgramId(), "rgbIntensity"), RGBIntensity[0], RGBIntensity[1], RGBIntensity[2]);
 	glUniform1i(glGetUniformLocation(ppFilter->GetProgramId(), "mode"), input->GetPostProcessingMode());
+	glUniform1f(glGetUniformLocation(ppFilter->GetProgramId(), "distortionAmount"), distortionIntensity);
 	glUseProgram(0);
 }
 
