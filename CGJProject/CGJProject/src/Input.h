@@ -8,12 +8,19 @@ protected:
 
 	struct Vec3 movement = Vec3(0.f);
 	int wheelDirection = 0;
-	int AnimationDirection = 0;
+
+	//Post-Processing control
+	int RGBIndex = 0;
+	int intensityChange = 0;
+	float intensityChangeSpeed = 0.01f;
+	float distortionChange = 0.f;
+	float distortionChangeSpeed = 0.001f;
+	int postProcessingMode = 0;
+	int numModes = 2;
 
 	struct Vec2 MouseSensitivity = Vec2(0.5f);
 	struct Vec3 MoveSensitivity = Vec3(0.1f);
 	float WheelSensitivity = 0.9f;
-	float AnimationSpeed = 50.f;
 
 	struct Vec2 MouseDelta;
 	struct Vec2 PreviousMousePosition;
@@ -23,8 +30,6 @@ protected:
 	uint8_t bMiddleMouseButtonDown : 1;
 	uint8_t bMouseMoved : 1;
 	uint8_t bWheelMoved : 1;
-	uint8_t bPDown : 1;
-	uint8_t bGDown : 1;
 
 public:
 
@@ -38,6 +43,9 @@ public:
 	struct Vec3 GetMovement() { return movement * MoveSensitivity; }
 	float GetWheelDelta();
 	bool IsMiddleMouseButtonDown() const { return bMiddleMouseButtonDown; }
-	bool IsPDown() const { return bPDown; }
-	bool IsGDown() const { return bGDown; }
+	int GetRGBIndex() const { return RGBIndex; }
+	float GetIntensityChange() const { return intensityChange * intensityChangeSpeed; }
+	float GetDistortionChange() const { return distortionChange * distortionChangeSpeed; }
+	int GetPostProcessingMode() const { return postProcessingMode; }
+
 };

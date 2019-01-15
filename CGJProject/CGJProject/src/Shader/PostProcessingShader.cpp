@@ -12,19 +12,6 @@ PostProcessingShader::PostProcessingShader()
 	};
 
 	BuildShader(shaderAttributes, shaderPaths);
-
-	std::string attribute_name;
-	attribute_name = "v_coord";
-	v_coord = GetAttributeId(attribute_name.c_str());
-	if (v_coord == -1) {
-		std::cerr << "Could not bind " << attribute_name << " to Post Processing Shader!" << std::endl;
-	}
-
-	attribute_name = "fbo_texture";
-	uniform_fbo_texture = GetUniformId(attribute_name.c_str());
-	if (uniform_fbo_texture == -1) {
-		std::cerr << "Could not bind " << attribute_name << " to Post Processing Shader!" << std::endl;
-	}
 }
 
 void PostProcessingShader::BuildShader(const std::vector<ShaderAttribute> Attributes, const std::vector<std::string> ShaderPaths)
@@ -45,6 +32,19 @@ void PostProcessingShader::BuildShader(const std::vector<ShaderAttribute> Attrib
 	CheckLinkage();
 
 	for (i = 0; i < NumOfShaders; i++) shaders[i].DetachAndDelete(ProgramId);
+
+	std::string attribute_name;
+	attribute_name = "v_coord";
+	v_coord = GetAttributeId(attribute_name.c_str());
+	if (v_coord == -1) {
+		std::cerr << "Could not bind " << attribute_name << " to Post Processing Shader!" << std::endl;
+	}
+
+	attribute_name = "fbo_texture";
+	uniform_fbo_texture = GetUniformId(attribute_name.c_str());
+	if (uniform_fbo_texture == -1) {
+		std::cerr << "Could not bind " << attribute_name << " to Post Processing Shader!" << std::endl;
+	}
 }
 
 void PostProcessingShader::SetFboTexture(GLuint new_fbo_texture)

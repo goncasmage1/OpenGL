@@ -1,5 +1,7 @@
 #include "Mesh.h"
 
+//Não me posso esquecer de eliminar os buffers das tangentes e bitangentes
+
 #define VERTICES 0
 #define TEXCOORDS 1
 #define NORMALS 2

@@ -74,9 +74,13 @@ std::shared_ptr<WaterShader> water = nullptr;
 
 std::shared_ptr<WaterRenderer> waterRenderer = nullptr;
 
+//Post-Processing
 std::shared_ptr<PostProcessingFrameBuffer> ppFBO = std::make_shared<PostProcessingFrameBuffer>();
 std::shared_ptr<PostProcessingShader> ppFilter = nullptr;
 std::shared_ptr<PPFilterMesh> ppMesh = nullptr;
+
+float RGBIntensity[3] = { 1.0f, 0.0f, 0.0f };
+float distortionIntensity = 0.f;
 
 /////////////////////////////////////////////////////////////////////// ERRORS
 
@@ -167,73 +171,6 @@ static void checkOpenGLError(std::string error)
 
 void createShaderProgram()
 {
-	//Instantiate specific ShaderProgram class
-	/*shaders.push_back(std::make_shared<ShaderProgram>());
-
-	//or send attributes explicitly
-	shaders.push_back(std::make_shared<ShaderProgram>(
-	std::vector<ShaderAttribute>{
-	ShaderAttribute(0, "in_Position"),
-	ShaderAttribute(1, "in_Coordinates"),
-	ShaderAttribute(2, "in_Normal")
-	},
-	std::vector<std::string>{
-	"src/Shader/GLSL/BrownShader.glsl",
-	"src/Shader/GLSL/FragmentShader.glsl"
-	}
-	));
-
-	shaders.push_back(std::make_shared<SailShader>());
-	shaders.push_back(std::make_shared<WaterShader>());
-	shaders.push_back(std::make_shared<WoodShader>());
->>>>>>> master
-
-	std::shared_ptr<SkyboxShader> skyboxShader = std::make_shared<SkyboxShader>();
-	std::vector<const char*> faces = {
-	"../../assets/Textures/sea/right.jpg",
-	"../../assets/Textures/sea/left.jpg",
-	"../../assets/Textures/sea/top.jpg",
-	"../../assets/Textures/sea/bottom.jpg",
-	"../../assets/Textures/sea/back.jpg",
-	"../../assets/Textures/sea/front.jpg"
-	};
-
-	skyboxShader->LoadCubeMap(faces);
-	shaders.push_back(skyboxShader);
-
-	//Texture
-	std::shared_ptr<TextureShader> NarutoShader = std::make_shared<TextureShader>();
-	NarutoShader->SetTexture("../../assets/Textures/naruto_kun.png");
-	shaders.push_back(NarutoShader);
-
-<<<<<<< HEAD
-	//Water Shader
-	water = std::make_shared<WaterShader>();
-	water->SetCamera(camera);
-	water->SetFBO(waterFBO);
-	// ------------------------ LIGHT ------------------------ 
-	water->SetLightPosition(Vec3(0.0f, -10.0f, 0.0f)); //its a vector :) lol
-	water->SetLightColour(Vec3(1.0f, 1.0f, 1.0f)); //white
-	// ------------------------------------------------------- 
-	shaders.push_back(water);
-
-
-	//RTT Reflection
-	std::shared_ptr<TextureShader> textureShader = std::make_shared<TextureShader>();
-	textureShader->SetTexture(waterFBO->getReflectionTexture());
-	shaders.push_back(textureShader);
-
-	//RTT
-	std::shared_ptr<TextureShader> textureRefractShader = std::make_shared<TextureShader>();
-	textureRefractShader->SetTexture(waterFBO->getRefractionTexture());
-	shaders.push_back(textureRefractShader);
-
-
-	checkOpenGLError("ERROR: Could not create shaders.");
-	/*
-=======
-	checkOpenGLError("ERROR: Could not create shaders.");*/
-
 	//Skybox Shader
 	std::shared_ptr<SkyboxShader> skyboxShader = std::make_shared<SkyboxShader>(camera->GetViewMatrix());
 	skybox = skyboxShader;
@@ -254,7 +191,7 @@ void createShaderProgram()
 	water->SetFBO(waterFBO);
 	shaders.push_back(water);
 
-	//Texture 
+	////Texture 
 	std::shared_ptr<TextureShader> NarutoShader = std::make_shared<TextureShader>();
 	NarutoShader->SetTexture("../../assets/Textures/brickwall.jpg");
 	NarutoShader->SetNormalTexture("../../assets/Textures/brickwall_normal.jpg");
@@ -315,8 +252,6 @@ void drawScene()
 	waterFBO->unbindFrameBuffer(); //Unbinds the Reflection Buffer
 	//
 
-	ppFBO->bindFilterFrameBuffer();
-
 	//Render Refraction
 	glDisable(GL_CULL_FACE);
 	waterFBO->bindRefractionFrameBuffer(); //Binds the Refraction Buffer
@@ -325,27 +260,82 @@ void drawScene()
 	waterFBO->unbindFrameBuffer(); //Unbinds the Refraction Buffer
 	//
 
+	//ppFBO->bindFilterFrameBuffer();
+
 	//Render Scene Normally
 	glDisable(GL_CLIP_DISTANCE0);
 	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, 1000)); //after GL_CLIP disabled this should be redundant. Might depend on the graphic
 	waterRenderer->Draw(Vec4(0.0f, -1.0f, 0.0f, 1000));
 	//Draw scene to texture
-	/*ppFilter->Use();
-	ppMesh->Draw();*/
-	checkOpenGLError("ERROR: Could not draw scene.");
 
+	//ppFilter->Use();
+	//ppMesh->Draw();
+
+	checkOpenGLError("ERROR: Could not draw scene.");
 }
 
 void processCamera()
 {
-	//if (camera->IsOrbiting() != input->IsMiddleMouseButtonDown()) camera->ToggleOrbiting();
 	camera->RotateCamera(input->GetMouseDelta());
 	camera->MoveCamera(input->GetMovement());
+
+}
+
+void processPostProcessingShader() 
+{
+	float intensityChange = input->GetIntensityChange();
+	int RGBIndex = input->GetRGBIndex();
+	if (intensityChange != 0.0f)
+	{
+		if (intensityChange > 0.f)
+		{
+			if ((RGBIntensity[RGBIndex] + intensityChange) >= 1.f)
+			{
+				RGBIntensity[RGBIndex] = 1.f;
+			}
+			else RGBIntensity[RGBIndex] += intensityChange;
+		}
+		else
+		{
+			if ((RGBIntensity[RGBIndex] + intensityChange) <= 0.f)
+			{
+				RGBIntensity[RGBIndex] = 0.f;
+			}
+			else RGBIntensity[RGBIndex] += intensityChange;
+		}
+	}
+	float distortionChange = input->GetDistortionChange();
+	if (distortionChange != 0.0f)
+	{
+		if (distortionChange > 0.f)
+		{
+			if ((distortionIntensity + distortionChange) >= 0.15f)
+			{
+				distortionIntensity = 0.15f;
+			}
+			else distortionIntensity += distortionChange;
+		}
+		else
+		{
+			if ((distortionIntensity + distortionChange) <= 0.f)
+			{
+				distortionIntensity = 0.f;
+			}
+			else distortionIntensity += distortionChange;
+		}
+	}
+	std::cout << distortionIntensity << std::endl;
+	glUseProgram(ppFilter->GetProgramId());
+	glUniform3f(glGetUniformLocation(ppFilter->GetProgramId(), "rgbIntensity"), RGBIntensity[0], RGBIntensity[1], RGBIntensity[2]);
+	glUniform1i(glGetUniformLocation(ppFilter->GetProgramId(), "mode"), input->GetPostProcessingMode());
+	glUniform1f(glGetUniformLocation(ppFilter->GetProgramId(), "distortionAmount"), distortionIntensity);
+	glUseProgram(0);
 }
 
 void processInput()
 {
 	processCamera();
+	processPostProcessingShader();
 }
 
 /////////////////////////////////////////////////////////////////////// CALLBACKS
@@ -505,7 +495,7 @@ void setupMeshes()
 	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/terrain2.obj"));
 
-	//ppMesh = meshLoader->CreatePPFilterMesh(ppFilter->GetVCoordId());
+	ppMesh = meshLoader->CreatePPFilterMesh(ppFilter->GetVCoordId());
 
 	//Skybox must be the first to be drawn in the scene
 	std::shared_ptr<SceneNode> sky = scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
