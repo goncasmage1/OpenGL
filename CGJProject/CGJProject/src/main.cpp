@@ -315,7 +315,7 @@ void drawScene()
 	waterFBO->unbindFrameBuffer(); //Unbinds the Reflection Buffer
 	//
 
-	//ppFBO->bindFilterFrameBuffer();
+	ppFBO->bindFilterFrameBuffer();
 
 	//Render Refraction
 	glDisable(GL_CULL_FACE);

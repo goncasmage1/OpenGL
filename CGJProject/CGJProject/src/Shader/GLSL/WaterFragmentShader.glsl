@@ -78,9 +78,8 @@ void main()
 
 	vec3 viewVector = normalize(toCameraVector);
 	vec3 lightVector = normalize(fromLightVector);
-	
-	////////////////////////////////////////////////////////
-	//Light 
+
+	//// Light ////
 	//Ambient 
 	float ambientStrenght = 0.1f;
 	vec3 ambient = ambientStrenght * lightColour;
@@ -95,12 +94,13 @@ void main()
 	specular = pow(specular, shineDamper);
 	vec3 specularHighlights = specular * reflectivity * lightColour * clamp(waterDepth, 0.0, 1.0);
 	
-	vec3 color_result = (ambient + diffuse + specularHighlights) * waterColour;
+	//vec3 color_result = (ambient + diffuse + specularHighlights) * waterColour;
 
-	////////////////////////////////////////////////////////
-	//Fresnel
+
+	//// Fresnel ////
 	float refractiveFactor = Fresnel(viewVector, normal, indexWater);
-
+	
+	////////////////////////////////////////////////////////
 	out_color = mix(refractionColour, reflectionColour, refractiveFactor);
 	out_color = mix(out_color, waterColour, 0.2) + vec4(specularHighlights, 0.0); //blue color
 	out_color.a = clamp(waterDepth, 0.0, 1.0);
