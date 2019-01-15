@@ -1,8 +1,8 @@
 #include "RTT.h"
 
-RTT::RTT()
+RTT::RTT(GLuint texture)
 {
-
+	textureId = texture;
 	std::vector<ShaderAttribute> shaderAttributes = {
 		ShaderAttribute(0, "in_Position"),
 		ShaderAttribute(1, "in_Coordinates"),

@@ -64,6 +64,13 @@ struct MeshData
 	int ShaderIndex = 0;
 };
 
+typedef struct Light{
+	Vec3 Position;
+	Vec3 Color;
+} Light;
+
+
+
 std::shared_ptr<Input> input = std::make_shared<Input>();
 std::shared_ptr<Camera> camera = std::make_shared<Camera>(WinX, WinY, 90);
 std::shared_ptr<MeshLoader> meshLoader = std::make_shared<MeshLoader>();
@@ -79,11 +86,10 @@ nv::cloth::Factory* factory = nullptr;
 nv::cloth::Solver* solver = nullptr;
 CUcontext cudaContext;
 
+Light sun;
 std::shared_ptr<WaterFrameBuffer> waterFBO = std::make_shared<WaterFrameBuffer>();
-
 std::shared_ptr<WaterShader> water = nullptr;
-std::shared_ptr<SceneNode> Light = nullptr;
-Vec3 LightPosition = Vec3(1.2f, 6.0f, 2.0f);
+std::shared_ptr<SkyboxShader> skybox = nullptr;
 
 //Post-Processing
 std::shared_ptr<PostProcessingFrameBuffer> ppFBO = std::make_shared<PostProcessingFrameBuffer>();
@@ -215,73 +221,25 @@ void destroyNvCloth()
 
 void createShaderProgram()
 {
-	//Instantiate specific ShaderProgram class
-	/*shaders.push_back(std::make_shared<ShaderProgram>());
-
-	//or send attributes explicitly
-	shaders.push_back(std::make_shared<ShaderProgram>(
-	std::vector<ShaderAttribute>{
-	ShaderAttribute(0, "in_Position"),
-	ShaderAttribute(1, "in_Coordinates"),
-	ShaderAttribute(2, "in_Normal")
-	},
-	std::vector<std::string>{
-	"src/Shader/GLSL/BrownShader.glsl",
-	"src/Shader/GLSL/FragmentShader.glsl"
-	}
-	));
-
-	shaders.push_back(std::make_shared<SailShader>());
-	shaders.push_back(std::make_shared<WaterShader>());
-	shaders.push_back(std::make_shared<WoodShader>());
-
-	std::shared_ptr<SkyboxShader> skyboxShader = std::make_shared<SkyboxShader>();
-	std::vector<const char*> faces = {
-	"../../assets/Textures/sea/right.jpg",
-	"../../assets/Textures/sea/left.jpg",
-	"../../assets/Textures/sea/top.jpg",
-	"../../assets/Textures/sea/bottom.jpg",
-	"../../assets/Textures/sea/back.jpg",
-	"../../assets/Textures/sea/front.jpg"
-	};
-
-	skyboxShader->LoadCubeMap(faces);
-	shaders.push_back(skyboxShader);
-
-	//Texture
-	std::shared_ptr<TextureShader> NarutoShader = std::make_shared<TextureShader>();
-	NarutoShader->SetTexture("../../assets/Textures/naruto_kun.png");
-	shaders.push_back(NarutoShader);
-
-	checkOpenGLError("ERROR: Could not create shaders.");*/
-
-	//RTT Reflection
-	std::shared_ptr<RTT> textureShader = std::make_shared<RTT>();
-	textureShader->SetTexture(waterFBO->getReflectionTexture());
-	shaders.push_back(textureShader);
 
 	//Skybox Shader
-	std::shared_ptr<SkyboxShader> skyboxShader = std::make_shared<SkyboxShader>();
-	std::vector<const char*> faces = {
-		"../../assets/Textures/sea/right.jpg",
-		"../../assets/Textures/sea/left.jpg",
-		"../../assets/Textures/sea/top.jpg",
-		"../../assets/Textures/sea/bottom.jpg",
-		"../../assets/Textures/sea/back.jpg",
-		"../../assets/Textures/sea/front.jpg"
-	};
-
-	skyboxShader->LoadCubeMap(faces);
+	std::shared_ptr<SkyboxShader> skyboxShader = std::make_shared<SkyboxShader>(camera->GetViewMatrix());
+	skybox = skyboxShader;
 	shaders.push_back(skyboxShader);
 
+	//RTT Reflection
+	std::shared_ptr<RTT> textureShader = std::make_shared<RTT>(waterFBO->getReflectionTexture());
+	shaders.push_back(textureShader);
+	
+	// ------------------------ LIGHT ------------------------ 
+	sun.Position = Vec3(1.0f, 10.0f, 0.0f);
+	sun.Color = Vec3(1.0f, 1.0f, 1.0f);
+	// ------------------------------------------------------- 
+	
 	//Water Shader
-	water = std::make_shared<WaterShader>();
+	water = std::make_shared<WaterShader>(Vec3(0.0f, 0.0f, 0.0f), sun.Position, sun.Color);
 	water->SetCamera(camera);
 	water->SetFBO(waterFBO);
-	// ------------------------ LIGHT ------------------------ 
-	water->SetLightPosition(LightPosition);
-	water->SetLightColour(Vec3(1.0f, 1.0f, 1.0f)); //white
-												   // ------------------------------------------------------- 
 	shaders.push_back(water);
 
 	////Texture 
@@ -293,8 +251,7 @@ void createShaderProgram()
 	shaders.push_back(NarutoShader);
 
 	//RTT
-	std::shared_ptr<RTT> textureRefractShader = std::make_shared<RTT>();
-	textureRefractShader->SetTexture(waterFBO->getRefractionTexture());
+	std::shared_ptr<RTT> textureRefractShader = std::make_shared<RTT>(waterFBO->getRefractionTexture());
 	shaders.push_back(textureRefractShader);
 
 	//Post-Processing
@@ -351,42 +308,27 @@ void destroyBufferObjects()
 
 /////////////////////////////////////////////////////////////////////// SCENE
 
-void processScene()
-{
-	Vec3 movementOffset = camera->GetCameraMovement();
-
-	if (movementOffset != scene->root->transform.Position)
-	{
-		scene->root->transform.Position = movementOffset;
-		scene->root->UpdateTransformationMatrix();
-	}
-}
-
 void drawScene()
-{
-
-	water->SetLightPosition(LightPosition + camera->GetCameraMovement());
+{	
 	glEnable(GL_CLIP_DISTANCE0);
-
+	
 	//Render Reflection
 	waterFBO->bindReflectionFrameBuffer(); //Binds the Reflection Buffer
-	std::vector<Vec3> pre = camera->FlipView(); //Set camera for reflection (flips) and Saves the previous camera settings
-	Vec3 water_heightRefl = Vec3(0.0f, 0.0f, 0.0f) + camera->GetCameraMovement();
-	processScene();
-	scene->Draw(Vec4(0.0f, 1.0f, 0.0f, -water_heightRefl.y)); // Render the Scene above the surface
-	camera->UnflipView(pre); // Set previous Camera settings
-	processScene();
+	camera->FlipView(); //Set camera for reflection (flips) and Saves the previous camera settings
+	skybox->SetViewMatrix(camera->GetViewMatrix()); //Update Skybox ViewMatrix (without position)
+	scene->Draw(Vec4(0.0f, 1.0f, 0.0f, -water->GetPosition().y+0.01f)); // Render the Scene above the surface
+	camera->FlipView(); // Unflip camera
+	skybox->SetViewMatrix(camera->GetViewMatrix()); //Reset the ViewMatrix
 	waterFBO->unbindFrameBuffer(); //Unbinds the Reflection Buffer
-								   //
+	//
 
 	//Render Refraction
 	waterFBO->bindRefractionFrameBuffer(); //Binds the Refraction Buffer
 	glDisable(GL_CULL_FACE);
-	Vec3 water_height = Vec3(0.0f, 0.0f, 0.0f) + camera->GetCameraMovement(); // Sets the hight of the plane
-	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, water_height.y)); //draws everything bellow the plane
+	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, water->GetPosition().y-0.01f)); //draws everything bellow the plane
 	glEnable(GL_CULL_FACE);
 	waterFBO->unbindFrameBuffer(); //Unbinds the Refraction Buffer
-								   //
+	//
 
 	ppFBO->bindFilterFrameBuffer();
 
@@ -399,20 +341,14 @@ void drawScene()
 	ppMesh->Draw();
 
 	checkOpenGLError("ERROR: Could not draw scene.");
+
+	checkOpenGLError("ERROR: Could not draw scene.");
 }
 
 void processCamera()
 {
 	camera->RotateCamera(input->GetMouseDelta());
 	camera->MoveCamera(input->GetMovement());
-
-	Vec3 movementOffset = camera->GetCameraMovement();
-
-	if (movementOffset != scene->root->transform.Position)
-	{
-		scene->root->transform.Position = movementOffset;
-		scene->root->UpdateTransformationMatrix();
-	}
 }
 
 void processPostProcessingShader() 
@@ -626,17 +562,10 @@ void setupGLUT(int argc, char* argv[])
 
 void setupMeshes()
 {
-	/*meshLoader->CreateMesh(std::string("../../assets/models/skybox.obj"));
-
-	scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[5]);*/
-
 	//MeshLoader loads all necessary meshes
 	meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/skybox.obj"));
-	//meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));
-
-	meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
 
 	ppMesh = meshLoader->CreatePPFilterMesh(ppFilter->GetVCoordId());
 	
@@ -648,29 +577,30 @@ void setupMeshes()
 	meshLoader->CreateSailMesh(properties, factory, solver, 0.05f, 30, 20);
 
 	//Skybox must be the first to be drawn in the scene
-	scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[1]);
+	scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
 
+	//// DO NOT DELETE THESE LINES /////
 	//reflection check
-	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(-12.0, 0.0, 0.0), Quat(), Vec3(0.5, 0.5, 0.5)), shaders[0]);
+	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(-12.0, WaterPosition.y, 0.0), Quat(), Vec3(0.5, 0.5, 0.5)), shaders[1]);
 	//refraction check
-	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, 0.0, 0.0), Quat(), Vec3(0.5, 0.5, 0.5)), shaders[4]);
+	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, WaterPosition.y, 0.0), Quat(), Vec3(0.5, 0.5, 0.5)), shaders[4]);
+	////////////////////////////////////
 
 	//Naruto
 	scene->root->CreateNode(meshLoader->Meshes[0], Transform(Vec3(-2.0, 0.5, -2.0), Quat(), Vec3(2.0f, 2.0f, 2.0f)), shaders[3]);
 
 	//Water
-	scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, 0.0, 0.0), Quat(), Vec3(2.0f, 2.0f, 2.0f)), shaders[2]);
+	scene->root->CreateNode(meshLoader->Meshes[2], Transform(water->GetPosition(), Quat(), Vec3(2.0f, 2.0f, 2.0f)), water);
 	
-	Light = scene->root->CreateNode(meshLoader->Meshes[0], Transform(LightPosition, Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[4]);
+	scene->root->CreateNode(meshLoader->Meshes[0], Transform(sun.Position, Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[4]);
 
 	Transform sailTransform = Transform(Vec3(0.f, 4.f, 0.f), Quat(), Vec3(1.f));
 	sailTransform.Rotation = FromAngleAxis(Vec4(1.f, 0.f, 0.f, 1.f), 90.f);
-	scene->root->CreateSailNode(meshLoader->Meshes[5], sailTransform, shaders[5]);
+	scene->root->CreateSailNode(meshLoader->Meshes[4], sailTransform, shaders[5]);
 }
 
 void setupFBO()
 {
-	//FIXME: Save window Settings and have a lower resolution for the water
 	waterFBO->initializeWater(WinX, WinY);
 
 	ppFBO->initializePostProcessing(WinX, WinY);

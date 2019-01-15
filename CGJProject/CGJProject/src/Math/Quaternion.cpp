@@ -246,6 +246,20 @@ const void ToAngleAxis(const Quat & Q, float & degrees, Vec4 & axis)
 	}
 }
 
+Quat Quat::FromAngleAxis(float theta, Vec4 axis)
+{
+	Quat q;
+	float a = theta * (float)DEGREES_TO_RADIANS;
+	q.t = cos(a / 2.0f);
+	float s = sin(a / 2.0f);
+	q.x = axis.x * s;
+	q.y = axis.y * s;
+	q.z = axis.z * s;
+	q.Normalize();
+
+	return q;
+}
+
 Mat4 Quat::GetMatrix()
 {
 	Quat qn = Normalized(*this);
