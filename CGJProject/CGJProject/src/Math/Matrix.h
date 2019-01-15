@@ -146,6 +146,7 @@ struct Mat4
 	static Mat4 RotationMat(struct Vec4 V, const float Degrees);
 	static Mat4 ViewMat(const Vec3 center, const Vec3 eye, const Vec3 up);
 	static Mat4 ViewMat(const Vec3 direction, const Vec3 up);
+	static Mat4 ViewMatrix(const Vec3 V, const Vec3 U, const Vec3 S, const Vec3 pos);
 	static Mat4 OrthographicMat(float n, float f, float b, float t, float r, float l);
 	static Mat4 ProjectionMat(float fov, float aspect, float n, float f);
 };

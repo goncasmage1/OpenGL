@@ -11,6 +11,10 @@ class Camera
 {
 protected:
 
+	////
+	float Yaw, Pitch;
+	float Near, Far;
+	////
 	GLuint VboId;
 	const GLuint UBO_BP = 0;
 
@@ -34,6 +38,7 @@ protected:
 public:
 
 	Camera(int newWinX, int newWinY, int FOV);
+	void updateCamera();
 
 	void CreateBufferObjects();
 	void DestroyBufferObjects();
@@ -47,15 +52,17 @@ public:
 	void MoveCamera(Vec3 movement);
 	Vec3 GetCameraMovement() const { return Offset; }
 
+
 	void RotateCamera(Vec2 rotation);
 	void Zoom(float amount);
 
+	float GetNear() { return Near; }
+	float GetFar() { return Far; }
 	Vec3 GetDirection();
 	Vec3 GetUp();
 	Vec3 GetOffset();
 	Mat4 GetModelMat();
-	std::vector<Vec3> FlipView();
-	void UnflipView(std::vector<Vec3> preSettings);
+	void FlipView();
 	void SetModelMat(Mat4 mat);
 };
 

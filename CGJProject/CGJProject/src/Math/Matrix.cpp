@@ -628,6 +628,7 @@ Mat4::Mat4(const Mat3 & newMat)
 	values[2][0] = newMat[2][0];
 	values[2][1] = newMat[2][1];
 	values[2][2] = newMat[2][2];
+	values[3][3] = 1.0f;
 }
 
 Mat4::Mat4(const Mat4 & newMat)
@@ -928,6 +929,25 @@ Mat4 Mat4::ViewMat(const Vec3 direction, const Vec3 up)
 	);
 }
 
+Mat4 Mat4::ViewMatrix(const Vec3 V, const Vec3 U, const Vec3 S, const Vec3 pos)
+{
+	float dotSide = Dot(S, pos);
+	float dotUp = Dot(U, pos);
+	float dotView = Dot(V, pos);
+
+	return Mat4(
+		{
+		{
+			{S.x, S.y, S.z, -dotSide},
+			{U.x, U.y, U.z, -dotUp},
+			{-V.x, -V.y, -V.z, dotView},
+			{0, 0, 0, 1}
+		}
+		}
+	);
+
+}
+
 Mat4 Mat4::OrthographicMat(float n, float f, float b, float t, float r, float l)
 {
 	return Mat4(
@@ -945,7 +965,7 @@ Mat4 Mat4::OrthographicMat(float n, float f, float b, float t, float r, float l)
 Mat4 Mat4::ProjectionMat(float fov, float aspect, float n, float f)
 {
 	float degrees = fov / 2;
-	float d = 1 / std::tan((degrees*PI)/180);
+	float d = 1 / std::tan(degrees);
 	return Mat4(
 		{
 		{

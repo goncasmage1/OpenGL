@@ -27,36 +27,30 @@ uniform vec4 plane;
 
 uniform vec3 lightPos;
 uniform vec3 viewPos;
-
+out vec3 worldLight;
+out mat3 TBN;
 void main(void)
 {
 
 	vec4 worldPosition = ModelMatrix * in_Position;
 	gl_Position = ProjectionMatrix * ViewMatrix * worldPosition;
-	vs_out.FragPos = vec3(ModelMatrix * in_Position);
+	vs_out.FragPos = vec3(ViewMatrix * ModelMatrix * in_Position);
 	ex_textCoord = in_Coordinates;
 
-	mat3 normalMatrix = transpose(inverse(mat3(ModelMatrix)));
+	mat3 normalMatrix = transpose(inverse(mat3(ViewMatrix * ModelMatrix)));
 	vs_out.Normal = normalMatrix * in_Normal;
 
-	vec3 T = normalize(vec3(ModelMatrix * vec4(tangent, 0.0)));
-	vec3 N = normalize(vec3(ModelMatrix * vec4(in_Normal, 0.0)));
+	vec3 T = normalize((normalMatrix * tangent).xyz);
+	vec3 B = normalize((normalMatrix * bitangent).xyz);
+	vec3 N = normalize((normalMatrix * in_Normal).xyz);
 
-	T = normalize(T - dot(T, N) * N);
+	TBN = transpose(mat3(T,B,N));
 
-	vec3 B = cross(T, N);
+	vs_out.LightVec = vec4()
 
-	mat4 TBN4 = mat4(
-		vec4(T, 0.0),
-		vec4(B, 0.0),
-		vec4(N, 0.0),
-		worldPosition 
-	);
-	
-	mat4 invTBN4 = inverse(TBN4);
-
-    vs_out.LightVec = invTBN4 * vec4(normalize(lightPos - worldPosition.xyz), 0.0);
-    vs_out.ViewVec  = invTBN4 * vec4(normalize(viewPos - worldPosition.xyz), 0.0);
+	worldLight = vec3(ViewMatrix * vec4(lightPos, 1.0));
+    //vs_out.LightVec = vec4(normalize(lightPos - worldPosition.xyz), 0.0);
+    //vs_out.ViewVec  = vec4(normalize(viewPos - worldPosition.xyz), 0.0);
 	//vs_out.TangentFragPos = TBN * vec3(worldPosition);
 	gl_ClipDistance[0] = dot(worldPosition, plane);
 	

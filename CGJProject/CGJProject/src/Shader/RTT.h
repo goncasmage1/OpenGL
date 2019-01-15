@@ -9,7 +9,7 @@ private:
 
 public:
 
-	RTT();
+	RTT(GLuint texture);
 	void SetTexture(unsigned int textureId) { this->textureId = textureId; }
 	void Use();
 };
