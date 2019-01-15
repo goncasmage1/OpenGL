@@ -14,8 +14,12 @@ protected:
 	int RGBIndex = 0;
 	int intensityChange = 0;
 	float intensityChangeSpeed = 0.01f;
-	float distortionChange = 0.f;
-	float distortionChangeSpeed = 0.001f;
+	float distortionAmountChange = 0.f;
+	float distortionAmountChangeSpeed = 0.001f;
+	float distortionSpeedChange = 0.f;
+	float distortionSpeedChangeSpeed = 0.01f;
+	float distortionFrequencyChange = 0.f;
+	float distortionFrequencyChangeSpeed = 0.01f;
 	int postProcessingMode = 0;
 	int numModes = 2;
 
@@ -48,7 +52,9 @@ public:
 	bool IsMiddleMouseButtonDown() const { return bMiddleMouseButtonDown; }
 	int GetRGBIndex() const { return RGBIndex; }
 	float GetIntensityChange() const { return intensityChange * intensityChangeSpeed; }
-	float GetDistortionChange() const { return distortionChange * distortionChangeSpeed; }
+	float GetDistortionAmountChange() const { return distortionAmountChange * distortionAmountChangeSpeed; }
+	float GetDistortionSpeedChange() const { return distortionSpeedChange * distortionSpeedChangeSpeed; }
+	float GetDistortionFrequencyChange() const { return distortionFrequencyChange * distortionFrequencyChangeSpeed; }
 	int GetPostProcessingMode() const { return postProcessingMode; }
 
 };

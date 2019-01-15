@@ -56,19 +56,12 @@ float fpsInterval = 1000.f / 60.f;
 const float HEIGHT = 1.0f;
 
 auto begin = std::chrono::steady_clock::now();
-
-
-struct MeshData
-{
-	int MeshIndex = 0;
-	int ShaderIndex = 0;
-};
+float timeCount = 0.f;
 
 typedef struct Light{
 	Vec3 Position;
 	Vec3 Color;
 } Light;
-
 
 
 std::shared_ptr<Input> input = std::make_shared<Input>();
@@ -98,6 +91,8 @@ std::shared_ptr<PPFilterMesh> ppMesh = nullptr;
 
 float RGBIntensity[3] = { 0.0f, 0.2f, 0.5f };
 float distortionIntensity = 0.f;
+float distortionSpeed = 0.f;
+float distortionFrequency = 0.f;
 
 /////////////////////////////////////////////////////////////////////// ERRORS
 
@@ -375,31 +370,72 @@ void processPostProcessingShader()
 			else RGBIntensity[RGBIndex] += intensityChange;
 		}
 	}
-	float distortionChange = input->GetDistortionChange();
-	if (distortionChange != 0.0f)
+	float distortionAmountChange = input->GetDistortionAmountChange();
+	if (distortionAmountChange != 0.0f)
 	{
-		if (distortionChange > 0.f)
+		if (distortionAmountChange > 0.f)
 		{
-			if ((distortionIntensity + distortionChange) >= 0.15f)
+			if ((distortionIntensity + distortionAmountChange) >= 0.15f)
 			{
 				distortionIntensity = 0.15f;
 			}
-			else distortionIntensity += distortionChange;
+			else distortionIntensity += distortionAmountChange;
 		}
 		else
 		{
-			if ((distortionIntensity + distortionChange) <= 0.f)
+			if ((distortionIntensity + distortionAmountChange) <= 0.f)
 			{
 				distortionIntensity = 0.f;
 			}
-			else distortionIntensity += distortionChange;
+			else distortionIntensity += distortionAmountChange;
 		}
 	}
-	std::cout << distortionIntensity << std::endl;
+	float distortionSpeedChange = input->GetDistortionSpeedChange();
+	if (distortionSpeedChange != 0.0f)
+	{
+		if (distortionSpeedChange > 0.f)
+		{
+			if ((distortionSpeed + distortionSpeedChange) >= 1.f)
+			{
+				distortionSpeed = 1.f;
+			}
+			else distortionSpeed += distortionSpeedChange;
+		}
+		else
+		{
+			if ((distortionSpeed + distortionSpeedChange) <= 0.f)
+			{
+				distortionSpeed = 0.f;
+			}
+			else distortionSpeed += distortionSpeedChange;
+		}
+	}
+	float distortionFrequencyChange = input->GetDistortionFrequencyChange();
+	if (distortionFrequencyChange != 0.0f)
+	{
+		if (distortionFrequencyChange > 0.f)
+		{
+			if ((distortionFrequency + distortionFrequencyChange) >= 1.f)
+			{
+				distortionFrequency = 1.f;
+			}
+			else distortionFrequency += distortionFrequencyChange;
+		}
+		else
+		{
+			if ((distortionFrequency + distortionFrequencyChange) <= 0.f)
+			{
+				distortionFrequency = 0.f;
+			}
+			else distortionFrequency += distortionFrequencyChange;
+		}
+	}
 	glUseProgram(ppFilter->GetProgramId());
 	glUniform3f(glGetUniformLocation(ppFilter->GetProgramId(), "rgbIntensity"), RGBIntensity[0], RGBIntensity[1], RGBIntensity[2]);
 	glUniform1i(glGetUniformLocation(ppFilter->GetProgramId(), "mode"), input->GetPostProcessingMode());
 	glUniform1f(glGetUniformLocation(ppFilter->GetProgramId(), "distortionAmount"), distortionIntensity);
+	glUniform1f(glGetUniformLocation(ppFilter->GetProgramId(), "offset"), timeCount);
+	glUniform1f(glGetUniformLocation(ppFilter->GetProgramId(), "frequency"), 1.f + distortionFrequency * 5.f);
 	glUseProgram(0);
 }
 
@@ -451,11 +487,14 @@ void display()
 
 	begin = std::chrono::steady_clock::now();
 
-	/*float frameTime = std::chrono::duration<float>(begin - frameStart).count() * 1000.f;
+	float frameTime = std::chrono::duration<float>(begin - frameStart).count();
 	std::cout << "Frame Time: " << frameTime << std::endl;
+	timeCount += frameTime * (1.f + distortionSpeed * 6.f);
+	if (timeCount > 2.0*3.14159) timeCount -= 2.0*3.14159;
+
 	float waitTime = fpsInterval - frameTime;
 	
-	if (waitTime > 0.f) Sleep(waitTime);*/
+	//if (waitTime > 0.f) Sleep(waitTime);
 }
 
 void idle()

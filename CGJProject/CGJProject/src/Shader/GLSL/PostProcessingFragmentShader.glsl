@@ -5,12 +5,13 @@ uniform sampler2D fbo_texture;
 uniform int mode = 0;
 uniform vec3 rgbIntensity = vec3(0.0, 0.0, 0.0);
 uniform float offset = 0.0;
+uniform float frequency = 1.0f;
 uniform float distortionAmount = 0.0;
-out vec4 color;
+  out vec4 color;
 
 void main(void) {
   vec2 texcoord = f_texcoord;
-  float distortion = sin(texcoord.y * 4.0*2.0*3.14159 + offset);
+  float distortion = sin(texcoord.y * frequency*2.0*3.14159 + offset);
   texcoord.x += (distortion * distortionAmount);
   switch(mode) {
     //Overlay
