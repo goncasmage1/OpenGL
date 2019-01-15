@@ -85,9 +85,12 @@ std::shared_ptr<WaterShader> water = nullptr;
 std::shared_ptr<SceneNode> Light = nullptr;
 Vec3 LightPosition = Vec3(1.2f, 6.0f, 2.0f);
 
+//Post-Processing
 std::shared_ptr<PostProcessingFrameBuffer> ppFBO = std::make_shared<PostProcessingFrameBuffer>();
 std::shared_ptr<PostProcessingShader> ppFilter = nullptr;
 std::shared_ptr<PPFilterMesh> ppMesh = nullptr;
+
+float RGBIntensity[3] = { 1.0f, 0.0f, 0.0f };
 
 /////////////////////////////////////////////////////////////////////// ERRORS
 
@@ -281,7 +284,7 @@ void createShaderProgram()
 												   // ------------------------------------------------------- 
 	shaders.push_back(water);
 
-	//Texture 
+	////Texture 
 	std::shared_ptr<TextureShader> NarutoShader = std::make_shared<TextureShader>();
 	NarutoShader->SetTexture("../../assets/Textures/brickwall.jpg");
 	NarutoShader->SetNormalTexture("../../assets/Textures/brickwall_normal.jpg");
@@ -385,27 +388,23 @@ void drawScene()
 	waterFBO->unbindFrameBuffer(); //Unbinds the Refraction Buffer
 								   //
 
-	//ppFBO->bindFilterFrameBuffer();
+	ppFBO->bindFilterFrameBuffer();
 
 	//Render Scene Normally
 	glDisable(GL_CLIP_DISTANCE0);
 	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, 1000)); //after GL_CLIP disabled this should be redundant. Might depend on the graphic
 
 	//Draw scene to texture
-	/*ppFilter->Use();
-	ppMesh->Draw();*/
-
-	checkOpenGLError("ERROR: Could not draw scene.");
+	ppFilter->Use();
+	ppMesh->Draw();
 
 	checkOpenGLError("ERROR: Could not draw scene.");
 }
 
 void processCamera()
 {
-	//if (camera->IsOrbiting() != input->IsMiddleMouseButtonDown()) camera->ToggleOrbiting();
 	camera->RotateCamera(input->GetMouseDelta());
 	camera->MoveCamera(input->GetMovement());
-	//camera->Zoom(input->GetWheelDelta());
 
 	Vec3 movementOffset = camera->GetCameraMovement();
 
@@ -416,9 +415,40 @@ void processCamera()
 	}
 }
 
+void processPostProcessingShader() 
+{
+	float intensityChange = (input->GetIntensityChange());
+	std::cout << intensityChange << std::endl;
+	int RGBIndex = input->GetRGBIndex();
+	if (intensityChange != 0.0f)
+	{
+		if (intensityChange > 0.f)
+		{
+			if ((RGBIntensity[RGBIndex] + intensityChange) >= 1.f)
+			{
+				RGBIntensity[RGBIndex] = 1.f;
+			}
+			else RGBIntensity[RGBIndex] += intensityChange;
+		}
+		else
+		{
+			if ((RGBIntensity[RGBIndex] + intensityChange) <= 0.f)
+			{
+				RGBIntensity[RGBIndex] = 0.f;
+			}
+			else RGBIntensity[RGBIndex] += intensityChange;
+		}
+	}
+	glUseProgram(ppFilter->GetProgramId());
+	glUniform3f(glGetUniformLocation(ppFilter->GetProgramId(), "rgbIntensity"), RGBIntensity[0], RGBIntensity[1], RGBIntensity[2]);
+	glUniform1i(glGetUniformLocation(ppFilter->GetProgramId(), "mode"), input->GetPostProcessingMode());
+	glUseProgram(0);
+}
+
 void processInput()
 {
 	processCamera();
+	processPostProcessingShader();
 }
 
 void processCloth()
@@ -633,7 +663,7 @@ void setupMeshes()
 	//Water
 	scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, 0.0, 0.0), Quat(), Vec3(2.0f, 2.0f, 2.0f)), shaders[2]);
 	
-	Light = scene->root->CreateNode(meshLoader->Meshes[0], Transform(LightPosition, Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[3]);
+	Light = scene->root->CreateNode(meshLoader->Meshes[0], Transform(LightPosition, Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[4]);
 
 	Transform sailTransform = Transform(Vec3(0.f, 4.f, 0.f), Quat(), Vec3(1.f));
 	sailTransform.Rotation = FromAngleAxis(Vec4(1.f, 0.f, 0.f, 1.f), 90.f);

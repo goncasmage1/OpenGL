@@ -7,9 +7,8 @@ in vec2 ex_textCoord;
 in VS_OUT{
 	vec3 FragPos;
 	vec3 Normal;
-	vec3 TangentLightPos;
-	vec3 TangentViewPos;
-	vec3 TangentFragPos;
+	vec4 LightVec;
+	vec4 ViewVec;
 } fs_in;
 
 uniform sampler2D screenTexture; //Diffuse Texture
@@ -31,15 +30,15 @@ void main()
 	vec3 ambient = 0.1 * Normalcolor;
 
 	//Diffuse Light
-	vec3 lightDir = normalize(fs_in.TangentLightPos - fs_in.TangentFragPos);
-	float diff = max(dot(lightDir, normal), 0.0);
+	vec4 lightDir = normalize(fs_in.LightVec);
+	float diff = max(dot(vec3(lightDir), normal), 0.0);
 	vec3 diffuse = diff * Normalcolor;
 
 	//Specular Light
-	vec3 viewDir = normalize(fs_in.TangentViewPos - fs_in.TangentFragPos);
-	vec3 reflectDir = reflect(-lightDir, normal);
-	vec3 halfwayDir = normalize(lightDir + viewDir);
-	float spec = pow(max(dot(normal, halfwayDir), 0.0), 32.0);
+	vec4 viewDir = normalize(fs_in.ViewVec);
+	vec3 reflectDir = reflect(vec3(-lightDir), normal);
+	vec4 halfwayDir = normalize(lightDir + viewDir);
+	float spec = pow(max(dot(normal, vec3(halfwayDir)), 0.0), 32.0);
 	vec3 specular = vec3(0.2) * spec;
 
 	color = vec4(ambient + diffuse + specular, 1.0f);
