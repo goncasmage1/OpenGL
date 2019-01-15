@@ -90,7 +90,7 @@ std::shared_ptr<PostProcessingFrameBuffer> ppFBO = std::make_shared<PostProcessi
 std::shared_ptr<PostProcessingShader> ppFilter = nullptr;
 std::shared_ptr<PPFilterMesh> ppMesh = nullptr;
 
-float RGBIntensity[3] = { 1.0f, 0.0f, 0.0f };
+float RGBIntensity[3] = { 0.0f, 0.2f, 0.5f };
 
 /////////////////////////////////////////////////////////////////////// ERRORS
 
@@ -587,8 +587,6 @@ void setupOpenGL()
 	glDepthMask(GL_TRUE);
 	glDepthRange(0.0, 1.0);
 	glClearDepth(1.0);
-	//glEnable(GL_CULL_FACE);
-	//glCullFace(GL_BACK);
 	glFrontFace(GL_CCW);
 }
 
