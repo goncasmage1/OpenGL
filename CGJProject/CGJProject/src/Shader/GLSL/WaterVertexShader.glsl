@@ -19,7 +19,7 @@ uniform SharedMatrices
 	mat4 ProjectionMatrix;
 };
 
-const float tilling = 0.25f;
+const float tilling = 1.0f;
 
 void main(void)
 {

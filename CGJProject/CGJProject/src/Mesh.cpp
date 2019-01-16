@@ -1,6 +1,6 @@
 #include "Mesh.h"
 
-//Não me posso esquecer de eliminar os buffers das tangentes e bitangentes
+//Nï¿½o me posso esquecer de eliminar os buffers das tangentes e bitangentes
 
 #define VERTICES 0
 #define TEXCOORDS 1
@@ -70,6 +70,8 @@ void Mesh::DestroyBufferObjects()
 	glDisableVertexAttribArray(VERTICES);
 	glDisableVertexAttribArray(TEXCOORDS);
 	glDisableVertexAttribArray(NORMALS);
+	glDisableVertexAttribArray(TANGENT);
+	glDisableVertexAttribArray(BITANGENT);
 	glDeleteBuffers(1, &VboVertices);
 	glDeleteBuffers(1, &VBO);
 	glDeleteVertexArrays(1, &VAO);
