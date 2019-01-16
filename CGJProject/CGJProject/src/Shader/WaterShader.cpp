@@ -1,8 +1,12 @@
 #include "WaterShader.h"
 #include "SOIL.h"
 
-WaterShader::WaterShader()
+WaterShader::WaterShader(Vec3 pos, Vec3 lightPos, Vec3 lightC)
 {
+	Position = pos;
+	lightPosition = lightPos;
+	lightColour = lightC;
+
 	dudvTexture = loadTexture(dudvPath);
 	normalTexture = loadTexture(normalPath);
 	moveFactor = 0.0f;
@@ -48,25 +52,6 @@ void WaterShader::SetCamera(std::shared_ptr<Camera> camera)
 	this->camera = camera;
 }
 
-void WaterShader::SetCameraPos()
-{
-	Vec3 direction = camera->GetDirection();
-	//Vec3 direction = camera->GetCameraMovement();
-	CameraPositionX = direction.x;
-	CameraPositionY = direction.y;
-	CameraPositionZ = direction.z;
-}
-
-void WaterShader::SetLightPosition(Vec3 pos)
-{
-	this->lightPosition = pos;
-}
-
-void WaterShader::SetLightColour(Vec3 colour)
-{
-	this->lightColour = colour;
-}
-
 void WaterShader::Use()
 {
 	ShaderProgram::Use();
@@ -91,6 +76,9 @@ void WaterShader::Use()
 	glActiveTexture(GL_TEXTURE4);
 	glBindTexture(GL_TEXTURE_2D, fbo->getRefractionDepthTexture());
 
+	glUniform1f(glGetUniformLocation(ProgramId, "near"), camera->GetNear());
+	glUniform1f(glGetUniformLocation(ProgramId, "far"), camera->GetFar());
+
 	moveFactor += waveSpeed * 0.008;
 	moveFactor = fmod(moveFactor, 1);
 	glUniform1f(glGetUniformLocation(ProgramId, "moveFactor"), moveFactor);
@@ -100,8 +88,7 @@ void WaterShader::Use()
 	glUniform3f(glGetUniformLocation(ProgramId, "lightColour"), lightColour.x, lightColour.y, lightColour.z);
 	//////////
 
-	SetCameraPos();
-	glUniform3f(glGetUniformLocation(ProgramId, "cameraDirection"), CameraPositionX, CameraPositionY, CameraPositionZ);
-	glUniform3f(glGetUniformLocation(ProgramId, "cameraOffset"), camera->GetOffset().x, camera->GetOffset().y, camera->GetOffset().z);
+	glUniform3f(glGetUniformLocation(ProgramId, "cameraPosition"), camera->GetOffset().x, camera->GetOffset().y, camera->GetOffset().z);
+
 
 }

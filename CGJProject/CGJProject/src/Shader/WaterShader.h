@@ -9,32 +9,25 @@ class WaterShader : public ShaderProgram
 {
 private:
 	const char* dudvPath = "../../assets/Textures/Ripple/waterDUDV.png";
-	//const char* normalPath = "../../assets/Textures/Ripple/normalMap.png";
-	const char* normalPath = "../../assets/Textures/Ripple/mNormalMap.png";
+	const char* normalPath = "../../assets/Textures/Ripple/normalMap.png"; //this one looks better
+	//const char* normalPath = "../../assets/Textures/Ripple/mNormalMap.png";
 	const float waveSpeed = 0.03f;
 
-	float moveFactor;
+
 	std::shared_ptr<WaterFrameBuffer> fbo;
-	int reflectionTextureId;
-	int refractionTextureId;
-	int dudvTexture;
-	int normalTexture;
-	Vec3 lightPosition;
-	Vec3 lightColour;
-	
-	int CameraPositionX, CameraPositionY, CameraPositionZ;
-	std::shared_ptr<Camera> camera; 
+	std::shared_ptr<Camera> camera;
+	int reflectionTextureId, refractionTextureId, dudvTexture, normalTexture;
+	float moveFactor;
+	Vec3 Position, lightPosition, lightColour; 
 
 public:
 
-	WaterShader();
+	WaterShader(Vec3 pos, Vec3 lightPos, Vec3 lightColor);
 	int loadTexture(const char* path);
 	
 	void SetFBO(std::shared_ptr<WaterFrameBuffer> fbo) { this->fbo = fbo; }
 	void SetCamera(std::shared_ptr<Camera> camera);
-	void SetCameraPos(); 
-	void SetLightPosition(Vec3 pos);
-	Vec3 GetLightPosition() { return this->lightPosition;  }
-	void SetLightColour(Vec3 colour);
 	void Use();
+
+	Vec3 GetPosition() { return Position; }
 };

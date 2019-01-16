@@ -1,24 +1,28 @@
 #include "SkyboxShader.h"
 #include <cassert>
 
-SkyboxShader::SkyboxShader()
+SkyboxShader::SkyboxShader(Mat4 view)
 {
 	std::vector<ShaderAttribute> shaderAttributes = {
-	ShaderAttribute(0, "in_Position"),
-	ShaderAttribute(1, "in_Coordinates"),
-	ShaderAttribute(2, "in_Normal")
+	ShaderAttribute(0, "in_Position")
 	};
 	std::vector<std::string> shaderPaths = {
 		"src/Shader/GLSL/SkyboxVertexShader.glsl",
 		"src/Shader/GLSL/SkyboxFragmentShader.glsl"
 	};
-
+	SetViewMatrix(view);
 	BuildShader(shaderAttributes, shaderPaths);
+	LoadCubeMap(faces);
 }
 
 GLuint SkyboxShader::GetTexture()
 {
 	return textureId;
+}
+
+void SkyboxShader::SetViewMatrix(Mat4 view)
+{
+	this->view = Mat4(Mat3(view));
 }
 
 void SkyboxShader::LoadCubeMap(std::vector<const char*> faces)
@@ -50,13 +54,13 @@ void SkyboxShader::LoadCubeMap(std::vector<const char*> faces)
 void SkyboxShader::Use()
 {
 	glDepthMask(GL_FALSE);
-	//glDepthFunc(GL_LEQUAL);
 	ShaderProgram::Use();
 	
 	if (textureId != 0)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glUniform1i(glGetUniformLocation(ProgramId, "skybox"), 0);
+		glUniformMatrix4fv(glGetUniformLocation(ProgramId, "view"), 1, GL_FALSE, view.GetData());
 		glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
 	}
 }

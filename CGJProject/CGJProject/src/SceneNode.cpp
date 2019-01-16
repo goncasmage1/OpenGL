@@ -60,11 +60,13 @@ void SceneNode::Draw(Vec4 plane)
 	if (shaderProg != nullptr && mesh != nullptr)
 	{
 
+		
 		shaderProg->SetPlane(plane);
 		shaderProg->Use();
 		SetupUniforms();
 		mesh->Draw();
 		glDepthMask(GL_TRUE);
+		glUseProgram(0);
 	}
 
 	for (std::shared_ptr<SceneNode> node : childNodes)
@@ -72,6 +74,7 @@ void SceneNode::Draw(Vec4 plane)
 		node->Draw(plane);
 	}
 	glUseProgram(0);
+	
 }
 
 void SceneNode::SetupUniforms()
