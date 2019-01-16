@@ -195,7 +195,8 @@ void createShaderProgram()
 	std::shared_ptr<TextureShader> NarutoShader = std::make_shared<TextureShader>();
 	NarutoShader->SetTexture("../../assets/Textures/brickwall.jpg");
 	NarutoShader->SetNormalTexture("../../assets/Textures/brickwall_normal.jpg");
-	NarutoShader->SetLightPosition(Vec3(0.0f, -10.0f, 0.0f));
+	NarutoShader->SetLightPosition(sun.Position);
+	NarutoShader->SetLightColour(sun.Color);
 	NarutoShader->SetCamera(camera);
 	shaders.push_back(NarutoShader);
 
@@ -516,9 +517,9 @@ void setupMeshes()
 	//Water
 	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(water->GetPosition(), Quat(), Vec3(3.5f, 3.5f, 3.5f)), water);
 	waterRenderer = std::make_shared<WaterRenderer>(meshLoader->Meshes[2], Transform(water->GetPosition(), Quat(), Vec3(3.5f, 3.5f, 3.5f)), scene->root, water);
-	
+
 	//This Object is only to know where the light is coming from (easier for debug, after development this can be deleted)
-	scene->root->CreateNode(meshLoader->Meshes[0], Transform(sun.Position, Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[3]);
+	scene->root->CreateNode(meshLoader->Meshes[0], Transform(sun.Position, Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[4]);
 }
 
 void setupFBO()
