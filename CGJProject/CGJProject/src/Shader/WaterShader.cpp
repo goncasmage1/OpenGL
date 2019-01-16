@@ -76,6 +76,9 @@ void WaterShader::Use()
 	glActiveTexture(GL_TEXTURE4);
 	glBindTexture(GL_TEXTURE_2D, fbo->getRefractionDepthTexture());
 
+	glUniform1f(glGetUniformLocation(ProgramId, "near"), camera->GetNear());
+	glUniform1f(glGetUniformLocation(ProgramId, "far"), camera->GetFar());
+
 	moveFactor += waveSpeed * 0.008;
 	moveFactor = fmod(moveFactor, 1);
 	glUniform1f(glGetUniformLocation(ProgramId, "moveFactor"), moveFactor);
@@ -86,5 +89,6 @@ void WaterShader::Use()
 	//////////
 
 	glUniform3f(glGetUniformLocation(ProgramId, "cameraPosition"), camera->GetOffset().x, camera->GetOffset().y, camera->GetOffset().z);
+
 
 }
