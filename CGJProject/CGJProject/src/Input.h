@@ -13,8 +13,10 @@ protected:
 	int RGBIndex = 0;
 	int intensityChange = 0;
 	float intensityChangeSpeed = 0.01f;
+	float distortionChange = 0.f;
+	float distortionChangeSpeed = 0.001f;
 	int postProcessingMode = 0;
-	int numModes = 3;
+	int numModes = 2;
 
 	struct Vec2 MouseSensitivity = Vec2(0.5f);
 	struct Vec3 MoveSensitivity = Vec3(0.1f);
@@ -43,6 +45,7 @@ public:
 	bool IsMiddleMouseButtonDown() const { return bMiddleMouseButtonDown; }
 	int GetRGBIndex() const { return RGBIndex; }
 	float GetIntensityChange() const { return intensityChange * intensityChangeSpeed; }
+	float GetDistortionChange() const { return distortionChange * distortionChangeSpeed; }
 	int GetPostProcessingMode() const { return postProcessingMode; }
 
 };
