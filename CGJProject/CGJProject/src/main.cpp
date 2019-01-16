@@ -242,7 +242,8 @@ void createShaderProgram()
 	std::shared_ptr<TextureShader> NarutoShader = std::make_shared<TextureShader>();
 	NarutoShader->SetTexture("../../assets/Textures/brickwall.jpg");
 	NarutoShader->SetNormalTexture("../../assets/Textures/brickwall_normal.jpg");
-	NarutoShader->SetLightPosition(Vec3(0.0f, -10.0f, 0.0f));
+	NarutoShader->SetLightPosition(sun.Position);
+	NarutoShader->SetLightColour(sun.Color);
 	NarutoShader->SetCamera(camera);
 	shaders.push_back(NarutoShader);
 
@@ -308,6 +309,17 @@ void drawScene()
 {	
 	glEnable(GL_CLIP_DISTANCE0);
 	
+	//Render Refraction
+	
+	//glEnable(GL_DEPTH_TEST);
+	//glDepthMask(GL_TRUE);
+	glDisable(GL_CULL_FACE);
+	waterFBO->bindRefractionFrameBuffer(); //Binds the Refraction Buffer
+	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, water->GetPosition().y - 0.1f)); //draws everything bellow the plane
+	glEnable(GL_CULL_FACE);
+	waterFBO->unbindFrameBuffer(); //Unbinds the Refraction Buffer
+	//
+
 	//Render Reflection
 	waterFBO->bindReflectionFrameBuffer(); //Binds the Reflection Buffer
 	camera->FlipView(); //Set camera for reflection (flips) and Saves the previous camera settings
@@ -316,14 +328,6 @@ void drawScene()
 	camera->FlipView(); // Unflip camera
 	skybox->SetViewMatrix(camera->GetViewMatrix()); //Reset the ViewMatrix
 	waterFBO->unbindFrameBuffer(); //Unbinds the Reflection Buffer
-	//
-
-	//Render Refraction
-	waterFBO->bindRefractionFrameBuffer(); //Binds the Refraction Buffer
-	glDisable(GL_CULL_FACE);
-	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, water->GetPosition().y-0.01f)); //draws everything bellow the plane
-	glEnable(GL_CULL_FACE);
-	waterFBO->unbindFrameBuffer(); //Unbinds the Refraction Buffer
 	//
 
 	ppFBO->bindFilterFrameBuffer();
@@ -335,8 +339,6 @@ void drawScene()
 	//Draw scene to texture
 	ppFilter->Use();
 	ppMesh->Draw();
-
-	checkOpenGLError("ERROR: Could not draw scene.");
 
 	checkOpenGLError("ERROR: Could not draw scene.");
 }
@@ -581,7 +583,7 @@ void setupOpenGL()
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
-	glDepthMask(GL_TRUE);
+	glDepthMask(GL_FALSE);
 	glDepthRange(0.0, 1.0);
 	glClearDepth(1.0);
 	glFrontFace(GL_CCW);
@@ -627,6 +629,7 @@ void setupMeshes()
 	meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/skybox.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));
+	meshLoader->CreateMesh(std::string("../../assets/models/terrain2.obj"));
 
 	ppMesh = meshLoader->CreatePPFilterMesh(ppFilter->GetVCoordId());
 	
@@ -638,23 +641,27 @@ void setupMeshes()
 	meshLoader->CreateSailMesh(properties, factory, solver, 0.05f, 30, 20);
 
 	//Skybox must be the first to be drawn in the scene
-	scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
+	std::shared_ptr<SceneNode> sky = scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
 
 	//// DO NOT DELETE THESE LINES /////
 	//reflection check
-	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(-12.0, WaterPosition.y, 0.0), Quat(), Vec3(0.5, 0.5, 0.5)), shaders[1]);
+	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(-12.0, water->GetPosition().y, 0.0), Quat(), Vec3(0.5, 0.5, 0.5)), shaders[1]);
 	//refraction check
-	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, WaterPosition.y, 0.0), Quat(), Vec3(0.5, 0.5, 0.5)), shaders[4]);
+	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, water->GetPosition().y, 0.0), Quat(), Vec3(0.5, 0.5, 0.5)), shaders[4]);
 	////////////////////////////////////
 
 	//Naruto
 	scene->root->CreateNode(meshLoader->Meshes[0], Transform(Vec3(-2.0, 0.5, -2.0), Quat(), Vec3(2.0f, 2.0f, 2.0f)), shaders[3]);
 
-	//Water
-	scene->root->CreateNode(meshLoader->Meshes[2], Transform(water->GetPosition(), Quat(), Vec3(2.0f, 2.0f, 2.0f)), water);
+	//Terrain
+	//scene->root->CreateNode(meshLoader->Meshes[3], Transform(Vec3(1.45f, -1.25f, 15.0f), Quat(), Vec3(6.0f, 6.0f, 6.0f)), shaders[3]);
 	
-	scene->root->CreateNode(meshLoader->Meshes[0], Transform(sun.Position, Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[4]);
+	//Water
+	scene->root->CreateNode(meshLoader->Meshes[2], Transform(water->GetPosition(), Quat(), Vec3(3.5f, 3.5f, 3.5f)), water);
 
+	//This Object is only to know where the light is coming from (easier for debug, after development this can be deleted)
+	scene->root->CreateNode(meshLoader->Meshes[0], Transform(sun.Position, Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[4]);
+	
 	Transform sailTransform = Transform(Vec3(0.f, 4.f, 0.f), Quat(), Vec3(1.f));
 	sailTransform.Rotation = FromAngleAxis(Vec4(1.f, 0.f, 0.f, 1.f), 90.f);
 	scene->root->CreateSailNode(meshLoader->Meshes[4], sailTransform, shaders[5]);
