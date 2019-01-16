@@ -261,7 +261,7 @@ void drawScene()
 	waterFBO->unbindFrameBuffer(); //Unbinds the Refraction Buffer
 	//
 
-	//ppFBO->bindFilterFrameBuffer();
+	ppFBO->bindFilterFrameBuffer();
 
 	//Render Scene Normally
 	glDisable(GL_CLIP_DISTANCE0);
@@ -269,8 +269,8 @@ void drawScene()
 	waterRenderer->Draw(Vec4(0.0f, -1.0f, 0.0f, 1000));
 	//Draw scene to texture
 
-	//ppFilter->Use();
-	//ppMesh->Draw();
+	ppFilter->Use();
+	ppMesh->Draw();
 
 	checkOpenGLError("ERROR: Could not draw scene.");
 }
