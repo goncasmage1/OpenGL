@@ -95,7 +95,7 @@ void main()
 	specular = pow(specular, shineDamper);
 	vec3 specularHighlights = specular * reflectivity * lightColour;
 	
-	vec3 color_result = (ambient + diffuse + specularHighlights) * waterColour;
+	//vec3 color_result = (ambient + diffuse + specularHighlights) * waterColour;
 
 	////////////////////////////////////////////////////////
 	//Fresnel

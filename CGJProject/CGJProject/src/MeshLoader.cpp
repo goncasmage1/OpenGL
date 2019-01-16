@@ -100,7 +100,7 @@ void MeshLoader::LoadMeshData(const std::string& filename)
 		deltaUV1 = uv2 - uv1;
 		deltaUV2 = uv3 - uv1;
 
-		GLfloat f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
+		GLfloat f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
 
 		//tangent1.x = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
 		//tangent1.y = f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y);
@@ -108,12 +108,16 @@ void MeshLoader::LoadMeshData(const std::string& filename)
 		tangent1 = Normalized(f*((edge1*deltaUV2.y - edge2*deltaUV1.y)));//Normalized(tangent1);
 
 		TempMeshRef->tangentData.push_back(tangent1);
+		TempMeshRef->tangentData.push_back(tangent1);
+		TempMeshRef->tangentData.push_back(tangent1);
 
 		bitangent1.x = f * (-deltaUV2.x * edge1.x + deltaUV1.x * edge2.x);
 		bitangent1.y = f * (-deltaUV2.x * edge1.y + deltaUV1.x * edge2.y);
 		bitangent1.z = f * (-deltaUV2.x * edge1.z + deltaUV1.x * edge2.z);
 		bitangent1 = Normalized(bitangent1);
 
+		TempMeshRef->biTangentData.push_back(bitangent1);
+		TempMeshRef->biTangentData.push_back(bitangent1);
 		TempMeshRef->biTangentData.push_back(bitangent1);
 
 		//Triangle 2
@@ -138,7 +142,12 @@ void MeshLoader::LoadMeshData(const std::string& filename)
 		//bitangent1 = Normalized(bitangent1);
 
 		//TempMeshRef->biTangentData.push_back(bitangent1);
-
+	}
+	for (int a = 0; a < TempMeshRef->vertexIdx.size(); a++) {
+		Vec3 normal = this->TempMeshRef->normalData[TempMeshRef->normalIdx[a] - 1];
+		Vec3 tangent = this->TempMeshRef->tangentData[a];
+		//Gram Schmidt Orthogonalization
+		this->TempMeshRef->tangentData[a] = Normalized(((tangent - (normal*tangent)*normal)));
 	}
 }
 
