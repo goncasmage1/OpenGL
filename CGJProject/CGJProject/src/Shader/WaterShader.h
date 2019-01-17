@@ -11,7 +11,7 @@ private:
 	const char* dudvPath = "../../assets/Textures/Ripple/waterDUDV.png";
 	const char* normalPath = "../../assets/Textures/Ripple/normalMap.png"; //this one looks better
 	//const char* normalPath = "../../assets/Textures/Ripple/mNormalMap.png";
-	const float waveSpeed = 0.03f;
+	const float waveSpeed = 0.1f;
 
 
 	std::shared_ptr<WaterFrameBuffer> fbo;

@@ -13,6 +13,7 @@ protected:
 
 	////
 	float Yaw, Pitch;
+	float Near, Far;
 	////
 	GLuint VboId;
 	const GLuint UBO_BP = 0;
@@ -55,6 +56,8 @@ public:
 	void RotateCamera(Vec2 rotation);
 	void Zoom(float amount);
 
+	float GetNear() { return Near; }
+	float GetFar() { return Far; }
 	Vec3 GetDirection();
 	Vec3 GetUp();
 	Vec3 GetOffset();

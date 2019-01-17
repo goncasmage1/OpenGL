@@ -25,6 +25,14 @@ void WaterFrameBuffer::initializeRefractionBuffer()
 {
 	refractionBuffer = createFrameBuffer();
 	refractionTexture = createTextureAttachment(width, height, false, false);
+	/*glGenTextures(1, &refractionTexture);
+	glBindTexture(GL_TEXTURE_2D, refractionTexture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height,
+		0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+		refractionTexture, 0);*/
 	refractionDepthTexture = createDepthTextureAttachment(width, height);
 	unbindCurrentFrameBuffer(width, height);
 }

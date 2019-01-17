@@ -111,6 +111,9 @@
     <ClCompile Include="src\PPFilterMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\WaterRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\PxCallbacks\CustomAllocator.cpp">
       <Filter>Source Files\PxCallbacks</Filter>
     </ClCompile>
@@ -201,6 +204,9 @@
       <Filter>Header Files\Shader</Filter>
     </ClInclude>
     <ClInclude Include="src\PPFilterMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WaterRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\PxCallbacks\CustomAllocator.h">
