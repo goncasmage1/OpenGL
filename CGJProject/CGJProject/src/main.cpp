@@ -241,14 +241,14 @@ void createShaderProgram()
 	water->SetFBO(waterFBO);
 	shaders.push_back(water);
 
-	////Texture 
-	std::shared_ptr<TextureShader> NarutoShader = std::make_shared<TextureShader>();
-	NarutoShader->SetTexture("../../assets/Textures/brickwall.jpg");
-	NarutoShader->SetNormalTexture("../../assets/Textures/brickwall_normal.jpg");
-	NarutoShader->SetLightPosition(sun.Position);
-	NarutoShader->SetLightColour(sun.Color);
-	NarutoShader->SetCamera(camera);
-	shaders.push_back(NarutoShader);
+	////Texture Wood
+	std::shared_ptr<TextureShader> woodShader = std::make_shared<TextureShader>();
+	woodShader->SetTexture("../../assets/Textures/Wood.jpg");
+	woodShader->SetNormalTexture("../../assets/Textures/Wood_normal.jpg");
+	woodShader->SetLightPosition(sun.Position);
+	woodShader->SetLightColour(sun.Color);
+	woodShader->SetCamera(camera);
+	shaders.push_back(woodShader);
 
 	//RTT
 	std::shared_ptr<RTT> textureRefractShader = std::make_shared<RTT>(waterFBO->getRefractionTexture());
@@ -257,6 +257,15 @@ void createShaderProgram()
 	//Post-Processing
 	ppFilter = std::make_shared<PostProcessingShader>();
 	ppFilter->SetFboTexture(ppFBO->GetFilterTexture());
+
+	////Texture Sand
+	std::shared_ptr<TextureShader> sandShader = std::make_shared<TextureShader>();
+	sandShader->SetTexture("../../assets/Textures/rock.jpg");
+	sandShader->SetNormalTexture("../../assets/Textures/rock_normal.jpg");
+	sandShader->SetLightPosition(sun.Position);
+	sandShader->SetLightColour(sun.Color);
+	sandShader->SetCamera(camera);
+	shaders.push_back(sandShader);
 
 	checkOpenGLError("ERROR: Could not create shaders.");
 
@@ -631,6 +640,7 @@ void setupMeshes()
 	meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/skybox.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));
+	meshLoader->CreateMesh(std::string("../../assets/models/boat.obj"));
 	meshLoader->CreateMesh(std::string("../../assets/models/terrain2.obj"));
 
 	ppMesh = meshLoader->CreatePPFilterMesh(ppFilter->GetVCoordId());
@@ -651,23 +661,20 @@ void setupMeshes()
 	//refraction check
 	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, water->GetPosition().y, 0.0), Quat(), Vec3(0.5, 0.5, 0.5)), shaders[4]);
 	////////////////////////////////////
-
-	//Naruto
-	//scene->root->CreateNode(meshLoader->Meshes[0], Transform(Vec3(-2.0, 0.5, -2.0), Quat(), Vec3(2.0f, 2.0f, 2.0f)), shaders[3]);
-
-	//Terrain
-	scene->root->CreateNode(meshLoader->Meshes[3], Transform(Vec3(1.45f, -1.25f, 15.0f), Quat(), Vec3(6.0f, 6.0f, 6.0f)), shaders[3]);
 	
 	//Water
 	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(water->GetPosition(), Quat(), Vec3(3.5f, 3.5f, 3.5f)), water);
 	waterRenderer = std::make_shared<WaterRenderer>(meshLoader->Meshes[2], Transform(water->GetPosition(), Quat(), Vec3(3.5f, 3.5f, 3.5f)), scene->root, water);
 
-	//This Object is only to know where the light is coming from (easier for debug, after development this can be deleted)
-	scene->root->CreateNode(meshLoader->Meshes[0], Transform(sun.Position, Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[4]);
+	//Boat
+	std::shared_ptr<SceneNode> boat = scene->root->CreateNode(meshLoader->Meshes[3], Transform(Vec3(0.0f, water->GetPosition().y - 0.3f, 0.0f), Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[3]);
+
+	//Terrain
+	scene->root->CreateNode(meshLoader->Meshes[4], Transform(Vec3(1.45f, -1.25f, 15.0f), Quat(), Vec3(6.0f, 6.0f, 6.0f)), shaders[5]);
 	
-	Transform sailTransform = Transform(Vec3(0.f, 4.f, 0.f), Quat(), Vec3(1.f));
+	Transform sailTransform = Transform(Vec3(0.78f, 4.f, 0.f), Quat(), Vec3(1.f));
 	sailTransform.Rotation = FromAngleAxis(Vec4(1.f, 0.f, 0.f, 1.f), 90.f);
-	scene->root->CreateSailNode(meshLoader->Meshes[5], sailTransform, shaders[5]);
+	boat->CreateSailNode(meshLoader->Meshes[6], sailTransform, shaders[5]);
 }
 
 void setupFBO()
