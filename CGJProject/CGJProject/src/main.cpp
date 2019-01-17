@@ -93,7 +93,7 @@ std::shared_ptr<PostProcessingShader> ppFilter = nullptr;
 std::shared_ptr<PPFilterMesh> ppMesh = nullptr;
 
 float RGBIntensity[3] = { 0.0f, 0.2f, 0.5f };
-float distortionIntensity = 0.f;
+float distortionIntensity = 0.002f;
 float distortionSpeed = 0.f;
 float distortionFrequency = 0.f;
 
@@ -501,7 +501,6 @@ void display()
 	begin = std::chrono::steady_clock::now();
 
 	float frameTime = std::chrono::duration<float>(begin - frameStart).count();
-	std::cout << "Frame Time: " << frameTime << std::endl;
 	timeCount += frameTime * (1.f + distortionSpeed * 6.f);
 	if (timeCount > 2.0*3.14159) timeCount -= 2.0*3.14159;
 

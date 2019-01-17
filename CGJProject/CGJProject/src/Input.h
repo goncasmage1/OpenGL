@@ -15,7 +15,7 @@ protected:
 	int intensityChange = 0;
 	float intensityChangeSpeed = 0.01f;
 	float distortionAmountChange = 0.f;
-	float distortionAmountChangeSpeed = 0.001f;
+	float distortionAmountChangeSpeed = 0.0005f;
 	float distortionSpeedChange = 0.f;
 	float distortionSpeedChangeSpeed = 0.01f;
 	float distortionFrequencyChange = 0.f;
