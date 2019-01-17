@@ -196,8 +196,8 @@ void createShaderProgram()
 	NarutoShader->SetTexture("../../assets/Textures/brickwall.jpg");
 	NarutoShader->SetNormalTexture("../../assets/Textures/brickwall_normal.jpg");
 	NarutoShader->SetLightPosition(sun.Position);
-	NarutoShader->SetLightColour(sun.Color);
 	NarutoShader->SetCamera(camera);
+	NarutoShader->setSkyColor(Vec3(0.5f, 0.5f, 0.5f));
 	shaders.push_back(NarutoShader);
 
 	//RTT

@@ -24,9 +24,21 @@ out VS_OUT {
     vec3 TangentFragPos;
 } vs_out;
 
+out float visibility;
+
+const float density = 0.09;
+const float gradient = 1.5;
+
 void main(void)
 {
-    gl_Position = ProjectionMatrix * ViewMatrix * ModelMatrix * in_Position;
+	//Fog
+	float distance = length(viewPos);
+	visibility = exp(-pow((distance*density), gradient));
+	visibility = clamp(visibility, 0.0, 1.0);
+	//
+
+
+    gl_Position = ProjectionMatrix * ViewMatrix * in_Position;
     vs_out.FragPos = vec3(ModelMatrix * in_Position);   
     vs_out.TexCoords = in_Coordinates;
     

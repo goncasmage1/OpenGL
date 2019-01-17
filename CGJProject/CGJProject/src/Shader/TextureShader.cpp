@@ -74,27 +74,18 @@ void TextureShader::SetNormalTexture(const char* path) {
 	
 }*/
 
+void TextureShader::setSkyColor(Vec3 color) {
+	this->skyColor = color;
+}
+
 void TextureShader::SetCamera(std::shared_ptr<Camera> camera)
 {
 	this->camera = camera;
 }
 
-//void TextureShader::SetCameraPos()
-//{
-//	Vec3 direction = camera->GetDirection();
-//	CameraPositionX = direction.x;
-//	CameraPositionY = direction.y;
-//	CameraPositionZ = direction.z;
-//}
-
 void TextureShader::SetLightPosition(Vec3 pos)
 {
 	this->lightPosition = pos;
-}
-
-void TextureShader::SetLightColour(Vec3 colour)
-{
-	this->lightColour = colour;
 }
 
 void TextureShader::Use()
@@ -117,6 +108,9 @@ void TextureShader::Use()
 
 	glUniform3f(glGetUniformLocation(ProgramId, "lightPos"), lightPosition.x, lightPosition.y, lightPosition.z);
 	glUniform3f(glGetUniformLocation(ProgramId, "viewPos"), camera->GetOffset().x, camera->GetOffset().y, camera->GetOffset().z);
+
+	//Fog Stuff and Things
+	glUniform3f(glGetUniformLocation(ProgramId, "skyColour"), this->skyColor.x, this->skyColor.y, this->skyColor.z);
 
 	//glUniform4f(glGetUniformLocation(ProgramId, "plane"), plane.x, plane.y, plane.z, plane.w);
 }
