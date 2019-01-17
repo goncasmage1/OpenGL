@@ -645,10 +645,10 @@ void setupMeshes()
 	ppMesh = meshLoader->CreatePPFilterMesh(ppFilter->GetVCoordId());
 	
 	SailProperties properties = SailProperties();
-	properties.liftCoefficient = 0.7f;
-	properties.dragCoefficient = 0.7f;
+	properties.liftCoefficient = 0.7f; //The cloth's easeness to be lifted by the wind (not the same as gravity apparently)
+	properties.dragCoefficient = 0.7f; //How much particles stick to each other (0 = a lot; 1 = not at all)
 	properties.gravity = physx::PxVec3(0.f, 1.f, 0.f);
-	properties.damping = 0.2f;
+	properties.damping = 0.2f; //How much the cloth can bend (0 = a lot; 1 = not that much)
 	meshLoader->CreateSailMesh(properties, factory, solver, 0.05f, 30, 20);
 
 	//Skybox must be the first to be drawn in the scene
