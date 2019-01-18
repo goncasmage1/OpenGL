@@ -28,6 +28,8 @@ void Input::keyboardButtontDown(unsigned char Key)
 		if (postProcessingMode >= numModes) postProcessingMode = 0;
 	}
 
+	if (Key == 'f' || Key == 'F') fog = ! fog;
+
 	if (Key == 27) exit(1);
 }
 

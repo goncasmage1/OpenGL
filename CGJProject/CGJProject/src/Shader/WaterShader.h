@@ -12,6 +12,7 @@ private:
 	const char* normalPath = "../../assets/Textures/Ripple/normalMap.png"; //this one looks better
 	//const char* normalPath = "../../assets/Textures/Ripple/mNormalMap.png";
 	const float waveSpeed = 0.1f;
+	bool fog;
 
 
 	std::shared_ptr<WaterFrameBuffer> fbo;
@@ -28,6 +29,7 @@ public:
 	void SetFBO(std::shared_ptr<WaterFrameBuffer> fbo) { this->fbo = fbo; }
 	void SetCamera(std::shared_ptr<Camera> camera);
 	void SetSkyColor(Vec3 color) { this->skyColor = color; }
+	void SetFog(bool fog) { this->fog = fog; }
 	void Use();
 
 	Vec3 GetPosition() { return Position; }

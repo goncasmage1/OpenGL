@@ -65,7 +65,7 @@ std::shared_ptr<Camera> camera = std::make_shared<Camera>(WinX, WinY, 90);
 std::shared_ptr<MeshLoader> meshLoader = std::make_shared<MeshLoader>();
 std::shared_ptr<Scene> scene = nullptr;
 std::vector<std::shared_ptr<ShaderProgram>> shaders = std::vector<std::shared_ptr<ShaderProgram>>();
-
+std::vector<std::shared_ptr<TextureShader>> foggy = std::vector<std::shared_ptr<TextureShader>>();
 std::shared_ptr<SkyboxShader> skybox = nullptr;
 
 Light sun;
@@ -200,6 +200,7 @@ void createShaderProgram()
 	NarutoShader->SetCamera(camera);
 	NarutoShader->setSkyColor(Vec3(0.5f, 0.5f, 0.5f));
 	shaders.push_back(NarutoShader);
+	foggy.push_back(NarutoShader);
 	////Texture Wood
 	std::shared_ptr<TextureShader> woodShader = std::make_shared<TextureShader>();
 	woodShader->SetTexture("../../assets/Textures/diffuse.jpg");
@@ -207,7 +208,7 @@ void createShaderProgram()
 	woodShader->SetLightPosition(sun.Position);
 	woodShader->SetCamera(camera);
 	shaders.push_back(woodShader);
-
+	foggy.push_back(woodShader);
 	//RTT
 	std::shared_ptr<RTT> textureRefractShader = std::make_shared<RTT>(waterFBO->getRefractionTexture());
 	shaders.push_back(textureRefractShader);
@@ -223,7 +224,9 @@ void createShaderProgram()
 	sandShader->SetNormalTexture("../../assets/Textures/rock_normal.jpg");
 	sandShader->SetLightPosition(sun.Position);
 	sandShader->SetCamera(camera);
-	shaders.push_back(sandShader);*/
+	shaders.push_back(sandShader);
+	foggy.push_back(sandShader);
+	*/
 
 	checkOpenGLError("ERROR: Could not create shaders.");
 }
@@ -258,15 +261,14 @@ void destroyBufferObjects()
 void drawScene()
 {	
 	glEnable(GL_CLIP_DISTANCE0);
-	
 
 	//Render Reflection
 	waterFBO->bindReflectionFrameBuffer(); //Binds the Reflection Buffer
-	camera->FlipView(); //Set camera for reflection (flips) and Saves the previous camera settings
+	camera->FlipView(); //Set camera for reflection (flips) 
 	skybox->SetViewMatrix(camera->GetViewMatrix()); //Update Skybox ViewMatrix (without position)
 	scene->Draw(Vec4(0.0f, 1.0f, 0.0f, -water->GetPosition().y)); // Render the Scene above the surface
 	camera->FlipView(); // Unflip camera
-	skybox->SetViewMatrix(camera->GetViewMatrix()); //Reset the ViewMatrix
+	skybox->SetViewMatrix(camera->GetViewMatrix()); //Reset skybox's ViewMatrix
 	waterFBO->unbindFrameBuffer(); //Unbinds the Reflection Buffer
 	//
 
@@ -296,6 +298,8 @@ void processCamera()
 {
 	camera->RotateCamera(input->GetMouseDelta());
 	camera->MoveCamera(input->GetMovement());
+
+
 
 }
 
@@ -354,6 +358,11 @@ void processInput()
 {
 	processCamera();
 	processPostProcessingShader();
+	water->SetFog(input->GetFog());
+	for (std::shared_ptr<TextureShader> shader : foggy)
+	{
+		shader->SetFog(input->GetFog());
+	}
 }
 
 /////////////////////////////////////////////////////////////////////// CALLBACKS

@@ -10,6 +10,7 @@ uniform mat4 ModelMatrix;
 uniform vec4 plane;
 uniform vec3 lightPos;
 uniform vec3 viewPos;
+uniform bool fog;
 uniform SharedMatrices
 {
 	mat4 ViewMatrix;
@@ -39,12 +40,15 @@ void main(void)
     vs_out.FragPos = vec3(worldPosition);   
     vs_out.TexCoords = in_Coordinates;
 
-	//Fog
-	float distance = length(positionRelativeCamera.xyz);
-	visibility = exp(-pow((distance*density), gradient));
-	visibility = clamp(visibility, 0.0, 1.0);
-	//
-    
+	if (fog)
+	{
+		//Fog
+		float distance = length(positionRelativeCamera.xyz);
+		visibility = exp(-pow((distance*density), gradient));
+		visibility = clamp(visibility, 0.0, 1.0);
+		//
+	}
+
     mat3 normalMatrix = transpose(inverse(mat3(ModelMatrix)));
     vec3 T = normalize(normalMatrix * tangent);
     vec3 B = normalize(normalMatrix * bitangent);

@@ -11,6 +11,7 @@ out float visibility;
 
 uniform vec3 cameraPosition;
 uniform vec3 lightPosition;
+uniform bool fog;
 
 uniform mat4 ModelMatrix;
 uniform vec4 VertColor;
@@ -20,7 +21,7 @@ uniform SharedMatrices
 	mat4 ProjectionMatrix;
 };
 
-const float tilling = 1.0f;
+const float tilling = 2.0f;
 const float density = 0.03;
 const float gradient = 1.5;
 
@@ -35,9 +36,13 @@ void main(void)
 	toCameraVector = cameraPosition - worldPosition.xyz;
 	fromLightVector = worldPosition.xyz - lightPosition;
 
-	//Fog
-	float distance = length(positionRelativeCamera.xyz);
-	visibility = exp(-pow((distance*density), gradient));
-	visibility = clamp(visibility, 0.0, 1.0);
-	//
+	if (fog)
+	{
+		//Fog
+		float distance = length(positionRelativeCamera.xyz);
+		visibility = exp(-pow((distance*density), gradient));
+		visibility = clamp(visibility, 0.0, 1.0);
+		//
+	}
+
 }
