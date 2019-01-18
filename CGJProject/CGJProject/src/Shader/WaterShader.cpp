@@ -89,6 +89,7 @@ void WaterShader::Use()
 	//////////
 
 	glUniform3f(glGetUniformLocation(ProgramId, "cameraPosition"), camera->GetOffset().x, camera->GetOffset().y, camera->GetOffset().z);
+	glUniform3f(glGetUniformLocation(ProgramId, "skyColour"), this->skyColor.x, this->skyColor.y, this->skyColor.z);
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

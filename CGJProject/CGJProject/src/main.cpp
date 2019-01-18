@@ -189,6 +189,7 @@ void createShaderProgram()
 	water = std::make_shared<WaterShader>(Vec3(0.0f, 0.0f, 0.0f), sun.Position, sun.Color);
 	water->SetCamera(camera);
 	water->SetFBO(waterFBO);
+	water->SetSkyColor(Vec3(0.5f, 0.5f, 0.5f));
 	shaders.push_back(water);
 
 	////Texture Mountains
@@ -214,14 +215,15 @@ void createShaderProgram()
 	//Post-Processing
 	ppFilter = std::make_shared<PostProcessingShader>();
 	ppFilter->SetFboTexture(ppFBO->GetFilterTexture());
-
+	
+	/*
 	////Texture Sand
 	std::shared_ptr<TextureShader> sandShader = std::make_shared<TextureShader>();
 	sandShader->SetTexture("../../assets/Textures/rock.jpg");
 	sandShader->SetNormalTexture("../../assets/Textures/rock_normal.jpg");
 	sandShader->SetLightPosition(sun.Position);
 	sandShader->SetCamera(camera);
-	shaders.push_back(sandShader);
+	shaders.push_back(sandShader);*/
 
 	checkOpenGLError("ERROR: Could not create shaders.");
 }
@@ -523,16 +525,19 @@ void setupMeshes()
 	//refraction check
 	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, water->GetPosition().y, 0.0), Quat(), Vec3(0.5, 0.5, 0.5)), shaders[4]);
 	////////////////////////////////////
-	
+
+
 	//Water
 	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(water->GetPosition(), Quat(), Vec3(3.5f, 3.5f, 3.5f)), water);
 	waterRenderer = std::make_shared<WaterRenderer>(meshLoader->Meshes[2], Transform(water->GetPosition(), Quat(), Vec3(3.5f, 3.5f, 3.5f)), scene->root, water);
-
 	//Boat
-	scene->root->CreateNode(meshLoader->Meshes[3], Transform(Vec3(0.0f, water->GetPosition().y - 0.3f, 0.0f), Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[4]);
-
+	scene->root->CreateNode(meshLoader->Meshes[3], Transform(Vec3(0.0f, water->GetPosition().y - 0.2f, 0.0f), Quat(), Vec3(0.5f, 0.5f, 0.5f)), shaders[4]);
 	//Terrain
 	scene->root->CreateNode(meshLoader->Meshes[4], Transform(Vec3(1.45f, -1.25f, 15.0f), Quat(), Vec3(6.0f, 6.0f, 6.0f)), shaders[3]);
+
+
+
+
 }
 
 void setupFBO()

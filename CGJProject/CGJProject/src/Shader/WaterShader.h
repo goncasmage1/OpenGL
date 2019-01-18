@@ -18,7 +18,7 @@ private:
 	std::shared_ptr<Camera> camera;
 	int reflectionTextureId, refractionTextureId, dudvTexture, normalTexture;
 	float moveFactor;
-	Vec3 Position, lightPosition, lightColour; 
+	Vec3 Position, lightPosition, lightColour, skyColor;
 
 public:
 
@@ -27,6 +27,7 @@ public:
 	
 	void SetFBO(std::shared_ptr<WaterFrameBuffer> fbo) { this->fbo = fbo; }
 	void SetCamera(std::shared_ptr<Camera> camera);
+	void SetSkyColor(Vec3 color) { this->skyColor = color; }
 	void Use();
 
 	Vec3 GetPosition() { return Position; }

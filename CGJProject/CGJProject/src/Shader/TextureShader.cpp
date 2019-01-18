@@ -111,6 +111,4 @@ void TextureShader::Use()
 
 	//Fog Stuff and Things
 	glUniform3f(glGetUniformLocation(ProgramId, "skyColour"), this->skyColor.x, this->skyColor.y, this->skyColor.z);
-
-	//glUniform4f(glGetUniformLocation(ProgramId, "plane"), plane.x, plane.y, plane.z, plane.w);
 }
