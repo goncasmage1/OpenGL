@@ -1,4 +1,4 @@
-#Project Instructions
+# Project Instructions
 
 This OpenGL project contains a scene that includes a wooden raft/boat sailing through the ocean with a flag attached.
 
