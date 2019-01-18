@@ -93,7 +93,7 @@ std::shared_ptr<PostProcessingShader> ppFilter = nullptr;
 std::shared_ptr<PPFilterMesh> ppMesh = nullptr;
 
 float RGBIntensity[3] = { 0.0f, 0.2f, 0.5f };
-float distortionIntensity = 0.f;
+float distortionIntensity = 0.002f;
 float distortionSpeed = 0.f;
 float distortionFrequency = 0.f;
 
@@ -241,12 +241,19 @@ void createShaderProgram()
 	water->SetFBO(waterFBO);
 	shaders.push_back(water);
 
+	////Texture Mountains
+	std::shared_ptr<TextureShader> NarutoShader = std::make_shared<TextureShader>();
+	NarutoShader->SetTexture("../../assets/Textures/rockDiff.jpg");
+	NarutoShader->SetNormalTexture("../../assets/Textures/rockNormal.jpg");
+	NarutoShader->SetLightPosition(sun.Position);
+	NarutoShader->SetCamera(camera);
+	NarutoShader->setSkyColor(Vec3(0.5f, 0.5f, 0.5f));
+	shaders.push_back(NarutoShader);
 	////Texture Wood
 	std::shared_ptr<TextureShader> woodShader = std::make_shared<TextureShader>();
-	woodShader->SetTexture("../../assets/Textures/Wood.jpg");
-	woodShader->SetNormalTexture("../../assets/Textures/Wood_normal.jpg");
+	woodShader->SetTexture("../../assets/Textures/diffuse.jpg");
+	woodShader->SetNormalTexture("../../assets/Textures/normal.jpg");
 	woodShader->SetLightPosition(sun.Position);
-	woodShader->SetLightColour(sun.Color);
 	woodShader->SetCamera(camera);
 	shaders.push_back(woodShader);
 
@@ -263,7 +270,6 @@ void createShaderProgram()
 	sandShader->SetTexture("../../assets/Textures/rock.jpg");
 	sandShader->SetNormalTexture("../../assets/Textures/rock_normal.jpg");
 	sandShader->SetLightPosition(sun.Position);
-	sandShader->SetLightColour(sun.Color);
 	sandShader->SetCamera(camera);
 	shaders.push_back(sandShader);
 
@@ -501,7 +507,6 @@ void display()
 	begin = std::chrono::steady_clock::now();
 
 	float frameTime = std::chrono::duration<float>(begin - frameStart).count();
-	std::cout << "Frame Time: " << frameTime << std::endl;
 	timeCount += frameTime * (1.f + distortionSpeed * 6.f);
 	if (timeCount > 2.0*3.14159) timeCount -= 2.0*3.14159;
 
@@ -646,10 +651,10 @@ void setupMeshes()
 	ppMesh = meshLoader->CreatePPFilterMesh(ppFilter->GetVCoordId());
 	
 	SailProperties properties = SailProperties();
-	properties.liftCoefficient = 0.7f;
-	properties.dragCoefficient = 0.7f;
+	properties.liftCoefficient = 0.7f; //The cloth's easeness to be lifted by the wind (not the same as gravity apparently)
+	properties.dragCoefficient = 0.7f; //How much particles stick to each other (0 = a lot; 1 = not at all)
 	properties.gravity = physx::PxVec3(0.f, 1.f, 0.f);
-	properties.damping = 0.2f;
+	properties.damping = 0.2f; //How much the cloth can bend (0 = a lot; 1 = not that much)
 	meshLoader->CreateSailMesh(properties, factory, solver, 0.05f, 30, 20);
 
 	//Skybox must be the first to be drawn in the scene
@@ -667,10 +672,10 @@ void setupMeshes()
 	waterRenderer = std::make_shared<WaterRenderer>(meshLoader->Meshes[2], Transform(water->GetPosition(), Quat(), Vec3(3.5f, 3.5f, 3.5f)), scene->root, water);
 
 	//Boat
-	std::shared_ptr<SceneNode> boat = scene->root->CreateNode(meshLoader->Meshes[3], Transform(Vec3(0.0f, water->GetPosition().y - 0.3f, 0.0f), Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[3]);
+	std::shared_ptr<SceneNode> boat = scene->root->CreateNode(meshLoader->Meshes[3], Transform(Vec3(0.0f, water->GetPosition().y - 0.3f, 0.0f), Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[4]);
 
 	//Terrain
-	scene->root->CreateNode(meshLoader->Meshes[4], Transform(Vec3(1.45f, -1.25f, 15.0f), Quat(), Vec3(6.0f, 6.0f, 6.0f)), shaders[5]);
+	scene->root->CreateNode(meshLoader->Meshes[4], Transform(Vec3(1.45f, -1.25f, 15.0f), Quat(), Vec3(6.0f, 6.0f, 6.0f)), shaders[3]);
 	
 	Transform sailTransform = Transform(Vec3(0.78f, 4.f, 0.f), Quat(), Vec3(1.f));
 	sailTransform.Rotation = FromAngleAxis(Vec4(1.f, 0.f, 0.f, 1.f), 90.f);
