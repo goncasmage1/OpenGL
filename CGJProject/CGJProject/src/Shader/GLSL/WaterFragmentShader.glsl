@@ -19,7 +19,6 @@ uniform float far;
 uniform float moveFactor;
 uniform vec3 lightColour;
 uniform vec3 skyColour;
-uniform bool fog;
 
 
 //--------- CONSTANTS ----------------
@@ -107,8 +106,5 @@ void main()
 	out_color = mix(refractionColour, reflectionColour, refractiveFactor);
 	out_color = mix(out_color, waterColour, 0.2) + vec4(specularHighlights, 0.0); //blue color
 	out_color.a = clamp(waterDepth, 0.0, 1.0);
-	if (fog)
-	{
-		out_color = mix(vec4(skyColour, 1.0), out_color, visibility);
-	}
+	out_color = mix(vec4(skyColour, 1.0), out_color, visibility);
 }
