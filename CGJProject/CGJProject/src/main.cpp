@@ -241,12 +241,19 @@ void createShaderProgram()
 	water->SetFBO(waterFBO);
 	shaders.push_back(water);
 
+	////Texture Mountains
+	std::shared_ptr<TextureShader> NarutoShader = std::make_shared<TextureShader>();
+	NarutoShader->SetTexture("../../assets/Textures/rockDiff.jpg");
+	NarutoShader->SetNormalTexture("../../assets/Textures/rockNormal.jpg");
+	NarutoShader->SetLightPosition(sun.Position);
+	NarutoShader->SetCamera(camera);
+	NarutoShader->setSkyColor(Vec3(0.5f, 0.5f, 0.5f));
+	shaders.push_back(NarutoShader);
 	////Texture Wood
 	std::shared_ptr<TextureShader> woodShader = std::make_shared<TextureShader>();
-	woodShader->SetTexture("../../assets/Textures/Wood.jpg");
-	woodShader->SetNormalTexture("../../assets/Textures/Wood_normal.jpg");
+	woodShader->SetTexture("../../assets/Textures/diffuse.jpg");
+	woodShader->SetNormalTexture("../../assets/Textures/normal.jpg");
 	woodShader->SetLightPosition(sun.Position);
-	woodShader->SetLightColour(sun.Color);
 	woodShader->SetCamera(camera);
 	shaders.push_back(woodShader);
 
@@ -263,7 +270,6 @@ void createShaderProgram()
 	sandShader->SetTexture("../../assets/Textures/rock.jpg");
 	sandShader->SetNormalTexture("../../assets/Textures/rock_normal.jpg");
 	sandShader->SetLightPosition(sun.Position);
-	sandShader->SetLightColour(sun.Color);
 	sandShader->SetCamera(camera);
 	shaders.push_back(sandShader);
 
@@ -666,10 +672,10 @@ void setupMeshes()
 	waterRenderer = std::make_shared<WaterRenderer>(meshLoader->Meshes[2], Transform(water->GetPosition(), Quat(), Vec3(3.5f, 3.5f, 3.5f)), scene->root, water);
 
 	//Boat
-	std::shared_ptr<SceneNode> boat = scene->root->CreateNode(meshLoader->Meshes[3], Transform(Vec3(0.0f, water->GetPosition().y - 0.3f, 0.0f), Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[3]);
+	std::shared_ptr<SceneNode> boat = scene->root->CreateNode(meshLoader->Meshes[3], Transform(Vec3(0.0f, water->GetPosition().y - 0.3f, 0.0f), Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[4]);
 
 	//Terrain
-	scene->root->CreateNode(meshLoader->Meshes[4], Transform(Vec3(1.45f, -1.25f, 15.0f), Quat(), Vec3(6.0f, 6.0f, 6.0f)), shaders[5]);
+	scene->root->CreateNode(meshLoader->Meshes[4], Transform(Vec3(1.45f, -1.25f, 15.0f), Quat(), Vec3(6.0f, 6.0f, 6.0f)), shaders[3]);
 	
 	Transform sailTransform = Transform(Vec3(0.78f, 4.f, 0.f), Quat(), Vec3(1.f));
 	sailTransform.Rotation = FromAngleAxis(Vec4(1.f, 0.f, 0.f, 1.f), 90.f);
