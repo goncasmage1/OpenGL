@@ -38,7 +38,6 @@ void main()
     vec3 halfwayDir = normalize(lightDir + viewDir);  
     float spec = pow(max(dot(normal, halfwayDir), 0.0), shineDamper);
     vec3 specular = vec3(reflectivity) * spec;
-    //
 
     ex_color = vec4(ambient + diffuse + specular, 1.0f);
 	if (fog)
