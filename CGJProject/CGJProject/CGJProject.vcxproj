@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{8823B095-F85F-4C94-8905-CD7794948250}</ProjectGuid>
     <RootNamespace>CGJProject</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -91,12 +91,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\..\dependencies\SOIL\include;$(SolutionDir)\..\dependencies\glew\include;$(SolutionDir)\..\dependencies\freeglut\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\ProgramFiles\Cuda\v 10.0\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\extensions\include;</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories>$(SolutionDir)\..\dependencies\SOIL\include;D:\ProgramFiles\Cuda\v 10.0\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\src\foundation\include;$(SolutionDir)\..\dependencies\glew\include;$(SolutionDir)\..\dependencies\freeglut\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\src\foundation\include;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\extensions\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\..\dependencies\SOIL\include;$(SolutionDir)\..\dependencies\FreeImage\Dist\x64;$(SolutionDir)\..\dependencies\glew\include;$(SolutionDir)\..\dependencies\freeglut\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\src\foundation\include;D:\ProgramFiles\Cuda\v 10.0\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\extensions\include;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)\..\dependencies\SOIL\lib\;$(SolutionDir)\..\dependencies\glew\lib\Release\x64\;$(SolutionDir)\..\dependencies\freeglut\lib\x64\;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\lib\vc12win64-cmake\;D:\ProgramFiles\Cuda\v 10.0\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut.lib;glew32.lib;SOIL.lib;NvClothDEBUG_x64.lib;PxFoundationDEBUG_x64.lib;cuda.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\..\dependencies\FreeImage\Dist\x64;$(SolutionDir)\..\dependencies\SOIL\lib\;$(SolutionDir)\..\dependencies\glew\lib\Release\x64\;$(SolutionDir)\..\dependencies\freeglut\lib\x64\;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\lib\vc12win64-cmake\;D:\ProgramFiles\Cuda\v 10.0\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freeglut.lib;glew32.lib;SOIL.lib;FreeImage.lib;NvClothDEBUG_x64.lib;PxFoundationDEBUG_x64.lib;cuda.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -121,13 +121,13 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\..\dependencies\SOIL\include;D:\ProgramFiles\Cuda\v 10.0\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\src\foundation\include;$(SolutionDir)\..\dependencies\glew\include;$(SolutionDir)\..\dependencies\freeglut\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\src\foundation\include;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\extensions\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\..\dependencies\SOIL\include;$(SolutionDir)\..\dependencies\FreeImage\Dist\x64;D:\ProgramFiles\Cuda\v 10.0\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\src\foundation\include;$(SolutionDir)\..\dependencies\glew\include;$(SolutionDir)\..\dependencies\freeglut\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\include;$(SolutionDir)\..\dependencies\NvCloth-master\PxShared\src\foundation\include;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\extensions\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>freeglut.lib;glew32.lib;SOIL.lib;NvCloth_x64.lib;PxFoundation_x64.lib;cuda.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\..\dependencies\SOIL\lib\;$(SolutionDir)\..\dependencies\glew\lib\Release\x64\;$(SolutionDir)\..\dependencies\freeglut\lib\x64\;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\lib\vc12win64-cmake\;D:\ProgramFiles\Cuda\v 10.0\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freeglut.lib;glew32.lib;SOIL.lib;FreeImage.lib;NvCloth_x64.lib;PxFoundation_x64.lib;cuda.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\..\dependencies\SOIL\lib\;$(SolutionDir)\..\dependencies\FreeImage\Dist\x64;$(SolutionDir)\..\dependencies\glew\lib\Release\x64\;$(SolutionDir)\..\dependencies\freeglut\lib\x64\;$(SolutionDir)\..\dependencies\NvCloth-master\NvCloth\lib\vc12win64-cmake\;D:\ProgramFiles\Cuda\v 10.0\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -162,6 +162,7 @@
     <ClCompile Include="src\Shader\WaterShader.cpp" />
     <ClCompile Include="src\Shader\WoodShader.cpp" />
     <ClCompile Include="src\WaterFrameBuffer.cpp" />
+    <ClCompile Include="src\WaterRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Camera.h" />
@@ -194,6 +195,7 @@
     <ClInclude Include="src\Shader\WaterShader.h" />
     <ClInclude Include="src\Shader\WoodShader.h" />
     <ClInclude Include="src\WaterFrameBuffer.h" />
+    <ClInclude Include="src\WaterRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Shader\GLSL\BrownShader.glsl" />

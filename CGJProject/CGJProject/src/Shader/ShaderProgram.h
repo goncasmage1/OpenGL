@@ -29,7 +29,6 @@ protected:
 public:
 
 	ShaderProgram();
-	ShaderProgram(const std::vector<ShaderAttribute> Attributes, const std::vector<std::string> ShaderPaths);
 
 	GLuint GetProgramId() const { return ProgramId; }
 	GLuint GetUniformId(const GLchar* param) const { return glGetUniformLocation(ProgramId, param); }

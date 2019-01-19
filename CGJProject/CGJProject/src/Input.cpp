@@ -34,6 +34,10 @@ void Input::keyboardButtontDown(unsigned char Key)
 		if (postProcessingMode >= numModes) postProcessingMode = 0;
 	}
 
+	if (Key == 'f' || Key == 'F') fog = ! fog;
+
+	if (Key == 'h' || Key == 'H') screenshot = true;
+
 	if (Key == 27) exit(1);
 }
 
@@ -109,4 +113,13 @@ float Input::GetWheelDelta()
 		return wheelDirection * WheelSensitivity;
 	}
 	return 0.f;
+}
+
+bool Input::GetScreenshot()
+{
+	if (screenshot) {
+		screenshot = false;
+		return true;
+	}
+	return false;
 }

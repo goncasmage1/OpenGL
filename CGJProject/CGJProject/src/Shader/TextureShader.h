@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <vector>
 #include "ShaderProgram.h"
 #include "..\Math\Vector.h"
 #include "..\Camera.h"
@@ -11,22 +12,21 @@ private:
 	GLuint textureId = 0;
 	GLuint normalTextureId = 0;
 	Vec4 plane;
-	Vec3 lightPosition;
-	Vec3 lightColour;
-	int CameraPositionX, CameraPositionY, CameraPositionZ;
+	Vec3 lightPosition, skyColor;
 	std::shared_ptr<Camera> camera;
+	bool fog;
 
 public:
 
 	TextureShader();
+	TextureShader(const std::vector<ShaderAttribute> Attributes, const std::vector<std::string> ShaderPaths);
 
 	void SetTexture(const char* path);
 	void SetNormalTexture(const char * path);
 	void SetCamera(std::shared_ptr<Camera> camera);
-	void SetCameraPos();
 	void SetTexture(unsigned int textureId) { this->textureId = textureId; }
 	void SetLightPosition(Vec3 pos);
-	void SetLightColour(Vec3 colour);
-	//void setTextureToFrameBuffer(unsigned int renderTexture);
+	void setSkyColor(Vec3 colour);
+	void SetFog(bool fog) { this->fog = fog; }
 	void Use();
 };

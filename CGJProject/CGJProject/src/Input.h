@@ -15,7 +15,7 @@ protected:
 	int intensityChange = 0;
 	float intensityChangeSpeed = 0.01f;
 	float distortionAmountChange = 0.f;
-	float distortionAmountChangeSpeed = 0.001f;
+	float distortionAmountChangeSpeed = 0.0005f;
 	float distortionSpeedChange = 0.f;
 	float distortionSpeedChangeSpeed = 0.01f;
 	float distortionFrequencyChange = 0.f;
@@ -37,6 +37,9 @@ protected:
 	uint8_t bMouseMoved : 1;
 	uint8_t bWheelMoved : 1;
 
+	bool fog = true;
+	bool screenshot = false;
+
 public:
 
 	void keyboardButtontDown(unsigned char Key);
@@ -56,5 +59,6 @@ public:
 	float GetDistortionSpeedChange() const { return distortionSpeedChange * distortionSpeedChangeSpeed; }
 	float GetDistortionFrequencyChange() const { return distortionFrequencyChange * distortionFrequencyChangeSpeed; }
 	int GetPostProcessingMode() const { return postProcessingMode; }
-
+	bool GetFog() { return fog; }
+	bool GetScreenshot();
 };

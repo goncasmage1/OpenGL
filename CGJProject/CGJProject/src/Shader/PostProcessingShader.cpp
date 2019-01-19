@@ -59,6 +59,8 @@ void PostProcessingShader::Use()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glUseProgram(ProgramId);
+
+	glUniform1i(uniform_fbo_texture, 5);
+	glActiveTexture(GL_TEXTURE5);
 	glBindTexture(GL_TEXTURE_2D, fbo_texture);
-	glUniform1i(uniform_fbo_texture, /*GL_TEXTURE*/0);
 }
