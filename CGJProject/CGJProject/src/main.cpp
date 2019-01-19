@@ -71,7 +71,6 @@ std::shared_ptr<MeshLoader> meshLoader = std::make_shared<MeshLoader>();
 std::shared_ptr<Scene> scene = nullptr;
 std::vector<std::shared_ptr<ShaderProgram>> shaders = std::vector<std::shared_ptr<ShaderProgram>>();
 std::vector<std::shared_ptr<TextureShader>> foggy = std::vector<std::shared_ptr<TextureShader>>();
-std::shared_ptr<SkyboxShader> skybox = nullptr;
 
 CustomAllocator* customAllocator = new CustomAllocator();
 CustomAssertHandler* customAssert = new CustomAssertHandler();
