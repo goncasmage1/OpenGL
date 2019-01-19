@@ -207,8 +207,8 @@ void createShaderProgram()
 
 	////Texture Mountains
 	std::shared_ptr<TextureShader> NarutoShader = std::make_shared<TextureShader>();
-	NarutoShader->SetTexture("../../assets/Textures/rockDiff.jpg");
-	NarutoShader->SetNormalTexture("../../assets/Textures/rockNormal.jpg");
+	NarutoShader->SetTexture("assets/Textures/rockDiff.jpg");
+	NarutoShader->SetNormalTexture("assets/Textures/rockNormal.jpg");
 	NarutoShader->SetLightPosition(sun.Position);
 	NarutoShader->SetCamera(camera);
 	NarutoShader->setSkyColor(Vec3(0.5f, 0.5f, 0.5f));
@@ -216,8 +216,8 @@ void createShaderProgram()
 	foggy.push_back(NarutoShader);
 	////Texture Wood
 	std::shared_ptr<TextureShader> woodShader = std::make_shared<TextureShader>();
-	woodShader->SetTexture("../../assets/Textures/diffuse.jpg");
-	woodShader->SetNormalTexture("../../assets/Textures/normal.jpg");
+	woodShader->SetTexture("assets/Textures/diffuse.jpg");
+	woodShader->SetNormalTexture("assets/Textures/normal.jpg");
 	woodShader->SetLightPosition(sun.Position);
 	woodShader->SetCamera(camera);
 	shaders.push_back(woodShader);
@@ -233,8 +233,8 @@ void createShaderProgram()
 	/*
 	////Texture Sand
 	std::shared_ptr<TextureShader> sandShader = std::make_shared<TextureShader>();
-	sandShader->SetTexture("../../assets/Textures/rock.jpg");
-	sandShader->SetNormalTexture("../../assets/Textures/rock_normal.jpg");
+	sandShader->SetTexture("assets/Textures/rock.jpg");
+	sandShader->SetNormalTexture("assets/Textures/rock_normal.jpg");
 	sandShader->SetLightPosition(sun.Position);
 	sandShader->SetCamera(camera);
 	shaders.push_back(sandShader);
@@ -531,11 +531,11 @@ void setupGLUT(int argc, char* argv[])
 void setupMeshes()
 {
 	//MeshLoader loads all necessary meshes
-	meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
-	meshLoader->CreateMesh(std::string("../../assets/models/skybox.obj"));
-	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));
-	meshLoader->CreateMesh(std::string("../../assets/models/boat.obj"));
-	meshLoader->CreateMesh(std::string("../../assets/models/terrain2.obj"));
+	meshLoader->CreateMesh(std::string("assets/models/sphere.obj"));
+	meshLoader->CreateMesh(std::string("assets/models/skybox.obj"));
+	meshLoader->CreateMesh(std::string("assets/models/water_surface.obj"));
+	meshLoader->CreateMesh(std::string("assets/models/boat.obj"));
+	meshLoader->CreateMesh(std::string("assets/models/terrain2.obj"));
 
 	ppMesh = meshLoader->CreatePPFilterMesh(ppFilter->GetVCoordId());
 
