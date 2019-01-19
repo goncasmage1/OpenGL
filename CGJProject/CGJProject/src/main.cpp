@@ -51,7 +51,7 @@ int WinX = 1600, WinY = 900;
 int WindowHandle = 0;
 unsigned int FrameCount = 0;
 float animationProgress = 0.f;
-physx::PxVec3 windVelocity = physx::PxVec3(6.0f, 0.f, 0.f);
+physx::PxVec3 windVelocity = physx::PxVec3(0.f, 0.f, -6.f);
 
 float fpsInterval = 1000.f / 60.f;
 const float HEIGHT = 1.0f;
@@ -676,7 +676,9 @@ void setupMeshes()
 	properties.dragCoefficient = 0.7f; //How much particles stick to each other (0 = a lot; 1 = not at all)
 	properties.gravity = physx::PxVec3(0.f, 1.f, 0.f);
 	properties.damping = 0.2f; //How much the cloth can bend (0 = a lot; 1 = not that much)
-	meshLoader->CreateSailMesh(properties, factory, solver, 0.05f, 30, 20);
+	properties.tetherConstraintStiffness = 0.6f;
+	properties.tetherConstraintScale = 1.1f; //How much the tethers stretch
+	meshLoader->CreateSailMesh(properties, factory, solver, 0.1f, 30, 20);
 
 	//Skybox must be the first to be drawn in the scene
 	std::shared_ptr<SceneNode> sky = scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
@@ -698,7 +700,7 @@ void setupMeshes()
 	//Terrain
 	scene->root->CreateNode(meshLoader->Meshes[4], Transform(Vec3(1.45f, -1.25f, 15.0f), Quat(), Vec3(6.0f, 6.0f, 6.0f)), shaders[3]);
 	
-	Transform sailTransform = Transform(Vec3(0.78f, 4.f, 0.f), Quat(), Vec3(1.f));
+	Transform sailTransform = Transform(Vec3(1.5f, 3.5f, 0.f), Quat(), Vec3(1.f));
 	sailTransform.Rotation = FromAngleAxis(Vec4(1.f, 0.f, 0.f, 1.f), 90.f);
 	boat->CreateSailNode(meshLoader->Meshes[6], sailTransform, shaders[7]);
 }
