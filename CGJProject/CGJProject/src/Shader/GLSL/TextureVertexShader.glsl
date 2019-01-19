@@ -32,8 +32,6 @@ const float gradient = 1.5;
 
 void main(void)
 {
-
-
 	vec4 worldPosition = ModelMatrix * in_Position;
 	vec4 positionRelativeCamera = ViewMatrix * worldPosition;
 	gl_Position = ProjectionMatrix * positionRelativeCamera;

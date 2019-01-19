@@ -10,6 +10,7 @@ out VS_OUT {
 	vec2 TextCoords;
 } vs_out;
 
+uniform vec4 plane;
 uniform mat4 ModelMatrix;
 uniform vec4 VertColor;
 uniform SharedMatrices
@@ -23,5 +24,7 @@ void main(void)
     vs_out.FragmentPosition = in_Position.xyz;
     vs_out.Normal = in_Normal;
     vs_out.TextCoords = in_Coordinates;
-	gl_Position = ProjectionMatrix * ViewMatrix * ModelMatrix * in_Position;
+	vec4 WorldPosition = ModelMatrix * in_Position;
+	gl_Position = ProjectionMatrix * ViewMatrix * WorldPosition;
+	gl_ClipDistance[0] = dot(WorldPosition, plane);	
 }

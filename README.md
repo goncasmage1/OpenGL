@@ -5,9 +5,16 @@ This OpenGL project contains a scene that includes a wooden raft/boat sailing th
 Camera:
 * W, A, S, D to move forward and sideways
 * E, Q to move up and down
+* Hold Right or Middle mouse button and move the mouse to look
 
 Wind:
 * X, Z to increase or decrease the wind force (hold down)
+
+Fog:
+* F to toggle fog
+
+Screenshot:
+* H to take a screenshot (they will be saved inside the Screenshots folder)
 
 Post-Processing:
 * B, N, M to select which color component to control (R, G and B respectively)

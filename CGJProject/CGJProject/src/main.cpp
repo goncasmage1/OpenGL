@@ -47,14 +47,14 @@
 #include "WaterRenderer.h"
 #include "FreeImage.h"
 
-#define CAPTION "Hello Modern 2D World"
+#define CAPTION "Raft sailing the ocean"
 
 
 int WinX = 1600, WinY = 900;
 int WindowHandle = 0;
 unsigned int FrameCount = 0;
 float animationProgress = 0.f;
-physx::PxVec3 windVelocity = physx::PxVec3(0.f, 0.f, -6.f);
+physx::PxVec3 windVelocity = physx::PxVec3(0.f, 0.f, -15.f);
 
 float fpsInterval = 1000.f / 60.f;
 const float HEIGHT = 1.0f;
@@ -284,33 +284,8 @@ void createShaderProgram()
 	//Post-Processing
 	ppFilter = std::make_shared<PostProcessingShader>();
 	ppFilter->SetFboTexture(ppFBO->GetFilterTexture());
-	
-	/*
-	////Texture Sand
-	std::shared_ptr<TextureShader> sandShader = std::make_shared<TextureShader>();
-	sandShader->SetTexture("assets/Textures/rock.jpg");
-	sandShader->SetNormalTexture("assets/Textures/rock_normal.jpg");
-	sandShader->SetLightPosition(sun.Position);
-	sandShader->SetCamera(camera);
-	shaders.push_back(sandShader);
-	foggy.push_back(sandShader);
-	*/
 
-	checkOpenGLError("ERROR: Could not create shaders.");
-
-	shaders.push_back(std::make_shared<ShaderProgram>(
-	std::vector<ShaderAttribute>{
-		ShaderAttribute(0, "in_Position"),
-		ShaderAttribute(1, "in_Coordinates"),
-		ShaderAttribute(2, "in_Normal")
-	},
-	std::vector<std::string>{
-		"src/Shader/GLSL/BrownShader.glsl",
-		"src/Shader/GLSL/FragmentShader.glsl"
-	}
-	));
-
-	//Texture 
+	//Flag Texture 
 	std::shared_ptr<TextureShader> tugaShader = std::make_shared<TextureShader>(
 	std::vector<ShaderAttribute>{
 		ShaderAttribute(0, "in_Position"),
@@ -325,6 +300,8 @@ void createShaderProgram()
 	tugaShader->SetLightPosition(Vec3(0.0f, -10.0f, 0.0f));
 	tugaShader->SetCamera(camera);
 	shaders.push_back(tugaShader);
+
+	checkOpenGLError("ERROR: Could not create shaders.");
 }
 
 void destroyShaderProgram()
@@ -366,7 +343,6 @@ void drawScene()
 	camera->FlipView(); // Unflip camera
 	skybox->SetViewMatrix(camera->GetViewMatrix()); //Reset skybox's ViewMatrix
 	waterFBO->unbindFrameBuffer(); //Unbinds the Reflection Buffer
-	//
 
 	//Render Refraction
 	glDisable(GL_CULL_FACE);
@@ -374,7 +350,6 @@ void drawScene()
 	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, water->GetPosition().y)); //draws everything bellow the plane
 	glEnable(GL_CULL_FACE);
 	waterFBO->unbindFrameBuffer(); //Unbinds the Refraction Buffer
-	//
 
 	ppFBO->bindFilterFrameBuffer();
 
@@ -382,8 +357,8 @@ void drawScene()
 	glDisable(GL_CLIP_DISTANCE0);
 	scene->Draw(Vec4(0.0f, -1.0f, 0.0f, 1000)); //after GL_CLIP disabled this should be redundant. Might depend on the graphic
 	waterRenderer->Draw(Vec4(0.0f, -1.0f, 0.0f, 1000));
-	//Draw scene to texture
 
+	//Draw scene to plane
 	ppFilter->Use();
 	ppMesh->Draw();
 
@@ -394,9 +369,6 @@ void processCamera()
 {
 	camera->RotateCamera(input->GetMouseDelta());
 	camera->MoveCamera(input->GetMovement());
-
-
-
 }
 
 void processPostProcessingShader() 
@@ -500,13 +472,10 @@ void processInput()
 	{
 		shader->SetFog(input->GetFog());
 	}
-
 }
 
 void processCloth()
 {
-	//TODO: Fix
-	float deltaTime = std::chrono::duration<float>(std::chrono::steady_clock::now() - begin).count() * 1000.f;
 	solver->beginSimulation(1.f/60.f);
 	for (int i = 0; i < solver->getSimulationChunkCount(); i++)
 	{
@@ -540,8 +509,7 @@ void display()
 
 	processCloth();
 	drawScene();
-	if (input->GetScreenshot())
-		takeScreenshot();
+	if (input->GetScreenshot()) takeScreenshot();
 	glutSwapBuffers();
 
 	begin = std::chrono::steady_clock::now();
@@ -664,7 +632,6 @@ void setupGLUT(int argc, char* argv[])
 	glutInitContextVersion(3, 3);
 	glutInitContextProfile(GLUT_CORE_PROFILE);
 	glutInitContextFlags(GLUT_FORWARD_COMPATIBLE);
-	//glutInitContextFlags(GLUT_DEBUG);
 
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 
@@ -690,6 +657,7 @@ void setupMeshes()
 	meshLoader->CreateMesh(std::string("assets/models/boat.obj"));
 	meshLoader->CreateMesh(std::string("assets/models/terrain2.obj"));
 
+	//Post-Processing Plane (where the scene will be rendered)
 	ppMesh = meshLoader->CreatePPFilterMesh(ppFilter->GetVCoordId());
 	
 	SailProperties properties = SailProperties();
@@ -711,25 +679,22 @@ void setupMeshes()
 	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, water->GetPosition().y, 0.0), Quat(), Vec3(0.5, 0.5, 0.5)), shaders[4]);
 	////////////////////////////////////
 
-
 	//Water
-	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(water->GetPosition(), Quat(), Vec3(3.5f, 3.5f, 3.5f)), water);
 	waterRenderer = std::make_shared<WaterRenderer>(meshLoader->Meshes[1], Transform(water->GetPosition(), Quat(), Vec3(3.5f, 3.5f, 3.5f)), scene->root, water);
 	//Boat
-	std::shared_ptr<SceneNode> boat = scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0f, water->GetPosition().y - 0.3f, 0.0f), Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[4]);
+	std::shared_ptr<SceneNode> boat = scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0f, water->GetPosition().y - 0.2f, 0.0f), Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[4]);
 
 	//Terrain
 	scene->root->CreateNode(meshLoader->Meshes[3], Transform(Vec3(1.45f, -1.25f, 15.0f), Quat(), Vec3(6.0f, 6.0f, 6.0f)), shaders[3]);
 	
-	Transform sailTransform = Transform(Vec3(1.5f, 3.5f, 0.f), Quat(), Vec3(1.f));
+	Transform sailTransform = Transform(Vec3(1.5f, 3.4f, 0.f), Quat(), Vec3(1.f));
 	sailTransform.Rotation = FromAngleAxis(Vec4(1.f, 0.f, 0.f, 1.f), 90.f);
-	boat->CreateSailNode(meshLoader->Meshes[5], sailTransform, shaders[7]);
+	boat->CreateSailNode(meshLoader->Meshes[5], sailTransform, shaders[6]);
 }
 
 void setupFBO()
 {
 	waterFBO->initializeWater(WinX, WinY);
-
 	ppFBO->initializePostProcessing(WinX, WinY);
 }
 

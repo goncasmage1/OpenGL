@@ -28,6 +28,5 @@ public:
 	void SetLightPosition(Vec3 pos);
 	void setSkyColor(Vec3 colour);
 	void SetFog(bool fog) { this->fog = fog; }
-	//void setTextureToFrameBuffer(unsigned int renderTexture);
 	void Use();
 };
