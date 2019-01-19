@@ -10,6 +10,7 @@ uniform mat4 ModelMatrix;
 uniform vec4 plane;
 uniform vec3 lightPos;
 uniform vec3 viewPos;
+uniform bool fog;
 uniform SharedMatrices
 {
 	mat4 ViewMatrix;
@@ -26,22 +27,28 @@ out VS_OUT {
 
 out float visibility;
 
-const float density = 0.09;
+const float density = 0.03;
 const float gradient = 1.5;
 
 void main(void)
 {
-	//Fog
-	float distance = length(viewPos);
-	visibility = exp(-pow((distance*density), gradient));
-	visibility = clamp(visibility, 0.0, 1.0);
-	//
 
 
-    gl_Position = ProjectionMatrix * ViewMatrix * in_Position;
-    vs_out.FragPos = vec3(ModelMatrix * in_Position);   
+	vec4 worldPosition = ModelMatrix * in_Position;
+	vec4 positionRelativeCamera = ViewMatrix * worldPosition;
+	gl_Position = ProjectionMatrix * positionRelativeCamera;
+    vs_out.FragPos = vec3(worldPosition);   
     vs_out.TexCoords = in_Coordinates;
-    
+
+	if (fog)
+	{
+		//Fog
+		float distance = length(positionRelativeCamera.xyz);
+		visibility = exp(-pow((distance*density), gradient));
+		visibility = clamp(visibility, 0.0, 1.0);
+		//
+	}
+
     mat3 normalMatrix = transpose(inverse(mat3(ModelMatrix)));
     vec3 T = normalize(normalMatrix * tangent);
     vec3 B = normalize(normalMatrix * bitangent);
@@ -52,5 +59,5 @@ void main(void)
     vs_out.TangentViewPos  = TBN * viewPos;
     vs_out.TangentFragPos  = TBN * vs_out.FragPos;
 
-	gl_ClipDistance[0] = dot(ModelMatrix * in_Position, plane);	
+	gl_ClipDistance[0] = dot(worldPosition, plane);	
 }

@@ -37,6 +37,8 @@ protected:
 	uint8_t bMouseMoved : 1;
 	uint8_t bWheelMoved : 1;
 
+	bool fog = true;
+
 public:
 
 	void keyboardButtontDown(unsigned char Key);
@@ -56,5 +58,6 @@ public:
 	float GetDistortionSpeedChange() const { return distortionSpeedChange * distortionSpeedChangeSpeed; }
 	float GetDistortionFrequencyChange() const { return distortionFrequencyChange * distortionFrequencyChangeSpeed; }
 	int GetPostProcessingMode() const { return postProcessingMode; }
+	bool GetFog() { return fog; }
 
 };
