@@ -33,17 +33,20 @@ void Mesh::CreateBufferObjects()
 				glEnableVertexAttribArray(TEXCOORDS);
 				glVertexAttribPointer(TEXCOORDS, 2, GL_FLOAT, GL_FALSE, sizeof(Vec2), 0);
 
-				glGenBuffers(1, &VboTangent);
-				glBindBuffer(GL_ARRAY_BUFFER, VboTangent);
-				glBufferData(GL_ARRAY_BUFFER, tangentData.size() * sizeof(Vec3), &tangentData[0], GL_STATIC_DRAW);
-				glEnableVertexAttribArray(TANGENT);
-				glVertexAttribPointer(TANGENT, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
+				if (tangentData.size() > 0 && biTangentData.size() > 0)
+				{
+					glGenBuffers(1, &VboTangent);
+					glBindBuffer(GL_ARRAY_BUFFER, VboTangent);
+					glBufferData(GL_ARRAY_BUFFER, tangentData.size() * sizeof(Vec3), &tangentData[0], GL_STATIC_DRAW);
+					glEnableVertexAttribArray(TANGENT);
+					glVertexAttribPointer(TANGENT, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
 
-				glGenBuffers(1, &VboBiTangent);
-				glBindBuffer(GL_ARRAY_BUFFER, VboBiTangent);
-				glBufferData(GL_ARRAY_BUFFER, biTangentData.size() * sizeof(Vec3), &biTangentData[0], GL_STATIC_DRAW);
-				glEnableVertexAttribArray(BITANGENT);
-				glVertexAttribPointer(BITANGENT, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
+					glGenBuffers(1, &VboBiTangent);
+					glBindBuffer(GL_ARRAY_BUFFER, VboBiTangent);
+					glBufferData(GL_ARRAY_BUFFER, biTangentData.size() * sizeof(Vec3), &biTangentData[0], GL_STATIC_DRAW);
+					glEnableVertexAttribArray(BITANGENT);
+					glVertexAttribPointer(BITANGENT, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), 0);
+				}
 
 			}
 			if (NormalsLoaded)

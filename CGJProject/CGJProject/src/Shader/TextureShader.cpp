@@ -19,6 +19,11 @@ TextureShader::TextureShader()
 
 }
 
+TextureShader::TextureShader(const std::vector<ShaderAttribute> Attributes, const std::vector<std::string> ShaderPaths)
+{
+	BuildShader(Attributes, ShaderPaths);
+}
+
 
 void TextureShader::SetTexture(const char* path)
 {

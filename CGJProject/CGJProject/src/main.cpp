@@ -294,12 +294,20 @@ void createShaderProgram()
 	));
 
 	//Texture 
-	std::shared_ptr<TextureShader> tugaShader = std::make_shared<TextureShader>();
-	//tugaShader->SetTexture("../../assets/Textures/portugal.jpg");
-	//NarutoShader->SetNormalTexture("../../assets/Textures/brickwall_normal.jpg");
-	//tugaShader->SetLightPosition(Vec3(0.0f, -10.0f, 0.0f));
-	//NarutoShader->SetCamera(camera);
-	//shaders.push_back(tugaShader);
+	std::shared_ptr<TextureShader> tugaShader = std::make_shared<TextureShader>(
+	std::vector<ShaderAttribute>{
+		ShaderAttribute(0, "in_Position"),
+		ShaderAttribute(1, "in_Coordinates"),
+		ShaderAttribute(2, "in_Normal"),
+	},
+	std::vector<std::string>{
+		"src/Shader/GLSL/SailVertexShader.glsl",
+		"src/Shader/GLSL/SailFragmentShader.glsl"
+	});
+	tugaShader->SetTexture("assets/Textures/portugal.png");
+	tugaShader->SetLightPosition(Vec3(0.0f, -10.0f, 0.0f));
+	tugaShader->SetCamera(camera);
+	shaders.push_back(tugaShader);
 }
 
 void destroyShaderProgram()
@@ -692,7 +700,7 @@ void setupMeshes()
 	
 	Transform sailTransform = Transform(Vec3(0.78f, 4.f, 0.f), Quat(), Vec3(1.f));
 	sailTransform.Rotation = FromAngleAxis(Vec4(1.f, 0.f, 0.f, 1.f), 90.f);
-	boat->CreateSailNode(meshLoader->Meshes[6], sailTransform, shaders[5]);
+	boat->CreateSailNode(meshLoader->Meshes[6], sailTransform, shaders[7]);
 }
 
 void setupFBO()

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <vector>
 #include "ShaderProgram.h"
 #include "..\Math\Vector.h"
 #include "..\Camera.h"
@@ -18,6 +19,7 @@ private:
 public:
 
 	TextureShader();
+	TextureShader(const std::vector<ShaderAttribute> Attributes, const std::vector<std::string> ShaderPaths);
 
 	void SetTexture(const char* path);
 	void SetNormalTexture(const char * path);
