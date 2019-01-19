@@ -221,6 +221,8 @@ void destroyNvCloth()
 
 void createShaderProgram()
 {
+	std::cout << "Shaders are being loaded..." << std::endl;
+	std::cout << std::endl;
 
 	//Skybox Shader
 	std::shared_ptr<SkyboxShader> skyboxShader = std::make_shared<SkyboxShader>(camera->GetViewMatrix());
@@ -662,8 +664,10 @@ void setupGLUT(int argc, char* argv[])
 
 void setupMeshes()
 {
+	std::cout << "Meshes and Textures are being loaded..." << std::endl;
+	std::cout << std::endl;
+
 	//MeshLoader loads all necessary meshes
-	meshLoader->CreateMesh(std::string("assets/models/sphere.obj"));
 	meshLoader->CreateMesh(std::string("assets/models/skybox.obj"));
 	meshLoader->CreateMesh(std::string("assets/models/water_surface.obj"));
 	meshLoader->CreateMesh(std::string("assets/models/boat.obj"));
@@ -681,7 +685,7 @@ void setupMeshes()
 	meshLoader->CreateSailMesh(properties, factory, solver, 0.1f, 30, 20);
 
 	//Skybox must be the first to be drawn in the scene
-	std::shared_ptr<SceneNode> sky = scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
+	std::shared_ptr<SceneNode> sky = scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[0]);
 
 	//// DO NOT DELETE THESE LINES /////
 	//reflection check
@@ -693,16 +697,16 @@ void setupMeshes()
 
 	//Water
 	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(water->GetPosition(), Quat(), Vec3(3.5f, 3.5f, 3.5f)), water);
-	waterRenderer = std::make_shared<WaterRenderer>(meshLoader->Meshes[2], Transform(water->GetPosition(), Quat(), Vec3(3.5f, 3.5f, 3.5f)), scene->root, water);
+	waterRenderer = std::make_shared<WaterRenderer>(meshLoader->Meshes[1], Transform(water->GetPosition(), Quat(), Vec3(3.5f, 3.5f, 3.5f)), scene->root, water);
 	//Boat
-	std::shared_ptr<SceneNode> boat = scene->root->CreateNode(meshLoader->Meshes[3], Transform(Vec3(0.0f, water->GetPosition().y - 0.3f, 0.0f), Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[4]);
+	std::shared_ptr<SceneNode> boat = scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0f, water->GetPosition().y - 0.3f, 0.0f), Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[4]);
 
 	//Terrain
-	scene->root->CreateNode(meshLoader->Meshes[4], Transform(Vec3(1.45f, -1.25f, 15.0f), Quat(), Vec3(6.0f, 6.0f, 6.0f)), shaders[3]);
+	scene->root->CreateNode(meshLoader->Meshes[3], Transform(Vec3(1.45f, -1.25f, 15.0f), Quat(), Vec3(6.0f, 6.0f, 6.0f)), shaders[3]);
 	
 	Transform sailTransform = Transform(Vec3(1.5f, 3.5f, 0.f), Quat(), Vec3(1.f));
 	sailTransform.Rotation = FromAngleAxis(Vec4(1.f, 0.f, 0.f, 1.f), 90.f);
-	boat->CreateSailNode(meshLoader->Meshes[6], sailTransform, shaders[7]);
+	boat->CreateSailNode(meshLoader->Meshes[5], sailTransform, shaders[7]);
 }
 
 void setupFBO()
