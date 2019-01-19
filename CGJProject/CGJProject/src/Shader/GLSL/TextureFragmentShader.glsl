@@ -15,6 +15,7 @@ uniform sampler2D screenTexture; //Diffuse Texture
 uniform sampler2D normalTexture; //Normal Mapping Texture
 uniform bool normalMapping; //Enable or Disable Normal Mapping
 uniform vec3 skyColour;
+uniform bool fog;
 
 const float shineDamper = 32.0f;
 const float reflectivity = 0.2;
@@ -40,5 +41,8 @@ void main()
     //
 
     ex_color = vec4(ambient + diffuse + specular, 1.0f);
-	ex_color = mix(vec4(skyColour, 1.0), ex_color, visibility);
+	if (fog)
+	{
+		ex_color = mix(vec4(skyColour, 1.0), ex_color, visibility);
+	}
 }

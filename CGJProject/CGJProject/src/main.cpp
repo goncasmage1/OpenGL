@@ -51,7 +51,7 @@ int WinX = 1600, WinY = 900;
 int WindowHandle = 0;
 unsigned int FrameCount = 0;
 float animationProgress = 0.f;
-physx::PxVec3 windVelocity = physx::PxVec3(6.0f, 0.f, 0.f);
+physx::PxVec3 windVelocity = physx::PxVec3(0.f, 0.f, -6.f);
 
 float fpsInterval = 1000.f / 60.f;
 const float HEIGHT = 1.0f;
@@ -70,6 +70,7 @@ std::shared_ptr<Camera> camera = std::make_shared<Camera>(WinX, WinY, 90);
 std::shared_ptr<MeshLoader> meshLoader = std::make_shared<MeshLoader>();
 std::shared_ptr<Scene> scene = nullptr;
 std::vector<std::shared_ptr<ShaderProgram>> shaders = std::vector<std::shared_ptr<ShaderProgram>>();
+std::vector<std::shared_ptr<TextureShader>> foggy = std::vector<std::shared_ptr<TextureShader>>();
 
 CustomAllocator* customAllocator = new CustomAllocator();
 CustomAssertHandler* customAssert = new CustomAssertHandler();
@@ -220,6 +221,8 @@ void destroyNvCloth()
 
 void createShaderProgram()
 {
+	std::cout << "Shaders are being loaded..." << std::endl;
+	std::cout << std::endl;
 
 	//Skybox Shader
 	std::shared_ptr<SkyboxShader> skyboxShader = std::make_shared<SkyboxShader>(camera->GetViewMatrix());
@@ -239,24 +242,26 @@ void createShaderProgram()
 	water = std::make_shared<WaterShader>(Vec3(0.0f, 0.0f, 0.0f), sun.Position, sun.Color);
 	water->SetCamera(camera);
 	water->SetFBO(waterFBO);
+	water->SetSkyColor(Vec3(0.5f, 0.5f, 0.5f));
 	shaders.push_back(water);
 
 	////Texture Mountains
 	std::shared_ptr<TextureShader> NarutoShader = std::make_shared<TextureShader>();
-	NarutoShader->SetTexture("../../assets/Textures/rockDiff.jpg");
-	NarutoShader->SetNormalTexture("../../assets/Textures/rockNormal.jpg");
+	NarutoShader->SetTexture("assets/Textures/rockDiff.jpg");
+	NarutoShader->SetNormalTexture("assets/Textures/rockNormal.jpg");
 	NarutoShader->SetLightPosition(sun.Position);
 	NarutoShader->SetCamera(camera);
 	NarutoShader->setSkyColor(Vec3(0.5f, 0.5f, 0.5f));
 	shaders.push_back(NarutoShader);
+	foggy.push_back(NarutoShader);
 	////Texture Wood
 	std::shared_ptr<TextureShader> woodShader = std::make_shared<TextureShader>();
-	woodShader->SetTexture("../../assets/Textures/diffuse.jpg");
-	woodShader->SetNormalTexture("../../assets/Textures/normal.jpg");
+	woodShader->SetTexture("assets/Textures/diffuse.jpg");
+	woodShader->SetNormalTexture("assets/Textures/normal.jpg");
 	woodShader->SetLightPosition(sun.Position);
 	woodShader->SetCamera(camera);
 	shaders.push_back(woodShader);
-
+	foggy.push_back(woodShader);
 	//RTT
 	std::shared_ptr<RTT> textureRefractShader = std::make_shared<RTT>(waterFBO->getRefractionTexture());
 	shaders.push_back(textureRefractShader);
@@ -264,14 +269,17 @@ void createShaderProgram()
 	//Post-Processing
 	ppFilter = std::make_shared<PostProcessingShader>();
 	ppFilter->SetFboTexture(ppFBO->GetFilterTexture());
-
+	
+	/*
 	////Texture Sand
 	std::shared_ptr<TextureShader> sandShader = std::make_shared<TextureShader>();
-	sandShader->SetTexture("../../assets/Textures/rock.jpg");
-	sandShader->SetNormalTexture("../../assets/Textures/rock_normal.jpg");
+	sandShader->SetTexture("assets/Textures/rock.jpg");
+	sandShader->SetNormalTexture("assets/Textures/rock_normal.jpg");
 	sandShader->SetLightPosition(sun.Position);
 	sandShader->SetCamera(camera);
 	shaders.push_back(sandShader);
+	foggy.push_back(sandShader);
+	*/
 
 	checkOpenGLError("ERROR: Could not create shaders.");
 
@@ -288,12 +296,20 @@ void createShaderProgram()
 	));
 
 	//Texture 
-	std::shared_ptr<TextureShader> tugaShader = std::make_shared<TextureShader>();
-	//tugaShader->SetTexture("../../assets/Textures/portugal.jpg");
-	//NarutoShader->SetNormalTexture("../../assets/Textures/brickwall_normal.jpg");
-	//tugaShader->SetLightPosition(Vec3(0.0f, -10.0f, 0.0f));
-	//NarutoShader->SetCamera(camera);
-	//shaders.push_back(tugaShader);
+	std::shared_ptr<TextureShader> tugaShader = std::make_shared<TextureShader>(
+	std::vector<ShaderAttribute>{
+		ShaderAttribute(0, "in_Position"),
+		ShaderAttribute(1, "in_Coordinates"),
+		ShaderAttribute(2, "in_Normal"),
+	},
+	std::vector<std::string>{
+		"src/Shader/GLSL/SailVertexShader.glsl",
+		"src/Shader/GLSL/SailFragmentShader.glsl"
+	});
+	tugaShader->SetTexture("assets/Textures/portugal.png");
+	tugaShader->SetLightPosition(Vec3(0.0f, -10.0f, 0.0f));
+	tugaShader->SetCamera(camera);
+	shaders.push_back(tugaShader);
 }
 
 void destroyShaderProgram()
@@ -329,11 +345,11 @@ void drawScene()
 
 	//Render Reflection
 	waterFBO->bindReflectionFrameBuffer(); //Binds the Reflection Buffer
-	camera->FlipView(); //Set camera for reflection (flips) and Saves the previous camera settings
+	camera->FlipView(); //Set camera for reflection (flips) 
 	skybox->SetViewMatrix(camera->GetViewMatrix()); //Update Skybox ViewMatrix (without position)
 	scene->Draw(Vec4(0.0f, 1.0f, 0.0f, -water->GetPosition().y)); // Render the Scene above the surface
 	camera->FlipView(); // Unflip camera
-	skybox->SetViewMatrix(camera->GetViewMatrix()); //Reset the ViewMatrix
+	skybox->SetViewMatrix(camera->GetViewMatrix()); //Reset skybox's ViewMatrix
 	waterFBO->unbindFrameBuffer(); //Unbinds the Reflection Buffer
 	//
 
@@ -363,6 +379,8 @@ void processCamera()
 {
 	camera->RotateCamera(input->GetMouseDelta());
 	camera->MoveCamera(input->GetMovement());
+
+
 
 }
 
@@ -462,6 +480,11 @@ void processInput()
 {
 	processCamera();
 	processPostProcessingShader();
+	water->SetFog(input->GetFog());
+	for (std::shared_ptr<TextureShader> shader : foggy)
+	{
+		shader->SetFog(input->GetFog());
+	}
 }
 
 void processCloth()
@@ -641,12 +664,14 @@ void setupGLUT(int argc, char* argv[])
 
 void setupMeshes()
 {
+	std::cout << "Meshes and Textures are being loaded..." << std::endl;
+	std::cout << std::endl;
+
 	//MeshLoader loads all necessary meshes
-	meshLoader->CreateMesh(std::string("../../assets/models/sphere.obj"));
-	meshLoader->CreateMesh(std::string("../../assets/models/skybox.obj"));
-	meshLoader->CreateMesh(std::string("../../assets/models/water_surface.obj"));
-	meshLoader->CreateMesh(std::string("../../assets/models/boat.obj"));
-	meshLoader->CreateMesh(std::string("../../assets/models/terrain2.obj"));
+	meshLoader->CreateMesh(std::string("assets/models/skybox.obj"));
+	meshLoader->CreateMesh(std::string("assets/models/water_surface.obj"));
+	meshLoader->CreateMesh(std::string("assets/models/boat.obj"));
+	meshLoader->CreateMesh(std::string("assets/models/terrain2.obj"));
 
 	ppMesh = meshLoader->CreatePPFilterMesh(ppFilter->GetVCoordId());
 	
@@ -655,10 +680,12 @@ void setupMeshes()
 	properties.dragCoefficient = 0.7f; //How much particles stick to each other (0 = a lot; 1 = not at all)
 	properties.gravity = physx::PxVec3(0.f, 1.f, 0.f);
 	properties.damping = 0.2f; //How much the cloth can bend (0 = a lot; 1 = not that much)
-	meshLoader->CreateSailMesh(properties, factory, solver, 0.05f, 30, 20);
+	properties.tetherConstraintStiffness = 0.6f;
+	properties.tetherConstraintScale = 1.1f; //How much the tethers stretch
+	meshLoader->CreateSailMesh(properties, factory, solver, 0.1f, 30, 20);
 
 	//Skybox must be the first to be drawn in the scene
-	std::shared_ptr<SceneNode> sky = scene->root->CreateNode(meshLoader->Meshes[1], Transform(), shaders[0]);
+	std::shared_ptr<SceneNode> sky = scene->root->CreateNode(meshLoader->Meshes[0], Transform(), shaders[0]);
 
 	//// DO NOT DELETE THESE LINES /////
 	//reflection check
@@ -666,20 +693,20 @@ void setupMeshes()
 	//refraction check
 	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0, water->GetPosition().y, 0.0), Quat(), Vec3(0.5, 0.5, 0.5)), shaders[4]);
 	////////////////////////////////////
-	
+
+
 	//Water
 	//scene->root->CreateNode(meshLoader->Meshes[2], Transform(water->GetPosition(), Quat(), Vec3(3.5f, 3.5f, 3.5f)), water);
-	waterRenderer = std::make_shared<WaterRenderer>(meshLoader->Meshes[2], Transform(water->GetPosition(), Quat(), Vec3(3.5f, 3.5f, 3.5f)), scene->root, water);
-
+	waterRenderer = std::make_shared<WaterRenderer>(meshLoader->Meshes[1], Transform(water->GetPosition(), Quat(), Vec3(3.5f, 3.5f, 3.5f)), scene->root, water);
 	//Boat
-	std::shared_ptr<SceneNode> boat = scene->root->CreateNode(meshLoader->Meshes[3], Transform(Vec3(0.0f, water->GetPosition().y - 0.3f, 0.0f), Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[4]);
+	std::shared_ptr<SceneNode> boat = scene->root->CreateNode(meshLoader->Meshes[2], Transform(Vec3(0.0f, water->GetPosition().y - 0.3f, 0.0f), Quat(), Vec3(1.0f, 1.0f, 1.0f)), shaders[4]);
 
 	//Terrain
-	scene->root->CreateNode(meshLoader->Meshes[4], Transform(Vec3(1.45f, -1.25f, 15.0f), Quat(), Vec3(6.0f, 6.0f, 6.0f)), shaders[3]);
+	scene->root->CreateNode(meshLoader->Meshes[3], Transform(Vec3(1.45f, -1.25f, 15.0f), Quat(), Vec3(6.0f, 6.0f, 6.0f)), shaders[3]);
 	
-	Transform sailTransform = Transform(Vec3(0.78f, 4.f, 0.f), Quat(), Vec3(1.f));
+	Transform sailTransform = Transform(Vec3(1.5f, 3.5f, 0.f), Quat(), Vec3(1.f));
 	sailTransform.Rotation = FromAngleAxis(Vec4(1.f, 0.f, 0.f, 1.f), 90.f);
-	boat->CreateSailNode(meshLoader->Meshes[6], sailTransform, shaders[5]);
+	boat->CreateSailNode(meshLoader->Meshes[5], sailTransform, shaders[7]);
 }
 
 void setupFBO()

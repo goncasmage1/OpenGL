@@ -316,6 +316,8 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 
+bin/x64/*
+
 # NvCloth files
 NvCloth-master/
 bin/x64/NvCloth_x64\.dll

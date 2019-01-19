@@ -19,6 +19,11 @@ TextureShader::TextureShader()
 
 }
 
+TextureShader::TextureShader(const std::vector<ShaderAttribute> Attributes, const std::vector<std::string> ShaderPaths)
+{
+	BuildShader(Attributes, ShaderPaths);
+}
+
 
 void TextureShader::SetTexture(const char* path)
 {
@@ -111,6 +116,5 @@ void TextureShader::Use()
 
 	//Fog Stuff and Things
 	glUniform3f(glGetUniformLocation(ProgramId, "skyColour"), this->skyColor.x, this->skyColor.y, this->skyColor.z);
-
-	//glUniform4f(glGetUniformLocation(ProgramId, "plane"), plane.x, plane.y, plane.z, plane.w);
+	glUniform1i(glGetUniformLocation(ProgramId, "fog"), fog);
 }
