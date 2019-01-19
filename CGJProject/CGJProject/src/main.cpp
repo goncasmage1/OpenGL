@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 #include <chrono>
+#include <ctime>    
+#include <cassert>
 #include <assert.h>
 
 #include "GL/glew.h"
@@ -43,6 +45,7 @@
 #include "Shader/SkyboxShader.h"
 #include "SOIL.h"
 #include "WaterRenderer.h"
+#include "FreeImage.h"
 
 #define CAPTION "Hello Modern 2D World"
 
@@ -99,6 +102,18 @@ float distortionSpeed = 0.f;
 float distortionFrequency = 0.f;
 
 /////////////////////////////////////////////////////////////////////// ERRORS
+
+void takeScreenshot() {
+	auto timenow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+	std::stringstream PATH;
+	PATH << "Screenshots/" << glutGet(GLUT_ELAPSED_TIME) << ".bmp";
+	BYTE* pixels = new BYTE[3 * WinX * WinY];
+	glReadPixels(0, 0, WinX, WinY, GL_BGR, GL_UNSIGNED_BYTE, pixels);
+	FIBITMAP* screenshot = FreeImage_ConvertFromRawBits(pixels, WinX, WinY, 3 * WinX, 24, 0x0000FF, 0x00FF00, 0xFF0000, false);
+	FreeImage_Save(FIF_BMP, screenshot, PATH.str().c_str(), 0);
+	FreeImage_Unload(screenshot);
+	delete[] pixels;
+}
 
 static std::string errorType(GLenum type)
 {
@@ -485,6 +500,7 @@ void processInput()
 	{
 		shader->SetFog(input->GetFog());
 	}
+
 }
 
 void processCloth()
@@ -524,7 +540,8 @@ void display()
 
 	processCloth();
 	drawScene();
-
+	if (input->GetScreenshot())
+		takeScreenshot();
 	glutSwapBuffers();
 
 	begin = std::chrono::steady_clock::now();

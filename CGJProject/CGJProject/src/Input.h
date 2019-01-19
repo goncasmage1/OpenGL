@@ -38,6 +38,7 @@ protected:
 	uint8_t bWheelMoved : 1;
 
 	bool fog = true;
+	bool screenshot = false;
 
 public:
 
@@ -59,5 +60,5 @@ public:
 	float GetDistortionFrequencyChange() const { return distortionFrequencyChange * distortionFrequencyChangeSpeed; }
 	int GetPostProcessingMode() const { return postProcessingMode; }
 	bool GetFog() { return fog; }
-
+	bool GetScreenshot();
 };
