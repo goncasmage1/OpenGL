@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <chrono>
+#include <ctime>    
 #include <cassert>
 
 #include "GL/glew.h"
@@ -33,6 +34,7 @@
 #include "Shader/SkyboxShader.h"
 #include "SOIL.h"
 #include "WaterRenderer.h"
+#include "FreeImage.h"
 
 #define CAPTION "Hello Modern 2D World"
 
@@ -81,8 +83,19 @@ std::shared_ptr<PPFilterMesh> ppMesh = nullptr;
 
 float RGBIntensity[3] = { 1.0f, 0.0f, 0.0f };
 float distortionIntensity = 0.f;
-
 /////////////////////////////////////////////////////////////////////// ERRORS
+
+void takeScreenshot() {
+	auto timenow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+	std::stringstream PATH;
+	PATH << "Screenshots/" << glutGet(GLUT_ELAPSED_TIME) << ".bmp";
+	BYTE* pixels = new BYTE[3 * WinX * WinY];
+	glReadPixels(0, 0, WinX, WinY, GL_BGR, GL_UNSIGNED_BYTE, pixels);
+	FIBITMAP* screenshot = FreeImage_ConvertFromRawBits(pixels, WinX, WinY, 3 * WinX, 24, 0x0000FF, 0x00FF00, 0xFF0000, false);
+	FreeImage_Save(FIF_BMP, screenshot, PATH.str().c_str(), 0);
+	FreeImage_Unload(screenshot);
+	delete[] pixels;
+}
 
 static std::string errorType(GLenum type)
 {
@@ -346,7 +359,6 @@ void processPostProcessingShader()
 			else distortionIntensity += distortionChange;
 		}
 	}
-	std::cout << distortionIntensity << std::endl;
 	glUseProgram(ppFilter->GetProgramId());
 	glUniform3f(glGetUniformLocation(ppFilter->GetProgramId(), "rgbIntensity"), RGBIntensity[0], RGBIntensity[1], RGBIntensity[2]);
 	glUniform1i(glGetUniformLocation(ppFilter->GetProgramId(), "mode"), input->GetPostProcessingMode());
@@ -363,6 +375,7 @@ void processInput()
 	{
 		shader->SetFog(input->GetFog());
 	}
+
 }
 
 /////////////////////////////////////////////////////////////////////// CALLBACKS
@@ -382,7 +395,8 @@ void display()
 	processInput();
 
 	drawScene();
-
+	if (input->GetScreenshot())
+		takeScreenshot();
 	glutSwapBuffers();
 
 	begin = std::chrono::steady_clock::now();
