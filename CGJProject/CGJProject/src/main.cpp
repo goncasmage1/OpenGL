@@ -50,7 +50,7 @@
 #define CAPTION "Raft sailing the ocean"
 
 
-int WinX = 1600, WinY = 900;
+int WinX = 1880, WinY = 980;
 int WindowHandle = 0;
 unsigned int FrameCount = 0;
 float animationProgress = 0.f;
@@ -486,6 +486,8 @@ void processCloth()
 	physx::PxVec3 newWind = windVelocity + (windVelocity.getNormalized() * input->GetWindDelta());
 	if (newWind.magnitude() > 0.1f) windVelocity += (windVelocity.getNormalized() * input->GetWindDelta());
 	meshLoader->UpdateSailData(windVelocity);
+
+	checkOpenGLError("ERROR: Could not update sails.");
 }
 
 /////////////////////////////////////////////////////////////////////// CALLBACKS

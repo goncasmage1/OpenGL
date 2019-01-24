@@ -10,7 +10,7 @@
 
 void Mesh::CreateBufferObjects()
 {
-	GLuint VboTexcoords, VboNormals, VboTangent, VboBiTangent;
+	GLuint VboTexcoords, VboTangent, VboBiTangent;
 
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
@@ -64,7 +64,6 @@ void Mesh::CreateBufferObjects()
 	glDeleteBuffers(1, &VboTexcoords);
 	glDeleteBuffers(1, &VboTangent);
 	glDeleteBuffers(1, &VboBiTangent);
-	glDeleteBuffers(1, &VboNormals);
 }
 
 void Mesh::DestroyBufferObjects()
@@ -76,6 +75,7 @@ void Mesh::DestroyBufferObjects()
 	glDisableVertexAttribArray(TANGENT);
 	glDisableVertexAttribArray(BITANGENT);
 	glDeleteBuffers(1, &VboVertices);
+	glDeleteBuffers(1, &VboNormals);
 	glDeleteBuffers(1, &VBO);
 	glDeleteVertexArrays(1, &VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);

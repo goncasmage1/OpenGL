@@ -8,6 +8,7 @@ QuadMesh::QuadMesh(float newSide, int newXRepeat, int newYRepeat) :
 	VerticesPerFace = 3;
 	GenerateQuads();
 	TexcoordsLoaded = true;
+	NormalsLoaded = true;
 }
 
 void QuadMesh::GenerateQuads()

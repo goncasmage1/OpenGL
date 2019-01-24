@@ -36,7 +36,7 @@ class Mesh
 protected:
 
 	GLuint VAO, VBO;
-	GLuint VboVertices;
+	GLuint VboVertices, VboNormals;
 
 public:
 
