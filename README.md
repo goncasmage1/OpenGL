@@ -47,7 +47,7 @@ Once the building procedure has been completed, go to dependencies/NvCloth-maste
 * PxFoundation_x64.dll
 * PxFoundationDEBUG_x64.dll
 
-#Step 6 - Visual Studio files were in vc12win64
+# Step 6 - Visual Studio files were in vc12win64
 
 This step is only necessary if your Visual Studio solution files were inside a vc12 folder.
 
