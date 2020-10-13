@@ -2,24 +2,27 @@ This file will help you compile NvCloth in order to be able to use it with this 
 
 You will need a Windows system in order to compile the library (we used Windows 10)
 
-#Step 1 - Installing requirements
+# Step 1 - Installing requirements
+
 In order to compile NvCloth, you will need to install:
 * [Visual Studio 2015 with Update 3](https://visualstudio.microsoft.com/pt-br/vs/older-downloads/):
     * Make sure to tick all the boxes related to C++ and Windows 8.1 (no need for mobile development)
 * [Windows 8.1 SDK](https://developer.microsoft.com/pt-pt/windows/downloads/sdk-archive)
 * [CUDA SDK](https://developer.nvidia.com/cuda-downloads), which we recommend installing in the following location for simplicity: "D:\ProgramFiles\Cuda\v 10.0". The documentation and temporary install locations are irrelevant.
 
-#Step 2 - Editing bat files
+# Step 2 - Editing bat files
+
 After you have installed all these, you will need to go to dependencies/NvCloth-master/NvCloth/scripts and edit the locate_cuda.bat and locate_win8sdk.bat files to point to the install locations of each of those SDK's, but if you followed our recommendations you shouldn't need to change these files (just make sure they're correct).
 
-#Step 3 - Generating Visual Studio solution files
+# Step 3 - Generating Visual Studio solution files
+
 Go to the dependencies/NvCloth-master/NvCloth folder and run CmakeGenerateProjects.bat. This will install something called packman (which we're not sure what it is) and generate the visual studio project files to build the library.
 After this bat file has finished running, go into the dependencies/NvCloth-master/NvCloth/compiler folder. There should be 5 folders inside: a cmake folder, and the combination of vc14 or vc12 with win32 or win64.
 If you're using a 64-bit operating system, you can delete the folders related to 32-bit.
 After that you will have a vc14win64 folder and a vc12win64 folder. One of them should have Visual Studio related files, and the other will not.
 Because we've had different results in this part on the installation procedure, we will have to create branching instructions depending on your results.
 
-#Step 4 - Building NvCloth
+# Step 4 - Building NvCloth
 
 ### 4.1 - Visual Studio files are in vc14win64
 
